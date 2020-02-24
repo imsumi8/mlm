@@ -1,0 +1,160 @@
+.backlogin{
+	  background-image: url(../img/bg.jpg) !important ; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	/*background-color: #1875DC;*/
+  
+}
+.mrgn_20{
+	margin-top:20px;
+}
+.errors{
+	display:none;
+	color: #fff !important;
+}
+.wdth{
+	width:100%;
+}
+.pad_tp_0{
+	padding-top:0px !important;
+}
+.top-img{
+    max-width: 200px;
+    padding-top: 5px;
+}
+.head{
+	font-size: 16px;
+    padding-bottom: 10px;
+}
+.sections label{
+	font-weight:200;
+}
+.sections{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    margin-top: 20px;
+    padding-bottom: 15px;
+    box-shadow: 0px 0px 12px 0px #bfb8b8;
+    border: 1px solid #dac5c5;
+}
+.mrleft{
+	margin-left:20px;
+}
+.star{
+color:red;
+}
+.pad_20{
+	padding-bottom:20px;
+}
+.reddish{
+    max-width: 225px;
+    border: 1px solid #5199e4;
+    margin-top: 10px;
+    box-shadow: 0px 0px 12px 0px #da8c8c;
+    margin-bottom: 0px;
+    min-height: 3px;
+}
+a:hover{
+	text-decoration:none !important;
+}
+.name_login{
+    position: relative;
+    top: 22px;
+    font-size: 18px;
+    color: red;
+    margin-right: 50px;
+
+}
+label {
+    display: block;
+}
+
+input.error {
+    border: 1px solid red;
+}
+
+label.error {
+    font-weight: normal;
+    color: red;
+}
+.form-control[readonly]{
+    background-color:#fff !important;   
+}
+.clrwt{
+    color:#fff !important;
+}
+.mrg_tp_25{
+        margin-top: 23px;
+}
+.mrg_tp_15{
+    margin-top:15px;
+}
+.clrred{
+    color:red;
+}
+.view_dt{
+    cursor:pointer;
+}
+.pay_modal_header{
+    background-color: #68a4ea;
+    color: #fff;
+    text-align: center;
+}
+.pay_modal_header .close{
+   opacity:1;
+    color: #fff;
+  
+}
+.search_panel{
+    border: 1px solid grey;
+    box-shadow: 0px 0px 3px 0px grey;
+    margin-left: 0px !important;
+    padding: 15px;
+    margin-right: 0px  !important;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+input[type="file"] {
+    display: none !important;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.logoinput{
+        min-width: 200px;
+    width: 100%;
+    max-height: 150px;
+    min-height: 150px;
+    max-width: 200px;
+}
+.no_pad{
+    padding:0px !important;
+}
+.report_logo{
+    width: 100%;
+    min-height: 170px;
+    max-height: 170px;
+}
+.fnt_50{
+    font-size:50px;
+}
+.actived{
+    background-color:#419bea !important;
+    color:#fff !important;
+}
+.actived .zmdi-caret-down{
+   color:#fff !important;
+}
+.gend{
+    position:relative;
+    top:2px;
+}
+.swal2-container div {
+    font-size: 15px;
+}
