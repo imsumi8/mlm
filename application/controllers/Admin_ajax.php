@@ -576,9 +576,11 @@ class Admin_ajax extends CI_Controller {
 	}
 	public function get_positionid(){
 	      $sponsorid=strtoupper($_POST['sponsorid']);
-	      $position=$_POST['position'];
-	      if(check_sponsor($sponsorid)==1){
-	           echo get_last_left_right($sponsorid,$position);
+		 // $position=$_POST['position'];
+		$sponsor= check_sponsor_get_name($sponsorid);
+	      if($sponsor != 0){
+			  $data = array('hrm_id'=>get_last_left_right($sponsorid),'hrm_name'=>$sponsor[0]['HRM_NAME']);
+	           echo json_encode($data);
 	      }else{
 	          echo 'Invalid Sponsor id';
 	      }
@@ -1975,11 +1977,13 @@ class Admin_ajax extends CI_Controller {
 		$sponserid=strtoupper($_POST['sponserid']);
 		$pack=$_POST['pack'];
 		$packprice=get_all_packs_by_id($pack);
-		$pos=$_POST['pos'];
+		
 		$positionid=strtoupper($_POST['positionid']);
 		if(strtoupper($_POST['sponserid'])==5000){
 		    $positionid=5000;
 		    $pos=get_positionmax();
+		}else{
+			$pos=get_positionmax_member(1,$_POST['sponserid']);
 		}
 	    $orgpostoinid=$positionid;
 	    $prev_upper_sponsor=$sponserid;
@@ -2074,28 +2078,28 @@ class Admin_ajax extends CI_Controller {
             		        insert_count_nodes($hrm_id,3);
             			    insert_count_nodes(5000,3);
             				$ledger_id=insert_ledger('ledger_'.$hrm_id);
-            				if($packprice>5000){
-            				    if($packprice==15000 || $packprice==35000){
-                				    $totepin=$packprice/5000;
-                				    $totepin=$totepin-1;
-            				    	for($p=1;$p<=$totepin;$p++){
-                        				$pin=create_pinno();
-                        				$amtid=1;
-                        				$status=0;
-                        				$epin_id=insertepin($pin,$hrm_id,$amtid,$status);
-                        				$msg='Dear user your have got free epin.\nEpin no:'.$pin;
-                                        send_sms($phone,$msg,$hrm_id);
-                        			}
-                        			$dt=date('Y-m-d');
-                        			$amt_pack=5000*$totepin;
-                        		    update_amount_ledger(3,(-1)*$amt_pack);
-                        		    update_amount_ledger(14,$amt_pack);
-                                    $crid=14;//for epin
-                                    $drid=3;/*for cash account */
-                        		    $particular='being epin given free to '.$firstname. ' '.$lastname.' of '.$amt_pack;
-                        		    insert_record_transaction($drid,$crid,$this->session->userdata('userid'),$particular,$amt_pack,$dt,$hrm_id);
-            				    }
-                    		}
+            				// if($packprice>5000){
+            				//     if($packprice==15000 || $packprice==35000){
+                			// 	    $totepin=$packprice/5000;
+                			// 	    $totepin=$totepin-1;
+            				//     	for($p=1;$p<=$totepin;$p++){
+                        	// 			$pin=create_pinno();
+                        	// 			$amtid=1;
+                        	// 			$status=0;
+                        	// 			$epin_id=insertepin($pin,$hrm_id,$amtid,$status);
+                        	// 			$msg='Dear user your have got free epin.\nEpin no:'.$pin;
+                            //             send_sms($phone,$msg,$hrm_id);
+                        	// 		}
+                        	// 		$dt=date('Y-m-d');
+                        	// 		$amt_pack=5000*$totepin;
+                        	// 	    update_amount_ledger(3,(-1)*$amt_pack);
+                        	// 	    update_amount_ledger(14,$amt_pack);
+                            //         $crid=14;//for epin
+                            //         $drid=3;/*for cash account */
+                        	// 	    $particular='being epin given free to '.$firstname. ' '.$lastname.' of '.$amt_pack;
+                        	// 	    insert_record_transaction($drid,$crid,$this->session->userdata('userid'),$particular,$amt_pack,$dt,$hrm_id);
+            				//     }
+                    		// }
             			
             				
         					if(get_option('first_node_matrix_counter_check')==0){

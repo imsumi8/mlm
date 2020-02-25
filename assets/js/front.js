@@ -785,10 +785,11 @@ jQuery(document).ready(function (){
             var d=$(this);
             var id=d.closest('form').find('.get_name_member').val();
             if(id==5000){
-                $('.forleader').hide();
+                // $('.forleader').hide();
                 $('.pos').val('2');
                 $('.position_check').val('5000');
             }else{
+				$('.pos').val('2');
                 $('.forleader').show();
             }
             $('.epins_register option').remove();

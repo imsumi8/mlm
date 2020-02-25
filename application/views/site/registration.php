@@ -8,7 +8,8 @@
           $minarray['label']=$res->HRM_ID." [ ".$res->HRM_NAME." ]";
           $minarray['value']=$res->HRM_ID;
           array_push($large_arr,$minarray);
-    }
+	}
+	
 
 ?>
 
@@ -106,7 +107,7 @@ color:#fff !important;
 							</div>
 							<div  class="pills-struct">
 								<ul role="tablist" class="nav nav-pills" id="myTabs_6">
-									<li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_6" href="#home_6">Paid Registration</a></li>
+									<li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_6" href="#home_6">Registration</a></li>
 									<!--<li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_6" role="tab" href="#profile_6" aria-expanded="false">Free Registration</a></li>-->
 								</ul>
 								<div class="tab-content" id="myTabContent_6">
@@ -138,12 +139,12 @@ color:#fff !important;
                 										
                 									</div>
                 									<div class="row">
-                									    <div class="col-md-4">
+                									    <div class="col-md-4" style="display:none">
                 											<div class="form-group">
                 												<div><label>Package <span class="star">*</span></label></div>
                 												<select name="pack" class="form-control packmain">
                 													<?php foreach($packs as $pack) { ?>
-                													    <option value="<?php echo $pack->PACKAGE_ID;?>" attr-price="<?php echo $pack->PACKAGE_PRICE; ?>"><?php echo $pack->PACKAGE_NAME." [ ".$pack->PACKAGE_PRICE." ]";?></option>
+                													    <option <?php echo ($pack->PACKAGE_ID==1)?'selected':'' ?> value="<?php echo $pack->PACKAGE_ID;?>" attr-price="<?php echo $pack->PACKAGE_PRICE; ?>"><?php echo $pack->PACKAGE_NAME." [ ".$pack->PACKAGE_PRICE." ]";?></option>
                 													<?php } ?>
                 												</select>
                 											</div>
@@ -156,6 +157,14 @@ color:#fff !important;
                 												
                 											</div>
                 										</div>
+
+														<div class="col-md-4">
+                											<div class="form-group">
+                												<div><label>Sponsor Name <span class="star">*</span></label></div>
+                												<input type="text" name="positionid" class="form-control sponsor_name" style="text-transform: uppercase;" value="<?php echo $this->uri->segment(4); ?>" readonly> 
+                											</div>
+                										</div>
+                									
                 										<div class="col-md-4">
                 											<div class="form-group">
                 												<div><label>E-PIN No. <span class="star">*</span></label></div>
@@ -191,7 +200,7 @@ color:#fff !important;
                 										
                 									</div>
                 									<div class="row forleader">
-                									    <div class="col-md-6">
+                									    <!-- <div class="col-md-6">
                 											<div class="form-group">
                 												<div><label>Position <span class="star">*</span></label></div>
                 												<select name="pos" class="form-control pos get_postitionid" required>
@@ -200,7 +209,7 @@ color:#fff !important;
                 													<option value='2' <?php  if($this->uri->segment(5)==2) echo 'selected'; ?>>RIGHT</option>
                 												</select>
                 											</div>
-            									    	</div>
+            									    	</div> -->
                 									    <div class="col-md-6">
                 											<div class="form-group">
                 												<div><label>Position Id <span class="star">*</span></label></div>
@@ -555,19 +564,22 @@ color:#fff !important;
 			    });
 			    function change_position(){
 			        var sponsorid=$('.get_name_member').val();
-			        var position=$('.pos').val();
-			        if(sponsorid!='' && position!=''){
+			        //var position=$('.pos').val();
+			        if(sponsorid!=''){
 			            $.ajax({
             				type: 'POST',
             				url: admin_loc+'get_positionid',
-            				data: 'sponsorid='+sponsorid+'&position='+position,
+            				data: 'sponsorid='+sponsorid,
             				async:false,
             				success: function(msg){
-            				    msg=$.trim(msg);
+							
+								var obj = jQuery.parseJSON(msg);
+							
             				    if(msg=="Invalid Sponsor id"){
             				        sweetalert('Invalid','warning',msg,'#f99b4a');
             				    }else{
-            				        $('.position_check').val(msg);
+									$('.sponsor_name').val(obj.hrm_name);
+            				        $('.position_check').val(obj.hrm_id);
             				    }
             				}
             			});
@@ -585,7 +597,7 @@ $('document').ready(function(){
         if (typeof terms === "undefined") {
           alert('please check terms and conditions');
         }else{
-            if($('.get_name_member').val()!='' && $('.pos').val()!='' && $('.name_free').val()!='' && $('.phone').val()!='' && $('.terms').val()!=''){
+            if($('.get_name_member').val()!=''  && $('.name_free').val()!='' && $('.phone').val()!='' && $('.terms').val()!=''){
                 $.ajax({
                     url: SITEURL + 'admin_ajax/check_sposonrs_id_single',
                     type: 'post',

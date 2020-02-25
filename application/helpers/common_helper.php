@@ -623,6 +623,20 @@
 			return 0;
 		}
 	}
+
+	function check_sponsor_get_name($sponsor){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$qry = "Select * from hrm_post where HRM_ID='".$sponsor."'";
+		$query = $ci->db->query($qry);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return 0;
+		}
+	}
+
 	function check_user_free($sponsor){
 		$ci=& get_instance();
 		$ci->load->database(); 
@@ -926,14 +940,14 @@
 		   return $row;
 		}
 	}
-	function get_last_left_right($hrmid,$position){
+	function get_last_left_right($hrmid){
 	    
 	    if($hrmid!=5000){
     	    $ci =& get_instance();
     		$ci->load->database();
     		$orghrmid=$hrmid;
     		for($i=1;$hrmid!='';$i++){
-            	$sql = "Select * from hrm_level_tracking where POSITION_ID='".$hrmid."' and LEVEL_ID='1' and POSITION='".$position."' and MLM_DESC_ID=3"; 
+            	$sql = "Select * from hrm_level_tracking where POSITION_ID='".$hrmid."' and LEVEL_ID='1' and MLM_DESC_ID=3"; 
         		$query = $ci->db->query($sql);
         		$row = $query->result();
         		if(!empty($row)){
@@ -949,6 +963,27 @@
 	    }
 		
 	}
+	function get_admin_id(){
+	    
+	  
+    	    $ci =& get_instance();
+			$ci->load->database();
+			$hrmtype=1;
+    	$sql = "Select * from hrm_post where HRM_TYPE='".$hrmtype."'"; 
+        		$query = $ci->db->query($sql);
+        		$row = $query->result();
+        		if(!empty($row)){
+        		   $hrmid=$row[0]->HRM_ID;
+        		
+        		}else{
+        		    $hrmid='';
+        		}
+    		
+    		return $hrmid;
+	    
+		
+	}
+
 	function get_last_left_right_limited_loop($hrmid,$position,$count){
 	    $ci =& get_instance();
 		$ci->load->database();
@@ -3088,7 +3123,24 @@
 		 }else{
 		     return 1;
 		 }
-    }
+	}
+	
+
+	function get_positionmax_member($level,$position_id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select MAX(POSITION) as pos from hrm_level_tracking where MLM_DESC_ID=3 and LEVEL_ID='".$level."' and POSITION_ID='".$position_id."'"; 
+		$query = $ci->db->query($sql);
+		$query =	$query ->result();
+		if(!empty($query)){
+			$query=$query[0]->pos;
+			 $query= $query+1;
+			return $query;
+		}else{
+			return 1;
+		}
+   }
+
     function get_all_nodes_by_admin(){
          $ci=& get_instance();
 		 $ci->load->database(); 
