@@ -300,19 +300,16 @@
 		<!-- Left Sidebar Menu -->
 		<div class="fixed-sidebar-left">
 			<ul class="nav navbar-nav side-nav nicescroll-bar">
-				<li class="navigation-header">
-					<span>Main</span> 
-					<i class="zmdi zmdi-more"></i>
-				</li>
+			
 			
 				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
 				<li>
 					<a <?php if($title=='Dashboard') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/dashboard"><div class="pull-left"><i class="fa fa-dashboard mr-20"></i><span class="right-nav-text">Admin Dashboard</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
 				</li>
 				
-				<li>
+				<!-- <li>
 					<a <?php if($title=='Member Dashboard') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/memdashboard"><div class="pull-left"><i class="fa fa-dashboard mr-20"></i><span class="right-nav-text">Member Dashboard</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
-				</li>
+				</li> -->
 				
 				<?php } else{ ?>
 				<li>
@@ -322,14 +319,15 @@
 				<?php $arr=get_hrm_post($this->session->userdata('userid'));
 				if($arr[0]->HRM_STATUS=='1') {
 				?>
-				<li>
+				<!-- <li>
 					<a <?php if($title=='Registration') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/register"><div class="pull-left"><i class="fa fa-group mr-20"></i><span class="right-nav-text">Member Registration</span></div><div class="clearfix"></div></a>
-				</li>
+				</li> -->
 				<?php } ?>
-				<li><hr class="light-grey-hr mb-10"/></li>
+				<!-- <li><hr class="light-grey-hr mb-10"/></li> -->
 				<?php  if($this->session->userdata('hrmtype') != 'admin') { ?>
 				<li>
-					<a <?php if($title=='Profile Management') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#profile_dr"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">Profile Management</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Profile Management') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#profile_dr"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">Profile Management</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">5</span></div><div class="clearfix"></div></a>
 					<ul id="profile_dr" class="collapse collapse-level-1">
 						<li>
 							<a <?php if($subpage=='member_view') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/member_view"><i class="fa fa-circle <?php if($subpage=='member_view') { echo 'clrred'; } ?>"></i> Profile View</a>
@@ -343,7 +341,8 @@
 					</ul>
 				</li>
 				<li>
-					<a <?php if($title=='Epin') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="fa fa-shopping-basket mr-20"></i><span class="right-nav-text">E-Pin</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Epin') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="fa fa-shopping-basket mr-20"></i><span class="right-nav-text">E-Pin</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #65cea7">6</span></div><div class="clearfix"></div></a>
 					<ul id="dashboard_dr" class="collapse collapse-level-1">
 					
 						<li>
@@ -376,7 +375,8 @@
 				
 				<?php  } else { ?>
 				<li>
-					<a <?php if($title=='Profile Management') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#profile_dr"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">Profile Management</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Profile Management') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#profile_dr"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">Profile Management</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">5</span></div><div class="clearfix"></div></a>
 					<ul id="profile_dr" class="collapse collapse-level-1">
 						<li>
 							<a <?php if($subpage=='member_view') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/member_view"><i class="fa fa-circle <?php if($subpage=='member_view') { echo 'clrred'; } ?>"></i> Member View</a>
@@ -396,7 +396,8 @@
 					</ul>
 				</li>
 				<li>
-					<a <?php if($title=='Epin') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="fa fa-shopping-basket mr-20"></i><span class="right-nav-text">E-Pin</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Epin') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="fa fa-shopping-basket mr-20"></i><span class="right-nav-text">E-Pin</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #65cea7">6</span></div><div class="clearfix"></div></a>
 					<ul id="dashboard_dr" class="collapse collapse-level-1">
 						<li>
 							<a <?php if($subpage=='generate') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/generate"><i class="fa fa-circle <?php if($subpage=='generate') { echo 'clrred'; } ?>"></i> Generate E-pin</a>
@@ -422,6 +423,7 @@
 							<a <?php if($subpage=='used') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/used"><i class="fa fa-circle <?php if($subpage=='used') { echo 'clrred'; } ?>"></i> Used E-pin</a>
 						</li>
 					</ul>
+				
 				</li>
 				<?php } ?>
 				<!--
@@ -448,7 +450,8 @@
 				
 
 				<li>
-					<a <?php if($title=='Tree View') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#genealogy_tr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Genealogy</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Tree View') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#genealogy_tr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Genealogy</span></div><div class="pull-right">
+						<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">1</span></div><div class="clearfix"></div></a>
 					<ul id="genealogy_tr" class="collapse collapse-level-1">
 						<li>
 							<a <?php if($subpage=='member_tree') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/view_tree"><i class="fa fa-circle <?php if($subpage=='member_tree') { echo 'clrred'; } ?>"></i> Member Tree View</a>
@@ -461,7 +464,8 @@
 				
 				<li>
 					
-				    <a <?php if($title=='AUTO POOL VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#pool_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Auto Pool Geneology</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+				    <a <?php if($title=='AUTO POOL VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#pool_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Auto Pool Geneology</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">2</span></div><div class="clearfix"></div></a>
 					<ul id="pool_dr" class="collapse collapse-level-1">
 						<?php if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,5)==1) { ?>
 						<li>
@@ -566,7 +570,8 @@
 				</li>
 				-->
 				<li>
-					<a <?php if($title=='Reports') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#report_dr"><div class="pull-left"><i class="fa fa-bar-chart mr-20"></i><span class="right-nav-text">Reports</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Reports') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#report_dr"><div class="pull-left"><i class="fa fa-bar-chart mr-20"></i><span class="right-nav-text">Reports</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #65cea7">6</span></div><div class="clearfix"></div></a>
 					<ul id="report_dr" class="collapse collapse-level-1">
 						<li>
 							<a <?php if($subpage=='profile') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/report/profile"><i class="fa fa-circle <?php if($subpage=='profile') { echo 'clrred'; } ?>"></i> Profile Report</a>

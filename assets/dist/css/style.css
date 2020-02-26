@@ -109,7 +109,7 @@ strong {
 }
 
 body {
-  color: #878787;
+  color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-style: normal;
@@ -757,7 +757,7 @@ code {
 }
 
 .bg-grey {
-  background: #878787 !important;
+  background: #fff !important;
 }
 
 .bg-yellow {
@@ -797,7 +797,7 @@ code {
 }
 
 .txt-grey {
-  color: #878787 !important;
+  color: #fff !important;
 }
 
 .txt-info,
@@ -938,12 +938,12 @@ code {
 }
 
 small {
-  color: #878787;
+  color: #fff;
   padding-left: 5px;
 }
 
 .text-muted {
-  color: #878787;
+  color: #fff;
 }
 
 .truncate {
@@ -2628,9 +2628,34 @@ button.fixed-btn.fc-agendaWeek-button, .fixed-btn.fc-prev-button, .fixed-btn.fc-
   overflow-y: auto;
   background-color: #fff;
   backface-visibility: hidden;
+  
+}
+.fixed-sidebar-left ul.side-nav > li{
+  position: relative;
+  border-top: 1px solid #34364a;
+  border-bottom: 1px solid #2c2d3e;
+  transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  border-top-color: #4577A5;
+    border-bottom-color: #396389;
+}
+
+.fixed-sidebar-left ul.side-nav > li.display{
+  border-top-color: #396389;
 }
 .fixed-sidebar-left .side-nav li {
   width: 225px;
+}
+
+.fixed-sidebar-left ul.side-nav > li >a{
+  position: relative;
+  display: block;
+  color: #e6f1f7;
+  font-size: 13px;
+  padding: 13px 10px 13px 13px;
+  text-shadow: 0 1px 1px rgba(0,0,0,.05);
+  transition: color .5s ease,background .5s ease;
+  -webkit-transition: color .5s ease,background .5s ease;
 }
 .fixed-sidebar-left .side-nav li.navigation-header > span, .fixed-sidebar-left .side-nav li.navigation-header > i {
   padding: 11px 15px;
@@ -2667,10 +2692,10 @@ button.fixed-btn.fc-agendaWeek-button, .fixed-btn.fc-prev-button, .fixed-btn.fc-
   width: 18px;
 }
 .fixed-sidebar-left .side-nav li a .pull-right i {
-  color: #878787;
+  color: #fff;
 }
 .fixed-sidebar-left .side-nav > li > a {
-  color: #212121;
+  color: #FFF;
   padding: 7px 15px;
 }
 .fixed-sidebar-left .side-nav > li > a:hover {
@@ -2678,7 +2703,7 @@ button.fixed-btn.fc-agendaWeek-button, .fixed-btn.fc-prev-button, .fixed-btn.fc-
 }
 .fixed-sidebar-left .side-nav > li > a:focus, .fixed-sidebar-left .side-nav > li > a:active {
   background: rgba(33, 33, 33, 0.05);
-  color: #212121;
+  color: #FFF;
 }
 .fixed-sidebar-left .side-nav > li > a:focus > i, .fixed-sidebar-left .side-nav > li > a:active > i {
   color: #e2724c;
@@ -2689,18 +2714,75 @@ button.fixed-btn.fc-agendaWeek-button, .fixed-btn.fc-prev-button, .fixed-btn.fc-
 .fixed-sidebar-left .side-nav > li > ul > li a {
   padding: 7px 15px 7px 51px;
   display: block;
-  color: #878787;
+  color: #fff;
 }
 .fixed-sidebar-left .side-nav > li > ul > li a:hover, .fixed-sidebar-left .side-nav > li > ul > li a:focus, .fixed-sidebar-left .side-nav > li > ul > li a:active {
   background: rgba(33, 33, 33, 0.05);
-  color: #878787;
+  color: #fff;
 }
 .fixed-sidebar-left .side-nav > li > ul > li > ul > li a {
   padding-left: 62px;
-  color: #878787;
+  color: #fff;
 }
 .fixed-sidebar-left .side-nav > li > ul > li > ul > li a:hover, .fixed-sidebar-left .side-nav > li > ul > li > ul > li a:focus, .fixed-sidebar-left .side-nav > li > ul > li > ul > li a:active {
-  color: #878787;
+  color: #fff;
+}
+.fixed-sidebar-left .side-nav > ul > li > a .badge {
+  position: absolute;
+  top: 12px;
+  right: 7px;
+}
+
+.animation-delay5 {
+  animation-delay: .9s;
+  -webkit-animation-delay: .9s;
+  -moz-animation-delay: .9s;
+  -ms-animation-delay: .9s;
+  -o-animation-delay: .9s;
+  animation-timing-function: ease;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  -ms-animation-timing-function: ease;
+  -o-animation-timing-function: ease;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+}
+.bounceIn {
+  animation-name: bounceIn;
+  -webkit-animation-name: bounceIn;
+  -moz-animation-name: bounceIn;
+  -ms-animation-name: bounceIn;
+  -o-animation-name: bounceIn;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+}
+.badge-success, .label-success {
+  background-color: #65cea7;
+  color: #fff;
+}
+.badge, .label {
+  background-color: #F1F5FC;
+  color: #777;
+}
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #999;
+  border-radius: 10px;
 }
 .fixed-sidebar-left .side-nav > li > a.active {
   background: #ea6c41;
@@ -2713,13 +2795,13 @@ button.fixed-btn.fc-agendaWeek-button, .fixed-btn.fc-prev-button, .fixed-btn.fc-
   color: #fff;
 }
 .fixed-sidebar-left .side-nav > li ul.collapse li a.active {
-  color: #212121;
+  color: #fff;
 }
 
 a.toggle-left-nav-btn,
 a#toggle_mobile_nav,
 a#toggle_mobile_search {
-  color: #878787;
+  color: #fff;
   position: relative;
   line-height: 66px;
 }
@@ -2940,7 +3022,7 @@ a#toggle_mobile_nav {
   background: #212121;
 }
 .setting-panel .theme-option-wrap > li#theme-4::before {
-  background: #333;
+  background:#fff;
 }
 .setting-panel .theme-option-wrap > li#theme-5::after {
   background: #284152;
@@ -3067,8 +3149,10 @@ a#toggle_mobile_nav {
 }
 .wrapper.theme-1-active .navbar.navbar-inverse,
 .wrapper.theme-1-active .fixed-sidebar-left .side-nav {
-  background: #fff;
+  background: #3e6b96;
+  
 }
+
 .wrapper.theme-2-active .navbar.navbar-inverse,
 .wrapper.theme-2-active .navbar.navbar-inverse.navbar-fixed-top .mobile-only-brand {
   background: #eaedee;
@@ -3088,7 +3172,7 @@ a#toggle_mobile_nav {
   background: #212121;
 }
 .wrapper.theme-4-active .fixed-sidebar-left .side-nav {
-  background: #333;
+  background: #fff;
 }
 .wrapper.theme-5-active .navbar.navbar-inverse,
 .wrapper.theme-5-active .navbar.navbar-inverse.navbar-fixed-top .mobile-only-brand {
@@ -3274,7 +3358,7 @@ a#toggle_mobile_nav {
 .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > .btn i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .wizard > .actions .input-group-btn > a i, .wizard > .actions .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > a i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .dt-buttons .input-group-btn > .dt-button i, .dt-buttons .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > .dt-button i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .tablesaw-sortable th.tablesaw-sortable-head .input-group-btn > button i, .tablesaw-sortable th.tablesaw-sortable-head .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > button i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .sweet-alert .input-group-btn > button i, .sweet-alert .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > button i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .owl-theme .owl-nav .input-group-btn > [class*="owl-"] i, .owl-theme .owl-nav .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > [class*="owl-"] i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > button.fc-agendaDay-button.fc-state-default.fc-corner-right i,
 .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > button.fc-month-button.fc-state-default.fc-corner-left i,
 .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > button.fc-agendaWeek-button i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > .fc-prev-button i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > .fc-next-button i, .navbar.navbar-inverse.navbar-fixed-top .top-nav-search .input-group .input-group-btn > .fc-today-button i {
-  color: #878787;
+  color: #fff;
   font-size: 20px;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li.dropdown {
@@ -3284,7 +3368,7 @@ a#toggle_mobile_nav {
   position: static;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li > a {
-  color: #878787;
+  color: #fff;
   background: transparent !important;
   -webkit-transition: 0.3s ease;
   -moz-transition: 0.3s ease;
@@ -3318,7 +3402,7 @@ a#toggle_mobile_nav {
   padding-bottom: 10px;
   padding-top: 10px;
   text-align: center;
-  color: #878787;
+  color: #fff;
   text-transform: capitalize;
   width: 80px;
 }
@@ -3327,7 +3411,7 @@ a#toggle_mobile_nav {
   padding-bottom: 5px;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.app-dropdown .connection-item:hover {
-  color: #878787;
+  color: #fff;
   background: rgba(33, 33, 33, 0.05);
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.app-dropdown .app-icon-wrap {
@@ -3339,7 +3423,7 @@ a#toggle_mobile_nav {
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.app-dropdown .app-box-bottom-wrap .read-all {
   padding: 5px 15px 0;
   font-size: 13px;
-  color: #878787;
+  color: #fff;
   text-transform: capitalize;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.alert-dropdown {
@@ -3360,7 +3444,7 @@ a#toggle_mobile_nav {
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.alert-dropdown .notification-box-bottom-wrap .read-all {
   padding: 5px 15px 0;
   font-size: 13px;
-  color: #878787;
+  color: #fff;
   text-transform: capitalize;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.alert-dropdown .streamline {
@@ -3415,11 +3499,11 @@ a#toggle_mobile_nav {
   font-weight: 500;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.alert-dropdown .streamline .sl-item .sl-content .notifications-time {
-  color: #878787;
+  color: #fff;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.alert-dropdown .streamline .sl-item .sl-content > p {
   font-size: 13px;
-  color: #878787;
+  color: #fff;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.user-auth-dropdown {
   min-width: 175px;
@@ -3457,7 +3541,7 @@ a#toggle_mobile_nav {
   display: block;
   text-transform: capitalize;
   padding: 8px 0 8px 39px;
-  color: #878787;
+  color: #fff;
 }
 .navbar.navbar-inverse.navbar-fixed-top .nav > li .dropdown-menu.mega-menu li.preview-carousel > a {
   font-size: 16px;
@@ -3835,7 +3919,7 @@ button.input-group-addon.fc-agendaWeek-button, .input-group-addon.fc-prev-button
 }
 
 .help-block {
-  color: #878787;
+  color: #fff;
 }
 
 .has-success .form-control, .has-success .select2-container--default .select2-selection--single .select2-selection__rendered, .select2-container--default .select2-selection--single .has-success .select2-selection__rendered,
@@ -3928,7 +4012,7 @@ button.input-group-addon.fc-agendaWeek-button, .input-group-addon.fc-prev-button
   color: #212121;
 }
 .daterangepicker .input-mini:focus {
-  border-color: #878787;
+  border-color: #fff;
   box-shadow: none !important;
   outline: 0 none;
 }
@@ -3966,7 +4050,7 @@ button.input-group-addon.fc-agendaWeek-button, .input-group-addon.fc-prev-button
   padding-left: 12px;
 }
 .select2-container--default.select2-container--open .select2-selection__rendered {
-  border-color: #878787;
+  border-color: #fff;
 }
 .select2-container--default .select2-selection__arrow {
   height: 40px !important;
@@ -4086,7 +4170,7 @@ button.input-group-addon.fc-agendaWeek-button, .input-group-addon.fc-prev-button
   border: 1px solid rgba(33, 33, 33, 0.1);
   border-radius: 0;
   box-shadow: none;
-  color: #878787;
+  color: #fff;
 }
 .bootstrap-tagsinput .tag {
   border-radius: 0;
@@ -4160,7 +4244,7 @@ button.input-group-addon.fc-agendaWeek-button, .input-group-addon.fc-prev-button
 }
 .wizard .steps .number {
   font-size: 18px;
-  color: #878787;
+  color: #fff;
 }
 .wizard .steps ul {
   display: table;
@@ -4266,7 +4350,7 @@ button.input-group-addon.fc-agendaWeek-button, .input-group-addon.fc-prev-button
   background: transparent;
   border: none;
   padding: 10px 20px;
-  color: #878787;
+  color: #fff;
   margin: 0;
   border-radius: 0;
   text-transform: capitalize;
@@ -4544,7 +4628,7 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
   color: #fff;
 }
 .accordion-struct.panel-group .panel .panel-heading a {
-  color: #878787;
+  color: #fff;
   text-transform: capitalize;
   padding: 10px 20px;
   width: 100%;
@@ -4570,10 +4654,10 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
   opacity: 0;
 }
 .accordion-struct.accordion-style-1.panel-group .panel .panel-heading.activestate a {
-  color: #878787;
+  color: #fff;
 }
 .accordion-struct.accordion-style-1.panel-group .panel .panel-heading a {
-  color: #878787;
+  color: #fff;
 }
 .accordion-struct.accordion-style-1 .icon-ac-wrap {
   display: inline;
@@ -4629,7 +4713,7 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
   background: rgba(33, 33, 33, 0.1);
   border: none;
   padding: 10px 20px;
-  color: #878787;
+  color: #fff;
   margin: 0;
   border-radius: 0;
   text-transform: capitalize;
@@ -4776,7 +4860,7 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
   background: #f7f7f9;
   border: none;
   padding: 10px 20px;
-  color: #878787;
+  color: #fff;
   margin: 0;
   border-radius: 0;
   text-transform: capitalize;
@@ -4835,7 +4919,7 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
 .nav-pills-outline.nav-pills > li > a {
   background-color: transparent !important;
   border: 2px solid #f7f7f9;
-  color: #878787;
+  color: #fff;
 }
 .nav-pills-outline.nav-pills > li > a:hover, .nav-pills-outline.nav-pills > li > a:active, .nav-pills-outline.nav-pills > li > a:focus {
   border-color: #469408;
@@ -4997,14 +5081,14 @@ table.dataTable > caption + thead > tr:first-child > td, table.dataTable > capti
 .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
   padding-top: 20px;
   margin-bottom: 14px;
-  color: #878787;
+  color: #fff;
 }
 .dataTables_wrapper .dataTables_length,
 .dataTables_wrapper .dataTables_info {
   padding-left: 15px;
 }
 .dataTables_wrapper .dataTables_info {
-  color: #878787;
+  color: #fff;
 }
 .dataTables_wrapper .dataTables_filter {
   padding-right: 15px;
@@ -5249,12 +5333,12 @@ table.footable > tbody > tr.footable-empty > td {
   padding: 16px !important;
 }
 .tablesaw td a {
-  color: #878787 !important;
+  color: #fff !important;
 }
 .tablesaw td, .tablesaw tbody th {
   vertical-align: middle;
   font-size: inherit;
-  color: #878787 !important;
+  color: #fff !important;
 }
 
 .tablesaw-toolbar {
@@ -5441,18 +5525,18 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
 }
 
 .ct-grid {
-  stroke: #878787;
+  stroke: #fff;
   stroke-dasharray: 0;
   stroke-width: 1px;
 }
 
 .ct-label {
-  color: #878787;
+  color: #fff;
   fill: #fff;
 }
 
 .ct-chart-bar .ct-label.ct-horizontal.ct-end {
-  color: #878787;
+  color: #fff;
 }
 
 .ct-chart-before-pad-zero:before {
@@ -5540,7 +5624,7 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
   font-size: 14px;
   padding-top: 10px;
   background: transparent;
-  color: #878787;
+  color: #fff;
 }
 .dd-handle:hover, .dd-handle:focus, .dd-handle:active {
   color: #212121;
@@ -5558,7 +5642,7 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
 
 .dd3-content {
   display: block;
-  color: #878787;
+  color: #fff;
   margin: 0 0 15px;
   font-size: 14px;
   padding-top: 10px;
@@ -5590,7 +5674,7 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
 .dd3-handle:before {
   font-family: FontAwesome;
   content: "\f047";
-  color: #878787;
+  color: #fff;
   display: block;
   position: absolute;
   left: 0;
@@ -6012,7 +6096,7 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
 }
 .folder-list li i {
   margin-right: 8px;
-  color: #878787;
+  color: #fff;
 }
 
 .category-list li {
@@ -6081,7 +6165,7 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
 }
 .file .file-name span {
   font-size: 12px;
-  color: #878787;
+  color: #fff;
 }
 
 .file-control {
@@ -6094,7 +6178,7 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
 }
 
 .file-name small {
-  color: #878787;
+  color: #fff;
 }
 
 ul.tag-list li {
@@ -6177,8 +6261,8 @@ a.compose-mail {
   z-index: 1;
 }
 .carousel-indicators li {
-  border-color: #878787;
-  background: #878787;
+  border-color: #fff;
+  background: #fff;
   opacity: .6;
 }
 .carousel-indicators li:hover {
@@ -6211,7 +6295,7 @@ a.compose-mail {
   height: 8px;
   margin: 5px 3px;
   width: 8px;
-  background: #878787;
+  background: #fff;
   opacity: .6;
 }
 
@@ -6386,7 +6470,7 @@ a.compose-mail {
 #filters li a {
   background: #f7f7f9 none repeat scroll 0 0;
   border-radius: 60px;
-  color: #878787;
+  color: #fff;
   display: inline-block;
   padding: 10px 20px;
   text-transform: capitalize;
@@ -6407,13 +6491,13 @@ a.compose-mail {
   border: 1px solid rgba(33, 33, 33, 0.1);
   border-radius: 0;
   box-shadow: none !important;
-  color: #878787;
+  color: #fff;
   height: 42px;
 }
 
 /*Panel*/
 .panel-title > small {
-  color: #878787;
+  color: #fff;
   font-size: 14px;
 }
 
@@ -6441,7 +6525,7 @@ a.compose-mail {
 }
 .panel .panel-heading .pull-right i {
   font-size: 20px;
-  color: #878787;
+  color: #fff;
 }
 .panel .panel-heading .pull-right .dropdown i {
   font-size: 16px;
@@ -6597,7 +6681,7 @@ a.compose-mail {
   background: rgba(33, 33, 33, 0.05);
 }
 .dropdown-menu > li > a i {
-  color: #878787;
+  color: #fff;
   font-size: 18px;
   margin-right: 10px;
   width: 18px;
@@ -6777,7 +6861,7 @@ a.compose-mail {
 }
 
 .pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
-  color: #878787;
+  color: #fff;
 }
 
 /*Pager*/
@@ -6871,7 +6955,7 @@ a.compose-mail {
   padding: 15px;
 }
 .task-panel a.list-group-item i {
-  color: #878787;
+  color: #fff;
   padding-right: 10px;
   font-size: 18px;
   width: 25px;
@@ -7087,7 +7171,7 @@ a.compose-mail {
 .chat-search .input-group .input-group-btn > .btn i, .chat-search .input-group .wizard > .actions .input-group-btn > a i, .wizard > .actions .chat-search .input-group .input-group-btn > a i, .chat-search .input-group .dt-buttons .input-group-btn > .dt-button i, .dt-buttons .chat-search .input-group .input-group-btn > .dt-button i, .chat-search .input-group .tablesaw-sortable th.tablesaw-sortable-head .input-group-btn > button i, .tablesaw-sortable th.tablesaw-sortable-head .chat-search .input-group .input-group-btn > button i, .chat-search .input-group .sweet-alert .input-group-btn > button i, .sweet-alert .chat-search .input-group .input-group-btn > button i, .chat-search .input-group .owl-theme .owl-nav .input-group-btn > [class*="owl-"] i, .owl-theme .owl-nav .chat-search .input-group .input-group-btn > [class*="owl-"] i, .chat-search .input-group .input-group-btn > button.fc-agendaDay-button.fc-state-default.fc-corner-right i,
 .chat-search .input-group .input-group-btn > button.fc-month-button.fc-state-default.fc-corner-left i,
 .chat-search .input-group .input-group-btn > button.fc-agendaWeek-button i, .chat-search .input-group .input-group-btn > .fc-prev-button i, .chat-search .input-group .input-group-btn > .fc-next-button i, .chat-search .input-group .input-group-btn > .fc-today-button i {
-  color: #878787;
+  color: #fff;
   font-size: 20px;
 }
 
@@ -7410,7 +7494,7 @@ a.compose-mail {
   font-size: 21px;
 }
 .profile-box .social-info .counts-text {
-  color: #878787;
+  color: #fff;
 }
 
 /*Followers*/
@@ -7682,7 +7766,7 @@ button.fc-agendaWeek-button {
 .small-calendar .fc-next-button, .small-calendar .fc-prev-button {
   background: transparent;
   border: none;
-  color: #878787;
+  color: #fff;
   font-size: 20px !important;
   padding: 0;
   line-height: 0;
@@ -7803,7 +7887,7 @@ button.fc-agendaWeek-button {
   padding-left: 10px;
 }
 .todo-list .todo-item .checkbox input[type="checkbox"]:checked + label {
-  color: #878787;
+  color: #fff;
   text-decoration: line-through;
 }
 
@@ -7874,7 +7958,7 @@ button.fc-agendaWeek-button {
 .message-box-wrap .message-box-bottom-wrap .read-all {
   padding: 5px 15px;
   font-size: 13px;
-  color: #878787;
+  color: #fff;
   text-transform: capitalize;
 }
 
@@ -7905,7 +7989,7 @@ button.fc-agendaWeek-button {
   margin-left: 50px;
 }
 .message-box > a .sl-item .sl-content .message-time, .review-box > a .sl-item .sl-content .message-time {
-  color: #878787;
+  color: #fff;
 }
 .message-box > a .sl-item .sl-content .message-subject, .review-box > a .sl-item .sl-content .message-subject {
   font-size: 13px;
@@ -8009,7 +8093,7 @@ ul.inbox-nav li a {
 ul.inbox-nav li a i {
   font-size: 16px;
   padding-right: 10px;
-  color: #878787;
+  color: #fff;
 }
 
 ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
@@ -8045,7 +8129,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
   font-weight: 500;
 }
 .table-inbox tr.unread td i {
-  color: #878787;
+  color: #fff;
 }
 .table-inbox.table-hover > tbody > tr {
   background: rgba(33, 33, 33, 0.05) !important;
@@ -8054,7 +8138,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
   color: #212121;
 }
 .table-inbox.table-hover > tbody > tr td i {
-  color: #878787;
+  color: #fff;
 }
 .table-inbox.table-hover > tbody > tr.unread {
   background: transparent !important;
@@ -8089,7 +8173,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 .mail-option .chk-all .btn i, .mail-option .chk-all .wizard > .actions a i, .wizard > .actions .mail-option .chk-all a i, .mail-option .chk-all .dt-buttons .dt-button i, .dt-buttons .mail-option .chk-all .dt-button i, .mail-option .chk-all .tablesaw-sortable th.tablesaw-sortable-head button i, .tablesaw-sortable th.tablesaw-sortable-head .mail-option .chk-all button i, .mail-option .chk-all .sweet-alert button i, .sweet-alert .mail-option .chk-all button i, .mail-option .chk-all .owl-theme .owl-nav [class*="owl-"] i, .owl-theme .owl-nav .mail-option .chk-all [class*="owl-"] i, .mail-option .chk-all button.fc-agendaDay-button.fc-state-default.fc-corner-right i,
 .mail-option .chk-all button.fc-month-button.fc-state-default.fc-corner-left i,
 .mail-option .chk-all button.fc-agendaWeek-button i, .mail-option .chk-all .fc-prev-button i, .mail-option .chk-all .fc-next-button i, .mail-option .chk-all .fc-today-button i, .mail-option .chk-all .dropdown i {
-  color: #878787;
+  color: #fff;
 }
 .mail-option .chk-all input[type="checkbox"] {
   margin-top: 0;
@@ -8118,7 +8202,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 .heading-inbox button.fc-month-button.fc-state-default.fc-corner-left i,
 .heading-inbox button.fc-agendaWeek-button i, .heading-inbox .fc-prev-button i, .heading-inbox .fc-next-button i, .heading-inbox .fc-today-button i, .heading-inbox .dropdown i {
   font-size: 17px;
-  color: #878787;
+  color: #fff;
 }
 .heading-inbox .btn i.zmdi-chevron-left, .heading-inbox .wizard > .actions a i.zmdi-chevron-left, .wizard > .actions .heading-inbox a i.zmdi-chevron-left, .heading-inbox .dt-buttons .dt-button i.zmdi-chevron-left, .dt-buttons .heading-inbox .dt-button i.zmdi-chevron-left, .heading-inbox .tablesaw-sortable th.tablesaw-sortable-head button i.zmdi-chevron-left, .tablesaw-sortable th.tablesaw-sortable-head .heading-inbox button i.zmdi-chevron-left, .heading-inbox .sweet-alert button i.zmdi-chevron-left, .sweet-alert .heading-inbox button i.zmdi-chevron-left, .heading-inbox .owl-theme .owl-nav [class*="owl-"] i.zmdi-chevron-left, .owl-theme .owl-nav .heading-inbox [class*="owl-"] i.zmdi-chevron-left, .heading-inbox button.fc-agendaDay-button.fc-state-default.fc-corner-right i.zmdi-chevron-left,
 .heading-inbox button.fc-month-button.fc-state-default.fc-corner-left i.zmdi-chevron-left,
@@ -8135,7 +8219,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 }
 
 .download-blocks a {
-  color: #878787;
+  color: #fff;
 }
 
 .sender-img-wrap img {
@@ -8147,7 +8231,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 .heading-inbox .compose-btn button.fc-month-button.fc-state-default.fc-corner-left,
 .heading-inbox .compose-btn button.fc-agendaWeek-button, .heading-inbox .compose-btn .fc-prev-button, .heading-inbox .compose-btn .fc-next-button, .heading-inbox .compose-btn .fc-today-button {
   box-shadow: none;
-  color: #878787;
+  color: #fff;
   display: inline-block;
   padding: 0 5px;
   background: transparent;
@@ -8155,7 +8239,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
 
 .sender-info .pull-right .dropdown-toggle > i {
   font-size: 17px;
-  color: #878787;
+  color: #fff;
   vertical-align: middle;
 }
 
@@ -8218,7 +8302,7 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
   margin-top: 22px;
 }
 .contact-card .card-user-email, .contact-card .card-user-phone {
-  color: #878787;
+  color: #fff;
 }
 
 /*Login Form*/
@@ -8829,6 +8913,14 @@ ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
     left: -10px;
     right: auto;
   }
+  .fixed-sidebar-left > ul > li{
+    position: relative;
+    border-top: 1px solid #34364a;
+    border-bottom: 1px solid #2c2d3e;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+  }
+
   ul.timeline > li > .timeline-panel.bg-yellow:after {
     border-right-color: #e69a2a;
   }

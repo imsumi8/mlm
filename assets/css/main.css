@@ -21,8 +21,10 @@
 	padding-top:0px !important;
 }
 .top-img{
-    max-width: 200px;
-    padding-top: 5px;
+    max-width: 145px;
+    max-height: 63px;
+    padding-top: 12px;
+    left: 22px;
 }
 .head{
 	font-size: 16px;
@@ -64,7 +66,7 @@ a:hover{
     position: relative;
     top: 22px;
     font-size: 18px;
-    color: red;
+    color: #fff;
     margin-right: 50px;
 
 }
@@ -93,7 +95,7 @@ label.error {
     margin-top:15px;
 }
 .clrred{
-    color:red;
+    color:#337ab7;
 }
 .view_dt{
     cursor:pointer;
