@@ -148,7 +148,7 @@ body {
 .back-to-top {
   position: fixed;
   display: none;
-  background: #3EC1D5;
+  background: #38458499;
   color: #fff;
   padding: 6px 12px 9px 12px;
   font-size: 16px;
@@ -165,13 +165,13 @@ body {
 }
 
 .back-to-top:focus {
-  background: #3EC1D5;
+  background: rgba(12, 20, 123, 0.72);
   color: #fff;
   outline: none;
 }
 
 .back-to-top:hover {
-  background: #3cd6ed;
+  background: rgba(12, 20, 123, 0.72);
   color: #fff;
 }
 
@@ -264,7 +264,7 @@ div#preloader {
   left: 0;
   width: 100%;
   height: auto;
-  background: rgba(0, 0, 0, 0.40);
+  background: rgba(12, 20, 123, 0.72);
   z-index: 9;
 }
 
@@ -384,7 +384,7 @@ border-bottom: 1px solid;
 /*--------------------------------*/
 
 .header-area.stick {
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(12, 20, 123, 0.72);
   height: 70px;
   position: fixed;
   top: 0;
@@ -558,7 +558,7 @@ border-bottom: 1px solid;
 }
 
 .test-overly {
-  background: rgba(0, 0, 0, 0.80);
+  background: rgba(17, 10, 60, 0.65);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -784,7 +784,7 @@ border-bottom: 1px solid;
 }
 
 .suscribe-input button {
-  background: #3ec1d5 none repeat scroll 0 0;
+  background: rgba(20, 33, 121, 0.88) none repeat scroll 0 0;
   border: medium none;
   border-radius: 0 20px 20px 0;
   color: #fff;
@@ -1365,7 +1365,7 @@ border-bottom: 1px solid;
 }
 
 .testi-overly {
-  background: rgba(0, 0, 0, 0.7) none repeat scroll 0 0;
+  background: rgba(77, 91, 187, 0.35) none repeat scroll 0 0;
   height: 100%;
   left: 0;
   position: absolute;
@@ -1443,7 +1443,7 @@ border-bottom: 1px solid;
 }
 
 .testimonial-carousel.owl-carousel.owl-theme .owl-controls .owl-dots div.owl-dot.active span {
-  background: #3EC1D5;
+  background: rgba(12, 20, 123, 0.72);
 }
 
 .testi-text.text-center>h6 {
@@ -1581,7 +1581,7 @@ border-bottom: 1px solid;
 --------------------------------*/
 
 .suscribe-area {
-  background: #3EC1D5 none repeat scroll 0 0;
+  background: rgba(12, 20, 123, 0.72) none repeat scroll 0 0;
   padding: 30px 0;
 }
 
@@ -1603,7 +1603,7 @@ border-bottom: 1px solid;
 .sus-btn {
   background: #fff none repeat scroll 0 0;
   border: 2px solid #fff;
-  color: #3EC1D5;
+  color: rgba(12, 20, 123, 0.72);
   display: inline-block;
   font-size: 16px;
   font-weight: 700;
@@ -1615,7 +1615,7 @@ border-bottom: 1px solid;
 }
 
 .sus-btn:hover {
-  background: #3EC1D5 none repeat scroll 0 0;
+  background: rgba(12, 20, 123, 0.72) none repeat scroll 0 0;
   border: 2px solid #fff;
   color: #fff;
 }
@@ -1771,7 +1771,7 @@ border-bottom: 1px solid;
 }
 
 .footer-logo h2 span {
-  color: #3ec1d5;
+  color: rgba(12, 20, 123, 0.72);
 }
 
 .footer-icons ul li {
@@ -1802,7 +1802,7 @@ border-bottom: 1px solid;
 }
 
 .footer-contacts p span {
-  color: #3EC1D5;
+  color: rgba(12, 20, 123, 0.72);
   font-weight: 700;
 }
 
@@ -1858,7 +1858,7 @@ border-bottom: 1px solid;
 }
 
 .copyright a, .credits a {
-  color: #3EC1D5;
+  color: rgba(12, 20, 123, 0.72);
 }
 
 .credits {

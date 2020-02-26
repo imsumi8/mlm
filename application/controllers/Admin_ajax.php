@@ -62,7 +62,7 @@ class Admin_ajax extends CI_Controller {
                 	$expbanner=explode('.',$banner);
             		$allowed_format = array('jpg','jpeg','png');	
             		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
-            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads_assets/';	
+            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/';	
             			$full_file_name = uniqid().".".end($expbanner);		
             			$uploadfile = $uploaddir.$full_file_name;
             		
@@ -98,7 +98,7 @@ class Admin_ajax extends CI_Controller {
                 	$expbanner=explode('.',$banner);
             		$allowed_format = array('jpg','jpeg','png');	
             		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
-            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads_assets/';	
+            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/';	
             			$full_file_name = uniqid().".".end($expbanner);		
             			$uploadfile = $uploaddir.$full_file_name;
             		
@@ -179,7 +179,7 @@ class Admin_ajax extends CI_Controller {
                 	$expbanner=explode('.',$banner);
             		$allowed_format = array('jpg','jpeg','png');	
             		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
-            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads_assets/';	
+            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/';	
             			$full_file_name = uniqid().".".end($expbanner);		
             			$uploadfile = $uploaddir.$full_file_name;
             		
@@ -373,7 +373,7 @@ class Admin_ajax extends CI_Controller {
             	$expbanner=explode('.',$banner);
         		$allowed_format = array('jpg','jpeg','png');	
         		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
-        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads_assets/';	
+        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/';	
         			$full_file_name = uniqid().".".end($expbanner);		
         			$uploadfile = $uploaddir.$full_file_name;
         		
@@ -430,7 +430,7 @@ class Admin_ajax extends CI_Controller {
             	$expbanner=explode('.',$banner);
         		$allowed_format = array('jpg','jpeg','png');	
         		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
-        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads_assets/';	
+        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/';	
         			$full_file_name = uniqid().".".end($expbanner);		
         			$uploadfile = $uploaddir.$full_file_name;
         		
@@ -989,7 +989,7 @@ class Admin_ajax extends CI_Controller {
             	$expbanner=explode('.',$banner);
         		$allowed_format = array('jpg','jpeg','png');	
         		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
-        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads_assets/';	
+        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/';	
         			$full_file_name = uniqid().".".end($expbanner);		
         			$uploadfile = $uploaddir.$full_file_name;
         		    $upload_nm=$full_file_name;
@@ -1042,7 +1042,7 @@ class Admin_ajax extends CI_Controller {
             	$expbanner=explode('.',$banner);
         		$allowed_format = array('jpg','jpeg','png');	
         		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
-        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/assets/uploads_assets/';	
+        			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/';	
         			$full_file_name = uniqid().".".end($expbanner);		
         			$uploadfile = $uploaddir.$full_file_name;
         		    $upload_nm=$full_file_name;

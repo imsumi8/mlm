@@ -34,7 +34,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -51,7 +51,7 @@ height: 370px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+background-color: rgba(12, 20, 123, 0.72) !important;
 }
 
 .social_icon span{
@@ -77,8 +77,8 @@ top: -45px;
 
 .input-group-prepend span{
 width: 50px;
-background-color: #FFC312;
-color: black;
+background-color: rgba(12, 20, 123, 0.72);
+color: #fff;
 border:0 !important;
 }
 
@@ -101,9 +101,14 @@ margin-right: 5px;
 }
 
 .login_btn{
-color: black;
-background-color: #FFC312;
+color: #FFF;
+background-color: rgba(12, 20, 123, 0.72);
 width: 100px;
+}
+.btn-primary{
+color: #FFF;
+background-color: rgba(12, 20, 123, 0.72);
+
 }
 
 .login_btn:hover{
@@ -128,12 +133,17 @@ margin-left: 4px;
 	<div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
+	
 			<div class="card-header">
-				<h3 style="padding-top: 27px;text-align: center;">Sign In With 7Silver</h3>
+			<!-- <div class="" style="float:left">
+					<a href="<?php echo base_url(); ?>" class="btn btn-sm btn-primary" >HOME</a>
+				</div> -->
+			
+				<h3 style="padding-top: 27px;text-align: center;">Sign In With RMGM</h3>
 				<div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
+					<!-- <span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span> -->
 				</div>
 			</div>
 			<div class="card-body">
@@ -162,14 +172,12 @@ margin-left: 4px;
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="<?php echo base_url(); ?>registration">Sign Up</a>
+					Don't have an account?<a href="<?php echo base_url(); ?>registration" class="btn btn-sm btn-primary">Sign Up</a>
 				</div>
 				<!--<div class="d-flex justify-content-center">
 					<a href="javascript:void(0);">Forgot your password?</a>
 				</div>-->
-					<div class="d-flex justify-content-center">
-					<a href="<?php echo base_url(); ?>">HOME</a>
-				</div>
+				
 			</div>
 		</div>
 	</div>

@@ -70,10 +70,10 @@ color:#fff !important;
 color:#fff !important;
 }
 </style>
-	<nav class="navbar navbar-inverse navbar-fixed" style="background-color:black !important;border-radius:0px;">
+	<nav class="navbar navbar-inverse navbar-fixed" style="background-color:rgba(12, 20, 123, 0.72) !important;border-radius:0px;">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" style="font-size:35px;" href="<?php echo base_url(); ?>">7Silver</a>
+      <a class="navbar-brand" style="font-size:35px;" href="<?php echo base_url(); ?>">RMGM</a>
        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".bs-example-navbar-collapse-1" aria-expanded="false">
 										<span class="sr-only">Toggle navigation</span>
 										<span class="icon-bar"></span>
@@ -100,7 +100,7 @@ color:#fff !important;
                        <div class="pad_20">
                            <div class="panel-heading">
 								<div class="text-center">
-									<h1 class="panel-title txt-dark">Member Registration with 7 Silver</h1>
+									<h1 class="panel-title txt-dark">Member Registration with RMGM</h1>
 									<hr class="reddish">
 								</div>
 								<div class="clearfix"></div>
@@ -527,7 +527,7 @@ color:#fff !important;
 									    <li>We will not be responsible for delay in payments in case of wrong details of your bank.</li>
 									    <!--<li>Maximum 1 Id's allowed with same bank details and same pancard / Aadhar card.</li>-->
 									    <li>Company reserves the right to modify the Term and Condition , Products, Plan, Business policy to give prior notice through our website www.sparsh.com and it will be binding on all Distributors and members.</li>
-									    <li>All dispute with regarding "7 SILVER" jurisdication with Kanpur Nagar District Court only.</li>
+									    <li>All dispute with regarding "RMGM" jurisdication with Kanpur Nagar District Court only.</li>
 									</ol>
 								</div>
 							</div>
@@ -628,7 +628,7 @@ $('document').ready(function(){
             var options = {
                 "key": "rzp_test_2zn3sFLkpJvTtA",
                 "amount": (totalAmount*100), // 2000 paise = INR 20
-                "name": "7 Silver",
+                "name": "RMGM",
                 "description": "Payment",
                 "image": baseurl+"assets/uploads_assets/5d68186c3b82a.png",
                 "handler": function (response){

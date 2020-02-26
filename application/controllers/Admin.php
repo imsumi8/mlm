@@ -183,7 +183,7 @@ class Admin extends CI_Controller {
 	}
 	public function view_tree(){
     	$data['title']='Tree View';
-	    $data['subpage']='';
+	    $data['subpage']='member_tree';
 		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
 	    $this->load->view('admin/header',$data);
 		$this->load->view('admin/tree/view_tree');

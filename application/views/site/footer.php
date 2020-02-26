@@ -8,7 +8,7 @@
             <div class="footer-content">
               <div class="footer-head">
                 <div class="footer-logo">
-                  <h2><span>7</span>SILVER</h2>
+                  <h2><span>RM</span>GM</h2>
                 </div>
 
                 <p>India is a country where multilevel marketing is widely accepted. Many of these Indian citizens do not have the Capital to start a traditional buisness.</p>
@@ -37,11 +37,11 @@
               <div class="footer-head">
                 <h4>information</h4>
                 <p>
-                 7 SILVER is best marketing company deals with health card and related items.
+                 RMGM is best marketing company deals with health card and related items.
                 </p>
                 <div class="footer-contacts">
                   <p><span>Tel:</span> +91 9999999999</p>
-                  <p><span>Email:</span> support@7silver.com</p>
+                  <p><span>Email:</span> support@rmgm.com</p>
                   <p><span>Working Hours:</span> 9am-5pm</p>
                 </div>
               </div>
@@ -72,7 +72,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="copyright text-center">
               <p>
-                &copy; Copyright <strong>7 SILVER</strong>. All Rights Reserved
+                &copy; Copyright <strong>RMGM</strong>. All Rights Reserved
               </p>
             </div>
             <div class="credits">
@@ -82,7 +82,7 @@
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
               -->
-              Designed by <a href="http://codelances.com/" target="_blank">Codelances Private Limited</a>
+              Designed by <a href="http://skywebsoft.com/" target="_blank">Sky Websoft</a>
             </div>
           </div>
         </div>

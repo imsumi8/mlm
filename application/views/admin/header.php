@@ -441,9 +441,23 @@
 					<a <?php if($title=='Single View') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/single_tree"><div class="pull-left"><i class="fa fa-sitemap mr-20"></i><span class="right-nav-text">Single Geneology</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
 				</li>
 				-->
-				<li>
+				<!-- <li>
 					<a <?php if($title=='Tree View') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/view_tree"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Silver Geneology</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
+				</li> -->
+
+				
+
+				<li>
+					<a <?php if($title=='Tree View') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#genealogy_tr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Genealogy</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<ul id="genealogy_tr" class="collapse collapse-level-1">
+						<li>
+							<a <?php if($subpage=='member_tree') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/view_tree"><i class="fa fa-circle <?php if($subpage=='member_tree') { echo 'clrred'; } ?>"></i> Member Tree View</a>
+						</li>
+					
+					</ul>
 				</li>
+				
+
 				
 				<li>
 					

@@ -3,7 +3,7 @@
     <!-- DEVELOPER DHEERAJ (9696006233) -->
 <head>
   <meta charset="utf-8">
-  <title>7 SILVER</title>
+  <title>RMGM</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -61,9 +61,9 @@
 									</button>
                 <!-- Brand -->
                 <a class="navbar-brand page-scroll sticky-logo" href="<?php echo site_url('welcome'); ?>">
-                  <h1><span></span>7 SILVER</h1>
+                  <!-- <h1><span></span>7 SILVER</h1> -->
                   <!-- Uncomment below if you prefer to use an image logo -->
-                  <!-- <img src="img/logo.png" alt="" title=""> -->
+                  <img src="<?php echo base_url(); ?>assets/img/logo.jpeg" alt="fgdgf" title="RMGM" style="height:45px;width:150px">
 								</a>
               </div>
               <!-- Collect the nav links, forms, and other content for toggling -->

@@ -2,8 +2,8 @@
   <div id="home" class="slider-area">
     <div class="bend niceties preview-2">
       <div id="ensign-nivoslider" class="slides">
-        <img src="<?php echo base_url();  ?>assets/assetstheme/img/slider/7silver1.jpg" alt="" title="#slider-direction-1" />
-        <img src="<?php echo base_url();  ?>assets/assetstheme/img/slider/7silver2.jpg" alt="" title="#slider-direction-2" />
+        <img src="<?php echo base_url();  ?>assets/assetstheme/img/slider/slider1.jpg" alt="" title="#slider-direction-1" />
+        <img src="<?php echo base_url();  ?>assets/assetstheme/img/slider/slider2.jpg" alt="" title="#slider-direction-2" />
         <img src="<?php echo base_url();  ?>assets/assetstheme/img/slider/slider3.jpg" alt="" title="#slider-direction-3" />
       </div>
 
@@ -44,7 +44,7 @@
                 </div>
                 <!-- layer 2 -->
                 <div class="layer-1-2 wow slideInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                  <h1 class="title2">Lead a Royal lifestyle with 7Silver</h1>
+                  <h1 class="title2">Lead a Royal lifestyle with RMGM</h1>
                 </div>
                 <!-- layer 3 -->
                 <div class="layer-1-3 hidden-xs wow slideInUp" data-wow-duration="2s" data-wow-delay=".2s">
@@ -186,7 +186,7 @@
                 <h4 class="sec-head">Our Working Strategy</h4>
               </a>
               <p>
-                7 Silver is a jewellery brand of MAXEN MEDIALABS PVT. LTD started in 2019 , which deals in direct selling of superlative silver jewellery. With an amazing and exclusive marketing plan the company is witnessing an exponential growth with every passing day. When you buy ornaments at our website, you are actually buying a fortune for yourself and your family. While designing this generic plan and introducing to the public we had only one goal in mind which is also our motto ‘ The company is progressively rising and is all set to become a powerful brand in silver jewellery. 92.5 is the purity level of our silver jewellery and this sterling silver looks exactly like “ white gold”. Add a pinch of style to your collection of silver jewellery by becoming a part of 7Silver . Secure your future and own a luxurious lifestyle , by becoming our network marketer . 7Silver is a brand where you don’t have to settle for less, except for the best !
+                RMGM is a jewellery brand of MAXEN MEDIALABS PVT. LTD started in 2019 , which deals in direct selling of superlative silver jewellery. With an amazing and exclusive marketing plan the company is witnessing an exponential growth with every passing day. When you buy ornaments at our website, you are actually buying a fortune for yourself and your family. While designing this generic plan and introducing to the public we had only one goal in mind which is also our motto ‘ The company is progressively rising and is all set to become a powerful brand in silver jewellery. 92.5 is the purity level of our silver jewellery and this sterling silver looks exactly like “ white gold”. Add a pinch of style to your collection of silver jewellery by becoming a part of 7Silver . Secure your future and own a luxurious lifestyle , by becoming our network marketer . 7Silver is a brand where you don’t have to settle for less, except for the best !
               </p>
              
             </div>
@@ -305,7 +305,7 @@
             <div class="col-xs-12 col-sm-3 col-md-3 text-center">
               <div class="single-skill">
                 <div class="progress-circular">
-                  <input type="text" class="knob" value="0" data-rel="95" data-linecap="round" data-width="175" data-bgcolor="#fff" data-fgcolor="#3EC1D5" data-thickness=".20" data-readonly="true" disabled>
+                  <input type="text" class="knob" value="0" data-rel="95" data-linecap="round" data-width="175" data-bgcolor="#fff" data-fgcolor="rgba(20, 33, 121, 0.88)" data-thickness=".20" data-readonly="true" disabled>
                   <h3 class="progress-h4">Easier Package</h3>
                 </div>
               </div>
@@ -315,7 +315,7 @@
             <div class="col-xs-12 col-sm-3 col-md-3 text-center">
               <div class="single-skill">
                 <div class="progress-circular">
-                  <input type="text" class="knob" value="0" data-rel="85" data-linecap="round" data-width="175" data-bgcolor="#fff" data-fgcolor="#3EC1D5" data-thickness=".20" data-readonly="true" disabled>
+                  <input type="text" class="knob" value="0" data-rel="85" data-linecap="round" data-width="175" data-bgcolor="#fff" data-fgcolor="#FFF" data-thickness=".20" data-readonly="true" disabled>
                   <h3 class="progress-h4">Life Time earnings</h3>
                 </div>
               </div>
@@ -384,7 +384,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="section-headline text-center">
             <h2>Our Projects & Rewards</h2>
-            <h4>If you are not born with a silver spoon, here is one for you ! Be a part of 7 silver’s network.  Earn everything you have ever  imagined . A package full of luxury rewards like international holiday trips. Buy our products combo worth 5,000INR, you get silver jewellery. Post that you receive cashbacks and rewards on referring the packages to other people. On referring to 2 people you get 25% direct cashbacks worth Rs 2500. If you complete a pool of 7 people, you get a reward of 5,000 and are eligible to enter next club. Likewise there are different clubs to rate your growth and rewards and cash prizes for the same are described in the Powerpoint embedded in upcoming section.</h4>
+            <h4>If you are not born with a silver spoon, here is one for you ! Be a part of RMGM’s network.  Earn everything you have ever  imagined . A package full of luxury rewards like international holiday trips. Buy our products combo worth 5,000INR, you get silver jewellery. Post that you receive cashbacks and rewards on referring the packages to other people. On referring to 2 people you get 25% direct cashbacks worth Rs 2500. If you complete a pool of 7 people, you get a reward of 5,000 and are eligible to enter next club. Likewise there are different clubs to rate your growth and rewards and cash prizes for the same are described in the Powerpoint embedded in upcoming section.</h4>
           </div>
         </div>
       </div>
@@ -1009,8 +1009,8 @@
               <div class="single-icon">
                 <i class="fa fa-envelope-o"></i>
                 <p>
-                  Email: support@7silver.in<br>
-                  <span>Web: www.7silver.in</span>
+                  Email: support@rmgm.in<br>
+                  <span>Web: www.rmgm.in</span>
                 </p>
               </div>
             </div>
