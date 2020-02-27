@@ -374,6 +374,70 @@
 			return '';
 		}
 	}
+
+	function insertcategory($category)
+	{
+		date_default_timezone_set('Asia/Calcutta'); 
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "INSERT INTO `product_category`(`name`) VALUES ('".$category."')"; 
+		$query = $ci->db->query($sql);
+		//$row = $query->result();
+		if(!empty($query)){
+			return $ci->db->insert_id();
+		}else{
+			return '';
+		}
+	}
+
+	function get_count_category($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `product_category` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_category($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `product_category` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function updatecategory($category,$id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "update `product_category` set name='".$category."' where id='".$id."'"; 
+		$query = $ci->db->query($sql);
+	    if(!empty($query)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+	function deletecategory($id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "delete from `product_category` where id='".$id."'"; 
+		$query = $ci->db->query($sql);
+		return 1;
+	}
+
 	function get_all_states()
 	{
 		$ci=& get_instance();
@@ -388,6 +452,10 @@
 		}
 		
 	}
+
+
+
+
 	function get_all_income_type()
 	{
 		$ci=& get_instance();
@@ -798,6 +866,9 @@
 			return '';
 		}
 	}
+
+
+
 	function update_epin_transfer($epin,$userid,$desc){
 		$ci=& get_instance();
 		$ci->load->database(); 

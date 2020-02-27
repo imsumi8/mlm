@@ -775,6 +775,115 @@ class Admin_ajax extends CI_Controller {
 		$this->db->trans_complete();
 		die();
 	}
+
+	public function add_category()
+	{
+		$this->db->trans_start();
+		$result=0;
+		$category=$_POST['category'];
+
+	
+		if($category==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$category_id=insertcategory($category);
+		}
+		  
+			
+		if($category_id){
+		    echo 'ok';
+		}
+		$this->db->trans_complete();
+		die();
+	}
+	public function edit_category()
+	{
+		
+		$category=$_POST['category'];
+		$category_id=$_POST['category_id'];
+
+	
+		if($category=='' || $category_id==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$id=updatecategory($category,$category_id);
+		}
+		  
+			
+		if($id){
+		    echo 'ok';
+		}
+	
+		die();
+	}
+
+	public function delete_Category(){
+
+		$id = $_GET['id'];
+         $del = deletecategory($id);
+		 if($del){
+		    echo 'ok';
+		}
+	
+		die();
+
+	}
+
+	public function get_category(){
+		$offset = 0;$limit = 10;
+		$sort = 'id'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`id` like '%".$search."%' OR `name` like '%".$search."%' )";
+		}
+		
+		$res=get_count_category($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_category($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		
+		foreach($res as $row){
+			
+			$operate = "<a class='btn btn-xs btn-primary edit-category' data-id='".$row['id']."' data-toggle='modal' data-target='#editcategory' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			$operate .= " <a class='btn btn-xs btn-danger delete-category' style='background:#52a2b2;border-color:#52a2b2' data-id='".$row['id']."'  title='Delete'><i class='fa fa-trash'></i></a>";
+			
+			$tempRow['id'] = $row['id'];
+			$tempRow['name'] = $row['name'];
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	
+
+	
 	public function epingenerate_franchisee()
 	{
 		$this->db->trans_start();

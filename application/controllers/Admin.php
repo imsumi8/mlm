@@ -323,7 +323,7 @@ class Admin extends CI_Controller {
 	{
 	    if($this->session->userdata('hrmtype') == 'admin') { 
     		$data=array();
-    		$data['title']='All Team Business | 7 SILVER';
+    		$data['title']='All Team Business | RMGM';
     		$data['subpage']='';
     		$this->load->view('admin/header',$data);
     		$this->load->view('admin/business/allteambusiness');
@@ -334,7 +334,7 @@ class Admin extends CI_Controller {
 	}
 	public function bankdetail(){
 	    if($this->session->userdata('hrmtype') == 'admin') { 
-        	$data['title']='Member Bank Detail | 7 SILVER';
+        	$data['title']='Member Bank Detail | RMGM';
     	    $data['subpage']='';
     		$this->load->view('admin/header',$data);
     		$this->load->view('admin/business/bankdetail');
@@ -345,7 +345,7 @@ class Admin extends CI_Controller {
 	}
 	public function manualpayout(){
 	    if($this->session->userdata('hrmtype') == 'admin') { 
-        	$data['title']='Manual Payout | 7 SILVER';
+        	$data['title']='Manual Payout | RMGM';
     	    $data['subpage']='';
     		
     	    $this->load->view('admin/header',$data);
@@ -357,7 +357,7 @@ class Admin extends CI_Controller {
 	}
 	public function package(){
 	    if($this->session->userdata('hrmtype') == 'admin') { 
-        	$data['title']='Package | 7 SILVER';
+        	$data['title']='Package | RMGM';
     	    $data['subpage']='';
     		
     	    $this->load->view('admin/header',$data);
@@ -367,6 +367,21 @@ class Admin extends CI_Controller {
 	        redirect('admin/dashboard');
 	    }
 	}
+
+
+	public function add_category(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Product | RMGM';
+    	    $data['subpage']='add_category';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/product/category');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
 	public function settings(){
 	   
     	$data['title']='Settings';

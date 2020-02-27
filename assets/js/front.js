@@ -1043,6 +1043,52 @@ jQuery(document).ready(function (){
         		});
 	    	}
 	});
+
+	$("#add_category").validate({
+        rules: {
+            "category": {
+                required: true,
+               
+            }
+        },
+        
+        submitHandler: function (form) { // for demo
+			check=1;
+        }
+	});
+	
+	$("#add_category").on('submit', function(e){
+		if(check==1){
+			e.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: admin_loc+'add_category',
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData:false,
+				beforeSend: function(){
+					$('.submitcategory').attr("disabled","disabled");
+					$('.submitcategory').attr("value","Please Wait...");
+				},
+				success: function(msg){
+					msg=$.trim(msg);
+					if(msg == 'ok'){
+						$('#add_category').trigger('reset');
+						sweetalert('Success','success','Category Added Successfully!','#469408');
+						$(".submitcategory").attr("disabled",false);
+						//location.href = base_loc+"add_category";
+						$('#category_list').bootstrapTable('refresh');
+						$('.submitcategory').attr("value","SUBMIT");
+					}else{
+						 $(".submitcategory").attr("disabled",false);
+						 sweetalert('Failure','warning',msg,'#f99b4a');
+						 $('.submitcategory').attr("value","SUBMIT");
+					}
+				}
+			});
+		}
+});
 	$("#epingeneratefront").on('submit', function(e){
 	        e.preventDefault();
     		$.ajax({

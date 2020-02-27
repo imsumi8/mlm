@@ -15,6 +15,7 @@
     <link href="<?php echo base_url(); ?>assets/vendors/bower_components/morris.js/morris.css" rel="stylesheet" type="text/css"/>
 	
 	<!-- Data table CSS -->
+
 	<link href="<?php echo base_url(); ?>assets/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 	
 	<link href="<?php echo base_url(); ?>assets/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
@@ -38,6 +39,18 @@
 	<!--<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>-->
 	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/reorder-rows/bootstrap-table-reorder-rows.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/TableDnD/1.0.3/jquery.tablednd.js"></script>
+		
+		<script src="https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/export/bootstrap-table-export.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+		
 	<script>
 		var admin_loc='<?php echo base_url().'Admin_ajax/'; ?>';
 		var base_loc='<?php echo base_url().'Admin/'; ?>';
@@ -523,20 +536,27 @@
 				</li>
 				-->
 				<?php } ?>
-				<!--
+				
 				<li>
-					<a <?php if($title=='Product') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#product_dr"><div class="pull-left"><i class="fa fa-cart-plus mr-20"></i><span class="right-nav-text">My Product</span></div><div class="pull-right"><i class="zmdi zmdi-caret-down"></i></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Product') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#product_dr"><div class="pull-left"><i class="fa fa-cart-plus mr-20"></i><span class="right-nav-text">Product</span></div><div class="pull-right">
+						</div><div class="clearfix"></div></a>
 					<ul id="product_dr" class="collapse collapse-level-1">
 						<li>
-							<a <?php if($subpage=='pantshirt') { ?> class="active active-page" <?php } ?> href="javascript:void(0);"><i class="fa fa-circle  <?php if($subpage=='pantshirt') { echo 'clrred'; } ?>"></i> Pant-Shirt</a>
+							<a <?php if($subpage=='add_category') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/add_category">
+							<i class="fa fa-circle  <?php if($subpage=='add_category') { echo 'clrred'; } ?>"></i> Add Category</a>
 						</li>
 						<li>
-							<a  <?php if($subpage=='saree') { ?> class="active active-page" <?php } ?> href="javascript:void(0);"><i class="fa fa-circle  <?php if($subpage=='saree') { echo 'clrred'; } ?>"></i> Saree</a>
+							<a  <?php if($subpage=='add_subcategory') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/add_subcategory">
+							<i class="fa fa-circle  <?php if($subpage=='add_subcategory') { echo 'clrred'; } ?>"></i> Add Subcategory</a>
+						</li>
+
+						<li>
+							<a  <?php if($subpage=='add_product') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/add_product"><i class="fa fa-circle  <?php if($subpage=='add_product') { echo 'clrred'; } ?>"></i> Add Product</a>
 						</li>
 					
 						</li>
 					</ul>
-				</li>-->
+				</li>
 				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
 				<li>
 					<a <?php if($title=='Package | 7 SILVER') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/package"><div class="pull-left"><i class="fa fa-shopping-cart mr-20"></i><span class="right-nav-text">Packages</span></div><div class="clearfix"></div></a>

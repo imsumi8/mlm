@@ -1155,8 +1155,8 @@ button.btn-primary.fc-agendaWeek-button:focus, .btn-primary.fc-prev-button:focus
 .owl-theme .owl-nav button[class*="owl-"].fc-agendaWeek-button, .owl-theme .owl-nav [class*="owl-"].fc-prev-button, .owl-theme .owl-nav [class*="owl-"].fc-next-button, .owl-theme .owl-nav [class*="owl-"].fc-today-button, button.fc-agendaDay-button.fc-state-default.fc-corner-right,
 button.fc-month-button.fc-state-default.fc-corner-left,
 button.fc-agendaWeek-button, .fc-prev-button, .fc-next-button, .fc-today-button {
-  background: #469408;
-  border: solid 1px #469408;
+  background: #65cea7;
+  border: solid 1px #65cea7;
 }
 .btn.btn-success:hover, .wizard > .actions a.btn-success:hover, .wizard > .actions a.fc-prev-button:hover, .wizard > .actions a.fc-next-button:hover, .wizard > .actions a.fc-today-button:hover, .dt-buttons .btn-success.dt-button:hover, .tablesaw-sortable th.tablesaw-sortable-head button.btn-success:hover,
 .tablesaw-sortable th.tablesaw-sortable-head button.fc-agendaWeek-button:hover, .tablesaw-sortable th.tablesaw-sortable-head button.fc-prev-button:hover, .tablesaw-sortable th.tablesaw-sortable-head button.fc-next-button:hover, .tablesaw-sortable th.tablesaw-sortable-head button.fc-today-button:hover, .sweet-alert button.btn-success:hover, .owl-theme .owl-nav .btn-success[class*="owl-"]:hover,
@@ -1171,8 +1171,8 @@ button.fc-agendaWeek-button:active, .fc-prev-button:active, .fc-next-button:acti
 .owl-theme .owl-nav button[class*="owl-"].fc-agendaWeek-button:focus, .owl-theme .owl-nav [class*="owl-"].fc-prev-button:focus, .owl-theme .owl-nav [class*="owl-"].fc-next-button:focus, .owl-theme .owl-nav [class*="owl-"].fc-today-button:focus, button.fc-agendaDay-button.fc-state-default.fc-corner-right:focus,
 button.fc-month-button.fc-state-default.fc-corner-left:focus,
 button.fc-agendaWeek-button:focus, .fc-prev-button:focus, .fc-next-button:focus, .fc-today-button:focus {
-  background: rgba(70, 148, 8, 0.85);
-  border: solid 1px rgba(70, 148, 8, 0.1);
+  background: #65cea7;
+  border: solid 1px #65cea7;
 }
 .btn.btn-danger, .wizard > .actions a.btn-danger, .dt-buttons .btn-danger.dt-button, .tablesaw-sortable th.tablesaw-sortable-head button.btn-danger, .sweet-alert button.btn-danger, .owl-theme .owl-nav .btn-danger[class*="owl-"], button.btn-danger.fc-agendaDay-button.fc-state-default.fc-corner-right,
 button.btn-danger.fc-month-button.fc-state-default.fc-corner-left,
