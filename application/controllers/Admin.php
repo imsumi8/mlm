@@ -371,11 +371,38 @@ class Admin extends CI_Controller {
 
 	public function add_category(){
 	    if($this->session->userdata('hrmtype') == 'admin') { 
-        	$data['title']='Product | RMGM';
+        	$data['title']='Category | RMGM';
     	    $data['subpage']='add_category';
     		
     	    $this->load->view('admin/header',$data);
     		$this->load->view('admin/product/category');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
+	public function add_subcategory(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Sub-Category | RMGM';
+    	    $data['subpage']='add_subcategory';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/product/subcategory');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
+
+	public function add_product(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Product | RMGM';
+    	    $data['subpage']='add_product';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/product/product');
     		$this->load->view('admin/footer');
 	    }else{
 	        redirect('admin/dashboard');

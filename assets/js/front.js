@@ -1089,6 +1089,127 @@ jQuery(document).ready(function (){
 			});
 		}
 });
+
+$("#add_subcategory").validate({
+	rules: {
+		"category_id": {
+			required: true,
+		   
+		},
+		"subcategory": {
+			required: true,
+		   
+		}
+	},
+	
+	submitHandler: function (form) { // for demo
+		check=1;
+	}
+});
+
+$("#add_subcategory").on('submit', function(e){
+	if(check==1){
+		e.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: admin_loc+'add_subcategory',
+			data: new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			beforeSend: function(){
+				$('.submitsubcategory').attr("disabled","disabled");
+				$('.submitsubcategory').attr("value","Please Wait...");
+			},
+			success: function(msg){
+				msg=$.trim(msg);
+				if(msg == 'ok'){
+					$('#add_subcategory').trigger('reset');
+					sweetalert('Success','success','Sub-Category Added Successfully!','#469408');
+					$(".submitsubcategory").attr("disabled",false);
+					//location.href = base_loc+"add_category";
+					$('#subcategory_list').bootstrapTable('refresh');
+					$('.submitsubcategory').attr("value","SUBMIT");
+				}else{
+					 $(".submitsubcategory").attr("disabled",false);
+					 sweetalert('Failure','warning',msg,'#f99b4a');
+					 $('.submitsubcategory').attr("value","SUBMIT");
+				}
+			}
+		});
+	}
+});
+
+$("#add_product").validate({
+	rules: {
+		"category_id": {
+			required: true,
+		   
+		},
+		"subcategory": {
+			required: true,
+		   
+		},
+		"name": {
+			required: true,
+		   
+		},
+		"mrp": {
+			required: true,
+		   
+		},
+		"dp": {
+			required: true,
+		   
+		},
+		"bv": {
+			required: true,
+		   
+		},
+		"gst": {
+			required: true,
+		   
+		},
+		
+	},
+	
+	submitHandler: function (form) { // for demo
+		check=1;
+	}
+});
+
+$("#add_product").on('submit', function(e){
+	if(check==1){
+		e.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: admin_loc+'add_product',
+			data: new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			beforeSend: function(){
+				$('.submitproduct').attr("disabled","disabled");
+				$('.submitproduct').attr("value","Please Wait...");
+			},
+			success: function(msg){
+				msg=$.trim(msg);
+				if(msg == 'ok'){
+					$('#add_product').trigger('reset');
+					sweetalert('Success','success','Product Added Successfully!','#469408');
+					$(".submitproduct").attr("disabled",false);
+					//location.href = base_loc+"add_category";
+					$('#product_list').bootstrapTable('refresh');
+					$('.submitproduct').attr("value","SUBMIT");
+				}else{
+					 $(".submitproduct").attr("disabled",false);
+					 sweetalert('Failure','warning',msg,'#f99b4a');
+					 $('.submitproduct').attr("value","SUBMIT");
+				}
+			}
+		});
+	}
+});
 	$("#epingeneratefront").on('submit', function(e){
 	        e.preventDefault();
     		$.ajax({

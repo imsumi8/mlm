@@ -13,7 +13,7 @@
                        <div class="panel panel-default card-view panel-refresh pad_20">
 							<div class="panel-heading">
 								<div class="text-center">
-									<h1 class="panel-title txt-dark">Product Category</h1>
+									<h1 class="panel-title txt-dark">Product Sub-Category</h1>
 									<hr class="reddish">
 								</div>
 								<div class="clearfix"></div>
@@ -26,30 +26,45 @@
             								<div class="panel-body">
             									<div  class="pills-struct">
             										<ul role="tablist" class="nav nav-pills" id="myTabs_6">
-            											<li class="active" role="presentation" style="background-color: #6ab0ec;"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_6" href="#home_6">Add Category</a></li>
+            											<li class="active" role="presentation" style="background-color: #6ab0ec;"><a aria-expanded="true"  data-toggle="tab" role="tab" id="home_tab_6" href="#home_6">Add Sub-Category</a></li>
             											<!--<li role="presentation" class=""><a  data-toggle="tab" id="profile_tab_6" role="tab" href="#profile_6" aria-expanded="false">Franchisee Epin</a></li>-->
             										    <!--<li role="presentation" class=""><a  data-toggle="tab" id="front_tab_6" role="tab" href="#front_6" aria-expanded="false">Front Site Epin</a></li>-->
             										</ul>
             										<div class="tab-content" id="myTabContent_6">
             											<div  id="home_6" class="tab-pane fade active in" role="tabpanel">
-            											    <form id="add_category" action=''>
+            											    <form id="add_subcategory" action=''>
             											        <!-- <input type="hidden" name="category" value="<?php echo $this->uri->segment(6); ?>"> -->
                                 								<div class="sections">
                                 									<div class="row"><div class="col-md-12"><div class="errors alert alert-warning"></div></div></div>
                                 							
+                                                                    <div class="row">
+																	<div class="col-md-6">
+                                                                    <label>Category <span class="star">*</span></label>
+                                                                        <select name="category_id" class="form-control">
+                                                                            <?php $arrepin=array(); $category=get_all_category();  foreach($category as $cat) {
+                                                                            if(!in_array($cat->name,$arrepin)){
+                                                                                $arrepin[]=$cat->name;
+                                                                            
+                                                                            ?>
+                                                                                <option value="<?php echo $cat->id;?>"><?php echo $cat->name;?></option>
+                                                                            <?php } } ?>
+                                                                        </select>
+                                                                </div>
+                                                                </div>
+                                                                <br>
                                 									<div class="row">
                                 										<div class="col-md-6">
                                 											<div class="form-group">
 												
-                                												<div><label>Category<span class="star">*</span></label></div>
-                                												<input type="text" name="category"  class="form-control" autocomplete="off" value="<?php echo $this->uri->segment(4); ?>"> 
+                                												<div><label>Sub-Category<span class="star">*</span></label></div>
+                                												<input type="text" name="subcategory"  class="form-control" autocomplete="off" value="<?php echo $this->uri->segment(4); ?>"> 
                                 											</div>
                                 										</div>
                                 										
                                 									</div>
                                 									<div class="row">
                                 										<div class="col-md-12">
-                                											<input type="submit" class="btn btn-success submitcategory" style="background: #65cea7; border: solid 1px #65cea7;" value="SUBMIT >>">
+                                											<input type="submit" class="btn btn-success submitsubcategory" style="background: #65cea7; border: solid 1px #65cea7;" value="SUBMIT >>">
                                 										</div>
                                 									</div>
                                 								</div>
@@ -70,14 +85,14 @@
 										
 										
 		<!-- CATEGORY TABLE								 -->
-		<div class="panel-heading">Category</div>								
+		<div class="panel-heading">Sub-Category</div>								
 									<div class='col-md-12 col-sm-12' >
 										<div id="toolbar">
 										
 										</div>
-										<table class='table-striped' id='category_list'
+										<table class='table-striped' id='subcategory_list'
 											data-toggle="table"
-											data-url="<?php echo base_url()."admin_ajax/get_category?table=category_list" ?>"
+											data-url="<?php echo base_url()."admin_ajax/get_subcategory?table=subcategory_list" ?>"
 											data-click-to-select="true"
 											data-side-pagination="server"
 											data-pagination="true"
@@ -98,9 +113,10 @@
 									
 													<tr>
 									  
-											<th data-field="sno">S.NO.</th>
+											<th data-field="sno">S.No.</th>
 										
-											<th data-field="name" data-sortable="true">Category</th>
+											<th data-field="category" data-sortable="true">Category</th>
+                                            <th data-field="subcategory" data-sortable="true">Sub-Category</th>
 											<th data-field="operate" data-events="actionUpdate">Action</th>
 											
 										 
@@ -135,24 +151,39 @@
 		</div>
 
 
-		<div id="editcategory" class="modal fade" role="dialog">
+		<div id="editsubcategory" class="modal fade" role="dialog">
   <div class="modal-dialog modal-md">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Category</h4>
+        <h4 class="modal-title">Edit Sub-Category</h4>
       </div>
       <div class="modal-body">
-         <form  id="editcategoryform">
+         <form  id="editsubcategoryform">
            
-             <input type="hidden" class="category_id" name="category_id" id="category_id">
+             <input type="hidden" class="subcategory_id" name="subcategory_id" id="subcategory_id">
           
+             <div class="row">
+																	<div class="col-md-12">
+                                                                    <label>Category <span class="star">*</span></label>
+                                                                        <select name="category" id="category" class="form-control">
+                                                                            <?php $arrepin=array(); $category=get_all_category();  foreach($category as $cat) {
+                                                                            if(!in_array($cat->name,$arrepin)){
+                                                                                $arrepin[]=$cat->name;
+                                                                            
+                                                                            ?>
+                                                                                <option value="<?php echo $cat->id;?>" ><?php echo $cat->name;?></option>
+                                                                            <?php } } ?>
+                                                                        </select>
+                                                                </div>
+                                                                </div>
+                                                                <br>
             <div class="row">
                 <div class="col-md-12">
-                    <label>Category</label>
-                    <input type="text" class="category_name form-control" name="category" id="name" required>
+                    <label>Sub-Category</label>
+                    <input type="text" class="subcategory_name form-control" name="subcategory" id="subcategory" required>
                 </div>
             </div>
             
@@ -160,7 +191,7 @@
         
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" style="background: #65cea7; border: solid 1px #65cea7;" class="btn btn-primary editcategory">Update</button>
+                    <button type="submit" style="background: #65cea7; border: solid 1px #65cea7;" class="btn btn-primary editsubcategory">Update</button>
                 </div>
             </div>
         </form>
@@ -188,12 +219,14 @@
 <script>
             window.actionUpdate = {
                 
-                  	'click .edit-category': function (e, value, row, index) {
+                  	'click .edit-subcategory': function (e, value, row, index) {
                   	    
             //	alert('You click remove icon, row: ' + JSON.stringify(row));
             
-					$('#category_id').val(row.id);
-	             	$('#name').val(row.name);
+                    $('#subcategory_id').val(row.id);
+                    $('#category').val(row.category_id);
+                     $('#subcategory').val(row.subcategory);
+                
 		
 			     
             	}
@@ -201,33 +234,33 @@
 			};
 			
 
-			$("#editcategoryform").on('submit', function(e){
+			$("#editsubcategoryform").on('submit', function(e){
     	    e.preventDefault();
     		$.ajax({    
     			type: 'POST',
-    			url: admin_loc+'edit_category',
+    			url: admin_loc+'edit_subcategory',
     			data: new FormData(this),
     			contentType: false,
     			cache: false,
     			processData:false,
     			beforeSend: function(){
-    				$('.editcategory').attr("disabled","disabled");
-    				$('.editcategory').html("Please Wait..");
+    				$('.editsubcategory').attr("disabled","disabled");
+    				$('.editsubcategory').html("Please Wait..");
     			},
     			success: function(msg){
     				msg=$.trim(msg);
     				if(msg == 'ok'){
-    					sweetalert('Success','success','Category Edited successfully','#469408');
-    					$(".editcategory").attr("disabled",false);
-						$('.editcategory').html("Update");
-						$('#category_list').bootstrapTable('refresh');
-						setTimeout(function() {$('#editcategory').modal('hide');}, 1000);
+    					sweetalert('Success','success','Sub-Category Edited successfully','#469408');
+    					$(".editsubcategory").attr("disabled",false);
+						$('.editsubcategory').html("Update");
+						$('#subcategory_list').bootstrapTable('refresh');
+						setTimeout(function() {$('#editsubcategory').modal('hide');}, 1000);
     					// location.reload();
     				}else{
-    					$(".editcategory").attr("disabled",false);
+    					$(".editsubcategory").attr("disabled",false);
     					 sweetalert('Warning','warning',msg,'#f99b4a');
-						 $('.editcategory').html("Update");
-						 setTimeout(function() {$('#editcategory').modal('hide');}, 1000);
+						 $('.editsubcategory').html("Update");
+						 setTimeout(function() {$('#editsubcategory').modal('hide');}, 1000);
     					 
     				}
     			}
@@ -238,22 +271,22 @@
 
 
 <script>
-		$(document).on('click','.delete-category',function(){
-			if(confirm('Are you sure? Want to delete category? All related products and sub categories will also be deleted')){
+		$(document).on('click','.delete-subcategory',function(){
+			if(confirm('Are you sure? Want to delete subcategory? All related products will also be deleted')){
 				id = $(this).data("id");
 			
 				$.ajax({
-					url : admin_loc+'delete_category',
+					url : admin_loc+'delete_subcategory',
 					type: "get",
-					data: 'id='+id +'&delete_category=1',
+					data: 'id='+id +'&delete_subcategory=1',
 					success: function(result){
 						// alert(result);
 						if(result=='ok'){
-							sweetalert('Success','success','Category Deleted successfully','#469408');
-							$('#category_list').bootstrapTable('refresh');
+							sweetalert('Success','success','Sub-Category Deleted successfully','#469408');
+							$('#subcategory_list').bootstrapTable('refresh');
 							
 						}else
-						sweetalert('Warning','warning','Category could not be deleted','#f99b4a');
+						sweetalert('Warning','warning','Sub-Category could not be deleted','#f99b4a');
 							//alert('Error! Category could not be deleted');
 					}
 				});

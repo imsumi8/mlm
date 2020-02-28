@@ -798,6 +798,9 @@ class Admin_ajax extends CI_Controller {
 		$this->db->trans_complete();
 		die();
 	}
+
+
+
 	public function edit_category()
 	{
 		
@@ -864,16 +867,18 @@ class Admin_ajax extends CI_Controller {
 		$bulkData['total'] = $total;
 		$rows = array();
 		$tempRow = array();
-		
+		$i=1;
 		foreach($res as $row){
 			
 			$operate = "<a class='btn btn-xs btn-primary edit-category' data-id='".$row['id']."' data-toggle='modal' data-target='#editcategory' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
 			$operate .= " <a class='btn btn-xs btn-danger delete-category' style='background:#52a2b2;border-color:#52a2b2' data-id='".$row['id']."'  title='Delete'><i class='fa fa-trash'></i></a>";
 			
 			$tempRow['id'] = $row['id'];
+			$tempRow['sno'] = $i;
 			$tempRow['name'] = $row['name'];
 			$tempRow['operate'] = $operate;
 			$rows[] = $tempRow;
+			$i++;
 		}
 		
 		$bulkData['rows'] = $rows;
@@ -881,7 +886,233 @@ class Admin_ajax extends CI_Controller {
 
 	}
 
+	public function add_subcategory()
+	{
+		$this->db->trans_start();
+		$result=0;
+		$category=$_POST['category_id'];
+		$subcategory=$_POST['subcategory'];
+
 	
+		if($category=='' || $subcategory==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$subcategory_id=insertsubcategory($category,$subcategory);
+		}
+		  
+			
+		if($subcategory_id){
+		    echo 'ok';
+		}
+		$this->db->trans_complete();
+		die();
+	}
+
+	public function edit_subcategory()
+	{
+		
+		$category=$_POST['category'];
+		$subcategory=$_POST['subcategory'];
+		$subcategory_id=$_POST['subcategory_id'];
+
+	
+		if($category=='' || $subcategory_id=='' || $subcategory==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$id=updatesubcategory($category,$subcategory,$subcategory_id);
+		}
+		  
+			
+		if($id){
+		    echo 'ok';
+		}
+	
+		die();
+	}
+
+	public function delete_subCategory(){
+
+		$id = $_GET['id'];
+         $del = deletesubcategory($id);
+		 if($del){
+		    echo 'ok';
+		}
+	
+		die();
+
+	}
+
+
+	public function get_subcategory(){
+		$offset = 0;$limit = 10;
+		$sort = 'id'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`id` like '%".$search."%' OR `name` like '%".$search."%' )";
+		}
+		
+		$res=get_count_subcategory($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_subcategory($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			$operate ='';
+			$operate = "<a class='btn btn-xs btn-primary edit-subcategory' data-id='".$row['id']."' data-toggle='modal' data-target='#editsubcategory' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			$operate .= " <a class='btn btn-xs btn-danger delete-subcategory' style='background:#52a2b2;border-color:#52a2b2' data-id='".$row['id']."'  title='Delete'><i class='fa fa-trash'></i></a>";
+			
+			$tempRow['id'] = $row['id'];
+			$tempRow['sno'] = $i;
+			$tempRow['category'] = get_category_name_by_id($row['category_id']);
+			$tempRow['category_id'] = $row['category_id'];
+			$tempRow['subcategory'] = $row['name'];
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	public function get_subcategory_by_cat()
+	{
+		$category = $_POST['category_id'];
+		if(empty($category)){
+			echo '<option value="">Select Sub Category</option>';
+			return false;
+		}
+		
+		$subcategories = get_subcategory_by_cat($category);
+		$options = '<option value="">Select Sub Category</option>';
+	foreach($subcategories as $option){
+		$options .="<option value='".$option['id']."'>".$option['name']."</option>";
+	}
+	echo $options;
+
+	}
+
+
+	public function add_product()
+	{
+	
+	    $msg='';
+		$category=$_POST['category_id'];
+		$subcategory=$_POST['subcategory'];
+		$name=$_POST['name'];
+		$desc=$_POST['desc'];
+		$size=$_POST['size'];
+		$type=$_POST['type'];
+		$mrp=$_POST['mrp'];
+		$dp=$_POST['dp'];
+		$bv=$_POST['bv'];
+		$gst=$_POST['gst'];
+		$hsn=$_POST['hsn'];
+     
+
+	
+		if($category=='' || $subcategory=='' || $name=='' || $mrp=='' || $dp=='' || $bv=='' || $gst==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+
+			if(isset($_FILES['image'])){
+            	
+            	$banner=$_FILES['image']['name']; 
+            	if($banner!=''){
+                	$file_size = $_FILES['image']['size'];
+                	
+                	$expbanner=explode('.',$banner);
+            		$allowed_format = array('jpg','jpeg','png');	
+            		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
+            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/products/';	
+            			$full_file_name = uniqid().".".end($expbanner);		
+            			$uploadfile = $uploaddir.$full_file_name;
+            		
+            			$upload_nm=$full_file_name;
+        				move_uploaded_file($_FILES["image"]["tmp_name"] , $uploadfile);	//for moving image 		
+        	
+        			     $data = array(
+                            'category_id'=>$category,
+							'subcategory_id'=>$subcategory,
+							'name'=>$name,
+							'description'=>$desc,
+							'size_value'=>$size,
+							'size_type'=>$type,
+							'mrp'=>$mrp,
+							'dp'=>$dp,
+							'bv'=>$bv,
+							'gst'=>$gst,
+							'hsn'=>$hsn,
+                             'image'=>$upload_nm,
+                        );
+                        $this->db->insert('products',$data);
+                        $productid=$this->db->insert_id();
+                  if($productid)
+						$msg ='ok'; 
+
+						echo $msg;
+						die();
+						
+        			}else{		
+            			$msg= "Unsupported file type";
+            		}
+            	}else{
+				  
+					$data = array(
+						'category_id'=>$category,
+						'subcategory_id'=>$subcategory,
+						'name'=>$name,
+						'description'=>$desc,
+						'size_value'=>$size,
+						'size_type'=>$type,
+						'mrp'=>$mrp,
+						'dp'=>$dp,
+						'bv'=>$bv,
+						'gst'=>$gst,
+						'hsn'=>$hsn,
+						 'image'=>'default.jpg',
+					);
+					$this->db->insert('products',$data);
+					$productid=$this->db->insert_id();
+			  if($productid)
+					$msg ='ok'; 
+
+					echo $msg;
+					die();
+            	}
+           }
+		   
+    			
+		}
+		  
+
+		
+	}
 
 	
 	public function epingenerate_franchisee()

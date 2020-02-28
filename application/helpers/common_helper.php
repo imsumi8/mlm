@@ -418,6 +418,20 @@
 		}
 	}
 
+	function get_all_category()
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `product_category` ";
+				$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
 	function updatecategory($category,$id){
 		$ci=& get_instance();
 		$ci->load->database(); 
@@ -437,6 +451,127 @@
 		$query = $ci->db->query($sql);
 		return 1;
 	}
+
+	function get_category_name_by_id($id)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from product_category where id='".$id."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->name;
+		}else{
+			return '';
+		}
+	}
+
+
+	function insertsubcategory($category,$subcategory)
+	{
+		date_default_timezone_set('Asia/Calcutta'); 
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "INSERT INTO `product_subcategory`(`category_id`,`name`) VALUES ('".$category."','".$subcategory."')"; 
+		$query = $ci->db->query($sql);
+		//$row = $query->result();
+		if(!empty($query)){
+			return $ci->db->insert_id();
+		}else{
+			return '';
+		}
+	}
+
+	function get_count_subcategory($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `product_subcategory` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_subcategory($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `product_subcategory` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_all_subcategory()
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `product_subcategory` ";
+				$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function updatesubcategory($category,$subcategory,$id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "update `product_subcategory` set category_id='".$category."' , name='".$subcategory."' where id='".$id."'"; 
+		$query = $ci->db->query($sql);
+	    if(!empty($query)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+	function deletesubcategory($id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "delete from `product_subcategory` where id='".$id."'"; 
+		$query = $ci->db->query($sql);
+		return 1;
+	}
+
+	function get_subcategory_by_cat($category)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `product_subcategory` where category_id='".$category."'";
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_all_size_types()
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `size_types` ";
+				$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
 
 	function get_all_states()
 	{
