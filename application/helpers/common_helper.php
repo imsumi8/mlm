@@ -466,6 +466,49 @@
 		}
 	}
 
+	function get_subcategory_name_by_id($id)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from product_subcategory where id='".$id."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->name;
+		}else{
+			return '';
+		}
+	}
+
+	
+	function get_count_product($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `products` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_product($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `products` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
 
 	function insertsubcategory($category,$subcategory)
 	{
@@ -558,6 +601,28 @@
 		}
 	}
 
+	function get_size_type($typeid)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `size_types` where id='".$typeid."'";
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row[0]['name'];
+		}else{
+			return '';
+		}
+	}
+
+	function get_perc_value(int $oval, int $perc){
+         
+		$value = round(($oval *$perc)/100,2);
+
+		return $value;
+
+	}
+
 	function get_all_size_types()
 	{
 		$ci=& get_instance();
@@ -569,6 +634,28 @@
 			return $row;
 		}else{
 			return '';
+		}
+	}
+
+	function deleteproduct($id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "delete from `products` where id='".$id."'"; 
+		$query = $ci->db->query($sql);
+		return 1;
+	}
+
+	function create_productid(){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$pin='RMG'.rand(100,999);
+		$qry = "Select * from products where product_code='".$pin."'";
+		$query = $ci->db->query($qry);
+		$row = $query->result();
+		if(!empty($row)){
+			create_productid();
+		}else{
+			return $pin;
 		}
 	}
 

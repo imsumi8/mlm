@@ -7,6 +7,9 @@
     input[type="file"] {
         display: block !important;
     }
+	.swal2-content .swal2-file{
+        display:none !important;
+    }
    
 </style>
 <!-- Main Content -->
@@ -174,7 +177,7 @@
 																	<div class="col-md-6">
                                                                     <div class="form-group">
                                                                     <label>Image </label>
-                                                                    <input type="file" class="" name="image" id="image">
+                                                                    <input type="file" class="fileup" name="image" id="image">
                                                                       
                                                                 </div>
                                                                 </div>
@@ -199,9 +202,7 @@
             				<!-- /Row -->
 
 							<div class='row'>
-									
-										
-										
+								
 		<!-- CATEGORY TABLE								 -->
 		<div class="panel-heading">Products</div>								
 									<div class='col-md-12 col-sm-12' >
@@ -235,6 +236,13 @@
 										
 											<th data-field="category" data-sortable="true">Category</th>
                                             <th data-field="subcategory" data-sortable="true">Sub-Category</th>
+											<th data-field="pro_name" data-events="actionUpdate" data-sortable="true">Product</th>
+											<th data-field="size" data-sortable="true">Size</th>
+											<th data-field="mrp" data-sortable="true">MRP</th>
+											<th data-field="dp" data-sortable="true">DP</th>
+											<th data-field="bv" data-sortable="true">BV</th>
+											<th data-field="gst" data-sortable="true">GST</th>
+											<th data-field="image" data-sortable="true">Image</th>
 											<th data-field="operate" data-events="actionUpdate">Action</th>
 											
 										 
@@ -243,9 +251,8 @@
 											</thead>
 										</table>
 									</div>
-								</div>
-								
-					</div>
+						
+			
 
 <!-- CATEGORY TABLE -->
 
@@ -268,56 +275,14 @@
 	
 		</div>
 
-<div id="editsubcategory" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-md">
+<?php
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Sub-Category</h4>
-      </div>
-      <div class="modal-body">
-         <form  id="editsubcategoryform">
-           
-             <input type="hidden" class="subcategory_id" name="subcategory_id" id="subcategory_id">
-          
-             <div class="row">
-																	<div class="col-md-12">
-                                                                    <label>Category <span class="star">*</span></label>
-                                                                        <select name="category" id="category" class="form-control">
-                                                                            <?php $arrepin=array(); $category=get_all_category();  foreach($category as $cat) {
-                                                                            if(!in_array($cat->name,$arrepin)){
-                                                                                $arrepin[]=$cat->name;
-                                                                            
-                                                                            ?>
-                                                                                <option value="<?php echo $cat->id;?>" ><?php echo $cat->name;?></option>
-                                                                            <?php } } ?>
-                                                                        </select>
-                                                                </div>
-                                                                </div>
-                                                                <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Sub-Category</label>
-                    <input type="text" class="subcategory_name form-control" name="subcategory" id="subcategory" required>
-                </div>
-            </div>
-            
-         <br>
-        
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" style="background: #65cea7; border: solid 1px #65cea7;" class="btn btn-primary editsubcategory">Update</button>
-                </div>
-            </div>
-        </form>
-      </div>
-     
-    </div>
+$this->load->view('admin/product/modal/edit_product');
 
-  </div>
-</div>
+$this->load->view('admin/product/modal/view_product');
+
+?>
+
 
 		
         <!-- /Main Content -->
@@ -336,48 +301,93 @@
 <script>
             window.actionUpdate = {
                 
-                  	'click .edit-subcategory': function (e, value, row, index) {
+     	'click .edit-product': function (e, value, row, index) {
                   	    
             //	alert('You click remove icon, row: ' + JSON.stringify(row));
-            
-                    $('#subcategory_id').val(row.id);
-                    $('#category').val(row.category_id);
-                     $('#subcategory').val(row.subcategory);
+            if(row.image_url != 'No image'){
+						var regex = /<img.*?src="(.*?)"/;
+						var src = regex.exec(row.image_url)[1];
+						$('#image_url').val(src);
+					}else{
+						$('#image_url').val('');
+					}
+					$('#product_id').val(row.id);
+                    $('#editcategory_id').val(row.category_id).trigger("change",[row.category_id,row.subcategory_id]);
+                    // $('#editsubcategory').val(row.subcategory_id);
+					 $('#editname').val(row.name);
+					 $('#editsize').val(row.size_value);
+					 $('#edittype').val(row.size_type);
+					 $('#editmrp').val(row.mrp);
+					 $('#editdp').val(row.dp_o);
+					 $('#editbv').val(row.bv_o);
+					 $('#editgst').val(row.gst_o);
+					 $('#editdesc').val(row.desc);
+					 $('#edithsn').val(row.hsn);
                 
 		
 			     
-            	}
+				},
+				'click .view-product': function (e, value, row, index) {
+                  	    
+						//  	alert('You click removeview icon, row: ' + JSON.stringify(row));
+						//   if(row.image_url != 'No image'){
+						// 			  var regex = /<img.*?src="(.*?)"/;
+						// 			  var src = regex.exec(row.image_url)[1];
+						// 			  $('#image_url').val(src);
+						// 		  }else{
+						// 			  $('#image_url').val('');
+						// 		  }
+								   $('#pro_id').html(row.product_code);
+								   $('#pro_subcategory').html(row.subcategory);
+								   $('#pro_category').html(row.category);
+								   $('#pro_name').html(row.name);
+						      	   $('#pro_size').html(row.size);
+						    	   $('#pro_mrp').html(row.mrp);
+								   $('#pro_dp').html(row.dp + ' ('+row.dp_o + '%)');
+						 		   $('#pro_bv').html(row.bv + ' ('+row.bv_o + '%)');
+						 		   $('#pro_gst').html(row.gst + ' ('+row.gst_o + '%)');
+						    	   $('#pro_desc').val(row.desc);
+								   $('#pro_hsn').html(row.hsn);
+							  
+					  
+							   
+							  },
                 
 			};
-			
+	
 
-			$("#editsubcategoryform").on('submit', function(e){
+</script>	
+	
+<script>
+		$("#editproduct_form").on('submit', function(e){
     	    e.preventDefault();
+			
     		$.ajax({    
     			type: 'POST',
-    			url: admin_loc+'edit_subcategory',
+    			url: admin_loc+'edit_product',
     			data: new FormData(this),
     			contentType: false,
     			cache: false,
     			processData:false,
     			beforeSend: function(){
-    				$('.editsubcategory').attr("disabled","disabled");
-    				$('.editsubcategory').html("Please Wait..");
+					console.log('edit');
+    				$('.editproduct').attr("disabled","disabled");
+    				$('.editproduct').html("Please Wait..");
     			},
     			success: function(msg){
     				msg=$.trim(msg);
     				if(msg == 'ok'){
-    					sweetalert('Success','success','Sub-Category Edited successfully','#469408');
-    					$(".editsubcategory").attr("disabled",false);
-						$('.editsubcategory').html("Update");
-						$('#subcategory_list').bootstrapTable('refresh');
-						setTimeout(function() {$('#editsubcategory').modal('hide');}, 1000);
+    					sweetalert('Success','success','Product Updated successfully','#469408');
+    					$(".editproduct").attr("disabled",false);
+						$('.editproduct').html("UPDATE");
+						$('#product_list').bootstrapTable('refresh');
+						setTimeout(function() {$('#editproduct').modal('hide');}, 1000);
     					// location.reload();
     				}else{
-    					$(".editsubcategory").attr("disabled",false);
+    					$(".editproduct").attr("disabled",false);
     					 sweetalert('Warning','warning',msg,'#f99b4a');
-						 $('.editsubcategory').html("Update");
-						 setTimeout(function() {$('#editsubcategory').modal('hide');}, 1000);
+						 $('.editproduct').html("UPDATE");
+						 setTimeout(function() {$('#editproduct').modal('hide');}, 1000);
     					 
     				}
     			}
@@ -400,26 +410,45 @@
 				}
 			});
 		});
-		</script>              
+		</script>       
+
+		<script>
+		$('#editcategory_id').on('change',function(e, row_category, row_subcategroy){
+			var category_id = $('#editcategory_id').val();
+			$.ajax({
+				type:'POST',
+				url: admin_loc+'get_subcategory_by_cat',
+				data:'category_id='+category_id,
+				beforeSend:function(){$('#editsubcategory').html('Please wait..');},
+				success:function(result){
+					// alert(result);
+					$('#editsubcategory').html(result);
+					if(category_id == row_category && row_subcategroy != 0 )
+						$('#editsubcategory').val(row_subcategroy);
+				
+				}
+			});
+		});
+		</script>             
 
 
 <script>
-		$(document).on('click','.delete-subcategory',function(){
-			if(confirm('Are you sure? Want to delete subcategory? All related products will also be deleted')){
+		$(document).on('click','.delete-product',function(){
+			if(confirm('Are you sure? Want to delete product?')){
 				id = $(this).data("id");
 			
 				$.ajax({
-					url : admin_loc+'delete_subcategory',
+					url : admin_loc+'delete_product',
 					type: "get",
-					data: 'id='+id +'&delete_subcategory=1',
+					data: 'id='+id +'&delete_product=1',
 					success: function(result){
 						// alert(result);
 						if(result=='ok'){
-							sweetalert('Success','success','Sub-Category Deleted successfully','#469408');
-							$('#subcategory_list').bootstrapTable('refresh');
+							sweetalert('Success','success','Product Deleted successfully','#469408');
+							$('#product_list').bootstrapTable('refresh');
 							
 						}else
-						sweetalert('Warning','warning','Sub-Category could not be deleted','#f99b4a');
+						sweetalert('Warning','warning','Product could not be deleted','#f99b4a');
 							//alert('Error! Category could not be deleted');
 					}
 				});

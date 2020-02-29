@@ -317,7 +317,7 @@
 			
 				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
 				<li>
-					<a <?php if($title=='Dashboard') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/dashboard"><div class="pull-left"><i class="fa fa-dashboard mr-20"></i><span class="right-nav-text">Admin Dashboard</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Dashboard') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/dashboard"><div class="pull-left"><i class="fa fa-dashboard mr-20"></i><span class="right-nav-text">Dashboard</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
 				</li>
 				
 				<!-- <li>
@@ -355,7 +355,7 @@
 				</li>
 				<li>
 					<a <?php if($title=='Epin') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="fa fa-shopping-basket mr-20"></i><span class="right-nav-text">E-Pin</span></div><div class="pull-right">
-					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #65cea7">6</span></div><div class="clearfix"></div></a>
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">6</span></div><div class="clearfix"></div></a>
 					<ul id="dashboard_dr" class="collapse collapse-level-1">
 					
 						<li>
@@ -388,7 +388,7 @@
 				
 				<?php  } else { ?>
 				<li>
-					<a <?php if($title=='Profile Management') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#profile_dr"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">Profile Management</span></div><div class="pull-right">
+					<a <?php if($title=='Profile Management') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#profile_dr"><div class="pull-left"><i class="fa fa-user mr-20"></i><span class="right-nav-text">Members</span></div><div class="pull-right">
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">5</span></div><div class="clearfix"></div></a>
 					<ul id="profile_dr" class="collapse collapse-level-1">
 						<li>
@@ -410,7 +410,7 @@
 				</li>
 				<li>
 					<a <?php if($title=='Epin') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard_dr"><div class="pull-left"><i class="fa fa-shopping-basket mr-20"></i><span class="right-nav-text">E-Pin</span></div><div class="pull-right">
-					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #65cea7">6</span></div><div class="clearfix"></div></a>
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">6</span></div><div class="clearfix"></div></a>
 					<ul id="dashboard_dr" class="collapse collapse-level-1">
 						<li>
 							<a <?php if($subpage=='generate') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/generate"><i class="fa fa-circle <?php if($subpage=='generate') { echo 'clrred'; } ?>"></i> Generate E-pin</a>
@@ -514,9 +514,9 @@
 					<a <?php if($title=='Total Member List') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/downlist_member"><div class="pull-left"><i class="fa fa-arrow-circle-down mr-20"></i><span class="right-nav-text">Total Down (Monoline)</span></div><div class="clearfix"></div></a>
 				</li>
 				-->
-				<li>
+				<!-- <li>
 					<a <?php if($title=='Total Matrix Member List') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/downlist_member_matrix"><div class="pull-left"><i class="fa fa-arrow-circle-down mr-20"></i><span class="right-nav-text">Total Down (Matrix)</span></div><div class="clearfix"></div></a>
-				</li>
+				</li> -->
 				<?php  if($this->session->userdata('hrmtype') != 'admin') { ?>
 				
     				<li>
@@ -537,9 +537,11 @@
 				-->
 				<?php } ?>
 				
-				<li>
+				
+				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
+					<li>
 					<a <?php if($title=='Product') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#product_dr"><div class="pull-left"><i class="fa fa-cart-plus mr-20"></i><span class="right-nav-text">Product</span></div><div class="pull-right">
-						</div><div class="clearfix"></div></a>
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">3</span></div><div class="clearfix"></div></a>
 					<ul id="product_dr" class="collapse collapse-level-1">
 						<li>
 							<a <?php if($subpage=='add_category') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/add_category">
@@ -557,22 +559,22 @@
 						</li>
 					</ul>
 				</li>
-				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
+
 				<li>
-					<a <?php if($title=='Package | 7 SILVER') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/package"><div class="pull-left"><i class="fa fa-shopping-cart mr-20"></i><span class="right-nav-text">Packages</span></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Package | RMGM') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/package"><div class="pull-left"><i class="fa fa-shopping-cart mr-20"></i><span class="right-nav-text">Packages</span></div><div class="clearfix"></div></a>
 				</li>
 			    <li>
-					<a <?php if($title=='Manual Payout | 7 SILVER') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/manualpayout"><div class="pull-left"><i class="fa fa-money mr-20"></i><span class="right-nav-text">Manual Payout</span></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Manual Payout | RMGM') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/manualpayout"><div class="pull-left"><i class="fa fa-money mr-20"></i><span class="right-nav-text">Manual Payout</span></div><div class="clearfix"></div></a>
 				</li>
 			    <li>
 					<a <?php if($title=='Withdrawl Request') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/withdrawlreq"><div class="pull-left"><i class="fa fa-paper-plane mr-20"></i><span class="right-nav-text">Withdrawl Request</span></div><div class="clearfix"></div></a>
 				</li>
 			    
 			    <li>
-					<a <?php if($title=='All Team Business | 7 SILVER') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/teambusiness"><div class="pull-left"><i class="fa fa-briefcase mr-20"></i><span class="right-nav-text">All Team Business</span></div><div class="clearfix"></div></a>
+					<a <?php if($title=='All Team Business | RMGM') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/teambusiness"><div class="pull-left"><i class="fa fa-briefcase mr-20"></i><span class="right-nav-text">All Team Business</span></div><div class="clearfix"></div></a>
 				</li>
 				<li>
-					<a <?php if($title=='Member Bank Detail | 7 SILVER') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/bankdetail"><div class="pull-left"><i class="fa fa-bank mr-20"></i><span class="right-nav-text">Member Bank Detail</span></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Member Bank Detail | RMGM') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/bankdetail"><div class="pull-left"><i class="fa fa-bank mr-20"></i><span class="right-nav-text">Member Bank Detail</span></div><div class="clearfix"></div></a>
 				</li>
 				<!--
 				<li>

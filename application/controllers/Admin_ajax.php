@@ -1068,7 +1068,8 @@ class Admin_ajax extends CI_Controller {
 							'bv'=>$bv,
 							'gst'=>$gst,
 							'hsn'=>$hsn,
-                             'image'=>$upload_nm,
+							 'image'=>$upload_nm,
+							 'product_code'=>create_productid(),
                         );
                         $this->db->insert('products',$data);
                         $productid=$this->db->insert_id();
@@ -1096,6 +1097,7 @@ class Admin_ajax extends CI_Controller {
 						'gst'=>$gst,
 						'hsn'=>$hsn,
 						 'image'=>'default.jpg',
+						 'product_code'=>create_productid(),
 					);
 					$this->db->insert('products',$data);
 					$productid=$this->db->insert_id();
@@ -1112,6 +1114,197 @@ class Admin_ajax extends CI_Controller {
 		  
 
 		
+	}
+
+	public function get_products(){
+		$offset = 0;$limit = 10;
+		$sort = 'id'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`id` like '%".$search."%' OR `name` like '%".$search."%' )";
+		}
+		
+		$res=get_count_product($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_product($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			$operate ='';
+			$operate = "<a class='btn btn-xs btn-primary edit-product' data-id='".$row['id']."' data-toggle='modal' data-target='#editproduct' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			$operate .= " <a class='btn btn-xs btn-danger delete-product' style='background:#52a2b2;border-color:#52a2b2' data-id='".$row['id']."'  title='Delete'><i class='fa fa-trash'></i></a>";
+			
+			$dp_value = $row['mrp'] - get_perc_value($row['mrp'],$row['dp']);
+             $bv_val = get_perc_value($dp_value,$row['bv']);
+			$name = " <a class='btn btn-xs btn-primary view-product' data-toggle='modal' data-target='#viewproduct' style='background:#fff;color:#333;border-color:#52a2b2' data-id='".$row['id']."'  title='View'>".$row['name']."</a>";
+			
+			$gst_val = round($dp_value-($dp_value*100)/($row['gst'] +100),2);
+			$image = " <a class='btn btn-xs btn-primary' href='".base_url().'assets/uploads_assets/products/'.$row['image']."' target='_blank' style='background:#65cea7;border-color:#65cea7' data-id='".$row['id']."'  title='View'>View Picture</a>";
+
+
+			$tempRow['id'] = $row['id'];
+			$tempRow['product_code'] = $row['product_code'];
+			$tempRow['sno'] = $i;
+			$tempRow['category'] = get_category_name_by_id($row['category_id']);
+			$tempRow['category_id'] = $row['category_id'];
+			$tempRow['desc'] = $row['description'];
+			$tempRow['subcategory'] =get_subcategory_name_by_id($row['subcategory_id']);
+			$tempRow['subcategory_id'] = $row['subcategory_id'];
+			$tempRow['name'] = $row['name'];
+			$tempRow['pro_name'] = $name;
+			$tempRow['size_type'] = $row['size_type'];
+			$tempRow['size_value'] = $row['size_value'];
+			$tempRow['dp_o'] = $row['dp'];
+			$tempRow['gst_o'] = $row['gst'];
+			$tempRow['size'] = $row['size_value'].' '.get_size_type($row['size_type']);
+			$tempRow['mrp'] = $row['mrp'];
+			$tempRow['dp'] = $dp_value;
+			$tempRow['bv'] = $bv_val;
+			$tempRow['bv_o'] = $row['bv'];
+			$tempRow['gst'] = $gst_val;
+			$tempRow['image'] = $image;
+			$tempRow['image_url']=(!empty($row['image']) && $row['image']!='default.jpg')?'<a data-fancybox="Question-Image" href="images/questions/'.$row['image'].'" ><img src="../assets/upload_assets/products/'.$row['image'].'" height=30 ></a>':'No image';
+			$tempRow['hsn'] = $row['hsn'];
+			
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+
+	public function edit_product()
+	{
+	
+		$msg='';
+		$id=$_POST['product_id'];
+		$category=$_POST['category_id'];
+		$subcategory=$_POST['subcategory'];
+		$name=$_POST['name'];
+		$desc=$_POST['desc'];
+		$size=$_POST['size'];
+		$type=$_POST['type'];
+		$mrp=$_POST['mrp'];
+		$dp=$_POST['dp'];
+		$bv=$_POST['bv'];
+		$gst=$_POST['gst'];
+		$hsn=$_POST['hsn'];
+     
+
+	
+		if($category=='' || $subcategory=='' || $name=='' || $mrp=='' || $dp=='' || $bv=='' || $gst==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+
+			if(isset($_FILES['image'])){
+            	
+            	$banner=$_FILES['image']['name']; 
+            	if($banner!=''){
+                	$file_size = $_FILES['image']['size'];
+                	
+                	$expbanner=explode('.',$banner);
+            		$allowed_format = array('jpg','jpeg','png');	
+            		if(in_array(strtolower(end($expbanner)),$allowed_format)){	
+            			$uploaddir = $_SERVER['DOCUMENT_ROOT'].'/mlm/assets/uploads_assets/products/';	
+            			$full_file_name = uniqid().".".end($expbanner);		
+            			$uploadfile = $uploaddir.$full_file_name;
+            		
+            			$upload_nm=$full_file_name;
+        				move_uploaded_file($_FILES["image"]["tmp_name"] , $uploadfile);	//for moving image 		
+        	
+        			     $data = array(
+                            'category_id'=>$category,
+							'subcategory_id'=>$subcategory,
+							'name'=>$name,
+							'description'=>$desc,
+							'size_value'=>$size,
+							'size_type'=>$type,
+							'mrp'=>$mrp,
+							'dp'=>$dp,
+							'bv'=>$bv,
+							'gst'=>$gst,
+							'hsn'=>$hsn,
+                             'image'=>$upload_nm,
+						);
+						$this->db->where('id',$id);
+                        $this->db->update('products',$data);
+                       // $productid=$this->db->insert_id();
+                //  if($productid)
+						$msg ='ok'; 
+
+						echo $msg;
+						die();
+						
+        			}else{		
+            			$msg= "Unsupported file type";
+            		}
+            	}else{
+				  
+					$data = array(
+						'category_id'=>$category,
+						'subcategory_id'=>$subcategory,
+						'name'=>$name,
+						'description'=>$desc,
+						'size_value'=>$size,
+						'size_type'=>$type,
+						'mrp'=>$mrp,
+						'dp'=>$dp,
+						'bv'=>$bv,
+						'gst'=>$gst,
+						'hsn'=>$hsn,
+						 'image'=>'default.jpg',
+					);
+					$this->db->where('id',$id);
+					$this->db->update('products',$data);
+
+					$msg ='ok'; 
+
+					echo $msg;
+					die();
+            	}
+           }
+		   
+    			
+		}
+		  
+
+		
+	}
+
+	public function delete_product(){
+
+		$id = $_GET['id'];
+         $del = deleteproduct($id);
+		 if($del){
+		    echo 'ok';
+		}
+	
+		die();
+
 	}
 
 	

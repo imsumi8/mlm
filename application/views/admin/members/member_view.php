@@ -426,7 +426,7 @@
                 										<div class="tab-content" id="myTabContent_8">
                 											<div  id="profile_8" class="tab-pane fade active in" role="tabpanel">
                 												<div class="col-md-12">
-                													    <table class="table table-bordered table-striped" >
+                											 <table class="table table-bordered table-striped" >
                     													<tr>
                     													    <tr>
                     															<td><strong>Userid</strong></td>
