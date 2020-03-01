@@ -29,9 +29,9 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$data['packs']=get_all_packs();
-		$this->load->view('site/header',$data);
-		$this->load->view('site/homepage');
-		$this->load->view('site/footer');
+		$this->load->view('site/head',$data);
+		$this->load->view('site/home');
+		$this->load->view('site/foot');
 		
 	}
 	public function product($id)
