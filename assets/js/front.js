@@ -104,9 +104,7 @@ jQuery(document).ready(function (){
 			"pos":{
 			    required: true,
 			},
-			"epinno":{
-			     required: true,
-			}
+			
 		},
         
         submitHandler: function (form) { // for demo

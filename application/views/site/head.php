@@ -40,6 +40,10 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();  ?>assets/register/css/montserrat-font.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();  ?>assets/register/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="<?php echo base_url();  ?>assets/register/css/style.css"/>
 	<!--alerts CSS -->
 	<link href="<?php echo base_url(); ?>assets/vendors/bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
@@ -93,7 +97,7 @@
                         <div class="col-xl-4 col-lg-4 d-block d-lg-block">
                             <div class="social_wrap d-flex align-items-center justify-content-end">
                                 <div class="login_text">
-                                <a  href="<?php echo site_url('registration'); ?>">Registration</a>
+                                <a  href="<?php echo site_url('registration'); ?>">Register</a>
                                 </div>
                                 <div class="login_text">
                                 <a  href="<?php echo site_url('admin'); ?>">Login</a>
