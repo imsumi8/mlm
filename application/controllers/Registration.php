@@ -35,6 +35,18 @@ class Registration extends CI_Controller {
 		$data['banks']=get_all_banks();
 		$data['packs']=get_all_packs();
 		
+		$this->load->view('site/head');
+		$this->load->view('site/register',$data);
+		
+	}
+
+	public function register()
+	{
+		$data['states']=get_all_states();
+		$data['banks']=get_all_banks();
+		$data['packs']=get_all_packs();
+		
+		
 		$this->load->view('site/registration',$data);
 		
 	}

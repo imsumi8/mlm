@@ -28,6 +28,29 @@
 
     <link rel="stylesheet" href="<?php echo base_url();  ?>assets/hus/css/style.css">
     <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+
+    <!-- <link href="<?php echo base_url(); ?>assets/dist/css/style.css" rel="stylesheet" type="text/css"> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Custom CSS -->
+	<!-- <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet" type="text/css"> -->
+	<script src="<?php echo base_url(); ?>assets/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/front.js"></script>
+	 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/multiselect/multiselect.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<!--alerts CSS -->
+	<link href="<?php echo base_url(); ?>assets/vendors/bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/additional-methods.js"></script>
+	<!--<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>-->
+	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+    <script>
+		var admin_loc='<?php echo base_url().'admin_ajax/'; ?>';
+		var base_loc='<?php echo base_url().'admin/'; ?>';
+    </script>
 </head>
 
 <body>
