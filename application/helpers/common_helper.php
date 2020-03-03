@@ -2502,7 +2502,8 @@
 	    $ci=& get_instance();
 		$ci->load->database(); 
 		$array=array();
-	    $sql="Select * from hrm_level_tracking where LEVEL_ID='1' and POSITION IN (1,2) and POSITION_ID='".$POSITION_id."'  and MLM_DESC_ID='".$mlm_desc."' and POSITION='".$position."' and HRM_ID!=5000 ORDER BY POSITION ASC";
+
+	    $sql="Select * from hrm_level_tracking where LEVEL_ID='1' and  POSITION_ID='".$POSITION_id."'  and MLM_DESC_ID='".$mlm_desc."'  and HRM_ID!=5000 ORDER BY POSITION ASC";
 	    $query = $ci->db->query($sql);
 	    $row = $query->result();
 	    $array=$row;

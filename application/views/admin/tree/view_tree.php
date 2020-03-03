@@ -55,24 +55,43 @@
 	.jOrgChart .username{
 	    padding:7px 0px !important;
 	    border-radius:10px;
-	    background: #419bea !important;
-	    box-shadow:0px 0px 5px 0px #419bea !important;
+	    background: #fff !important;
+	    box-shadow:0px 0px 0px 0px #419bea !important;
 	    user-select: text;
         cursor: default;
+        color:#555;
 	}
 	.jOrgChart .tree_icon {
         height: 50px !important;
         width: 50px !important;
 	}
 	.red-tooltip + .tooltip > .tooltip-inner {background-color: #f00;}
-    .red-tooltip + .tooltip > .tooltip-arrow { border-bottom-color:#f00; }
+    .red-tooltip + .tooltip > .tooltip-arrow { border-bottom-color:#f00;}
+    .blue-tooltip + .tooltip > .tooltip-inner {
+        background-color: rgba(66, 139, 202, 0.83);
+        border: 1px solid black;
+        border-radius: 5px;
+        
+    }
+    .tree_tooltip{
+     padding: 15px;
+    width: 100px;
+    display: inline-block;
+    color: white;
+    position:relative;
+    z-index:1006;
+    }
     .tooltip {
-        font-size:18px;
+        font-size:12px;
+        font-family: 'Open Sans',sans-serif; 
+       
         
     }
     .jOrgChart {
         margin: 30px !important;
     }
+
+ 
 </style>
 <?php
 //$nodes=get_nodes_geneology(5001);
@@ -186,7 +205,7 @@
        $('.summary').html('');
         $.ajax({
             type: "POST",
-            url: admin_loc+'tree',
+            url: admin_loc+'tree_nth',
            data: {
                 user_id: user_name,mlmdesc:mlmdesc
             },
