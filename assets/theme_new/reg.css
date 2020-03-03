@@ -1,0 +1,23 @@
+/*body {
+  margin: 0;
+  padding: 0;
+  background-color: #17a2b;
+  /*height: 100vh; 
+}*/
+#login .container #login-row #login-column #login-box {
+  margin-top: 70px;
+  max-width: 500px;
+  height: 350px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+  margin-left: 300px;
+  margin-bottom:20px; 
+   
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 40px;
+   
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}

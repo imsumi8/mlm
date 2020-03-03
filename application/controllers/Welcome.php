@@ -28,10 +28,10 @@ class Welcome extends CI_Controller {
 	}
 	public function index()
 	{
-		$data['packs']=get_all_packs();
-		$this->load->view('site/head',$data);
-		$this->load->view('site/home');
-		$this->load->view('site/foot');
+		// $data['packs']=get_all_packs();
+		// $this->load->view('site/head',$data);
+		$this->load->view('site/home_new');
+		// $this->load->view('site/foot');
 		
 	}
 	public function product($id)
