@@ -770,6 +770,20 @@
 			return '';
 		}
 	}
+
+	function get_all_products()
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from products order by id desc"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
 	function get_all_packs_by_id($id)
 	{
 		$ci=& get_instance();
@@ -924,6 +938,28 @@
 			return $row;
 		}else{
 			return 0;
+		}
+	}
+
+	function check_duplicate_detail($key,$value){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from hrm_post_meta where HRM_KEY='".$key."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		foreach($row as $res){
+			   
+			if($res->HRM_VALUE==$value)
+			{
+                  return 0;
+			}
+              
+		}
+		
+			return 1;
+		}else{
+			return 1;
 		}
 	}
 
@@ -1239,17 +1275,17 @@
     	    $ci =& get_instance();
     		$ci->load->database();
     		$orghrmid=$hrmid;
-    		for($i=1;$hrmid!='';$i++){
-            	$sql = "Select * from hrm_level_tracking where POSITION_ID='".$hrmid."' and LEVEL_ID='1' and MLM_DESC_ID=3"; 
-        		$query = $ci->db->query($sql);
-        		$row = $query->result();
-        		if(!empty($row)){
-        		   $hrmid=$row[0]->HRM_ID;
-        		   $orghrmid=$hrmid;
-        		}else{
-        		    $hrmid='';
-        		}
-    		}
+    		// for($i=1;$hrmid!='';$i++){
+            // 	$sql = "Select * from hrm_level_tracking where POSITION_ID='".$hrmid."' and LEVEL_ID='1' and MLM_DESC_ID=3"; 
+        	// 	$query = $ci->db->query($sql);
+        	// 	$row = $query->result();
+        	// 	if(!empty($row)){
+        	// 	   $hrmid=$row[0]->HRM_ID;
+        	// 	   $orghrmid=$hrmid;
+        	// 	}else{
+        	// 	    $hrmid='';
+        	// 	}
+    		// }
     		return $orghrmid;
 	    }else{
 	        return 5000;

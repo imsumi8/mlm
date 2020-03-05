@@ -1771,7 +1771,7 @@ h3 {
 .our_facilitics_area {
   position: relative;
   padding-top: 170px;
-  padding-bottom: 180px;
+  padding-bottom: 20px;
   z-index: 0;
 }
 
@@ -1779,7 +1779,7 @@ h3 {
   /* line 1, ../../Arafath/CL/january 2020/237. Real Estate/HTML/scss/_facilites.scss */
   .our_facilitics_area {
     padding-top: 80px;
-    padding-bottom: 50px;
+    padding-bottom: 0px;
   }
 }
 
@@ -1914,14 +1914,14 @@ h3 {
 
 /* line 1, ../../Arafath/CL/january 2020/237. Real Estate/HTML/scss/_appetment.scss */
 .appertment_area {
-  padding-top: 180px;
-  padding-bottom: 180px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 @media (max-width: 767px) {
   /* line 1, ../../Arafath/CL/january 2020/237. Real Estate/HTML/scss/_appetment.scss */
   .appertment_area {
-    padding-top: 80px;
+    padding-top: 0px;
     padding-bottom: 80px;
   }
 }

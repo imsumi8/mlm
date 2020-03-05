@@ -51,7 +51,7 @@ height: 370px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
-background-color: #1abc9c !important;
+background-color: #2d44a2 !important;
 }
 
 .social_icon span{
@@ -77,7 +77,7 @@ top: -45px;
 
 .input-group-prepend span{
 width: 50px;
-background-color: rgba(9, 94, 97, 0.72);
+background-color: rgba(13, 10, 95, 0.72);
 color: #fff;
 border:0 !important;
 }
@@ -102,12 +102,12 @@ margin-right: 5px;
 
 .login_btn{
 color: #FFF;
-background-color: rgba(9, 94, 97, 0.72);
+background-color: rgba(13, 10, 95, 0.72);
 width: 100px;
 }
 .btn-primary{
 color: #FFF;
-background-color: rgba(9, 94, 97, 0.72);
+background-color: rgba(13, 10, 95, 0.72);
 
 }
 

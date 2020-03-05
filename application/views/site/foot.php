@@ -9,10 +9,10 @@
                             <h3 class="footer_title">
                                 About Us
                             </h3>
-                            <p>Heaven fruitful doesn't over lesser days appear creeping seasons so behold bearing days open</p>
+                            <p>We stand at the threshold of a new world, a world where dreams are realized and lives are positively impacted . In this world, roads will lead us to our collective destinies , We are <B>RMGM BizzWorld</B> and we are making this new world happen. We invite you to join us o this magnificent journey of innovation and growth. </p>
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img src="img/footer_logo.png" alt="">
+                                    <img style="height:50px;" src="<?php echo base_url();  ?>assets/hus/img/loo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -22,10 +22,9 @@
                             <h3 class="footer_title">
                                 Contact Info
                             </h3>
-                            <p>Address :Your address goes
-                                here, your demo address.</p>
+                            <p>Address :Crossing No.9 Geeta nagar Kanpur Uttar pradesh</p>
                             <ul>
-                                <li><a href="#">Phone : +8880 44338899</a></li>
+                                <li><a href="#">Phone : +91 111111111</a></li>
                                 <li><a href="#">Email : info@rmgm.com</a></li>
                             </ul>
 
@@ -37,10 +36,10 @@
                                 Important Link
                             </h3>
                             <ul>
-                                <li><a href="#">View Project</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Testimonial</a></li>
-                                <li><a href="#">Proparties</a></li>
+                                <li><a href="#">View Package</a></li>
+                                <li><a href="#">Franchise</a></li>
+                                <li><a href="#">Business Plan</a></li>
+                             
                                 <li><a href="#">Support</a></li>
                             </ul>
                         </div>

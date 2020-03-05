@@ -104,6 +104,12 @@ jQuery(document).ready(function (){
 			"pos":{
 			    required: true,
 			},
+			"aadhar":{
+			    required: true,
+			},
+			"pancard":{
+			    required: true,
+			},
 			
 		},
         
@@ -503,8 +509,9 @@ jQuery(document).ready(function (){
 				},
 				success: function(msg){
 					msg=$.trim(msg);
+					console.log(msg);
 					var s = msg.substr(0, 2);
-					if(s == '7S'){
+					if(s == 'RM'){
 						$('#memberregister').trigger('reset');
 						 var str="USER ID : "+msg+"<br> PASSWORD : "+pass+"";
 						 sweetalert('Member Registration','success',str,'#469408');

@@ -579,13 +579,74 @@ class Admin_ajax extends CI_Controller {
 		 // $position=$_POST['position'];
 		$sponsor= check_sponsor_get_name($sponsorid);
 	      if($sponsor != 0){
-			  $data = array('hrm_id'=>get_last_left_right($sponsorid),'hrm_name'=>$sponsor[0]['HRM_NAME']);
+			  $data = array('hrm_id'=>get_last_left_right($sponsorid),'hrm_name'=>$sponsor[0]['HRM_NAME'],'msg'=>'ok');
 	           echo json_encode($data);
 	      }else{
-	          echo 'Invalid Sponsor id';
+			  $data =array('msg'=>'Invalid Sponsor id');
+	          echo json_encode($data);
 	      }
 	      die();
 	}
+
+
+	public function get_phone(){
+		$phone=strtoupper($_POST['phone']);
+	   // $position=$_POST['position'];
+	  $cphone= check_duplicate_detail('contact',$phone);
+		if($cphone != 0){
+			$data = array('msg'=>'ok');
+			 echo json_encode($data);
+		}else{
+			$data =array('msg'=>'Mobile No. already taken');
+			echo json_encode($data);
+		}
+		die();
+  }
+
+
+  public function get_email(){
+	$email=$_POST['email'];
+   // $position=$_POST['position'];
+  $cemail= check_duplicate_detail('email',$email);
+	if($cemail != 0){
+		$data = array('msg'=>'ok');
+		 echo json_encode($data);
+	}else{
+		$data =array('msg'=>'Email already taken');
+		echo json_encode($data);
+	}
+	die();
+}
+
+
+public function get_aadhar(){
+	$aadhar=$_POST['aadhar'];
+   // $position=$_POST['position'];
+  $caadhar= check_duplicate_detail('aadhar',$aadhar);
+	if($caadhar != 0){
+		$data = array('msg'=>'ok');
+		 echo json_encode($data);
+	}else{
+		$data =array('msg'=>'Aadhar No already taken');
+		echo json_encode($data);
+	}
+	die();
+}
+
+public function get_pancard(){
+	$pancard=$_POST['pancard'];
+   // $position=$_POST['position'];
+  $cpan= check_duplicate_detail('pancard',$pancard);
+	if($cpan != 0){
+		$data = array('msg'=>'ok');
+		 echo json_encode($data);
+	}else{
+		$data =array('msg'=>'Pan No already taken');
+		echo json_encode($data);
+	}
+	die();
+}
+
 	public function get_epin_sponsor(){
 	      $id=$_POST['id'];
 	      $pack=$_POST['pack'];
@@ -2590,7 +2651,7 @@ class Admin_ajax extends CI_Controller {
 		<?php
 		die();
 	}
-	public function memberregister()
+	public function memberregister2()
 	{
 		date_default_timezone_set('Asia/Calcutta'); 
 		$this->db->trans_start();
@@ -2673,7 +2734,7 @@ class Admin_ajax extends CI_Controller {
 		    if(check_sponsor($sponserid)==1){
 		        if(check_sponsor($positionid)==1){
 		           if($desiredid=='' || check_sponsor($desiredid)!=1){
-		               $hrm_id="7S".create_hrm_id();
+		               $hrm_id="RM".create_hrm_id();
 					   $orghrm=$hrm_id;
 					   $bckdate=date('Y-m-d');
     		            $id=insert_hrm($hrm_id,$firstname." ".$lastname,$date,$status,$pass,$bckdate,$desiredid);
@@ -2728,8 +2789,8 @@ class Admin_ajax extends CI_Controller {
                             $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with NEW RMGM.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
             		        send_sms($phone,$msg,$hrm_id);
             		        
-            		        insert_count_nodes($hrm_id,3);
-            			    insert_count_nodes(5000,3);
+            		        // insert_count_nodes($hrm_id,3);
+            			    // insert_count_nodes(5000,3);
             				$ledger_id=insert_ledger('ledger_'.$hrm_id);
             				// if($packprice>5000){
             				//     if($packprice==15000 || $packprice==35000){
@@ -2873,6 +2934,159 @@ class Admin_ajax extends CI_Controller {
 		    }else if($check==5){
 		        echo 'You cannot add this member in this position';
 		    }
+		    else{
+		        echo 'Cannot use admin id for add member';
+		    }
+		}
+		die();
+	}
+	
+	
+		public function memberregister()
+	{
+		date_default_timezone_set('Asia/Calcutta'); 
+		$this->db->trans_start();
+		$result=0;
+		$firstname=ucwords($_POST['firstname']);
+		$lastname=ucwords($_POST['lastname']);
+		$desiredid=strtoupper($_POST['desiredid']);
+		$email=$_POST['email'];
+		$phone=$_POST['phone'];
+		$aadhar=$_POST['aadhar'];
+		$gender=$_POST['gender'];
+		$dob=$_POST['dob'];
+		$pancard=$_POST['pancard'];
+		$address=$_POST['address'];
+		$acno=$_POST['acno'];
+		$holdername=$_POST['holdername'];
+		$bank=$_POST['bank'];
+		$ifsc=$_POST['ifsc'];
+		$branch=$_POST['branch'];
+		$sponserid=strtoupper($_POST['sponserid']);
+		$positionid=strtoupper($_POST['positionid']);
+		
+		if(strtoupper($_POST['sponserid'])==5000){
+		    $positionid=5000;
+		    $pos=get_positionmax();
+		}else{
+			$pos=get_positionmax_member(1,$_POST['sponserid']);
+		}
+		
+	    $orgpostoinid=$positionid;
+	    $prev_upper_sponsor=$sponserid;
+		$prev_upper_positionid=$positionid;
+		$pass=md5($_POST['pass']);
+		$date=date('Y-m-d h:i:s');
+		
+		
+		$status=1;
+		$orghrm='';
+		$check=1;
+		$dt=date('Y-m-d');
+		$sponsor_type=$_POST['sponsor_type'];
+		$check_sponsor=	$sponserid;
+		$get_left_right='';
+
+		// $check_email = $this->get_email($email);
+		// if(json_decode($check_email)[0]['msg'] != 'ok'){
+		// 	$check = 2;
+		// }
+		// $check_phone = $this->get_phone($phone);
+		// if(json_decode($check_phone)[0]['msg'] != 'ok'){
+		// 	$check = 3;
+		// }
+		// $check_pancard = $this->get_pancard($pancard);
+		// if(json_decode($check_pancard)[0]['msg'] != 'ok'){
+		// 	$check = 4;
+		// }
+		// $check_aadhar = $this->get_aadhar($aadhar);
+		// if(json_decode($check_aadhar)[0]['msg'] != 'ok'){
+		// 	$check = 5;
+		// }
+
+		// echo $check;
+		// die();
+	
+    	if($check==1){
+		    if(check_sponsor($sponserid)==1){
+		        if(check_sponsor($positionid)==1){
+		           if($desiredid=='' || check_sponsor($desiredid)!=1){
+		               $hrm_id="RM".create_hrm_id();
+					   $orghrm=$hrm_id;
+					   $bckdate=date('Y-m-d');
+    		            $id=insert_hrm($hrm_id,$firstname." ".$lastname,$date,$status,$pass,$bckdate,$desiredid);
+            			if($id>0){
+            			   
+            			    update_hrmpost_meta($hrm_id,'first_name',$firstname);
+            				update_hrmpost_meta($hrm_id,'last_name',$lastname);
+            				update_hrmpost_meta($hrm_id,'father_name','');
+            				update_hrmpost_meta($hrm_id,'mother_name','');
+            				update_hrmpost_meta($hrm_id,'email',$email);
+            				update_hrmpost_meta($hrm_id,'gender',$gender);
+            				update_hrmpost_meta($hrm_id,'contact',$phone);
+            				update_hrmpost_meta($hrm_id,'whatsap_contact','');
+            				update_hrmpost_meta($hrm_id,'state','');
+            				update_hrmpost_meta($hrm_id,'city','');
+            				update_hrmpost_meta($hrm_id,'pin_code','');
+            				update_hrmpost_meta($hrm_id,'dob',$dob);
+            				update_hrmpost_meta($hrm_id,'pancard',$pancard);
+            				update_hrmpost_meta($hrm_id,'aadhar',$aadhar);
+            				update_hrmpost_meta($hrm_id,'address',$address);
+            				update_hrmpost_meta($hrm_id,'img',get_option('default_img'));
+            				update_hrmpost_meta($hrm_id,'password',$_POST['pass']);
+            				
+            				update_hrmpost_meta($hrm_id,'ac_no',$acno);
+            				update_hrmpost_meta($hrm_id,'ac_holder_name',$holdername);
+            				update_hrmpost_meta($hrm_id,'bank_id',$bank);
+            				update_hrmpost_meta($hrm_id,'ifsc',$ifsc);
+            				update_hrmpost_meta($hrm_id,'branch_name',$branch);
+            				update_hrmpost_meta($hrm_id,'brnch_address','');
+            				update_hrmpost_meta($hrm_id,'payment_type','');
+            				update_hrmpost_meta($hrm_id,'pin_no','');
+            		       	update_hrmpost_meta($hrm_id,'package','');
+            				update_hrmpost_meta($hrm_id,'hrm_type','2');
+            				update_hrmpost_meta($hrm_id,'nmaddress','');
+        				    update_hrmpost_meta($hrm_id,'nmfirstname','');
+        					update_hrmpost_meta($hrm_id,'nmlastname','');
+        					update_hrmpost_meta($hrm_id,'nmfathername','');
+        					update_hrmpost_meta($hrm_id,'nmmothername','');
+        					update_hrmpost_meta($hrm_id,'nmmob','');
+        					update_hrmpost_meta($hrm_id,'nmrelation','');
+        					update_hrmpost_meta($hrm_id,'level',1);
+        					update_hrmpost_meta($hrm_id,'mlm_plan_desc',3);
+            			    update_hrmpost_meta($hrm_id,'given_pair',0);
+            			    update_hrmpost_meta($hrm_id,'sponsorid',$sponserid);
+            			    
+                            $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RMGM.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
+            		        send_sms($phone,$msg,$hrm_id);
+            		 
+            				$result=1; 
+            			}
+            			if($result>0){
+            				echo $orghrm;
+            				$this->db->trans_complete();
+            			}else{
+            			    echo 'Member not registered successfully';
+            			}
+		           }else{
+		                echo 'Desired id is already present';
+		           }
+		        }else{
+		            echo 'No such position id is present';
+		        }
+    		}else{
+		    	echo 'No such sponsor id is present';
+		    }
+		}else{
+		    if($check==2){
+		    	echo 'Email already registered';
+		    }else if($check==3){
+		        echo 'Phone already registered';
+		    }else if($check==4){
+		        echo 'Pancard already registered';
+		    }else if($check==5){
+				echo 'Aadhar already registered';
+			}
 		    else{
 		        echo 'Cannot use admin id for add member';
 		    }

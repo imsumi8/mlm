@@ -58,7 +58,7 @@ class Admin extends CI_Controller {
 		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
 		$this->load->view('admin/header',$data);
 		if($this->session->userdata('hrmtype') == 'admin') { 
-		    $this->load->view('admin/dashboard');
+		   // $this->load->view('admin/dashboard');
 		}else{
 		     $this->load->view('admin/member_dashboard');
 		}

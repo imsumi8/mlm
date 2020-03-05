@@ -480,13 +480,13 @@
 				    <a <?php if($title=='AUTO POOL VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#pool_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Auto Pool Geneology</span></div><div class="pull-right">
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">2</span></div><div class="clearfix"></div></a>
 					<ul id="pool_dr" class="collapse collapse-level-1">
-						<?php if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,5)==1) { ?>
+						<?php if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,3)==1) { ?>
 						<li>
-							<a <?php if($subpage=='Auto Pool 5') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool/5"><i class="fa fa-circle <?php if($subpage=='Auto Pool 5') { echo 'clrred'; } ?>"></i> Gold</a> 
+							<a <?php if($subpage=='Auto Pool 5') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool/5"><i class="fa fa-circle <?php if($subpage=='Auto Pool 5') { echo 'clrred'; } ?>"></i> Silver</a> 
 						</li>
-						<?php } if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,6)==1) {  ?>
+						<?php } if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,3)==1) {  ?>
 						<li>
-							<a  <?php if($subpage=='Auto Pool 6') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool/6"><i class="fa fa-circle <?php if($subpage=='Auto Pool 6') { echo 'clrred'; } ?>"></i> Platinum</a>
+							<a  <?php if($subpage=='Auto Pool 6') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool/6"><i class="fa fa-circle <?php if($subpage=='Auto Pool 6') { echo 'clrred'; } ?>"></i> Gold</a>
 						</li>
 						<?php } if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,7)==1) {  ?>
 							<li>

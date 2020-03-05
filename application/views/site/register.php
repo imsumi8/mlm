@@ -33,7 +33,7 @@
 
 					<div class="form-group">
 						<div class="form-row form-row-1">
-						<input type="text" name="phone" class="phone input_num" id="phone" placeholder="Phone No*" required>
+						<input type="number" name="phone" class="phone input_num" id="phone" placeholder="Phone No*" required>
 						</div>
 						<div class="form-row form-row-2">
 						<input type="text" name="email" class="email" id="email" placeholder="Email*" required>
@@ -44,7 +44,7 @@
 						<input type="text" name="pancard" class="pancard" id="pancard" placeholder="Pan Card*" required>
 						</div>
 						<div class="form-row form-row-2">
-						<input type="text" name="aadhar" class="aadhar" id="aadhar" placeholder="Aadhar No*" required>
+						<input type="number" name="aadhar" class="aadhar" id="aadhar" placeholder="Aadhar No*" required>
 						</div>
 					</div>
 
@@ -209,7 +209,51 @@
 			       }); 
 			       $('.get_postitionid').on('change',function(){
 			           change_position();
+				   }); 
+				   
+				   $('.phone').on('Keyup',function(){
+			           check_duplicate_phone();
 			       }); 
+			       $('.phone').on('focusout',function(){
+					check_duplicate_phone();
+			       }); 
+			       $('.phone').on('change',function(){
+					check_duplicate_phone();
+				   });
+				   
+				   $('.aadhar').on('Keyup',function(){
+					check_duplicate_aadhar();
+			       }); 
+			       $('.aadhar').on('focusout',function(){
+					check_duplicate_aadhar();
+			       }); 
+			       $('.aadhar').on('change',function(){
+					check_duplicate_aadhar();
+				   });
+				   
+
+				   $('.pancard').on('Keyup',function(){
+			           check_duplicate_pancard();
+			       }); 
+			       $('.pancard').on('focusout',function(){
+					check_duplicate_pancard();
+			       }); 
+			       $('.pancard').on('change',function(){
+					check_duplicate_pancard();
+				   });
+				   
+
+				   $('.email').on('Keyup',function(){
+			           check_duplicate_email();
+			       }); 
+			       $('.email').on('focusout',function(){
+					check_duplicate_email();
+			       }); 
+			       $('.email').on('change',function(){
+					check_duplicate_email();
+			       });
+
+
 			    });
 			    function change_position(){
 			        var sponsorid=$('.get_name_member').val();
@@ -224,11 +268,119 @@
 							
 								var obj = jQuery.parseJSON(msg);
 							
-            				    if(msg=="Invalid Sponsor id"){
-            				        sweetalert('Invalid','warning',msg,'#f99b4a');
+							console.log(obj);
+
+            				    if(obj.msg=="Invalid Sponsor id"){
+									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
+									$('.get_name_member').val('');
             				    }else{
 									$('.sponsor_name').val(obj.hrm_name);
             				        $('.position_check').val(obj.hrm_id);
+            				    }
+            				}
+            			});
+			        }
+				}
+				
+
+				function check_duplicate_phone(){
+			        var phone=$('.phone').val();
+			        //var position=$('.pos').val();
+			        if(phone != ''){
+			            $.ajax({
+            				type: 'POST',
+            				url: admin_loc+'get_phone',
+            				data: 'phone='+phone,
+            				async:false,
+            				success: function(msg){
+							
+								var obj = jQuery.parseJSON(msg);
+							
+							
+            				    if(obj.msg=="Mobile No. already taken"){
+									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
+									$('.phone').val('');
+            				    }else{
+									// $('.sponsor_name').val(obj.hrm_name);
+            				        // $('.position_check').val(obj.hrm_id);
+            				    }
+            				}
+            			});
+			        }
+				}
+				
+
+				function check_duplicate_email(){
+			        var email=$('.email').val();
+			        //var position=$('.pos').val();
+			        if(email != ''){
+			            $.ajax({
+            				type: 'POST',
+            				url: admin_loc+'get_email',
+            				data: 'email='+email,
+            				async:false,
+            				success: function(msg){
+							
+								var obj = jQuery.parseJSON(msg);
+							
+            				    if(obj.msg=="Email already taken"){
+									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
+									$('.email').val('');
+            				    }else{
+									// $('.sponsor_name').val(obj.hrm_name);
+            				        // $('.position_check').val(obj.hrm_id);
+            				    }
+            				}
+            			});
+			        }
+				}
+				
+
+				function check_duplicate_aadhar(){
+			        var aadhar=$('.aadhar').val();
+			        //var position=$('.pos').val();
+			        if(aadhar != ''){
+			            $.ajax({
+            				type: 'POST',
+            				url: admin_loc+'get_aadhar',
+            				data: 'aadhar='+aadhar,
+            				async:false,
+            				success: function(msg){
+							
+								var obj = jQuery.parseJSON(msg);
+							
+            				    if(obj.msg=="Aadhar No already taken"){
+									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
+									$('.aadhar').val('');
+            				    }else{
+									// $('.sponsor_name').val(obj.hrm_name);
+            				        // $('.position_check').val(obj.hrm_id);
+            				    }
+            				}
+            			});
+			        }
+				}
+				
+
+				function check_duplicate_pancard(){
+			        var pancard=$('.pancard').val();
+			        //var position=$('.pos').val();
+			        if(pancard != ''){
+			            $.ajax({
+            				type: 'POST',
+            				url: admin_loc+'get_pancard',
+            				data: 'pancard='+pancard,
+            				async:false,
+            				success: function(msg){
+							
+								var obj = jQuery.parseJSON(msg);
+							
+            				    if(obj.msg=="Pan No already taken"){
+									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
+									$('.pancard').val('');
+            				    }else{
+									// $('.sponsor_name').val(obj.hrm_name);
+            				        // $('.position_check').val(obj.hrm_id);
             				    }
             				}
             			});

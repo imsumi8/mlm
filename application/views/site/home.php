@@ -10,11 +10,13 @@
                         <div class="col-xl-6 col-md-8">
                             <div class="slider_text">
                                 <span></span>
-                                <h3>We Create
-                                    your deam
-                                    appartment</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipilit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis.</p>
-                                <a href="#" class="boxed-btn3">View Project</a>
+                                <h3>Welcome To
+                                RMGM
+                                Bizzworld
+                                    
+                                    </h3>
+                                    <p>Everything you want in life is waiting for you, outside your comfort zone and inside your effort zone.</p>
+                                <a href="#" class="boxed-btn3">View Package</a>
                             </div>
                         </div>
                     </div>
@@ -26,11 +28,11 @@
                         <div class="col-xl-6 col-md-8">
                             <div class="slider_text">
                                 <span></span>
-                                <h3>We Create
-                                    your deam
-                                    appartment</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipilit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis.</p>
-                                <a href="#" class="boxed-btn3">View Project</a>
+                                <h3>We Full
+                                    Fill
+                                    &nbsp; your <br>dreams</h3>
+                                    <p>With a commitment to deliver unique herbal ayurvedic and other product that best cater to client's needs.</p>
+                                <a href="#" class="boxed-btn3">View Package</a>
                             </div>
                         </div>
                     </div>
@@ -42,11 +44,12 @@
                         <div class="col-xl-6 col-md-8">
                             <div class="slider_text">
                                 <span></span>
-                                <h3>We Create
-                                    your deam
-                                    appartment</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipilit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis.</p>
-                                <a href="#" class="boxed-btn3">View Project</a>
+                                <h3>Welcome To The World Of Innovation
+                                    </h3>
+                                    <p>RMGM is a direct selling business that offers a comprehensive range
+                                     of research-based Ayurvedic pharmaceutical directly to the consumers.
+                                      </p>
+                            <a href="#" class="boxed-btn3">View Package</a>
                             </div>
                         </div>
                     </div>
@@ -65,7 +68,7 @@
                         <div class="about_exp_inner_upper d-flex align-items-center justify-content-center">
                             <div class="about_exp_inner text-center">
                                 <span>10</span>
-                                <p>Years of Exprince</p>
+                                <p>Years of Experiences</p>
                             </div>
                         </div>
                     </div>
@@ -73,28 +76,28 @@
                 <div class="col-lg-6">
                     <div class="about_info pl-70">
                         <div class="section_title mb-55">
-                            <h3>We are Hus <br>
-                                <span>Realestate Company</span></h3>
+                            <h3>We are RMGM <br>
+                                <span> Company</span></h3>
                             <div class="devider">
                                 <span></span>
                                 <span></span>
                             </div>
                         </div>
                         <div class="info_inner">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                            <p>Congratulations on making one of The Best Decisions you have ever made in your Life! You've chosen one of thr fastest growing Business opportunities in the word today ,ideal to help you develop a significant supplemental income, or even complete financial freedom. Either way , you've shown yourself to be a leader. Some one who is not happy with mediocrity and the herd meantiality , some one who knows there is a better way to live. You have just discovered it </p>
                             <ul>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Consectetur adipisicing elit, sed do</li>
-                                <li>Eiusmod tempor incididunt ut labore</li>
-                                <li>Ad minim veniam, quis nostrud.</li>
+                                <li>Ayurveda: knowledge of the scriptures for the Healthy Living</li>
+                                <li>Hassle-Free operations with total customer satisfaction</li>
+                                <li>We operate through a streamlined procedure where our registered distributors introduce new customers to the company</li>
+                                
                             </ul>
                             <div class="customer_info d-flex">
                                 <div class="single_info d-flex align-items-baseline">
                                     <span class="counter">120</span>
-                                    <p>Buildings</p>
+                                    <p>Packages</p>
                                 </div>
                                 <div class="single_info d-flex align-items-baseline">
-                                    <span ><span class="counter">500</span>+</span>
+                                    <span ><span class="counter">1500</span>+</span>
                                     <p>Clients</p>
                                 </div>
                             </div>
@@ -127,7 +130,7 @@
                             <i class="flaticon-sketch"></i>
                         </div>
                         <h3>Planning Stage</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                        <p>You can become a partner without spending money in RMGM, because there is no subscription fees to become an affiliate.</p>
                         <a href="#">Learn more</a>
                     </div>
                 </div>
@@ -136,8 +139,8 @@
                         <div class="icon">
                             <i class="flaticon-hotel"></i>
                         </div>
-                        <h3>Planning Stage</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                        <h3>Much Profit</h3>
+                        <p>To get the benefit of the RMGM business, you need to purchase the product at maximum retail price (M.R.P.) in open choice</p>
                         <a href="#">Learn more</a>
                     </div>
                 </div>
@@ -146,8 +149,8 @@
                         <div class="icon">
                             <i class="flaticon-headset"></i>
                         </div>
-                        <h3>Planning Stage</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                        <h3>Bussiness Plan</h3>
+                        <p>Whenever you make a new participant yourself in the first person below, it is called Sponser. On each Sponser, you get a commission of 10% of its Joining Amount.</p>
                         <a href="#">Learn more</a>
                     </div>
                 </div>
@@ -156,242 +159,100 @@
     </div>
     <!-- our_facilitics_area_end  -->
     
-    <!-- property_certificates_start  -->
-    <div class="property_certificates">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4">
-                    <div class="section_title">
-                        <h3>Property
-                            <span>Certificates</span></h3>
-                        <div class="devider">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="certificate_listing d-flex justify-content-between align-items-center">
-                        <div class="single_list">
-                            <div class="thumb">
-                                <img src="img/certificates/1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="single_list">
-                            <div class="thumb">
-                                <img src="img/certificates/2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="single_list">
-                            <div class="thumb">
-                                <img src="img/certificates/3.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- property_certificates_end  -->
 
 
     <!-- appertment_area_start  -->
     <div class="appertment_area">
+        <div class="section_title text-center mb-80">
+                        <h3>OUR PRODUCTS</h3>
+        </div>
         <div class="appertment_active owl-carousel">
-            <div class="single_appertment">
-                <div class="thumb">
-                    <img src="img/appertment/1.png" alt="">
-                </div>
-                <div class="appertment_info">
-                    <span>$35.000</span>
-                    <a href="#">
-                        <h5>Colorful little aprtment</h5>
-                    </a>
-                    <ul>
-                        <li>2BD</li>
-                        <li>2BA</li>
-                        <li>920 SF</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="single_appertment">
-                <div class="thumb">
-                    <img src="img/appertment/2.png" alt="">
-                </div>
-                <div class="appertment_info">
-                    <span>$35.000</span>
-                    <a href="#">
-                        <h5>Colorful little aprtment</h5>
-                    </a>
-                    <ul>
-                        <li>2BD</li>
-                        <li>2BA</li>
-                        <li>920 SF</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="single_appertment">
-                <div class="thumb">
-                    <img src="img/appertment/3.png" alt="">
-                </div>
-                <div class="appertment_info">
-                    <span>$35.000</span>
-                    <a href="#">
-                        <h5>Colorful little aprtment</h5>
-                    </a>
-                    <ul>
-                        <li>2BD</li>
-                        <li>2BA</li>
-                        <li>920 SF</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="single_appertment">
-                <div class="thumb">
-                    <img src="img/appertment/1.png" alt="">
-                </div>
-                <div class="appertment_info">
-                    <span>$35.000</span>
-                    <a href="#">
-                        <h5>Colorful little aprtment</h5>
-                    </a>
-                    <ul>
-                        <li>2BD</li>
-                        <li>2BA</li>
-                        <li>920 SF</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="single_appertment">
-                <div class="thumb">
-                    <img src="img/appertment/2.png" alt="">
-                </div>
-                <div class="appertment_info">
-                    <span>$35.000</span>
-                    <a href="#">
-                        <h5>Colorful little aprtment</h5>
-                    </a>
-                    <ul>
-                        <li>2BD</li>
-                        <li>2BA</li>
-                        <li>920 SF</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="single_appertment">
-                <div class="thumb">
-                    <img src="img/appertment/3.png" alt="">
-                </div>
-                <div class="appertment_info">
-                    <span>$35.000</span>
-                    <a href="#">
-                        <h5>Colorful little aprtment</h5>
-                    </a>
-                    <ul>
-                        <li>2BD</li>
-                        <li>2BA</li>
-                        <li>920 SF</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- appertment_area_end  -->
+
+        <?php 
+        foreach($products as $pro){
+            $dp_value = $pro->mrp - get_perc_value($pro->mrp,$pro->dp);
+            $bv_val = get_perc_value($dp_value,$pro->bv);  
+            ?>
+
+<div class="single_appertment">
+<div class="thumb">
+
+    <img src="<?php echo base_url();  ?>assets/uploads_assets/products/<?php echo $pro->image ?>" alt="products">
     
-    <!-- testimonial_area  -->
-    <div class="testimonial_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="testmonial_active owl-carousel">
-                        <div class="single_carousel">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-9">
-                                    <div class="single_testmonial text-center">
-                                        <div class="author_thumb">
-                                            <img src="img/testmonial/author.png" alt="">
-                                        </div>
-                                        <div class="testmonial_author">
-                                            <h3>Margaret Lawson</h3>
-                                            <span>Creative Director</span>
-                                        </div>
-                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our responsibility! So start caring for your body and it will care for you. Eat clean it will care for you and workout hard.”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_carousel">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-9">
-                                    <div class="single_testmonial text-center">
-                                        <div class="author_thumb">
-                                            <img src="img/testmonial/author2.png" alt="">
-                                        </div>
-                                        <div class="testmonial_author">
-                                            <h3>Margaret Lawson</h3>
-                                            <span>Creative Director</span>
-                                        </div>
-                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our responsibility! So start caring for your body and it will care for you. Eat clean it will care for you and workout hard.”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_carousel">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-9">
-                                    <div class="single_testmonial text-center">
-                                        <div class="author_thumb">
-                                            <img src="img/testmonial/author2.png" alt="">
-                                        </div>
-                                        <div class="testmonial_author">
-                                            <h3>Margaret Lawson</h3>
-                                            <span>Creative Director</span>
-                                        </div>
-                                        <p>“I am at an age where I just want to be fit and healthy our bodies are our responsibility! So start caring for your body and it will care for you. Eat clean it will care for you and workout hard.”</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+</div>
+
+
+<div class="appertment_info">
+<span>₹<?php echo $pro->mrp; ?></span>
+                    <a href="#">
+                        <h5><?php echo $pro->name; ?></h5>
+                    </a>
+                    <ul>
+                        <li><?php echo $dp_value ?> DP</li>
+                        <li><?php echo $bv_val ?> BV</li>
+                    
+                    </ul>  
+</div>
+</div>
+
+<?php 
+  } 
+  ?>
+           
+            <!-- <div class="single_appertment">
+                <div class="thumb">
+                    <img src="<?php echo base_url();  ?>assets/hus/img/appertment/2.jpg" alt="">
+                </div>
+                <div class="appertment_info">
+                    
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- /testimonial_area  -->
-    <!-- quotation_area_start  -->
-    <div class="quotation_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="quotation_text d-flex align-items-center justify-content-between">
-                        <div class="quotation_info">
-                            <h3>Get a free <br>
-                                quotation Today!</h3>
-                                <p>Have any questions in mind?</p>
-                            <a href="#" class="boxed-btn3">Contact Us</a>
-                        </div>
-                        <div class="sayhello d-flex align-items-center">
-                            <div class="icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="num">
-                                <span>say Hello,</span>
-                                <h3>+44 563 986 4785 </h3>
-                            </div>
-                        </div>
-                    </div>
+            <div class="single_appertment">
+                <div class="thumb">
+                    <img src="<?php echo base_url();  ?>assets/hus/img/appertment/3.jpg" alt="">
+                </div>
+                <div class="appertment_info">
+                    
                 </div>
             </div>
+            <div class="single_appertment">
+                <div class="thumb">
+                    <img src="<?php echo base_url();  ?>assets/hus/img/appertment/4.jpg" alt="">
+                </div>
+                <div class="appertment_info">
+                    
+                </div>
+            </div>
+            <div class="single_appertment">
+                <div class="thumb">
+                    <img src="<?php echo base_url();  ?>assets/hus/img/appertment/5.jpg" alt="">
+                </div>
+                <div class="appertment_info">
+                    
+                </div>
+            </div>
+            <div class="single_appertment">
+                <div class="thumb">
+                    <img src="<?php echo base_url();  ?>assets/hus/img/appertment/6.jpg" alt="">
+                </div>
+                <div class="appertment_info">
+                    
+                </div>
+            </div> -->
         </div>
     </div>
+
 
     <!-- our_latest_news_area_Start  -->
     <div class="our_latest_news_area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                   
                     <div class="section_title text-center mb-80">
-                        <h3>Our Latest News</h3>
+                        <h3>OUR MANAGEMENT TEAM</h3>
                         <div class="devider">
                             <span></span>
                             <span></span>
@@ -401,52 +262,32 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="news_active owl-carousel">
-                        <div class="single_news">
+                    <marquee bgcolor = "#1438c7" behavior = "alternate" scrollamount="6" direction="left" height="200px">
+                    
                             <div class="thumb">
                                 <a href="#">
-                                    <img src="img/news/1.png" alt="">
+                                    <img style="height:200px; width:180px;" src="<?php echo base_url();  ?>assets/hus/img/news/1.png" alt="">
                                 </a>
-                            </div>
-                            <div class="news_info d-flex">
-                                <div class="date">
-                                    <p><span>24</span> <br>
-                                        Nov</p>
-                                </div>
-                                <div class="news_meta">
-                                    <span>Porperties</span>
-                                    <a href="#"><h3>Footprints in Time:
-                                        House in Kurashiki, Japan</h3></a>
-                                    <a class="read_more" href="#">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_news">
-                            <div class="thumb">
                                 <a href="#">
-                                    <img src="img/news/2.png" alt="">
+                                    <img style="height:200px; width:180px;" src="<?php echo base_url();  ?>assets/hus/img/news/2.png" alt="">
+                                </a>
+                                <a href="#">
+                                    <img style="height:200px; width:180px;" src="<?php echo base_url();  ?>assets/hus/img/news/1.png" alt="">
+                                </a>
+                                <a href="#">
+                                    <img style="height:200px; width:180px;" src="<?php echo base_url();  ?>assets/hus/img/news/2.png" alt="">
+                                </a>
+                                <a href="#">
+                                    <img style="height:200px; width:180px;" src="<?php echo base_url();  ?>assets/hus/img/news/1.png" alt="">
                                 </a>
                             </div>
-                            <div class="news_info d-flex">
-                                <div class="date">
-                                    <p><span>24</span> <br>
-                                        Nov</p>
-                                </div>
-                                <div class="news_meta">
-                                    <span>Porperties</span>
-                                    <a href="#">
-                                        <h3>Footprints in Time:
-                                            House in Kurashiki, Japan</h3>
-                                    </a>
-                                    <a class="read_more" href="#">Read more <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                            </marquee><!-- marquee div---->
+                        </div> 
+                        
+                        
                     </div>
+
+
                 </div>
-            </div>
-        </div>
-    </div>
+           </div> 
     <!-- our_latest_news_area_end  -->
