@@ -108,23 +108,27 @@
       </div>
       <div class="modal-body">
          <form  id="addpackform" enctype="multipart/form-data">
-             <input type="hidden" class="totalrow" name="totalrow" value="1">
+             <input type="hidden" class="totalrow" name="totalrow" value="0">
             <div class="row">
                 <div class="col-md-6">
                     <label>Package Name <span class="star">*</span></label>
                     <input type="text" class="pack_name form-control" name="pack_name" required>
                 </div>
                 <div class="col-md-6">
-                    <label>Select Pack Amount <span class="star">*</span></label>
-                    	<select name="amtid" class="form-control">
-							<?php $arrepin=array(); $epimamts=get_all_epinamts();  foreach($epimamts as $epimamt) {
-							if(!in_array($epimamt->EPIN_AMT,$arrepin)){
-							    $arrepin[]=$epimamt->EPIN_AMT;
+                    <label>Pack Amount <span class="star">*</span></label>
+                    <input type="number" class="form-control" name="amtid" required>
+                    	<!-- <select name="amtid" class="form-control"> -->
+                            <?php 
+                            // $arrepin=array(); $epimamts=get_all_epinamts();  foreach($epimamts as $epimamt) {
+							// if(!in_array($epimamt->EPIN_AMT,$arrepin)){
+							//     $arrepin[]=$epimamt->EPIN_AMT;
 							
 							?>
-								<option value="<?php echo $epimamt->EPIN_AMT_ID;?>"><?php echo $epimamt->EPIN_AMT;?></option>
-							<?php } } ?>
-						</select>
+								<!-- <option value="<?php echo $epimamt->EPIN_AMT_ID;?>"><?php echo $epimamt->EPIN_AMT;?></option> -->
+                            <?php
+                        //  } } 
+                         ?>
+						<!-- </select> -->
                 </div>
             </div>
             <div class="row pad_tp_10">

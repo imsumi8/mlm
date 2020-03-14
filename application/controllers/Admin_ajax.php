@@ -133,7 +133,8 @@ class Admin_ajax extends CI_Controller {
             		}
             	}else{
             	    $packname=$_POST['pack_name'];
-            	    $amts=get_epin_amt_by_id($_POST['amtid']);
+					// $amts=get_epin_amt_by_id($_POST['amtid']);
+					$amts=$_POST['amtid'];
     			     $data = array(
                         'PACKAGE_NAME'=>$packname,
                         'PACKAGE_PRICE'=>$amts,
@@ -142,10 +143,12 @@ class Admin_ajax extends CI_Controller {
                         'PACKAGE_DESC'=>$_POST['pack_desc'],
                         'PACKAGE_PV'=>'',
                         'PACKAGE_IMG'=>'default.jpg',
-                    );
+					);
+				
                 
                     $this->db->insert('matc_packages',$data);
-                    $packid=$this->db->insert_id();
+					$packid=$this->db->insert_id();
+					
                     if($_POST['totalrow']>0){
                         for($i=1;$i<=$_POST['totalrow'];$i++){
                             update_pack_meta($packid,$_POST['categ_'.$i],$_POST['attr_name_'.$i],$_POST['attr_value_'.$i]);
@@ -780,6 +783,17 @@ public function get_pancard(){
 		$this->db->trans_complete();
 		die();
 	}
+
+	public function get_epin_amount()
+	{
+	
+		$amtid=$_POST['type_id'];
+	
+		echo get_epin_amt_by_id($amtid);
+		
+		
+	}
+	
 	public function epingenerate()
 	{
 		$this->db->trans_start();
@@ -1247,6 +1261,89 @@ public function get_pancard(){
 			$tempRow['hsn'] = $row['hsn'];
 			
 			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	public function get_register_members(){
+		$offset = 0;$limit = 10;
+		$sort = 'HRM_DATE'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`HRM_ID` like '%".$search."%' OR `HRM_NAME` like '%".$search."%' )";
+		}
+		
+		$res=get_count_member($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_register_member($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			// $operate ='';
+			// $operate = "<a class='btn btn-xs btn-primary edit-product' data-id='".$row['id']."' data-toggle='modal' data-target='#editproduct' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			// $operate .= " <a class='btn btn-xs btn-danger delete-product' style='background:#52a2b2;border-color:#52a2b2' data-id='".$row['id']."'  title='Delete'><i class='fa fa-trash'></i></a>";
+			
+			// $dp_value = $row['mrp'] - get_perc_value($row['mrp'],$row['dp']);
+            //  $bv_val = get_perc_value($dp_value,$row['bv']);
+			// $name = " <a class='btn btn-xs btn-primary view-product' data-toggle='modal' data-target='#viewproduct' style='background:#fff;color:#333;border-color:#52a2b2' data-id='".$row['id']."'  title='View'>".$row['name']."</a>";
+			
+			// $gst_val = round($dp_value-($dp_value*100)/($row['gst'] +100),2);
+	    if($row['PAY_STATUS']==1)
+		$status = " <span class='btn btn-xs btn-success' title='Payment Status'>Paid</span>";
+		else
+		$status = " <span class='btn btn-xs btn-danger' title='Payment Status'>Unpaid</span>";
+
+			$mobile=get_hrm_postmeta($row['HRM_ID'],'contact');
+			$email=get_hrm_postmeta($row['HRM_ID'],'email');
+			$sponsorid=get_hrm_postmeta($row['HRM_ID'],'sponsorid');
+			if($sponsorid){
+				$sponsor_name = check_sponsor_get_name($sponsorid)[0]['HRM_NAME'];
+			}else{
+				$sponsorid='';
+				$sponsor_name='';
+			}
+			
+			if($row['HRM_ID'] == 5000)
+			$status = '';
+              
+			
+
+			$tempRow['userid'] = $row['HRM_ID'];
+			$tempRow['username'] = $row['HRM_NAME'];
+			$tempRow['sno'] = $i;
+			$tempRow['mobile'] = $mobile;
+			$tempRow['email'] = $email;
+			$tempRow['sponsorid'] = $sponsorid;
+			$tempRow['sponsorname'] =$sponsor_name;
+			$tempRow['pay_status'] = $status;
+		
+			
+			
+			// $tempRow['operate'] = $operate;
 			$rows[] = $tempRow;
 			$i++;
 		}
@@ -2940,6 +3037,213 @@ public function get_pancard(){
 		}
 		die();
 	}
+
+
+
+	public function joinedpackage()
+	{
+		date_default_timezone_set('Asia/Calcutta'); 
+		$this->db->trans_start();
+		$result=0;
+		
+		$sponserid=strtoupper($_POST['sponserid']);
+		$pack=$_POST['pack'];
+		$packprice=get_all_packs_by_id($pack);
+		$positionid=strtoupper($sponserid);
+		$epinno=$_POST['epinno'];
+		
+
+		if(strtoupper($_POST['sponserid'])==5000){
+		    $positionid=5000;
+		    $pos=get_positionmax();
+		}else{
+			$pos=get_positionmax_member(1,$_POST['sponserid']);
+		}
+
+	    $orgpostoinid=$positionid;
+	    $prev_upper_sponsor=$sponserid;
+		$prev_upper_positionid=$positionid;
+		$date=date('Y-m-d h:i:s');
+		
+		
+		$status=1;
+		$orghrm='';
+		// $amt_pack=get_all_packs_by_id_full_dt($pack);
+		$check=0;
+		$dt=date('Y-m-d');
+		$check_sponsor=	$sponserid;
+		$get_left_right='';
+		$check=1;
+	    if($paymenttype=1){
+        	if(check_pinno($epinno,$pack,$this->session->userdata('userid'))){
+        	    $check=1;
+        	    if($sponserid == 5000  || $positionid==5000){
+            	    // if(get_option('check_5000')==0){
+            	    //     $check=1;
+            	    //    // update_mlm_option('check_5000',1);
+            	    // }else{
+            	    //     $check=3;
+            	    // }
+            	}
+            }else{
+        	    $check=2;
+        	}
+	    }else{
+	       $check=1; 
+		}
+		$hrm_id=$this->session->userdata('userid');
+
+    	if($check==1){
+		    if(check_sponsor($sponserid)==1){
+		        if(check_sponsor($positionid)==1){
+		           if(check_sponsor($positionid)==1){
+					   $orghrm=$hrm_id;
+				
+            			if(check_sponsor($positionid)==1){
+
+            			    update_hrmpost_meta($hrm_id,'pin_no',$epinno);
+							update_hrmpost_meta($hrm_id,'package',$pack);
+							
+							update_hrmpost_meta($hrm_id,'package',$pack);
+        					
+							
+            			    update_epin_done_by_epinno($hrm_id,$epinno,$this->session->userdata('userid'));
+            			    
+            		        
+            		         insert_count_nodes($hrm_id,3);
+            			     insert_count_nodes(5000,3);
+            				
+            			
+            				
+        					if(get_option('first_node_matrix_counter_check')==0){
+			                    $pos=1;
+			                    update_mlm_option('first_node_matrix_counter_check',1);
+							}
+							
+
+            				if($this->session->userdata('userid')){
+            			        insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
+            				}else{
+            				    insert_hrm_level_track(3,1,$hrm_id,$pos,'5000',$positionid,$sponserid);
+							}
+							
+
+            			    if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
+            				    update_hrm_count_level_own_node($sponserid,1,3);
+            				    $checkinsert=check_free_insert($sponserid);
+            				    $totalleft=get_direct_by_pos($sponserid,1);
+            				    $totalright=get_direct_by_pos($sponserid,2);
+            				    if($totalleft>$totalright){
+            				        $netpair=$totalright;
+            				    }else if($totalright>$totalleft){
+            				        $netpair=$totalleft;
+            				    }else{
+            				        $netpair=$totalleft;
+            				    }
+            				    $levelpercent=get_option('level_income');
+            				    $get_givenpair=get_hrm_postmeta($sponserid,'given_pair');
+            				    if($netpair>$get_givenpair){
+            				        $goingpair=$netpair-$get_givenpair;
+            				        for($i=1;$i<=$goingpair;$i++){
+            				            $netdirectincome=($levelpercent*5000*2)/100;
+            				            pay_commission_to_customer($sponserid,$netdirectincome,1,'0',date('Y-m-d'),1);
+            				            $get_givenpair=get_hrm_postmeta($sponserid,'given_pair');
+            				            update_hrmpost_meta($sponserid,'given_pair',$get_givenpair+1);/*stage 3 matrix*/
+            				        }
+            				    }
+            				    if(!empty($checkinsert)){
+            				        if(check_two_done($sponserid,$checkinsert[0]->DATE_TIME)==1){
+            				            //for auto pool
+            				            if(get_option('auto_pool'.$checkinsert[0]->MLM_DESC_ID)==0){
+            			                    update_mlm_option('auto_poolid'.$checkinsert[0]->MLM_DESC_ID,$sponserid);
+            			                    update_mlm_option('auto_pool'.$checkinsert[0]->MLM_DESC_ID,1);
+            			                }
+                    				    update_hrmpost_meta($sponserid,'autopool'.$checkinsert[0]->MLM_DESC_ID.'level',1);
+                    				    insert_count_nodes($sponserid,$checkinsert[0]->MLM_DESC_ID);/* 5 is for autopool */
+                    				    insert_priority($sponserid,$checkinsert[0]->MLM_DESC_ID);
+    					                $getpos=get_current_pos($checkinsert[0]->SPONSOR_ID,$checkinsert[0]->MLM_DESC_ID);
+                                		$positionno=$getpos[0];
+                                        $positionid=$getpos[1];
+                                        insert_hrm_level_track($checkinsert[0]->MLM_DESC_ID,1,$sponserid,$positionno,$checkinsert[0]->ADDED_BY,$positionid,$checkinsert[0]->SPONSOR_ID);
+                                        update_priority($sponserid,$checkinsert[0]->MLM_DESC_ID);
+                                        delete_free_tracks($sponserid);
+            				        }else{
+            				            //send msg to do one more
+            				        }
+            				    }
+            				    /* for direct income */
+            				    
+            				    $array=array();
+    							for($x=0;$hrm_id!=5000;$x++){
+    							    $hrm_id=get_reverse_parent_hrms($hrm_id,3);
+    							    if($hrm_id!=5000){
+    									$array[]=$hrm_id;
+    									
+        							}
+    							}
+    							$array=array_unique($array);
+    							foreach($array as $sponserid){
+    							    $stage_level=get_hrm_postmeta($sponserid,'mlm_plan_desc');
+        							$stagewise_sponsor_level=get_hrm_postmeta($sponserid,'level');
+    							    insert_count_nodes($sponserid,$stage_level);
+    							    $check=get_own_count_nodes($sponserid,1,3);
+    							    $netcount=get_members_validnew($stagewise_sponsor_level);
+    							    if($stagewise_sponsor_level<=2){
+        							    $mainmaincheck=get_level_row_members($sponserid,$stagewise_sponsor_level);
+        							    if($netcount<=$mainmaincheck[0] && $check>=2){
+        							         if($stagewise_sponsor_level!=1){
+        							            $netdirectincome=($stagewise_sponsor_level*2*$levelpercent*5000)/100;
+                            		            pay_commission_to_customer($sponserid,$netdirectincome,2,'0',date('Y-m-d'),1);
+        							         }        							       
+                            				 $arr=hrm_level_track($stagewise_sponsor_level,$sponserid,$stage_level);
+                            				 $sponsor_level=$arr[0]->LEVEL_ID+1;
+                            				 $pos=$arr[0]->POSITION;
+                            				 $added_by=$arr[0]->ADDED_BY;
+                            				 $positionid=$arr[0]->POSITION_ID;
+                            				 $sponserids_prev=$arr[0]->SPONSOR_ID;
+                            				 update_hrmpost_meta($sponserid,'level',$stagewise_sponsor_level+1);
+                            				 insert_hrm_level_track($stage_level,$sponsor_level,$sponserid,$pos,$added_by,$positionid,$sponserids_prev);
+                            				 
+                            				 if($sponsor_level==3){
+                            				     insert_hrm_level_free_track(5,1,$sponserid,$pos,$added_by,$positionid,$sponserids_prev);
+                            				 }
+                            				
+                            			}
+    							    }
+    							}
+            				}
+            				$result=1; 
+            			}
+            			if($result>0){
+            				echo $orghrm;
+            				$this->db->trans_complete();
+            			}else{
+            			    echo 'Member not registered successfully';
+            			}
+		           }else{
+		                echo 'Desired id is already present';
+		           }
+		        }else{
+		            echo 'No such position id is present';
+		        }
+    		}else{
+		    	echo 'No such sponsor id is present';
+		    }
+		}else{
+		    if($check==2){
+		    	echo 'Incorrect E-Pin entered';
+		    }else if($check==4){
+		        echo 'You cannot add the member under the selected position id';
+		    }else if($check==5){
+		        echo 'You cannot add this member in this position';
+		    }
+		    else{
+		        echo 'Cannot use admin id for add member'.$check;
+		    }
+		}
+		die();
+	}
+	
 	
 	
 		public function memberregister()
@@ -3058,7 +3362,8 @@ public function get_pancard(){
             			    update_hrmpost_meta($hrm_id,'sponsorid',$sponserid);
             			    
                             $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RMGM.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
-            		        send_sms($phone,$msg,$hrm_id);
+							send_sms($phone,$msg,$hrm_id);
+							$ledger_id=insert_ledger('ledger_'.$hrm_id);
             		 
             				$result=1; 
             			}

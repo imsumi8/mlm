@@ -27,10 +27,20 @@
                     								<div class="sections">
                     									<div class="row"><div class="col-md-12"><div class="errors alert alert-warning"></div></div></div>
                     									<div class="row">
+														<div class="col-md-12">
+                											<div class="form-group">
+                												<div><label>Payment Type <span class="star">*</span></label><span class="mrleft"><label><input type="radio" class="payments" name="paymenttype" checked value='1'> Offline</label></span>
+                												<span class="mrleft"><label><input type="radio" name="paymenttype" class="payments" value='2'> Online</label></span>
+                												</div>
+																<input type="hidden" class="user_id" value="<?php echo $this->session->userdata('userid'); ?>">
+                												
+                											</div>
+                										</div>
+
                     									    <div class="col-md-12">
                     											<div class="form-group">
                     												<div><label>E-PIN TYPE <span class="star">*</span></label>
-                    												    <select name="amtid" class="form-control">
+                    												    <select name="amtid" class="form-control epin_type">
                         													<?php foreach($epimamts as $epimamt) { ?>
                         														<option value="<?php echo $epimamt->EPIN_AMT_ID;?>"><?php echo $epimamt->EPIN_AMT;?></option>
                         													<?php } ?>
@@ -41,10 +51,11 @@
                     										<div class="col-md-12">
                     											<div class="form-group">
                     												<div><label>Quantity <span class="star">*</span></label>
-                    												    <input type="text" name="quant" class="form-control input_num" value="">
+                    												    <input type="text" name="quant" class="form-control input_num epin_qty" value="">
                     												</div>
                     											</div>
                     										</div>
+															<div class="offline_data">
                     										<div class="col-md-12">
                     											<div class="form-group">
                     												<div><label>Write E-PIN Request <span class="star">*</span></label>
@@ -62,9 +73,11 @@
                                                                 <input id="file-upload" type="file" name="fileToUpload" class='imgInp'/>
                                                             </div>
                     									</div>
+														</div>
                     									<div class="row mrg_tp_15">
                     										<div class="col-md-12">
                     											<input type="submit" class="btn btn-success submitreqpin" value="SUBMIT">
+																<input type="button" class="btn btn-success onlinepay sections" value="SUBMIT">
                     										</div>
                     									</div>
                     									
@@ -148,4 +161,103 @@
 			<!-- /Footer -->
 			
 		</div>
+<script>
+		$('document').ready(function(){
+			         $('.onlinepay').hide();
+			        $('.payments').on('click',function(){
+			           if($(this).val()==1){
+			             $('.offline_data').show();
+			             $('.submitreqpin').show();
+			              $('.onlinepay').hide();
+			           } else{
+			               $('.offline_data').hide();
+			               $('.submitreqpin').hide();
+			               $('.onlinepay').show();
+			           }
+			        });
+			    
+			    });
+				</script>	
+			<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+$('document').ready(function(){
+	var totalAmount=0;
+    var SITEURL = "<?php echo base_url() ?>";
+    $('body').on('click', '.onlinepay', function(e){
+		var pay_type=$('.payments:checked').val();
+		
+        $newcheck=0;
+        if (pay_type != 2) {
+          alert('please check online payment');
+        }else{
+            if($('.epin_type').val()!='' && $('.epin_qty').val()!=''){
+                $.ajax({
+                    url: SITEURL + 'admin_ajax/get_epin_amount',
+                    type: 'post',
+                    async:false,
+                    data: {
+                        type_id: $('.epin_type').val(),
+                    }, 
+                    success: function (msg) {
+                    
+						msg=$.trim(msg);
+						console.log(msg);
+                        if(msg!=''){
+							$newcheck=1;
+							
+							 totalAmount=msg;
+							console.log(totalAmount);	
+                        }else{
+                            alert('E-Pin type is invalid');
+                        }
+                    }
+                });
+            }else{
+                alert('please fill all required fields');
+            }
+        }
+      
+        if($newcheck==1){
+         	var baseurl='<?php echo base_url(); ?>';
+            // var totalAmount = $('option:selected', '.packmain').attr('attr-price');
+            var user_id =  $('.user_id').val();
+            var qty=$('.epin_qty').val();
+            var options = {
+                "key": "rzp_test_2zn3sFLkpJvTtA",
+                "amount": (qty*totalAmount*100), // 2000 paise = INR 20
+                "name": "RMGM",
+                "description": "Payment",
+                "image": baseurl+"assets/img/logo.jpeg",
+                "handler": function (response){
+                      $.ajax({
+                        url: SITEURL + 'payment/razorPaySuccess',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            razorpay_payment_id: response.razorpay_payment_id , totalAmount : totalAmount ,user_id : user_id,qty:qty,
+                        }, 
+                        success: function (msg) {
+                         
+                           //window.location.href = SITEURL + 'payment/RazorThankYou';
+                        }
+                    });
+                    $('.reqpin').trigger('click');
+                },
+                "theme": {
+                    "color": "#528FF0"
+                }
+            };
+           
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
+    });
+    
+     
+    
+}); 
+</script>
+
+
         <!-- /Main Content -->

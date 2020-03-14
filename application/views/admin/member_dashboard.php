@@ -47,7 +47,7 @@
 				    $ar=json_decode($ar);
 				    $userid=$this->session->userdata('userid');
 				  ?>
-				<div class="row">
+				<!-- <div class="row">
 				    <div class="col-md-6 col-xs-12">
 				        <div class="panel panel-default card-view pa-0">
 				            <div class="panel-wrapper collapse in">
@@ -78,7 +78,7 @@
 				            </div>
 				        </div>
 				    </div>
-				</div>
+				</div> -->
 				<!-- Row -->
 				<!-- /Row -->
 				<div class="row">
@@ -346,7 +346,9 @@
 							</div>
 						</div>
 					</div>
-					<?php  $arr=get_hrm_post($this->session->userdata('userid')); if($arr[0]->HRM_STATUS=='1') { $user_id=get_added_by($this->session->userdata('userid')); } else { $user_id=get_added_by_free($this->session->userdata('userid')); } ?>
+					<?php  $arr=get_hrm_post($this->session->userdata('userid')); if($arr[0]->PAY_STATUS=='1') { $user_id=get_added_by($this->session->userdata('userid')); } else { $user_id=get_hrm_postmeta($user_id,'sponsorid');
+						//get_added_by_free($this->session->userdata('userid'));
+						 } ?>
 					<div class="col-lg-6 col-xs-12">
 						<div class="panel panel-default card-view  pa-0" style="margin-left:0px;">
 							<div class="panel-wrapper collapse in">

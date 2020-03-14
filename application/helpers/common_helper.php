@@ -659,6 +659,34 @@
 		}
 	}
 
+	function get_count_member($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `hrm_post` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_register_member($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `hrm_post`".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
 
 	function get_all_states()
 	{
@@ -1063,6 +1091,21 @@
 			return '';
 		}
 	}
+
+	function get_amtid_by_epin($epinno)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select EPIN_AMT_ID from epin where EPIN_NO=".$epinno; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->EPIN_AMT_ID;
+		}else{
+			return '';
+		}
+	}
+
 	function insert_hrm($hrmid,$name,$date,$status,$pass,$bckdate,$desiredid)
 	{
 		$ci=& get_instance();
@@ -1969,6 +2012,7 @@
 			$query = $ci->db->query($sql);
 		}
 	}
+	
 	function  update_hrm_count_level_own_node($hrm_id,$hrm_level,$mlmdesc){
 	    $ci=& get_instance();
 		$ci->load->database(); 
@@ -3039,7 +3083,7 @@
 		$ci->load->database(); 
 		
         $users=	$ci->session->userdata('userid');
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and HRM_STATUS=1 ORDER by ID ASC');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 ORDER by ID ASC');
         $result=$query->result();
         if(!empty($result)){ 
             $arr=array();

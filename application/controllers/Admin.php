@@ -58,7 +58,7 @@ class Admin extends CI_Controller {
 		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
 		$this->load->view('admin/header',$data);
 		if($this->session->userdata('hrmtype') == 'admin') { 
-		   // $this->load->view('admin/dashboard');
+		    $this->load->view('admin/dashboard');
 		}else{
 		     $this->load->view('admin/member_dashboard');
 		}
@@ -181,6 +181,19 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/registration');
 		$this->load->view('admin/footer');
 	}
+
+	public function new_package()
+	{
+		$data=array();
+		$data['title']='New Package';
+		$data['subpage']='new_package';
+		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
+	
+		$data['packs']=get_all_packs();
+		$this->load->view('admin/header',$data);
+		$this->load->view('admin/package/new_package');
+		$this->load->view('admin/footer');
+	}
 	public function view_tree(){
     	$data['title']='Tree View';
 	    $data['subpage']='member_tree';
@@ -277,6 +290,11 @@ class Admin extends CI_Controller {
 				$data['subpage']='search_member';
 				$this->load->view('admin/header',$data);
 		        $this->load->view('admin/members/search_member');
+				
+			}else if($this->uri->segment(3)=="member_registered"){
+				$data['subpage']='member_registered';
+				$this->load->view('admin/header',$data);
+		        $this->load->view('admin/members/registered_member');
 				
 			}else if($this->uri->segment(3)=="change_cred"){
 			    $data['subpage']='change_cred';

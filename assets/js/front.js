@@ -531,6 +531,54 @@ jQuery(document).ready(function (){
 			});
 		}
 	});
+
+	$("#joinpackage").validate({
+        rules: {},
+        
+        submitHandler: function (form) { // for demo
+		     $('#checkedform').val('1');
+        }
+    });
+
+	$("#joinpackage").on('submit', function(e){
+		var checked=$('#checkedform').val();
+		if(checked=='1'){
+			e.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: admin_loc+'joinedpackage',
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData:false,
+				async:false,
+				beforeSend: function(){
+					$('.submitpackage').attr("disabled","disabled");
+					$('.submitpackage').attr("value","Please Wait...");
+				},
+				success: function(msg){
+					msg=$.trim(msg);
+				
+					if(msg == 'RM'){
+						$('#joinpackage').trigger('reset');
+						
+			             sweetalert('Package Joined','success','Successfully','#469408');
+						 $(".submitpackage").attr("disabled",false);
+						 $('#checkedform').val('0');
+						 $('.submitpackage').attr("value","SUBMIT");
+				
+					}else{
+						 $(".submitpackage").attr("disabled",false);
+						 sweetalert('Failure','warning',msg,'#f99b4a');
+						 $('#checkedform').val('0');
+						 $('.submitpackage').attr("value","SUBMIT");
+					}
+				}
+			});
+		}
+	});
+
+
 	$("#freememberregister").on('submit', function(e){
 		var checked=$('#checkedformfree').val();
 		var pass=$('#passwordfree').val();
@@ -563,6 +611,7 @@ jQuery(document).ready(function (){
 			});
 		}
 	});
+
 	$("#topup").on('submit', function(e){
 		
 	    e.preventDefault();
@@ -592,6 +641,7 @@ jQuery(document).ready(function (){
 		});
 		
 	});
+
 	$("#sendwithdrawreq").on('submit', function(e){
 		if(check==1){
 			e.preventDefault();
@@ -621,6 +671,7 @@ jQuery(document).ready(function (){
 			});
 		}
 	});
+
 	$("#pay_commission").on('submit', function(e){
 		
 			e.preventDefault();
@@ -652,6 +703,7 @@ jQuery(document).ready(function (){
 			});
 	
 	});
+
 	$('body').on('click','.view_dt',function(){
             $('.userid').html($(this).attr('attr-id'));
             $('.fullname').html($(this).attr('attr-name'));
@@ -665,7 +717,8 @@ jQuery(document).ready(function (){
             $('.bnk_nm').html($(this).attr('attr-bnk_nm'));
             $('.branchname').html($(this).attr('attr-branchname'));
             $('#myModal').modal('show');
-    });
+	});
+	
     $('body').on('click','.approve',function(){
            if(confirm("Are you sure want to confirm the approved pending payment")){
                var id=$(this).attr('attr-id');
@@ -784,7 +837,9 @@ jQuery(document).ready(function (){
 				}
 			});
          
-     });
+	 });
+	 
+
     $('.get_name_member').focusout(function(){
         
             var d=$(this);

@@ -171,6 +171,7 @@
         <div class="appertment_active owl-carousel">
 
         <?php 
+       if(!empty($products)){ 
         foreach($products as $pro){
             $dp_value = $pro->mrp - get_perc_value($pro->mrp,$pro->dp);
             $bv_val = get_perc_value($dp_value,$pro->bv);  
@@ -199,6 +200,7 @@
 
 <?php 
   } 
+}
   ?>
            
             <!-- <div class="single_appertment">

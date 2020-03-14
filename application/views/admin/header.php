@@ -358,9 +358,13 @@
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">6</span></div><div class="clearfix"></div></a>
 					<ul id="dashboard_dr" class="collapse collapse-level-1">
 					
-						<li>
-							<a <?php if($subpage=='generateepinwallet') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/generateepinwallet"><i class="fa fa-circle  <?php if($subpage=='generateepinwallet') { echo 'clrred'; } ?>"></i> Generate Epin Wallet</a>
+					<li>
+							<a <?php if($subpage=='requestmember') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/requestmember"><i class="fa fa-circle  <?php if($subpage=='requestmember') { echo 'clrred'; } ?>"></i> Purchase E-pin</a>
 						</li>
+
+						<!-- <li>
+							<a <?php if($subpage=='generateepinwallet') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/generateepinwallet"><i class="fa fa-circle  <?php if($subpage=='generateepinwallet') { echo 'clrred'; } ?>"></i> Generate Epin Wallet</a>
+						</li> -->
 						
 						<li>
 							<a <?php if($subpage=='usedmember') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/usedmember"><i class="fa fa-circle  <?php if($subpage=='usedmember') { echo 'clrred'; } ?>"></i> Used E-pin</a>
@@ -368,9 +372,7 @@
 						<li>
 							<a  <?php if($subpage=='unusedmember') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/unusedmember"><i class="fa fa-circle  <?php if($subpage=='unusedmember') { echo 'clrred'; } ?>"></i> Unused E-pin</a>
 						</li>
-						<li>
-							<a <?php if($subpage=='requestmember') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/requestmember"><i class="fa fa-circle  <?php if($subpage=='requestmember') { echo 'clrred'; } ?>"></i> Request E-pin</a>
-						</li>
+						
 					
 						<li>
 							<a <?php if($subpage=='transferepin') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/epin/transferepin"><i class="fa fa-circle  <?php if($subpage=='transferepin') { echo 'clrred'; } ?>"></i> Transfer E-pin</a>
@@ -394,8 +396,12 @@
 						<li>
 							<a <?php if($subpage=='member_view') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/member_view"><i class="fa fa-circle <?php if($subpage=='member_view') { echo 'clrred'; } ?>"></i> Member View</a>
 						</li>
-						<li>
+						<!-- <li>
 							<a  <?php if($subpage=='search_member') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/search_member"><i class="fa fa-circle <?php if($subpage=='search_member') { echo 'clrred'; } ?>"></i> Search Member</a>
+						</li> -->
+
+						<li>
+							<a <?php if($subpage=='member_registered') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/member_registered"><i class="fa fa-circle <?php if($subpage=='member_registered') { echo 'clrred'; } ?>"></i> Registered Users</a>
 						</li>
 						<li>
 							<a <?php if($subpage=='change_cred') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/change_cred"><i class="fa fa-circle <?php if($subpage=='change_cred') { echo 'clrred'; } ?>"></i> Change Credential</a>
@@ -449,7 +455,7 @@
 				</li>
 				-->
 				<?php	
-				if($arr[0]->HRM_STATUS=='1') {
+				if($arr[0]->HRM_STATUS=='1' && $arr[0]->PAY_STATUS=='1') {
 				?>
 				<!--
 				<li>
@@ -473,7 +479,7 @@
 					</ul>
 				</li>
 				
-
+				<?php $s=0; if($s == 1){ ?>
 				
 				<li>
 					
@@ -508,7 +514,7 @@
 						<?php } ?>
 					</ul>
 				</li>
-				<?php  }  ?>
+				<?php } }  ?>
 				<!--
 				<li>
 					<a <?php if($title=='Total Member List') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/downlist_member"><div class="pull-left"><i class="fa fa-arrow-circle-down mr-20"></i><span class="right-nav-text">Total Down (Monoline)</span></div><div class="clearfix"></div></a>

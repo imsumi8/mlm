@@ -43,7 +43,7 @@
 															<td><?php echo $epinunuse->EPIN_NO; ?></td>
 															<td><?php echo get_epin_amt_by_id($epinunuse->EPIN_AMT_ID); ?></td>
 															<td><?php echo $epinunuse->ISSUED_DATE; ?></td>
-															<td><a href="<?php echo base_url(); ?>admin/register/<?php echo $epinunuse->EPIN_NO; ?>" class="btn btn-success">Join New</a></td>
+															<td><a href="<?php echo base_url(); ?>admin/new_package/<?php echo $epinunuse->EPIN_NO; ?>" class="btn btn-success">Join Package</a></td>
 														</tr>
 													<?php $i++; } }else { ?>
 														<tr><td colspan="6">No Data Available</td></tr>
