@@ -464,6 +464,10 @@
                     															<td><strong>Aadhar No.</strong></td>
                     															<td><?php echo get_hrm_postmeta($user_id,'aadhar'); ?></td>
                     														</tr>
+																			<tr>
+                    															<td><strong>Password </strong></td>
+                    															<td><?php echo get_hrm_postmeta($user_id,'password'); ?></td>
+                    														</tr>
                     														<tr>
                     															<td><strong>Gender</strong></td>
                     															<td><?php echo get_hrm_postmeta($user_id,'gender'); ?></td>

@@ -1,6 +1,6 @@
 <?php
 
-    $query=$this->db->query('Select HRM_ID,HRM_NAME from hrm_post where HRM_STATUS=2 and HRM_ID!=5000');
+    $query=$this->db->query('Select HRM_ID,HRM_NAME from hrm_post where PAY_STATUS=0 and HRM_ID!=5000');
     $result=$query->result();
     $large_arr=array();
     foreach($result as $res){
@@ -63,8 +63,8 @@
             										</div>
             										<div class="col-md-12">
             											<div class="form-group">
-            												<div><label>User Name</label></div>
-            												<input type="text" name="usrnm" class="form-control usrnm" readonly> 
+            												<div><label>Sponsorid</label></div>
+            												<input type="text" name="sponserid" class="form-control get_sponsor" value="" readonly> 
             											</div>
             										</div>
             										<div class="col-md-12">
@@ -112,9 +112,5 @@
 			<!-- /Footer -->
 			
 		</div>
-		<script>
-		    $(document).ready(function (){
-		     $('.positioncheck').keyup();
-		    });
-		</script>
+
         <!-- /Main Content -->

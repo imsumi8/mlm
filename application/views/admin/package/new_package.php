@@ -89,7 +89,7 @@
                 												<?php } ?>
                 											</div>
                 										</div>
-                                         
+                                         <input type="hidden" name="userid" value="<?php echo $this->session->userdata('userid'); ?>">
                 										<div class="col-md-4">
                 											<div class="form-group">
                 												<div><label>E-PIN No. <span class="star">*</span></label></div>

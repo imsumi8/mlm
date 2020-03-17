@@ -34,6 +34,22 @@ class Welcome extends CI_Controller {
 		$this->load->view('site/foot');
 		
 	}
+	public function about()
+	{
+		//$data['packs']=get_all_packs();
+		$this->load->view('site/head');
+		$this->load->view('site/about');
+		$this->load->view('site/foot');
+		
+	}
+	public function contact()
+	{
+		//$data['packs']=get_all_packs();
+		$this->load->view('site/head');
+		$this->load->view('site/contact');
+		$this->load->view('site/foot');
+		
+	}
 	public function product($id)
 	{
 	

@@ -445,15 +445,21 @@
 				
 				</li>
 				<?php } ?>
-				<!--
+
+				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
+				
 				<li>
 					<a <?php if($title=='Topup') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/topup"><div class="pull-left"><i class="fa fa-shopping-bag mr-20"></i><span class="right-nav-text">Topup</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
 				</li>
-				
+
 				<li>
-					<a <?php if($title=='Free Single Geneology') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/free_single_tree"><div class="pull-left"><i class="fa fa-sitemap mr-20"></i><span class="right-nav-text">Free Single Geneology</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
+					<a <?php if($title=='Autopool') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><div class="pull-left"><i class="fa fa-shopping-bag mr-20"></i><span class="right-nav-text">Autopool Geneology</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
 				</li>
-				-->
+				<?php  } ?>
+				<!-- <li>
+					<a <?php if($title=='Free Single Geneology') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/free_single_tree"><div class="pull-left"><i class="fa fa-sitemap mr-20"></i><span class="right-nav-text">Free Single Geneology</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
+				</li> -->
+				
 				<?php	
 				if($arr[0]->HRM_STATUS=='1' && $arr[0]->PAY_STATUS=='1') {
 				?>
@@ -478,6 +484,28 @@
 					
 					</ul>
 				</li>
+
+
+				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
+				<li>
+					
+				    <a <?php if($title=='STAR VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#star_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Star Geneology</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">2</span></div><div class="clearfix"></div></a>
+					<ul id="star_dr" class="collapse collapse-level-1">
+					
+						<li>
+							<a <?php if($subpage=='star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/star"><i class="fa fa-circle <?php if($subpage=='star') { echo 'clrred'; } ?>"></i> Star</a> 
+						</li>
+						
+						<li>
+							<a  <?php if($subpage=='double_star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/double_star"><i class="fa fa-circle <?php if($subpage=='double_star') { echo 'clrred'; } ?>"></i> Double Star</a>
+						</li>
+					
+
+						</ul>
+				</li>
+
+				<?php } ?>
 				
 				<?php $s=0; if($s == 1){ ?>
 				
@@ -486,11 +514,11 @@
 				    <a <?php if($title=='AUTO POOL VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#pool_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Auto Pool Geneology</span></div><div class="pull-right">
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">2</span></div><div class="clearfix"></div></a>
 					<ul id="pool_dr" class="collapse collapse-level-1">
-						<?php if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,3)==1) { ?>
+						<?php if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,2,3)==1) { ?>
 						<li>
 							<a <?php if($subpage=='Auto Pool 5') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool/5"><i class="fa fa-circle <?php if($subpage=='Auto Pool 5') { echo 'clrred'; } ?>"></i> Silver</a> 
 						</li>
-						<?php } if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,1,3)==1) {  ?>
+						<?php } if(get_count_hrm_track_for_autopool($arr[0]->HRM_ID,3,3)==1) {  ?>
 						<li>
 							<a  <?php if($subpage=='Auto Pool 6') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool/6"><i class="fa fa-circle <?php if($subpage=='Auto Pool 6') { echo 'clrred'; } ?>"></i> Gold</a>
 						</li>

@@ -273,6 +273,26 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/direct_downline_list');
 		$this->load->view('admin/footer');
 	}
+
+	public function star(){
+    	$data['title']='STAR VIEW';
+	    $data['subpage']='star';
+		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
+		$data['result']=star_member_list($this->session->userdata('userid'),3);
+	    $this->load->view('admin/header',$data);
+		$this->load->view('admin/star_member_list');
+		$this->load->view('admin/footer');
+	}
+
+	public function double_star(){
+    	$data['title']='STAR VIEW';
+	    $data['subpage']='double_star';
+		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
+		$data['result']=double_member_list($this->session->userdata('userid'),3);
+	    $this->load->view('admin/header',$data);
+		$this->load->view('admin/double_member_list');
+		$this->load->view('admin/footer');
+	}
 	public function members(){
     	$data['title']='Profile Management';
 	    $data['subpage']='member_view';
@@ -463,6 +483,21 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/topup');
 		$this->load->view('admin/footer');
 	}
+
+	public function autopool_list(){
+	   
+    	$data['title']='Autopool';
+		$data['subpage']='';
+		
+		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
+		$data['result']=direct_member_list($this->session->userdata('userid'),3);
+	    $this->load->view('admin/header',$data);
+		$this->load->view('admin/autopool_list');
+		$this->load->view('admin/footer');
+	   
+	
+	}
+
 	public function withdrawlreq(){
 	   
     	$data['title']='Withdrawl Request';

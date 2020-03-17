@@ -558,8 +558,8 @@ jQuery(document).ready(function (){
 				},
 				success: function(msg){
 					msg=$.trim(msg);
-				
-					if(msg == 'RM'){
+			
+					if(msg == '1'){
 						$('#joinpackage').trigger('reset');
 						
 			             sweetalert('Package Joined','success','Successfully','#469408');
@@ -617,7 +617,7 @@ jQuery(document).ready(function (){
 	    e.preventDefault();
 		$.ajax({
 			type: 'POST',
-			url: admin_loc+'topup',
+			url: admin_loc+'joinedpackage',
 			data: new FormData(this),
 			contentType: false,
 			cache: false,
@@ -628,9 +628,9 @@ jQuery(document).ready(function (){
 			},
 			success: function(msg){
 				msg=$.trim(msg);
-				if(msg == 'ok'){
+				if(msg == 1){
 					$('#topup').trigger('reset');
-					 sweetalert('Success','success','Member Registered Successfully!','#469408');
+					 sweetalert('Success','success','Package Joined Successfully!','#469408');
 					 $(".topup").attr("disabled",false);
 					 location.href=base_loc+'topup';
 				}else{
@@ -800,12 +800,18 @@ jQuery(document).ready(function (){
 		
        	$.ajax({
 			type: 'POST',
-			url: admin_loc+'get_name',
+			url: admin_loc+'get_sponsor',
 			data: 'id='+id,
 			async:false,
 			success: function(msg){
 				msg=$.trim(msg);
-				$('.usrnm').val(msg);
+				if(msg=="Invalid Sponsor id"){
+					sweetalert('Failure','warning',msg,'#f99b4a');
+
+				}else{
+					$('.get_sponsor').val(msg);
+				}
+			
 			}
 		});
 		

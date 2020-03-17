@@ -80,16 +80,16 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a class="active" href="<?php echo site_url('welcome'); ?>">home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">pages</a>
+                                        <li><a href="<?php echo site_url('welcome/about'); ?>">About</a></li>
+                                        <!-- <li><a href="#">pages</a>
                                             <ul class="submenu">
                                                     <li><a href="facilites.html">Facilities</a></li>
                                                     <li><a href="property.html">Properties</a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                       
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="<?php echo site_url('welcome/contact'); ?>">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>

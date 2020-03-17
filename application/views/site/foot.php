@@ -22,9 +22,9 @@
                             <h3 class="footer_title">
                                 Contact Info
                             </h3>
-                            <p>Address :Crossing No.9 Geeta nagar Kanpur Uttar pradesh</p>
+                            <p>Address :C -418 World Bank Barra, kanpur Pin-208027</p>
                             <ul>
-                                <li><a href="#">Phone : +91 111111111</a></li>
+                                <li><a href="#">Phone : +91 9369526020</a></li>
                                 <li><a href="#">Email : info@rmgm.com</a></li>
                             </ul>
 

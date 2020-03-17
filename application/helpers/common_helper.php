@@ -969,6 +969,8 @@
 		}
 	}
 
+	
+
 	function check_duplicate_detail($key,$value){
 		$ci=& get_instance();
 		$ci->load->database(); 
@@ -1220,6 +1222,18 @@
 			$query = $ci->db->query($sql);
 		}
 	}
+
+
+	function update_paystatus($hrm_id,$status)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+	
+			$sql = "update `hrm_post` set PAY_STATUS='".$status."' where HRM_ID='".$hrm_id."' "; 
+			$query = $ci->db->query($sql);
+	
+	}
+
 	function update_pack_meta($packid,$categid,$key,$value)
 	{
 		$ci=& get_instance();
@@ -1390,6 +1404,22 @@
 		    return 0;
 		}
 	}
+
+
+	function get_direct_by_hrm($hrmid){
+	    $ci =& get_instance();
+		$ci->load->database();
+	
+    	$sql = "Select COUNT(*) as cnt from hrm_level_tracking where SPONSOR_ID='".$hrmid."' and MLM_DESC_ID=3 and LEVEL_ID='1' "; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		   return $row[0]->cnt;
+		}else{
+		    return 0;
+		}
+	}
+
 	function insert_ledger($name)
 	{
 		$ci =& get_instance();
@@ -1638,6 +1668,34 @@
 		$row = $query->result();
 		if(!empty($row)){
 		    $count=$row[0]->OWN_COUNT;
+		    return $count;
+		}else{
+		    return 0;
+		}
+	}
+
+	function  get_count_star($hrm_id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as cnt from hrm_level_tracking where SPONSOR_ID='".$hrm_id."' and LEVEL_ID=1 and MLM_DESC_ID=3 and STAR=1"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    $count=$row[0]->cnt;
+		    return $count;
+		}else{
+		    return 0;
+		}
+	}
+
+	function  get_count_double_star($hrm_id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as cnt from hrm_level_tracking where SPONSOR_ID='".$hrm_id."' and LEVEL_ID=1 and MLM_DESC_ID=3 and DOUBLE_STAR=1"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    $count=$row[0]->cnt;
 		    return $count;
 		}else{
 		    return 0;
@@ -1999,6 +2057,29 @@
 			$query = $ci->db->query($sql);
 		}
 	}
+
+	function  make_double_star($hrm_id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+	
+		    $count=$row[0]->SELF_ID;
+		    $count=$count+1;
+			$sql = "update `hrm_level_tracking` set DOUBLE_STAR=1 where HRM_ID='".$hrm_id."' and LEVEL_ID=1 and MLM_DESC_ID=3"; 
+			$query = $ci->db->query($sql);
+		
+	}
+
+	function  make_star($hrm_id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+	
+		    $count=$row[0]->SELF_ID;
+		    $count=$count+1;
+			$sql = "update `hrm_level_tracking` set STAR=1 where HRM_ID='".$hrm_id."' and LEVEL_ID=1 and MLM_DESC_ID=3"; 
+			$query = $ci->db->query($sql);
+		
+	}
+
 	function  update_hrm_count_level_othernode($hrm_id,$hrm_level,$mlmdesc){
 	    $ci=& get_instance();
 		$ci->load->database(); 
@@ -3009,6 +3090,29 @@
 		   return $row;
 		}
 	}
+
+	function  star_member_list($hrm_id,$mlm_desc){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from hrm_level_tracking LEFT JOIN hrm_post on hrm_post.HRM_ID=hrm_level_tracking.HRM_ID where hrm_level_tracking.SPONSOR_ID='".$hrm_id."' and hrm_level_tracking.STAR=1 and LEVEL_ID='1' and MLM_DESC_ID='".$mlm_desc."' and hrm_level_tracking.HRM_ID!=5000"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		   return $row;
+		}
+	}
+
+	function  double_member_list($hrm_id,$mlm_desc){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from hrm_level_tracking LEFT JOIN hrm_post on hrm_post.HRM_ID=hrm_level_tracking.HRM_ID where hrm_level_tracking.SPONSOR_ID='".$hrm_id."' and hrm_level_tracking.DOUBLE_STAR=1 and LEVEL_ID='1' and MLM_DESC_ID='".$mlm_desc."' and hrm_level_tracking.HRM_ID!=5000"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		   return $row;
+		}
+	}
+
 	function get_down_parent_hrms_lev_0($hrm_id,$mlm_desc){
 	   
 	    $ci=& get_instance();
