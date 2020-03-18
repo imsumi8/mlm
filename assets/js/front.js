@@ -1098,7 +1098,7 @@ jQuery(document).ready(function (){
         					$('#epingenerate').trigger('reset');
         					sweetalert('Success','success','E-Pin Generated Successfully!','#469408');
         					$(".submitepin").attr("disabled",false);
-        				    location.href = base_loc+"epin/request";
+        				    location.href = base_loc+"epin/unused";
         				    $('.submitepin').attr("value","SUBMIT");
         				}else{
         					 $(".submitepin").attr("disabled",false);

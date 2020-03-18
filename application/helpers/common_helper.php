@@ -3132,7 +3132,7 @@
 		$ci->load->database(); 
        /* used in member dasdhboard */
        
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and HRM_STATUS=1');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1');
         $result=$query->result();
         if(!empty($result)){ 
             $arr=array();
@@ -3236,19 +3236,20 @@
         $ci=& get_instance();
 		$ci->load->database(); 
 		
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and HRM_STATUS=1 ORDER by ID ASC');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 ORDER by ID ASC');
         $result=$query->result();
         if(!empty($result)){ 
             $arr=array();
             foreach($result as $results){
     		    $hrm_id=$results->HRM_ID;
     		   for($x=0;$hrm_id!=5000;$x++){
-    			    $hrm_id=get_reverse_parent_hrms_lev_0($hrm_id,$mlm_desc);
+    			 $hrm_id=get_reverse_parent_hrms_lev_0($hrm_id,$mlm_desc);
     			    if($hrm_id==$users){
     					$arr[]=$results->HRM_ID;
     				}
     			}
-    		}
+			}
+			
     		return get_amount($arr);
             
       }
@@ -3631,7 +3632,7 @@
 	function get_today_joining(){
 	     $ci=& get_instance();
 		 $ci->load->database(); 
-		 $sql = "select COUNT(*) as total from hrm_post where DATE(HRM_DATE)=CURDATE() and HRM_STATUS=1"; 
+		 $sql = "select COUNT(*) as total from hrm_post where DATE(HRM_DATE)=CURDATE() and PAY_STATUS=1"; 
 		 $query = $ci->db->query($sql);
 		 $row = $query->result();
 		 if(!empty($row)){
@@ -3643,7 +3644,7 @@
 	function get_today_free_joining(){
 	     $ci=& get_instance();
 		 $ci->load->database(); 
-		 $sql = "select COUNT(*) as total from hrm_post where DATE(HRM_DATE)=CURDATE() and HRM_STATUS=2"; 
+		 $sql = "select COUNT(*) as total from hrm_post where DATE(HRM_DATE)=CURDATE() and 	PAY_STATUS=0"; 
 		 $query = $ci->db->query($sql);
 		 $row = $query->result();
 		 if(!empty($row)){

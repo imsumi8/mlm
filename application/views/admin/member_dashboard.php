@@ -43,8 +43,9 @@
             <div class="container-fluid pt-25">
                 
 				<!-- Row -->
-				  <?php $ar=get_member_three($this->session->userdata('userid')); 
-				    $ar=json_decode($ar);
+				  <?php 
+				  //$ar=get_member_three($this->session->userdata('userid')); 
+				    //$ar=json_decode($ar);
 				    $userid=$this->session->userdata('userid');
 				  ?>
 				<!-- <div class="row">

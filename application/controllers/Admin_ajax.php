@@ -2660,9 +2660,9 @@ public function get_pancard(){
 			    
 				<li>
 					<div>
-						<a href="javascript:void(0)" id="level-0" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($hrm_id!=5000 && $_POST['mlmdesc']==3) { $ar=get_member_three($hrm_id); 
-        				    $ar=json_decode($ar); ?>
-							TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); ?><br>Star Members: <?php echo get_count_star($hrm_id); ?><br>Double Star: <?php echo get_count_double_star($hrm_id);} ?>" class="blue-tooltip">
+						<a href="javascript:void(0)" id="level-0" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($hrm_id!=5000 && $_POST['mlmdesc']==3) { //$ar=get_member_three($hrm_id); 
+        				  //  $ar=json_decode($ar); ?>
+							TOTAL : <?php //echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); ?><br>Star Members: <?php echo get_count_star($hrm_id); ?><br>Double Star: <?php echo get_count_double_star($hrm_id);} ?>" class="blue-tooltip">
 							<?php if($hrm_id!=$this->session->userdata('userid')){ ?>
 							<img class="tree_up_icon" src="<?php echo base_url(); ?>assets/img/up.png" alt="<?php echo get_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>" onclick='getGenologyTree("<?php echo get_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>",event);'/>
 							<?php } $arr=get_hrm_post($hrm_id); 
@@ -2695,9 +2695,9 @@ public function get_pancard(){
 						?>
 						<li>
 							<div>
-								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodes->HRM_ID); 
-        				    $ar=json_decode($ar); ?>
-							TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodes->HRM_ID,1,$_POST['mlmdesc']); ?><br>Star Members : <?php echo get_count_star($nodes->HRM_ID);?><br>Double Star : <?php echo get_count_double_star($nodes->HRM_ID);} ?>" class="blue-tooltip">
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { //$ar=get_member_three($nodes->HRM_ID); 
+        				    //$ar=json_decode($ar); ?>
+							TOTAL : <?php //echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodes->HRM_ID,1,$_POST['mlmdesc']); ?><br>Star Members : <?php echo get_count_star($nodes->HRM_ID);?><br>Double Star : <?php echo get_count_double_star($nodes->HRM_ID);} ?>" class="blue-tooltip">
 									<?php $arr=get_hrm_post($nodes->HRM_ID); 
     							    if($arr[0]->HRM_STATUS==1){
     							        $stats='active.png';
@@ -2725,6 +2725,17 @@ public function get_pancard(){
 						<?php
 					}
 					
+				}else{
+					?>
+					<li>
+						<div>
+							<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $hrm_id; ?>/<?php echo '1'; ?>" target="_blank">
+							<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
+								<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
+							</a>
+						</div>
+					</li>
+					<?php
 				}
 		
 					?>
@@ -2741,12 +2752,14 @@ public function get_pancard(){
 					    <li>
 					
 							<div>
-								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodess->HRM_ID); 
-		                                $ar=json_decode($ar); ?>
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { //$ar=get_member_three($nodess->HRM_ID); 
+										//$ar=json_decode($ar); 
+										
+										?>
 		                   
 								TOTAL:&nbsp&nbsp
 							
-								<?php echo $ar[0]+$ar[1]; ?>
+								<?php //echo $ar[0]+$ar[1]; ?>
 						
 								&nbsp&nbspDIRECT:&nbsp&nbsp
 								
@@ -2783,7 +2796,20 @@ public function get_pancard(){
 							</div>
 						
 						</li>
-						<?php } } ?>
+						<?php } }else{
+						?>
+						<li>
+							<div>
+								<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $hrm_id; ?>/<?php echo '2'; ?>" target="_blank">
+								<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
+								</a>
+							</div>
+						</li>
+						<?php	
+					}
+						
+						?>
 					</ul>
 					<?php } ?>
 				</li>
@@ -3152,7 +3178,7 @@ public function get_pancard(){
             			    update_hrmpost_meta($hrm_id,'pin_no',$epinno);
 							update_hrmpost_meta($hrm_id,'package',$pack);
 						
-            			    update_epin_done_by_epinno($hrm_id,$epinno,$this->session->userdata('userid'));
+            			    update_epin_done_by_epinno($hrm_id,$epinno,$hrm_id);
             			    update_paystatus($hrm_id, 1);
             		        
             		         insert_count_nodes($hrm_id,3);
@@ -3176,7 +3202,7 @@ public function get_pancard(){
 								update_hrm_count_level_own_node($sponserid,1,3);
 								$netpair=get_direct_by_hrm($sponserid);
 
-								if($netpair>2){
+						if($netpair>2){
 
 									pay_commission_to_customer($sponserid,1000,1,'0',date('Y-m-d'),1);
 								}else{
