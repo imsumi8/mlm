@@ -486,13 +486,13 @@ class Admin extends CI_Controller {
 
 	public function autopool_list(){
 	   
-    	$data['title']='Autopool';
-		$data['subpage']='';
+		$data['title']='STAR VIEW';
+	    $data['subpage']='autoppol';
 		
 		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
 		$data['result']=direct_member_list($this->session->userdata('userid'),3);
 	    $this->load->view('admin/header',$data);
-		$this->load->view('admin/autopool_list');
+		$this->load->view('admin/tree/autopooltree');
 		$this->load->view('admin/footer');
 	   
 	

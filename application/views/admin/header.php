@@ -452,9 +452,6 @@
 					<a <?php if($title=='Topup') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/topup"><div class="pull-left"><i class="fa fa-shopping-bag mr-20"></i><span class="right-nav-text">Topup</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
 				</li>
 
-				<li>
-					<a <?php if($title=='Autopool') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><div class="pull-left"><i class="fa fa-shopping-bag mr-20"></i><span class="right-nav-text">Autopool Geneology</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
-				</li>
 				<?php  } ?>
 				<!-- <li>
 					<a <?php if($title=='Free Single Geneology') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/free_single_tree"><div class="pull-left"><i class="fa fa-sitemap mr-20"></i><span class="right-nav-text">Free Single Geneology</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
@@ -500,7 +497,12 @@
 						<li>
 							<a  <?php if($subpage=='double_star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/double_star"><i class="fa fa-circle <?php if($subpage=='double_star') { echo 'clrred'; } ?>"></i> Double Star</a>
 						</li>
+
 					
+				
+						<li>
+					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Pool Tree</a>
+				</li>	
 
 						</ul>
 				</li>
@@ -554,7 +556,7 @@
 				<?php  if($this->session->userdata('hrmtype') != 'admin') { ?>
 				
     				<li>
-    					<a <?php if($title=='Direct Member List') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/directmemberlist"><div class="pull-left"><i class="fa fa-level-down mr-20"></i><span class="right-nav-text">Direct Down (Matrix)</span></div><div class="clearfix"></div></a>
+    					<a <?php if($title=='Direct Member List') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/directmemberlist"><div class="pull-left"><i class="fa fa-level-down mr-20"></i><span class="right-nav-text">Direct Downline</span></div><div class="clearfix"></div></a>
     				</li>
     				
 				<?php } ?>
@@ -604,9 +606,9 @@
 					<a <?php if($title=='Withdrawl Request') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/withdrawlreq"><div class="pull-left"><i class="fa fa-paper-plane mr-20"></i><span class="right-nav-text">Withdrawl Request</span></div><div class="clearfix"></div></a>
 				</li>
 			    
-			    <li>
+			    <!-- <li>
 					<a <?php if($title=='All Team Business | RMGM') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/teambusiness"><div class="pull-left"><i class="fa fa-briefcase mr-20"></i><span class="right-nav-text">All Team Business</span></div><div class="clearfix"></div></a>
-				</li>
+				</li> -->
 				<li>
 					<a <?php if($title=='Member Bank Detail | RMGM') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/bankdetail"><div class="pull-left"><i class="fa fa-bank mr-20"></i><span class="right-nav-text">Member Bank Detail</span></div><div class="clearfix"></div></a>
 				</li>

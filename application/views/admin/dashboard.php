@@ -66,15 +66,15 @@
 												</div>
 											    <div class="col-xs-4 text-center">
 													<span class="weight-500 uppercase-font txt-light block font-13"> PAID</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo get_today_joining(); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php //echo get_today_joining(); ?></span></span>
 												</div>
 												<div class="col-xs-4 text-center">
 													<span class="weight-500 uppercase-font txt-light block font-13"> FREE</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo get_today_free_joining(); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php //echo get_today_free_joining(); ?></span></span>
 												</div>
 												<div class="col-xs-4 text-center">
 													<span class="weight-500 uppercase-font txt-light block font-13"> TOTAL</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo get_today_joining()+get_today_free_joining(); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php //echo get_today_joining()+get_today_free_joining(); ?></span></span>
 												</div>
 											</div>	
 										</div>
@@ -93,11 +93,11 @@
 											<div class="row">
 											    <div class="col-xs-6 text-center">
 													<span class="weight-500 uppercase-font txt-light block font-13">TODAY USED E-PINS</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo get_today_used_epin(); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php // echo get_today_used_epin(); ?></span></span>
 												</div>
 												<div class="col-xs-6 text-center">
 													<span class="weight-500 uppercase-font txt-light block font-13">TODAY GENREATED E-PINS</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo today_generatedepin(); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php //echo today_generatedepin(); ?></span></span>
 												</div>
 											</div>	
 										</div>
@@ -117,7 +117,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13">TOTAL DOWNLINE MEMBER</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo allposts_count(3); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php //echo allposts_count(3); ?></span></span>
 												</div>
 												
 											</div>	
@@ -136,7 +136,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13">TOTAL ACTIVE DOWNLINE MEMBER</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo allposts_count(3); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php //echo allposts_count(3); ?></span></span>
 												</div>
 											
 											</div>	

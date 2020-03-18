@@ -582,7 +582,7 @@ class Admin_ajax extends CI_Controller {
 		 // $position=$_POST['position'];
 		$sponsor= check_sponsor_get_name($sponsorid);
 	      if($sponsor != 0){
-			  $data = array('hrm_id'=>get_last_left_right($sponsorid),'hrm_name'=>$sponsor[0]['HRM_NAME'],'msg'=>'ok');
+			  $data = array('hrm_id'=>$sponsorid,'hrm_name'=>$sponsor[0]['HRM_NAME'],'msg'=>'ok');
 	           echo json_encode($data);
 	      }else{
 			  $data =array('msg'=>'Invalid Sponsor id');
@@ -2110,6 +2110,7 @@ public function get_pancard(){
 	        $levelstr='autopoollevel';
 	    }
 		?>
+		
 		<div class="col-md-12 text-center">
 			<ul id="tree_view" style="display:none">
 			    
@@ -2141,7 +2142,7 @@ public function get_pancard(){
 						?>
 						<li>
 							<div>
-								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodes[0]->HRM_ID); 
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==5) { $ar=get_member_three($nodes[0]->HRM_ID); 
         				    $ar=json_decode($ar); ?>
         				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodes[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
 									<?php $arr=get_hrm_post($nodes[0]->HRM_ID); 
@@ -2195,7 +2196,7 @@ public function get_pancard(){
 										?>
 										<li>
 											<div>
-												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodess[0]->HRM_ID); 
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==5) { $ar=get_member_three($nodess[0]->HRM_ID); 
         				    $ar=json_decode($ar); ?>
         				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodess[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
 													<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
@@ -2247,7 +2248,7 @@ public function get_pancard(){
 						?>
 						<li>
 							<div>
-								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodes[0]->HRM_ID); 
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==5) { $ar=get_member_three($nodes[0]->HRM_ID); 
         				    $ar=json_decode($ar); ?>
         				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodes[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
 									<?php $arr=get_hrm_post($nodes[0]->HRM_ID); 
@@ -2301,7 +2302,7 @@ public function get_pancard(){
 										?>
 										<li>
 											<div>
-												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodess[0]->HRM_ID); 
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==5) { $ar=get_member_three($nodess[0]->HRM_ID); 
         				    $ar=json_decode($ar); ?>
         				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodess[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
 													<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
@@ -3147,7 +3148,7 @@ public function get_pancard(){
 		$get_left_right='';
 		$check=1;
 	    if($paymenttype=1){
-        	if(check_pinno($epinno,$pack,$hrm_id)){
+        	if(check_pinno($epinno,$pack,$hrm_id,$sponserid)){
         	    $check=1;
         	    if($sponserid == 5000  || $positionid==5000){
             	    // if(get_option('check_5000')==0){
@@ -3204,22 +3205,41 @@ public function get_pancard(){
 
 						if($netpair>2){
 
-									pay_commission_to_customer($sponserid,1000,1,'0',date('Y-m-d'),1);
+							      if($sponserid != 5000)
+								  pay_commission_to_customer($sponserid,1000,1,'0',date('Y-m-d'),1);
+								  
 								}else{
 								  
 					if($netpair==2){	
-							
-								 $parent_level2 =get_reverse_parent_hrms_lev_0($sponserid,3);
+						
+						$parent_level2 =get_reverse_parent_hrms_lev_0($sponserid,3);
+
+						if($sponserid != 5000){
+								 
 								//  insert_autopool_track(3,1,$sponserid,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
-	
+							
+								            //for auto pool
+								            if(get_option('auto_pool5')==0){
+								                update_mlm_option('auto_poolid5',$sponserid);
+								                update_mlm_option('auto_pool5',1);
+								            }
+										    update_hrmpost_meta($sponserid,'autopool5level',1);
+										    insert_count_nodes($sponserid,5);/* 5 is for autopool */
+										    insert_priority($sponserid,5);
+								            $getpos=get_current_pos($sponserid,5);
+								    		$positionno=$getpos[0];
+								            $positionid=$getpos[1];
+								            insert_hrm_level_track(5,1,$sponserid,$positionno,$sponserid,$positionid,$sponserid);
+											update_priority($sponserid,5);
+										}				
 
 				   if($parent_level2 != 5000){
-									pay_commission_to_customer($parent_level2,500,1,'0',date('Y-m-d'),1);
+									pay_commission_to_customer($parent_level2,500,2,'0',date('Y-m-d'),1);
 									$parent_level3 =get_reverse_parent_hrms_lev_0($parent_level2,3);
 
                        if($parent_level3 != 5000){
 										
-								pay_commission_to_customer($parent_level3,1000,1,'0',date('Y-m-d'),1);
+								pay_commission_to_customer($parent_level3,1000,3,'0',date('Y-m-d'),1);
 					     	if(get_hrm_postmeta($parent_level3,'double_star') == 0){
 									  
 								$count_dstar = get_hrm_postmeta($parent_level3,'double_star_count');

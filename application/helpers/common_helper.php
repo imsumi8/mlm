@@ -877,27 +877,36 @@
 			return $pin;
 		}
 	}
-	function check_pinno($epin,$amtid,$sponsorid){
+	function check_pinno($epin,$amtid,$hrm_id, $sponsorid){
 		$ci=& get_instance();
 		$ci->load->database(); 
 		$preice=$amts=get_epin_amt_by_id($amtid);
 		$amtid=get_min_id($preice);
 		
-	    	$qry = "Select * from epin where EPIN_NO='".$epin."' and EPIN_STATUS=0 and ISSUE_TO='".$sponsorid."' and EPIN_AMT_ID='".$amtid."'";
+	    	$qry = "Select * from epin where EPIN_NO='".$epin."' and EPIN_STATUS=0 and ISSUE_TO='".$hrm_id."' and EPIN_AMT_ID='".$amtid."'";
 	   
 		$query = $ci->db->query($qry);
 		$row = $query->result();
 		if(!empty($row)){
 			return 1;
 		}else{
-		    $qry = "Select * from epin where EPIN_NO='".$epin."' and EPIN_STATUS=0 and ISSUE_TO='5000' and EPIN_AMT_ID='".$amtid."'";
+			$qry = "Select * from epin where EPIN_NO='".$epin."' and EPIN_STATUS=0 and ISSUE_TO='".$sponsorid."' and EPIN_AMT_ID='".$amtid."'";
 		    $query = $ci->db->query($qry);
 		    $row = $query->result();
 		    if(!empty($row)){
 			    return 1;
 		    }else{
-			    return 0;
-		    }
+				$qry = "Select * from epin where EPIN_NO='".$epin."' and EPIN_STATUS=0 and ISSUE_TO='5000' and EPIN_AMT_ID='".$amtid."'";
+				$query = $ci->db->query($qry);
+				$row = $query->result();
+				if(!empty($row)){
+					return 1;
+				}else{
+					return 0;
+				}
+			}
+			
+		 
 		}
 	}
 	function get_accessdate(){
@@ -959,7 +968,7 @@
 	function check_sponsor_get_name($sponsor){
 		$ci=& get_instance();
 		$ci->load->database(); 
-		$qry = "Select * from hrm_post where HRM_ID='".$sponsor."'";
+		$qry = "Select * from hrm_post where HRM_ID='".$sponsor."' and PAY_STATUS=1";
 		$query = $ci->db->query($qry);
 		$row = $query->result_array();
 		if(!empty($row)){
@@ -3132,8 +3141,9 @@
 		$ci->load->database(); 
        /* used in member dasdhboard */
        
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1');
-        $result=$query->result();
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 and HRM_STATUS=1');
+		$result=$query->result();
+	
         if(!empty($result)){ 
             $arr=array();
         
@@ -3145,7 +3155,8 @@
     					$arr[]=$results->HRM_ID;
     				}
     			}
-    		}
+			}
+		
     		$user_ids = "'" . implode ( "', '", $arr ) . "'";
     	
     	    $query=$ci->db->query('Select * from hrm_post where HRM_ID IN ('.$user_ids.')');
@@ -3187,7 +3198,7 @@
 		$ci->load->database(); 
 		
         $users=	$ci->session->userdata('userid');
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 ORDER by ID ASC');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and HRM_STATUS=1 ORDER by ID ASC');
         $result=$query->result();
         if(!empty($result)){ 
             $arr=array();
@@ -3517,17 +3528,17 @@
 	    $dt=Date('Y-m-d');
 	    $sum_charge=0;
 	  
-             $spnoser_ledger=get_ledger_name("ledger_".$sponserid);
-             $spnoser_ledgerid=$spnoser_ledger[0]->ID; /*for sponsor account */
-             $firstname=get_hrm_postmeta($sponserid,'first_name');
-             $lastname=get_hrm_postmeta($sponserid,'last_name');
-             $pancard=get_hrm_postmeta($sponserid,'pancard');
-             $drid=$spnoser_ledgerid;
+             $spnoser_ledger=get_ledger_name("ledger_".$sponserid); ///ledger_RM7237381
+             $spnoser_ledgerid=$spnoser_ledger[0]->ID; /*for sponsor account */////29
+             $firstname=get_hrm_postmeta($sponserid,'first_name');//sumit
+             $lastname=get_hrm_postmeta($sponserid,'last_name');//
+             $pancard=get_hrm_postmeta($sponserid,'pancard');//54848
+             $drid=$spnoser_ledgerid;//29
              
              $drid=9; /*for comission account */
         	 $crid=3;/*for cash account */
-         	 update_amount_ledger(3,(-1)*$amt);
-         	 update_amount_ledger(9,$amt);
+         	 update_amount_ledger(3,(-1)*$amt);//24000
+         	 update_amount_ledger(9,$amt);//1000
              $particular='Being cash paid to commision for '.$firstname. ' '.$lastname.' of '.$amt;
         	 insert_record_transaction($drid,$crid,5000,$particular,$amt,$dt);
         	 $drid=$spnoser_ledgerid; /*for sponsor account */
