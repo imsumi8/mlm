@@ -2179,17 +2179,6 @@ public function get_pancard(){
 											</div>
 										</li>
 										<?php
-									}else{
-										?>
-										<li>
-											<div>
-												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '1'; ?>" target="_blank">
-												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
-													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
-												</a>
-											</div>
-										</li>
-										<?php
 									}
 									$nodess=get_nodes_geneology_pos($nodes[0]->HRM_ID,2,$_POST['mlmdesc']);
 									if(!empty($nodess)){
@@ -2213,34 +2202,11 @@ public function get_pancard(){
 											</div>
 										</li>
 										<?php
-									}else{
-										?>
-										<li>
-											<div>
-												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '2'; ?>" target="_blank">
-												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
-													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
-												</a>
-											</div>
-										</li>
-										<?php
 									}
 								?>
 							</ul>
 						</li>
 						<?php
-					}else{
-						?>
-						<li>
-							<div>
-								<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $hrm_id; ?>/<?php echo '1'; ?>" target="_blank">
-								<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
-									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
-									
-								</a>
-							</div>
-						</li>
-						<?php						
 					}
 					if($hrm_id!=5000){
 					$nodes=get_nodes_geneology_pos($hrm_id,2,$_POST['mlmdesc']);
@@ -2285,17 +2251,6 @@ public function get_pancard(){
 											</div>
 										</li>
 										<?php
-									}else{
-										?>
-										<li>
-											<div>
-												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '1'; ?>" target="_blank">
-												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
-													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
-												</a>
-											</div>
-										</li>
-										<?php
 									}
 									$nodess=get_nodes_geneology_pos($nodes[0]->HRM_ID,2,$_POST['mlmdesc']);
 									if(!empty($nodess)){
@@ -2319,34 +2274,12 @@ public function get_pancard(){
 											</div>
 										</li>
 										<?php
-									}else{
-										?>
-										<li>
-											<div>
-												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '2'; ?>" target="_blank">
-												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
-													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
-												</a>
-											</div>
-										</li>
-										<?php
 									}
 									
 								?>
 							</ul>
 						</li>
 						<?php
-					}else{
-						?>
-						<li>
-							<div>
-								<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $hrm_id; ?>/<?php echo '2'; ?>" target="_blank">
-								<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
-									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
-								</a>
-							</div>
-						</li>
-						<?php	
 					}
 				
 					}

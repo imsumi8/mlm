@@ -2357,7 +2357,12 @@
 	    $sql = "select POSITION_ID from hrm_level_tracking where HRM_ID='".$positionid."' and LEVEL_ID=1 and MLM_DESC_ID='".$mlm_desc."'"; 
 	    $query = $ci->db->query($sql);
 		$row = $query->result();
-	    return 	$row[0]->POSITION_ID;
+		if($row){
+			return 	$row[0]->POSITION_ID;
+		}else{
+			return 	'';
+		}
+	   
 	}
 	function get_reverse_parent_hrms_any_level($positionid,$mlm_desc,$level){
 	   
