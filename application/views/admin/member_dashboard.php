@@ -167,7 +167,35 @@
 				<!-- Row -->
 				<!-- Row -->
 				<div class="row">
-					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+
+<!--------- new edit from here sponsor sales incentives -------------->
+
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="sm-data-box actived">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+												    <span class="weight-500 uppercase-font txt-light block font-13"> SPONSOR SALES INCENTIVE</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo '0' ?></span></span>
+												</div>
+											
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
@@ -175,8 +203,45 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-												    <span class="weight-500 uppercase-font txt-light block font-13"> DIRECT SPONSOR BONUS</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php  echo $direct=get_sum_wallet_balance_type($userid,1); ?></span></span>
+													<span class="weight-500 uppercase-font txt-light block font-13">TEAM SALES INCENTIVE</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales=get_sum_wallet_balance_type($userid,1); ?></span></span>
+												</div>
+												
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+
+	<!-- end here ----------------->
+
+
+
+
+
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+
+						<div class="panel panel-default card-view pa-0">
+
+
+
+
+							<div class="panel-wrapper collapse in">
+
+
+
+								<div class="panel-body pa-0">
+									<div class="sm-data-box bg-red">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+												    <span class="weight-500 uppercase-font txt-light block font-13"> STAR BONUS</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php  echo $direct=get_sum_wallet_balance_type($userid,0); ?></span></span>
 													
 												</div>
 											
@@ -198,7 +263,7 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-													<span class="weight-500 uppercase-font txt-light block font-13"> STAR/DOUBLE STAR BONUS</span>
+													<span class="weight-500 uppercase-font txt-light block font-13"> DOUBLE STAR BONUS</span>
 													<span class="txt-light block counter"><span class="counter-anim"><?php echo $silver=get_sum_wallet_balance_type($userid,2); ?></span></span>
 												</div>
 											
@@ -248,7 +313,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13"> TOTAL INCOME</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $direct+$silver+$gold; ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales; ?></span></span>
 												</div>
 											
 											</div>	

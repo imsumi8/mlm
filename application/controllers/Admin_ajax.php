@@ -2295,7 +2295,7 @@ public function get_pancard(){
 	public function tree()
 	{
 		$hrm_id=$_POST['user_id'];
-		if($_POST['mlmdesc']==3){
+		if($_POST['mlmdesc']==2){
 	        $levelstr='level';
 	    }else{
 	        $levelstr='autopoollevel';
@@ -3057,252 +3057,86 @@ public function get_pancard(){
 		$positionid=strtoupper($sponserid);
 		$epinno=$_POST['epinno'];
 		$hrm_id=$_POST['userid'];
+		$date=date('Y-m-d h:i:s');
+		$status=1;
+		$orghrm='';
+	    $dt=date('Y-m-d');
+		$check=0;
 		
 
 		if(strtoupper($_POST['sponserid'])==5000){
 		    $positionid=5000;
-		    $pos=get_positionmax();
+			$pos=0;
+			$count_upper_level_sponsor =0;
 		}else{
-			$pos=get_positionmax_member(1,$_POST['sponserid']);
+			$upper_level_sponsor_id=get_top_sponsor(1,$_POST['sponserid']);
+			$pos = count($upper_level_sponsor_id) +1;
+			$count_upper_level_sponsor =count($upper_level_sponsor_id);
 		}
 
-	    $orgpostoinid=$positionid;
-	    $prev_upper_sponsor=$sponserid;
-		$prev_upper_positionid=$positionid;
-		$date=date('Y-m-d h:i:s');
-		
-		
-		$status=1;
-		$orghrm='';
-		// $amt_pack=get_all_packs_by_id_full_dt($pack);
-		$check=0;
-		$dt=date('Y-m-d');
-		$check_sponsor=	$sponserid;
-		$get_left_right='';
-		$check=1;
-	    if($paymenttype=1){
-        	if(check_pinno($epinno,$pack,$hrm_id,$sponserid)){
+
+		if(check_pinno($epinno,$pack,$hrm_id,$sponserid)){
         	    $check=1;
-        	    if($sponserid == 5000  || $positionid==5000){
-            	    // if(get_option('check_5000')==0){
-            	    //     $check=1;
-            	    //    // update_mlm_option('check_5000',1);
-            	    // }else{
-            	    //     $check=3;
-            	    // }
-            	}
+        	  
             }else{
         	    $check=2;
         	}
-	    }else{
-	       $check=1; 
-		}
+	  
 	
 
 		
 
     	if($check==1){
+		   
 		    if(check_sponsor($sponserid)==1){
-		        if(check_sponsor($positionid)==1){
-		           if(check_sponsor($positionid)==1){
+		    
 					   $orghrm=$hrm_id;
 				
-            			if(check_sponsor($positionid)==1){
+            	 update_hrmpost_meta($hrm_id,'pin_no',$epinno);
+				 update_hrmpost_meta($hrm_id,'package',$pack);
+				 update_epin_done_by_epinno($hrm_id,$epinno,$hrm_id);
+                 update_paystatus($hrm_id, 1);
+            	 insert_count_nodes($hrm_id,3);
+                 insert_count_nodes(5000,3);
+         
+							
+          insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
+		  update_hrm_count_level_own_node($sponserid,1,3); 			
 
-            			    update_hrmpost_meta($hrm_id,'pin_no',$epinno);
-							update_hrmpost_meta($hrm_id,'package',$pack);
+	if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
 						
-            			    update_epin_done_by_epinno($hrm_id,$epinno,$hrm_id);
-            			    update_paystatus($hrm_id, 1);
-            		        
-            		         insert_count_nodes($hrm_id,3);
-            			     insert_count_nodes(5000,3);
-            				
-            			
-            				
-        					if(get_option('first_node_matrix_counter_check')==0){
-			                    $pos=1;
-			                    update_mlm_option('first_node_matrix_counter_check',1);
-							}
+		$direct_down=get_direct_by_hrm($sponserid);
+		 
+	if($count_upper_level_sponsor>0)
+		pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+
+		if($direct_down > 2){
+			$income = get_level_income_by_level(1);
+			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
+        }
+
+		if($direct_down == 2){
+			
+		}
+
+
+
+				
+
+		}    	
 							
 
-            				if($this->session->userdata('userid')){
-            			        insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
-            				}else{
-            				    insert_hrm_level_track(3,1,$hrm_id,$pos,'5000',$positionid,$sponserid);
-							}
-
-							if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
-								update_hrm_count_level_own_node($sponserid,1,3);
-								$netpair=get_direct_by_hrm($sponserid);
-
-						if($netpair>2){
-
-							      if($sponserid != 5000)
-								  pay_commission_to_customer($sponserid,1000,1,'0',date('Y-m-d'),1);
-								  
-								}else{
-								  
-					if($netpair==2){	
-						
-						$parent_level2 =get_reverse_parent_hrms_lev_0($sponserid,3);
-
-						if($sponserid != 5000){
-								 
-								//  insert_autopool_track(3,1,$sponserid,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
-							
-								            //for auto pool
-								            if(get_option('auto_pool5')==0){
-								                update_mlm_option('auto_poolid5',$sponserid);
-								                update_mlm_option('auto_pool5',1);
-								            }
-										    update_hrmpost_meta($sponserid,'autopool5level',1);
-										    insert_count_nodes($sponserid,5);/* 5 is for autopool */
-										    insert_priority($sponserid,5);
-								            $getpos=get_current_pos($sponserid,5);
-								    		$positionno=$getpos[0];
-								            $positionid=$getpos[1];
-								            insert_hrm_level_track(5,1,$sponserid,$positionno,$sponserid,$positionid,$sponserid);
-											update_priority($sponserid,5);
-										}				
-
-				   if($parent_level2 != 5000){
-									pay_commission_to_customer($parent_level2,500,2,'0',date('Y-m-d'),1);
-									$parent_level3 =get_reverse_parent_hrms_lev_0($parent_level2,3);
-
-                       if($parent_level3 != 5000){
-										
-								pay_commission_to_customer($parent_level3,1000,3,'0',date('Y-m-d'),1);
-					     	if(get_hrm_postmeta($parent_level3,'double_star') == 0){
-									  
-								$count_dstar = get_hrm_postmeta($parent_level3,'double_star_count');
-								$count_dstar +=1;
-								update_hrmpost_meta($parent_level3,'double_star_count',$count_dstar);
-
-								if($count_dstar==4){
-									update_hrmpost_meta($parent_level3,'double_star',1);
-									make_double_star($parent_level3);
-
-								}
-								      
-							}
-							   
-							
-								update_hrmpost_meta($parent_level3,'star',1);
-								make_star($parent_level3);
-							}	
-
-
-						}   
-
-			      }
-								 
-                               
-
-
-								}
-
-							}    	
-							
-
-            			    // if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
-            				//     update_hrm_count_level_own_node($sponserid,1,3);
-            				//     $checkinsert=check_free_insert($sponserid);
-            				//     $totalleft=get_direct_by_pos($sponserid,1);
-            				//     $totalright=get_direct_by_pos($sponserid,2);
-            				//     if($totalleft>$totalright){
-            				//         $netpair=$totalright;
-            				//     }else if($totalright>$totalleft){
-            				//         $netpair=$totalleft;
-            				//     }else{
-            				//         $netpair=$totalleft;
-            				//     }
-            				//     $levelpercent=get_option('level_income');
-            				//     $get_givenpair=get_hrm_postmeta($sponserid,'given_pair');
-            				//     if($netpair>$get_givenpair){
-            				//         $goingpair=$netpair-$get_givenpair;
-            				//         for($i=1;$i<=$goingpair;$i++){
-            				//             $netdirectincome=($levelpercent*5000*2)/100;
-            				//             pay_commission_to_customer($sponserid,$netdirectincome,1,'0',date('Y-m-d'),1);
-            				//             $get_givenpair=get_hrm_postmeta($sponserid,'given_pair');
-            				//             update_hrmpost_meta($sponserid,'given_pair',$get_givenpair+1);/*stage 3 matrix*/
-            				//         }
-            				//     }
-            				//     if(!empty($checkinsert)){
-            				//         if(check_two_done($sponserid,$checkinsert[0]->DATE_TIME)==1){
-            				//             //for auto pool
-            				//             if(get_option('auto_pool'.$checkinsert[0]->MLM_DESC_ID)==0){
-            			    //                 update_mlm_option('auto_poolid'.$checkinsert[0]->MLM_DESC_ID,$sponserid);
-            			    //                 update_mlm_option('auto_pool'.$checkinsert[0]->MLM_DESC_ID,1);
-            			    //             }
-                    		// 		    update_hrmpost_meta($sponserid,'autopool'.$checkinsert[0]->MLM_DESC_ID.'level',1);
-                    		// 		    insert_count_nodes($sponserid,$checkinsert[0]->MLM_DESC_ID);/* 5 is for autopool */
-                    		// 		    insert_priority($sponserid,$checkinsert[0]->MLM_DESC_ID);
-    					    //             $getpos=get_current_pos($checkinsert[0]->SPONSOR_ID,$checkinsert[0]->MLM_DESC_ID);
-                            //     		$positionno=$getpos[0];
-                            //             $positionid=$getpos[1];
-                            //             insert_hrm_level_track($checkinsert[0]->MLM_DESC_ID,1,$sponserid,$positionno,$checkinsert[0]->ADDED_BY,$positionid,$checkinsert[0]->SPONSOR_ID);
-                            //             update_priority($sponserid,$checkinsert[0]->MLM_DESC_ID);
-                            //             delete_free_tracks($sponserid);
-            				//         }else{
-            				//             //send msg to do one more
-            				//         }
-            				//     }
-            				//     /* for direct income */
-            				    
-            				//     $array=array();
-    						// 	for($x=0;$hrm_id!=5000;$x++){
-    						// 	    $hrm_id=get_reverse_parent_hrms($hrm_id,3);
-    						// 	    if($hrm_id!=5000){
-    						// 			$array[]=$hrm_id;
-    									
-        					// 		}
-    						// 	}
-    						// 	$array=array_unique($array);
-    						// 	foreach($array as $sponserid){
-    						// 	    $stage_level=get_hrm_postmeta($sponserid,'mlm_plan_desc');
-        					// 		$stagewise_sponsor_level=get_hrm_postmeta($sponserid,'level');
-    						// 	    insert_count_nodes($sponserid,$stage_level);
-    						// 	    $check=get_own_count_nodes($sponserid,1,3);
-    						// 	    $netcount=get_members_validnew($stagewise_sponsor_level);
-    						// 	    if($stagewise_sponsor_level<=2){
-        					// 		    $mainmaincheck=get_level_row_members($sponserid,$stagewise_sponsor_level);
-        					// 		    if($netcount<=$mainmaincheck[0] && $check>=2){
-        					// 		         if($stagewise_sponsor_level!=1){
-        					// 		            $netdirectincome=($stagewise_sponsor_level*2*$levelpercent*5000)/100;
-                            // 		            pay_commission_to_customer($sponserid,$netdirectincome,2,'0',date('Y-m-d'),1);
-        					// 		         }        							       
-                            // 				 $arr=hrm_level_track($stagewise_sponsor_level,$sponserid,$stage_level);
-                            // 				 $sponsor_level=$arr[0]->LEVEL_ID+1;
-                            // 				 $pos=$arr[0]->POSITION;
-                            // 				 $added_by=$arr[0]->ADDED_BY;
-                            // 				 $positionid=$arr[0]->POSITION_ID;
-                            // 				 $sponserids_prev=$arr[0]->SPONSOR_ID;
-                            // 				 update_hrmpost_meta($sponserid,'level',$stagewise_sponsor_level+1);
-                            // 				 insert_hrm_level_track($stage_level,$sponsor_level,$sponserid,$pos,$added_by,$positionid,$sponserids_prev);
-                            				 
-                            // 				 if($sponsor_level==3){
-                            // 				     insert_hrm_level_free_track(5,1,$sponserid,$pos,$added_by,$positionid,$sponserids_prev);
-                            // 				 }
-                            				
-                            // 			}
-    						// 	    }
-    						// 	}
-            				// }
+            			 
             				$result=1; 
-            			}
+            			
             			if($result>0){
             				echo $result;
             				$this->db->trans_complete();
             			}else{
-            			    echo 'Member not registered successfully';
+            			    echo 'Member not registered';
             			}
-		           }else{
-		                echo 'Desired id is already present';
-		           }
-		        }else{
-		            echo 'No such position id is present';
-		        }
+		           
+		        
     		}else{
 		    	echo 'No such sponsor id is present';
 		    }
@@ -3346,12 +3180,7 @@ public function get_pancard(){
 		$sponserid=strtoupper($_POST['sponserid']);
 		$positionid=strtoupper($_POST['positionid']);
 		
-		if(strtoupper($_POST['sponserid'])==5000){
-		    $positionid=5000;
-		    $pos=get_positionmax();
-		}else{
-			$pos=get_positionmax_member(1,$_POST['sponserid']);
-		}
+	
 		
 	    $orgpostoinid=$positionid;
 	    $prev_upper_sponsor=$sponserid;

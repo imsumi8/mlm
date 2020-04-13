@@ -1056,11 +1056,11 @@
 		$ci=& get_instance();
 		$ci->load->database(); 
 		
-		    $sql = "update `epin` set USED_BY='".$used_by."', EPIN_STATUS='1', USED_DATE='".date('Y-m-d H:i:s')."' where ISSUE_TO='".$sponsorid."' and EPIN_NO='".$epin."'"; 
+		    $sql = "update `epin` set USED_BY='".$used_by."', EPIN_STATUS='1', USED_DATE='".date('Y-m-d H:i:s')."' where EPIN_NO='".$epin."'"; 
 		
 		$query = $ci->db->query($sql);
-	    $sql = "update `epin` set USED_BY='".$used_by."', EPIN_STATUS='1', USED_DATE='".date('Y-m-d H:i:s')."' where ISSUE_TO='5000' and EPIN_NO='".$epin."'"; 
-	    $query = $ci->db->query($sql);
+	    // $sql = "update `epin` set USED_BY='".$used_by."', EPIN_STATUS='1', USED_DATE='".date('Y-m-d H:i:s')."' where ISSUE_TO='5000' and EPIN_NO='".$epin."'"; 
+	    // $query = $ci->db->query($sql);
 	}
 
 	function get_all_epinamts()
@@ -1240,6 +1240,8 @@
 	
 			$sql = "update `hrm_post` set PAY_STATUS='".$status."' where HRM_ID='".$hrm_id."' "; 
 			$query = $ci->db->query($sql);
+			if($query)
+			return 1;
 	
 	}
 
@@ -3494,7 +3496,41 @@
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		return $row[0]->KYC_NAME;
-    }
+	}
+	
+	function get_level_income_by_level($level){
+        $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from level_income where LEVEL_NO='".$level."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->LEVEL_AMOUNT;
+		}else{
+			return '';
+		}
+		
+	}
+
+	function pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor){
+	  
+		for($i=0;$i<$count_upper_level_sponsor; $i++){
+					
+			$level = $i+2;
+
+			$income = get_level_income_by_level($level);
+			
+			 if(!$income)
+		       break;
+
+     pay_commission_to_customer($upper_level_sponsor_id[$i],$income,1,'0',date('Y-m-d'),1);	
+					   	
+			 }
+			 
+			 return true;
+		
+	}
+	
     function update_status_kyc_delete($id){
         $ci=& get_instance();
 		$ci->load->database(); 
@@ -3549,7 +3585,7 @@
         	 $drid=$spnoser_ledgerid; /*for sponsor account */
         	 $crid=9;/*for comission account */
          	 update_amount_ledger($drid,$amt);
-         	 update_amount_ledger(9,(-1)*$amt);
+         	//  update_amount_ledger(9,(-1)*$amt);
              $particular='Being commission paid to '.$firstname. ' '.$lastname.' of '.$amt;
              insert_record_transaction($drid,$crid,5000,$particular,$amt,$dt);
              $chargeid='';
@@ -3621,20 +3657,24 @@
 	}
 	
 
-	function get_positionmax_member($level,$position_id){
+	function get_top_sponsor($level,$hrm_id){
 		$ci=& get_instance();
-		$ci->load->database(); 
-		$sql = "select MAX(POSITION) as pos from hrm_level_tracking where MLM_DESC_ID=3 and LEVEL_ID='".$level."' and POSITION_ID='".$position_id."'"; 
-		$query = $ci->db->query($sql);
-		$query =	$query ->result();
-		if(!empty($query)){
-			$query=$query[0]->pos;
-			 $query= $query+1;
-			return $query;
-		}else{
-			return 1;
-		}
+		// $ci->load->database(); 
+
+		$array=array();
+			for($x=0;$hrm_id!=5000;$x++){
+			    $hrm_id=get_reverse_parent_hrms($hrm_id,3);
+			    if($hrm_id!=5000){
+					$array[]=$hrm_id;
+					
+				}
+			}
+
+	   return $array;
+	
    }
+
+
 
     function get_all_nodes_by_admin(){
          $ci=& get_instance();
