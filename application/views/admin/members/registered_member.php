@@ -51,8 +51,10 @@
 									   
 										   <th data-field="userid" data-sortable="true">Userid</th>
 										   <th data-field="username" data-sortable="true">Username</th>
+										   <?php if($this->session->userdata('userid') == 5000){ ?>
 										   <th data-field="mobile" data-events="actionUpdate" data-sortable="true">Mobile</th>
 										   <th data-field="email" data-sortable="true">Email</th>
+										 <?php  } ?>
 										   <th data-field="sponsorid" data-sortable="true">Sponsorid</th>
 										   <th data-field="sponsorname" data-sortable="true">Sponsor Name</th>
 										   <th data-field="pay_status" data-sortable="true">Status</th>

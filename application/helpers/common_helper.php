@@ -909,6 +909,9 @@
 		 
 		}
 	}
+
+
+	
 	function get_accessdate(){
 	    $day=date('d');
 	    if($day>1 && $day<=15){
@@ -2400,6 +2403,53 @@
 			$query = $ci->db->query($sql);
 		}
 	}
+
+
+	function  insert_level_count_nodes($hrm_id,$mlm_desc_id){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from level_count_nodes where HRM_ID='".$hrm_id."' and MLM_DESC='".$mlm_desc_id."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    $count=$row[0]->COUNT;
+		    $count=$count+1;
+			$sql = "update `level_count_nodes` set COUNT='".$count."' where HRM_ID='".$hrm_id."' and MLM_DESC='".$mlm_desc_id."'"; 
+			$query = $ci->db->query($sql);
+		}else{
+			$sql = "INSERT INTO `level_count_nodes`(`HRM_ID`, `COUNT`, `MLM_DESC`) VALUES ('".$hrm_id."','1','".$mlm_desc_id."')"; 
+			$query = $ci->db->query($sql);
+		}
+	}
+
+	function  get_level_nodes($hrm_id,$mlm_desc){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT from level_count_nodes where HRM_ID='".$hrm_id."' and MLM_DESC='".$mlm_desc."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    $count=$row[0]->COUNT;
+		    return $count;
+		}else{
+		    return 0;
+		}
+	}
+
+	function  get_all_level_nodes($mlm_desc){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select SUM(COUNT) as cnt from level_count_nodes where MLM_DESC='".$mlm_desc."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    $count=$row[0]->cnt;
+		    return $count;
+		}else{
+		    return 0;
+		}
+	}
+	
 	function update_hrm_reward_count($hrm,$status,$REWARD_INCOME_ID,$count)
 	{
 		$ci=& get_instance();
@@ -3205,7 +3255,7 @@
 		$ci->load->database(); 
 		
         $users=	$ci->session->userdata('userid');
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and HRM_STATUS=1 ORDER by ID ASC');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 ORDER by ID ASC');
         $result=$query->result();
         if(!empty($result)){ 
             $arr=array();
@@ -3226,7 +3276,67 @@
       }else{
           return 0;
       }
-    }
+	}
+	
+	function allposts_count_active($mlm_desc)
+    {   
+        $ci=& get_instance();
+		$ci->load->database(); 
+		
+        $users=	$ci->session->userdata('userid');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 and HRM_STATUS=1 ORDER by ID ASC');
+        $result=$query->result();
+        if(!empty($result)){ 
+            $arr=array();
+        
+    		foreach($result as $results){
+    		    $hrm_id=$results->HRM_ID;
+    		   for($x=0;$hrm_id!=5000;$x++){
+    			    $hrm_id=get_reverse_parent_hrms_lev_0($hrm_id,$mlm_desc);
+    			    if($hrm_id==$users){
+    					$arr[]=$results->HRM_ID;
+    				}
+    			}
+    		}
+    		$user_ids = "'" . implode ( "', '", $arr ) . "'";
+    	
+    	    $query=$ci->db->query('Select * from hrm_post where HRM_ID IN ('.$user_ids.') ORDER by ID ASC');
+           return $query->num_rows();  
+      }else{
+          return 0;
+      }
+	}
+	
+	function allposts_count_inactive($mlm_desc)
+    {   
+        $ci=& get_instance();
+		$ci->load->database(); 
+		
+        $users=	$ci->session->userdata('userid');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 and HRM_STATUS=0 ORDER by ID ASC');
+        $result=$query->result();
+        if(!empty($result)){ 
+            $arr=array();
+        
+    		foreach($result as $results){
+    		    $hrm_id=$results->HRM_ID;
+    		   for($x=0;$hrm_id!=5000;$x++){
+    			    $hrm_id=get_reverse_parent_hrms_lev_0($hrm_id,$mlm_desc);
+    			    if($hrm_id==$users){
+    					$arr[]=$results->HRM_ID;
+    				}
+    			}
+    		}
+    		$user_ids = "'" . implode ( "', '", $arr ) . "'";
+    	
+    	    $query=$ci->db->query('Select * from hrm_post where HRM_ID IN ('.$user_ids.') ORDER by ID ASC');
+           return $query->num_rows();  
+      }else{
+          return 0;
+      }
+	}
+	
+
     function get_amount($arr){
         if(!empty($arr)){
             $ci=& get_instance();
@@ -3530,6 +3640,91 @@
 			 return true;
 		
 	}
+
+	function get_level_income_by_double($level){
+        $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from level_double_income where LEVEL_NO='".$level."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->LEVEL_AMOUNT;
+		}else{
+			return '';
+		}
+		
+	}
+
+	function pay_double_star_bonus($upper_level_sponsor_id,$count_upper_level_sponsor){
+	  
+		for($i=0;$i<$count_upper_level_sponsor; $i++){
+					
+			$level = $i+1;
+
+			$income = get_level_income_by_double($level);
+			
+			 if(!$income)
+			   break;
+
+			   insert_level_count_nodes($upper_level_sponsor_id[$i],'DL'.$level);
+			   insert_level_count_nodes($upper_level_sponsor_id[$i],'DL');
+			   
+			 if($level == 3){
+
+				$count_double =	get_level_nodes($upper_level_sponsor_id[$i],'DL3');
+
+				if($count_double==4){
+				 update_hrmpost_meta($upper_level_sponsor_id[$i],'triple_star',1); 
+				 $upper_triple_sponsor_id=get_top_sponsor(1,$upper_level_sponsor_id[$i]);
+				$count_upper_triple_sponsor =count($upper_triple_sponsor_id);
+				pay_triple_star_bonus($upper_triple_sponsor_id,$count_upper_triple_sponsor);
+					continue;
+				}
+			 }  
+
+     pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),1);	
+					   	
+			 }
+			 
+			 return true;
+		
+	}
+
+	function get_level_income_by_triple($level){
+        $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from level_triple_income where LEVEL_NO='".$level."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->LEVEL_AMOUNT;
+		}else{
+			return '';
+		}
+		
+	}
+
+	function pay_triple_star_bonus($upper_level_sponsor_id,$count_upper_level_sponsor){
+	  
+		for($i=0;$i<$count_upper_level_sponsor; $i++){
+					
+			$level = $i+1;
+
+			$income = get_level_income_by_triple($level);
+			
+			 if(!$income)
+			   break;
+			   
+			   insert_level_count_nodes($upper_level_sponsor_id[$i],'TL'.$level);
+			   insert_level_count_nodes($upper_level_sponsor_id[$i],'TL');
+
+     pay_commission_to_customer($upper_level_sponsor_id[$i],$income,4,'0',date('Y-m-d'),1);	
+					   	
+			 }
+			 
+			 return true;
+		
+	}
 	
     function update_status_kyc_delete($id){
         $ci=& get_instance();
@@ -3674,6 +3869,26 @@
 	
    }
 
+   function get_level_wise_upper_sponsor($level,$hrm_id){
+	$ci=& get_instance();
+	// $ci->load->database(); 
+
+	$r_hrmid='';
+		for($x=0;$hrm_id!=5000;$x++){
+			$hrm_id=get_reverse_parent_hrms($hrm_id,3);
+
+			if(($x+1)==$level && $hrm_id != 5000){
+			   
+				$r_hrmid = $hrm_id;
+			     break;
+			}
+		
+		}
+
+   return $r_hrmid;
+
+}
+
 
 
     function get_all_nodes_by_admin(){
@@ -3709,6 +3924,32 @@
 		    return 0;
 		 }
 	}
+
+	function get_overall_joining(){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total from hrm_post where PAY_STATUS=1"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		   return $row[0]->total;
+		}else{
+		   return 0;
+		}
+   }
+   function get_overall_free_joining(){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total from hrm_post where PAY_STATUS=0"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		   return $row[0]->total;
+		}else{
+		   return 0;
+		}
+   }
+
 	function get_today_products($packge_id){
 	     $ci=& get_instance();
 		 $ci->load->database(); 
@@ -3745,6 +3986,19 @@
 		    return 0;
 		 }
 	}
+
+	function overall_generatedepin(){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total from epin"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		   return $row[0]->total;
+		}else{
+		   return 0;
+		}
+   }
 	function total_kyc_status($status){
 	     $ci=& get_instance();
 		 $ci->load->database(); 
@@ -4309,6 +4563,19 @@
 	    $ci=& get_instance();
 		$ci->load->database(); 
         $sql = "Select COUNT(*) as cnt from epin where DATE(USED_DATE)='".date('Y-m-d')."'"; 
+		$query = $ci->db->query($sql);
+		$query=$query->result();
+		if(!empty($query)){
+		    return $query[0]->cnt;
+		}else{
+		    return 0;
+		}
+	}
+
+	function get_overall_used_epin(){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+        $sql = "Select COUNT(*) as cnt from epin where USED_DATE != '' "; 
 		$query = $ci->db->query($sql);
 		$query=$query->result();
 		if(!empty($query)){

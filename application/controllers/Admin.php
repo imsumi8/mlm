@@ -336,6 +336,11 @@ class Admin extends CI_Controller {
 				$data['subpage']='member_view';
 				$this->load->view('admin/header',$data);
 		        $this->load->view('admin/members/member_view');
+			}else if($this->uri->segment(3)=="member_registered"){
+				$data['subpage']='member_registered';
+				$this->load->view('admin/header',$data);
+		        $this->load->view('admin/members/registered_member');
+				
 			}
 			else if($this->uri->segment(3)=="change_cred"){
 			    $data['subpage']='change_cred';

@@ -1288,6 +1288,8 @@ public function get_pancard(){
 		$offset = 0;$limit = 10;
 		$sort = 'HRM_DATE'; $order = 'ASC';
 		$where = '';
+       
+
 		$table = $_GET['table'];
 		
 		if(isset($_POST['id']))
@@ -1317,6 +1319,12 @@ public function get_pancard(){
 		$tempRow = array();
 		$i=1;
 		foreach($res as $row){
+
+	$sponsorid=get_hrm_postmeta($row['HRM_ID'],'sponsorid');
+	 if($this->session->userdata('userid') != 5000){
+			if($this->session->userdata('userid') == $row['HRM_ID'] || $sponsorid != $this->session->userdata('userid'))
+			continue;
+		 }
 			// $operate ='';
 			// $operate = "<a class='btn btn-xs btn-primary edit-product' data-id='".$row['id']."' data-toggle='modal' data-target='#editproduct' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
 			// $operate .= " <a class='btn btn-xs btn-danger delete-product' style='background:#52a2b2;border-color:#52a2b2' data-id='".$row['id']."'  title='Delete'><i class='fa fa-trash'></i></a>";
@@ -1330,10 +1338,11 @@ public function get_pancard(){
 		$status = " <span class='btn btn-xs btn-success' title='Payment Status'>Paid</span>";
 		else
 		$status = " <span class='btn btn-xs btn-danger' title='Payment Status'>Unpaid</span>";
-
+		  
+	
 			$mobile=get_hrm_postmeta($row['HRM_ID'],'contact');
 			$email=get_hrm_postmeta($row['HRM_ID'],'email');
-			$sponsorid=get_hrm_postmeta($row['HRM_ID'],'sponsorid');
+		
 			if($sponsorid){
 				$sponsor_name = check_sponsor_get_name($sponsorid)[0]['HRM_NAME'];
 			}else{
@@ -1349,8 +1358,10 @@ public function get_pancard(){
 			$tempRow['userid'] = $row['HRM_ID'];
 			$tempRow['username'] = $row['HRM_NAME'];
 			$tempRow['sno'] = $i;
+			if($this->session->userdata('userid') == 5000){
 			$tempRow['mobile'] = $mobile;
 			$tempRow['email'] = $email;
+			}
 			$tempRow['sponsorid'] = $sponsorid;
 			$tempRow['sponsorname'] =$sponsor_name;
 			$tempRow['pay_status'] = $status;
@@ -2594,12 +2605,24 @@ public function get_pancard(){
 			    
 				<li>
 					<div>
-						<a href="javascript:void(0)" id="level-0" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($hrm_id!=5000 && $_POST['mlmdesc']==3) { //$ar=get_member_three($hrm_id); 
-        				  //  $ar=json_decode($ar); ?>
-							TOTAL : <?php //echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); ?><br>Star Members: <?php echo get_count_star($hrm_id); ?><br>Double Star: <?php echo get_count_double_star($hrm_id);} ?>" class="blue-tooltip">
+						<a href="javascript:void(0)" id="level-0" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($hrm_id!=5000 && $_POST['mlmdesc']==3) {
+							 //$ar=get_member_three($hrm_id); 
+						  //  $ar=json_decode($ar); 
+						  ?>
+							TOTAL : <?php echo get_member_nodes($hrm_id,$_POST['mlmdesc']); ?>
+							<br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); ?>
+							<br>Star L2: <?php echo get_level_nodes($hrm_id,'SL2'); ?>
+							<br>Star L3: <?php echo get_level_nodes($hrm_id,'SL3');  ?>
+							<br>Double Star: <?php echo get_level_nodes($hrm_id,'DL');  ?>
+						    <br>Triple Star: <?php echo get_level_nodes($hrm_id,'TL'); } ?>"
+							class="blue-tooltip">
+							
 							<?php if($hrm_id!=$this->session->userdata('userid')){ ?>
 							<img class="tree_up_icon" src="<?php echo base_url(); ?>assets/img/up.png" alt="<?php echo get_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>" onclick='getGenologyTree("<?php echo get_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>",event);'/>
-							<?php } $arr=get_hrm_post($hrm_id); 
+							<?php } 
+							
+							$arr=get_hrm_post($hrm_id); 
+
 							    if($arr[0]->HRM_STATUS==1){
 							        $stat='active.png';
 							    }else{
@@ -2609,8 +2632,13 @@ public function get_pancard(){
 								if(get_hrm_postmeta($hrm_id,'star')==1){
 									$stat='star.png';
 								}
+
 								if(get_hrm_postmeta($hrm_id,'double_star')==1){
 									$stat='double.png';
+								}
+
+								if(get_hrm_postmeta($hrm_id,'triple_star')==1){
+									$stat='triple.png';
 								}
 							    
 							?>
@@ -2631,12 +2659,26 @@ public function get_pancard(){
 							<div>
 								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { //$ar=get_member_three($nodes->HRM_ID); 
         				    //$ar=json_decode($ar); ?>
-							TOTAL : <?php //echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodes->HRM_ID,1,$_POST['mlmdesc']); ?><br>Star Members : <?php echo get_count_star($nodes->HRM_ID);?><br>Double Star : <?php echo get_count_double_star($nodes->HRM_ID);} ?>" class="blue-tooltip">
-									<?php $arr=get_hrm_post($nodes->HRM_ID); 
+                            TOTAL : <?php echo get_member_nodes($nodes->HRM_ID,$_POST['mlmdesc']); ?>
+							<br>DIRECT : <?php echo get_own_count_nodes($nodes->HRM_ID,1,$_POST['mlmdesc']); ?>
+							<br>Star L2: <?php echo get_level_nodes($nodes->HRM_ID,'SL2'); ?>
+							<br>Star L3: <?php echo get_level_nodes($nodes->HRM_ID,'SL3');  ?>
+							<br>Double Star: <?php echo get_level_nodes($nodes->HRM_ID,'DL');  ?>
+						    <br>Triple Star: <?php echo get_level_nodes($nodes->HRM_ID,'TL'); } ?>"
+							class="blue-tooltip">
+
+							<?php
+							
+							$arr=get_hrm_post($nodes->HRM_ID); 
+
     							    if($arr[0]->HRM_STATUS==1){
-    							        $stats='active.png';
+
+										$stats='active.png';
+										
     							    }else{
-    							        $stats='inactive.png';
+
+										$stats='inactive.png';
+										
 									} 
 									
 									if(get_hrm_postmeta($nodes->HRM_ID,'star')==1){
@@ -2644,6 +2686,10 @@ public function get_pancard(){
 									}
 									if(get_hrm_postmeta($nodes->HRM_ID,'double_star')==1){
 										$stats='double.png';
+									}
+
+									if(get_hrm_postmeta($nodes->HRM_ID,'triple_star')==1){
+										$stats='triple.png';
 									}
 									
 									?>
@@ -2691,23 +2737,15 @@ public function get_pancard(){
 										
 										?>
 		                   
-								TOTAL:&nbsp&nbsp
+						   TOTAL : <?php echo get_member_nodes($nodess->HRM_ID,$_POST['mlmdesc']); ?>
+							<br>DIRECT : <?php echo get_own_count_nodes($nodess->HRM_ID,1,$_POST['mlmdesc']); ?>
+							<br>Star L2: <?php echo get_level_nodes($nodess->HRM_ID,'SL2'); ?>
+							<br>Star L3: <?php echo get_level_nodes($nodess->HRM_ID,'SL3');  ?>
+							<br>Double Star: <?php echo get_level_nodes($nodess->HRM_ID,'DL');  ?>
+						    <br>Triple Star: <?php echo get_level_nodes($nodess->HRM_ID,'TL'); } ?>"
+							class="blue-tooltip">
+
 							
-								<?php //echo $ar[0]+$ar[1]; ?>
-						
-								&nbsp&nbspDIRECT:&nbsp&nbsp
-								
-								 <?php echo get_own_count_nodes($nodess->HRM_ID,1,$_POST['mlmdesc']); ?>
-						
-						&nbsp&nbsp Star Members:&nbsp&nbsp
-						
-						 <?php echo get_count_star($nodess->HRM_ID); ?>
-						
-						&nbsp&nbsp Double Star:&nbsp&nbsp
-						
-						 <?php echo get_count_double_star($nodess->HRM_ID);?>
-								
-								  <?php } ?>" class="blue-tooltip">
 									<?php $arr=get_hrm_post($nodess->HRM_ID); 
             							    if($arr[0]->HRM_STATUS==1){
             							        $statss='active.png';
@@ -2720,6 +2758,9 @@ public function get_pancard(){
 											}
 											if(get_hrm_postmeta($nodess->HRM_ID,'double_star')==1){
 												$statss='double.png';
+											}
+											if(get_hrm_postmeta($nodess->HRM_ID,'triple_star')==1){
+												$statss='triple.png';
 											}
             						?>
 									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $hrm_id; ?>" id= "<?php echo $hrm_id; ?>" onclick='getGenologyTree("<?php echo $hrm_id; ?>",event);' > 
@@ -3074,13 +3115,20 @@ public function get_pancard(){
 			$count_upper_level_sponsor =count($upper_level_sponsor_id);
 		}
 
-
+		$hrm_info =get_hrm_post($hrm_id);
 		if(check_pinno($epinno,$pack,$hrm_id,$sponserid)){
         	    $check=1;
         	  
             }else{
         	    $check=2;
-        	}
+			}
+			
+      
+			if($hrm_info[0]->PAY_STATUS == 1){
+
+        	    $check=6;
+        	  
+            }
 	  
 	
 
@@ -3097,7 +3145,8 @@ public function get_pancard(){
 				 update_epin_done_by_epinno($hrm_id,$epinno,$hrm_id);
                  update_paystatus($hrm_id, 1);
             	 insert_count_nodes($hrm_id,3);
-                 insert_count_nodes(5000,3);
+				 insert_count_nodes(5000,3);
+				
          
 							
           insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
@@ -3107,15 +3156,55 @@ public function get_pancard(){
 						
 		$direct_down=get_direct_by_hrm($sponserid);
 		 
-	if($count_upper_level_sponsor>0)
+		insert_count_nodes($sponserid,3);
+
+	if($count_upper_level_sponsor>0){
+		////below level 1 team sales incentive
 		pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+	}	
 
 		if($direct_down > 2){
 			$income = get_level_income_by_level(1);
+			////level 1 team sales incentive
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
         }
 
 		if($direct_down == 2){
+		 
+			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);	
+
+			if(!empty($sec_level_sponsor)){
+				////star bonus 
+				update_hrmpost_meta($sec_level_sponsor,'star',1);
+			    insert_level_count_nodes($sec_level_sponsor,'SL2');
+                pay_commission_to_customer($sec_level_sponsor,500,2,'0',date('Y-m-d'),1);
+				
+			}
+
+		 $third_level_sponsor = get_level_wise_upper_sponsor(3,$sponserid);
+
+		 if(!empty($third_level_sponsor)){
+			////star bonus 
+		    
+			insert_level_count_nodes($third_level_sponsor,'SL3');
+			$count_double =	get_level_nodes($third_level_sponsor,'SL3');
+			
+			if($count_double==4){
+				update_hrmpost_meta($third_level_sponsor,'double_star',1);
+				$upper_double_sponsor_id=get_top_sponsor(1,$third_level_sponsor);
+				$count_upper_double_sponsor =count($upper_double_sponsor_id);
+				pay_double_star_bonus($upper_double_sponsor_id,$count_upper_double_sponsor);
+
+			}elseif($count_double > 4){
+	            pay_commission_to_customer($third_level_sponsor,1500,5,'0',date('Y-m-d'),1);
+			}
+			
+			
+		}else{
+		
+			insert_level_count_nodes($third_level_sponsor,'SL3');
+
+		}
 			
 		}
 
@@ -3147,6 +3236,8 @@ public function get_pancard(){
 		        echo 'You cannot add the member under the selected position id';
 		    }else if($check==5){
 		        echo 'You cannot add this member in this position';
+		    }else if($check==6){
+		        echo 'Userid Already Topup';
 		    }
 		    else{
 		        echo 'Cannot use admin id for add member'.$check;
@@ -3267,7 +3358,7 @@ public function get_pancard(){
 							update_hrmpost_meta($hrm_id,'given_pair',0);
 							update_hrmpost_meta($hrm_id,'star',0);
 							update_hrmpost_meta($hrm_id,'double_star',0);
-							update_hrmpost_meta($hrm_id,'double_star_count',0);
+							update_hrmpost_meta($hrm_id,'triple_star',0);
             			    update_hrmpost_meta($hrm_id,'sponsorid',$sponserid);
             			    
                             $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RMGM.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();

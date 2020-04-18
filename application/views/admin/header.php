@@ -345,6 +345,7 @@
 						<li>
 							<a <?php if($subpage=='member_view') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/member_view"><i class="fa fa-circle <?php if($subpage=='member_view') { echo 'clrred'; } ?>"></i> Profile View</a>
 						</li>
+						
 						<li>
 							<a <?php if($subpage=='change_cred') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/change_cred"><i class="fa fa-circle <?php if($subpage=='change_cred') { echo 'clrred'; } ?>"></i> Change Credential</a>
 						</li>
@@ -478,6 +479,11 @@
 						<li>
 							<a <?php if($subpage=='member_tree') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/view_tree"><i class="fa fa-circle <?php if($subpage=='member_tree') { echo 'clrred'; } ?>"></i> Member Tree View</a>
 						</li>
+						<?php  if($this->session->userdata('hrmtype') != 'admin') { ?>
+						<li>
+							<a <?php if($subpage=='member_registered') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/members/member_registered"><i class="fa fa-circle <?php if($subpage=='member_registered') { echo 'clrred'; } ?>"></i> Registered Users</a>
+						</li>
+						<?php } ?>
 					
 					</ul>
 				</li>
@@ -487,7 +493,7 @@
 				<li>
 					
 				    <a <?php if($title=='STAR VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#star_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Star Geneology</span></div><div class="pull-right">
-					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">2</span></div><div class="clearfix"></div></a>
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">3</span></div><div class="clearfix"></div></a>
 					<ul id="star_dr" class="collapse collapse-level-1">
 					
 						<li>
@@ -501,7 +507,7 @@
 					
 				
 						<li>
-					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Pool Tree</a>
+					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Triple Star</a>
 				</li>	
 
 						</ul>
