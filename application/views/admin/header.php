@@ -489,7 +489,7 @@
 				</li>
 
 
-				<?php  if($this->session->userdata('hrmtype') == 'admin') { ?>
+			
 				<li>
 					
 				    <a <?php if($title=='STAR VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#star_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Star Geneology</span></div><div class="pull-right">
@@ -513,7 +513,7 @@
 						</ul>
 				</li>
 
-				<?php } ?>
+			
 				
 				<?php $s=0; if($s == 1){ ?>
 				
