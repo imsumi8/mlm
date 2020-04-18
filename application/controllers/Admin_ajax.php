@@ -3200,10 +3200,6 @@ public function get_pancard(){
 			}
 			
 			
-		}else{
-		
-			insert_level_count_nodes($third_level_sponsor,'SL3');
-
 		}
 			
 		}
