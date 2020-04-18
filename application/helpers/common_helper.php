@@ -3617,7 +3617,7 @@
 		if(!empty($row)){
 			return $row[0]->LEVEL_AMOUNT;
 		}else{
-			return '';
+			return 0;
 		}
 		
 	}
@@ -3650,7 +3650,7 @@
 		if(!empty($row)){
 			return $row[0]->LEVEL_AMOUNT;
 		}else{
-			return '';
+			return 0;
 		}
 		
 	}
@@ -3699,7 +3699,7 @@
 		if(!empty($row)){
 			return $row[0]->LEVEL_AMOUNT;
 		}else{
-			return '';
+			return 0;
 		}
 		
 	}
@@ -3873,7 +3873,7 @@
 	$ci=& get_instance();
 	// $ci->load->database(); 
 
-	$r_hrmid='';
+	$r_hrmid=0;
 		for($x=0;$hrm_id!=5000;$x++){
 			$hrm_id=get_reverse_parent_hrms($hrm_id,3);
 

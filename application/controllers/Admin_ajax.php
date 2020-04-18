@@ -3173,7 +3173,7 @@ public function get_pancard(){
 		 
 			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);	
 
-			if(!empty($sec_level_sponsor)){
+			if($sec_level_sponsor){
 				////star bonus 
 				update_hrmpost_meta($sec_level_sponsor,'star',1);
 			    insert_level_count_nodes($sec_level_sponsor,'SL2');
@@ -3183,7 +3183,7 @@ public function get_pancard(){
 
 		 $third_level_sponsor = get_level_wise_upper_sponsor(3,$sponserid);
 
-		 if(!empty($third_level_sponsor)){
+		 if($third_level_sponsor){
 			////star bonus 
 		    
 			insert_level_count_nodes($third_level_sponsor,'SL3');
