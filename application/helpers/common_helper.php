@@ -2180,6 +2180,62 @@
 		
 		return true;
 	}
+
+	function get_sum_wallet_balance_new($hrmid,$type)
+	{
+		$ci =& get_instance();
+		$ci->load->database();
+	    $sql = "select sum(WALLET_AMOUNT) as total from wallet_balance where HRM_ID='".$hrmid."' and COMMISSION_TYPE IN (".$type.") "; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->total;
+		}else{
+			return 0;
+		}
+		
+		return true;
+	}
+
+	function check_hold_payment($hrmid,$type)
+	{
+		$ci =& get_instance();
+		$ci->load->database();
+	    $sql = "select * from wallet_balance where HRM_ID='".$hrmid."' and COMMISSION_TYPE IN (".$type.") and WALLET_STATUS=0"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return 1;
+		}else{
+			return 0;
+		}
+		
+		return true;
+	}
+
+	function pay_hold_commission($hrmid,$type)
+	{
+		$ci =& get_instance();
+		$ci->load->database();
+	    $sql = "select * from wallet_balance where HRM_ID='".$hrmid."' and COMMISSION_TYPE IN (".$type.") and WALLET_STATUS=0"; 
+		$query = $ci->db->query($sql);
+		$result = $query->result();
+		if(!empty($result)){
+
+			foreach($result as $results){
+				$sql = "update `wallet_balance` set WALLET_STATUS=1  where WALLET_ID='".$results->WALLET_ID."' "; 
+				$query = $ci->db->query($sql);
+			}
+
+		}else{
+			return 0;
+		}
+		
+		return true;
+	}
+
+
+
 	function get_count_wallet_balance_type($hrmid,$type)
 	{
 		$ci =& get_instance();
@@ -3674,7 +3730,14 @@
 				$count_double =	get_level_nodes($upper_level_sponsor_id[$i],'DL3');
 
 				if($count_double==4){
-				 update_hrmpost_meta($upper_level_sponsor_id[$i],'triple_star',1); 
+
+					if(get_hrm_postmeta($upper_level_sponsor_id[$i],'double_star')==1){
+						update_hrmpost_meta($upper_level_sponsor_id[$i],'triple_star',1); 
+						}else{
+							update_hrmpost_meta($upper_level_sponsor_id[$i],'triple_star',2); 
+						}
+
+		
 				 $upper_triple_sponsor_id=get_top_sponsor(1,$upper_level_sponsor_id[$i]);
 				$count_upper_triple_sponsor =count($upper_triple_sponsor_id);
 				pay_triple_star_bonus($upper_triple_sponsor_id,$count_upper_triple_sponsor);
@@ -3682,7 +3745,12 @@
 				}
 			 }  
 
-     pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),1);	
+			 if(get_hrm_postmeta($upper_level_sponsor_id[$i],'double_star')==1){
+				  pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),1);
+			 }else{
+				pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),0);
+ 
+			 }	
 					   	
 			 }
 			 
@@ -3718,7 +3786,12 @@
 			   insert_level_count_nodes($upper_level_sponsor_id[$i],'TL'.$level);
 			   insert_level_count_nodes($upper_level_sponsor_id[$i],'TL');
 
-     pay_commission_to_customer($upper_level_sponsor_id[$i],$income,4,'0',date('Y-m-d'),1);	
+	if(get_hrm_postmeta($upper_level_sponsor_id[$i],'triple_star')==1){
+		   pay_commission_to_customer($upper_level_sponsor_id[$i],$income,4,'0',date('Y-m-d'),1);	
+	}else{
+		pay_commission_to_customer($upper_level_sponsor_id[$i],$income,4,'0',date('Y-m-d'),0);	
+
+	}
 					   	
 			 }
 			 

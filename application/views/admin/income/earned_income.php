@@ -87,7 +87,7 @@
 													     $chargestr='';
 													     $chargeamt=0;
 													     if($commissions->WALLET_STATUS==0){
-													         $statsr='<span style="color:red;">Over Pairs</span>';
+													         $statsr='<span style="color:red;">Hold</span>';
 													     }else{
 													         $statsr='<span style="color:green;">Given</span>';
 													     }

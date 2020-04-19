@@ -166,13 +166,9 @@
 				</div>
 				<!-- Row -->
 				<!-- Row -->
-				<div class="row">
-
-
-<!--------- new edit from here sponsor sales incentives -------------->
-
-
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				
+	<div class="row">
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
@@ -214,6 +210,53 @@
 							</div>
 						</div>
 					</div>
+
+
+							
+	<div class="row">
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="sm-data-box actived">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+												    <span class="weight-500 uppercase-font txt-light block font-13"> SELF BUSINESS VALUE</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo '0' ?></span></span>
+												</div>
+											
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="sm-data-box bg-red">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+													<span class="weight-500 uppercase-font txt-light block font-13">TEAM BUSINESS VALUE</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo '0'; ?></span></span>
+												</div>
+												
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					
 
 
@@ -241,7 +284,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 												    <span class="weight-500 uppercase-font txt-light block font-13"> STAR BONUS</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php  echo $star=get_sum_wallet_balance_type($userid,2); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php  echo $star=get_sum_wallet_balance_new($userid,2); ?></span></span>
 													
 												</div>
 											
@@ -264,7 +307,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13"> DOUBLE STAR BONUS</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $d_star=get_sum_wallet_balance_type($userid,3); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $d_star=get_sum_wallet_balance_new($userid,3); ?></span></span>
 												</div>
 											
 											</div>	
@@ -286,7 +329,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 												    <span class="weight-500 uppercase-font txt-light block font-13"> TRIPLE STAR BONUS</span>
-												    <span class="txt-light block counter"><span class="counter-anim"><?php echo $t_star=get_sum_wallet_balance_type($userid,4); ?></span></span>
+												    <span class="txt-light block counter"><span class="counter-anim"><?php echo $t_star=get_sum_wallet_balance_new($userid,4); ?></span></span>
 												</div>
 											
 											</div>	
@@ -313,7 +356,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13"> TOTAL INCOME</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales; ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales + $t_star + $d_star + $star; ?></span></span>
 												</div>
 											
 											</div>	

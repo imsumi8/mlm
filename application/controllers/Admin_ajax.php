@@ -2611,8 +2611,7 @@ public function get_pancard(){
 						  ?>
 							TOTAL : <?php echo get_member_nodes($hrm_id,$_POST['mlmdesc']); ?>
 							<br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); ?>
-							<br>Star L2: <?php echo get_level_nodes($hrm_id,'SL2'); ?>
-							<br>Star L3: <?php echo get_level_nodes($hrm_id,'SL3');  ?>
+							<br>Star: <?php echo (get_level_nodes($hrm_id,'SL2') +get_level_nodes($hrm_id,'SL3')); ?>
 							<br>Double Star: <?php echo get_level_nodes($hrm_id,'DL');  ?>
 						    <br>Triple Star: <?php echo get_level_nodes($hrm_id,'TL'); } ?>"
 							class="blue-tooltip">
@@ -2661,8 +2660,7 @@ public function get_pancard(){
         				    //$ar=json_decode($ar); ?>
                             TOTAL : <?php echo get_member_nodes($nodes->HRM_ID,$_POST['mlmdesc']); ?>
 							<br>DIRECT : <?php echo get_own_count_nodes($nodes->HRM_ID,1,$_POST['mlmdesc']); ?>
-							<br>Star L2: <?php echo get_level_nodes($nodes->HRM_ID,'SL2'); ?>
-							<br>Star L3: <?php echo get_level_nodes($nodes->HRM_ID,'SL3');  ?>
+							<br>Star: <?php echo (get_level_nodes($nodes->HRM_ID,'SL2') +get_level_nodes($nodes->HRM_ID,'SL3')); ?>
 							<br>Double Star: <?php echo get_level_nodes($nodes->HRM_ID,'DL');  ?>
 						    <br>Triple Star: <?php echo get_level_nodes($nodes->HRM_ID,'TL'); } ?>"
 							class="blue-tooltip">
@@ -2739,8 +2737,7 @@ public function get_pancard(){
 		                   
 						   TOTAL : <?php echo get_member_nodes($nodess->HRM_ID,$_POST['mlmdesc']); ?>
 							<br>DIRECT : <?php echo get_own_count_nodes($nodess->HRM_ID,1,$_POST['mlmdesc']); ?>
-							<br>Star L2: <?php echo get_level_nodes($nodess->HRM_ID,'SL2'); ?>
-							<br>Star L3: <?php echo get_level_nodes($nodess->HRM_ID,'SL3');  ?>
+							<br>Star: <?php echo (get_level_nodes($nodess->HRM_ID,'SL2') +get_level_nodes($nodess->HRM_ID,'SL3')); ?>
 							<br>Double Star: <?php echo get_level_nodes($nodess->HRM_ID,'DL');  ?>
 						    <br>Triple Star: <?php echo get_level_nodes($nodess->HRM_ID,'TL'); } ?>"
 							class="blue-tooltip">
@@ -3171,16 +3168,37 @@ public function get_pancard(){
 
 		if($direct_down == 2){
 		 
-			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);	
+			update_hrmpost_meta($sponserid,'star',1);
+			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
+			
+			if(check_hold_payment($sponserid,'2,5,3,4') == 1){
+
+				if(get_hrm_postmeta($sponserid,'double_star')==2){
+					update_hrmpost_meta($sponserid,'double_star',1);
+				}
+
+				if(get_hrm_postmeta($sponserid,'triple_star')==2){
+					update_hrmpost_meta($sponserid,'triple_star',1);
+				}
+
+				
+
+				pay_hold_commission($sponserid,'2,5,3,4');
+
+			}
 
 			if($sec_level_sponsor){
 				////star bonus 
-				update_hrmpost_meta($sec_level_sponsor,'star',1);
-			    insert_level_count_nodes($sec_level_sponsor,'SL2');
-                pay_commission_to_customer($sec_level_sponsor,500,2,'0',date('Y-m-d'),1);
-				
-			}
+			
+				insert_level_count_nodes($sec_level_sponsor,'SL2');
+				if(get_hrm_postmeta($sec_level_sponsor,'star')==1){
+					pay_commission_to_customer($sec_level_sponsor,500,2,'0',date('Y-m-d'),1);
+				}else{
 
+				pay_commission_to_customer($sec_level_sponsor,500,2,'0',date('Y-m-d'),0);
+				}
+			}
+ 
 		 $third_level_sponsor = get_level_wise_upper_sponsor(3,$sponserid);
 
 		 if($third_level_sponsor){
@@ -3189,14 +3207,24 @@ public function get_pancard(){
 			insert_level_count_nodes($third_level_sponsor,'SL3');
 			$count_double =	get_level_nodes($third_level_sponsor,'SL3');
 			
+		
 			if($count_double==4){
+				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
 				update_hrmpost_meta($third_level_sponsor,'double_star',1);
+				}else{
+					update_hrmpost_meta($third_level_sponsor,'double_star',2);
+				}
 				$upper_double_sponsor_id=get_top_sponsor(1,$third_level_sponsor);
 				$count_upper_double_sponsor =count($upper_double_sponsor_id);
 				pay_double_star_bonus($upper_double_sponsor_id,$count_upper_double_sponsor);
 
 			}elseif($count_double > 4){
-	            pay_commission_to_customer($third_level_sponsor,1500,5,'0',date('Y-m-d'),1);
+				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
+				pay_commission_to_customer($third_level_sponsor,1500,5,'0',date('Y-m-d'),1);
+				}else{
+					pay_commission_to_customer($third_level_sponsor,1500,5,'0',date('Y-m-d'),0);
+
+				}
 			}
 			
 			
