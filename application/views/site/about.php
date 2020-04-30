@@ -23,7 +23,7 @@
     
 <h3 align="center"> <span> Why </span> RMGM Wellness </h3></div>
 <div class="info_inne " >
-<p style="padding-left: 10px; padding-right:10px;" >  RMGM Wellness Pvt Ltd known to offer best result oriented Ayurvedic products since last 20 years . All unique formulations are based on 50 years Experience which enhances the efficiency of products and keep increasing the list of our happy customers . Company portfolio includes more than 250 FDA approved Products and GMP certified own manufacturing plant with advance machinery . RMGM is the name for trust and result in pocket friendly prices .</p> </div>
+<p style="padding-left: 10px; padding-right:10px;" >  RMGM Bizz World Pvt Ltd known to offer best result oriented Ayurvedic products since last 2 years . All unique formulations are based on 5 years Experience which enhances the efficiency of products and keep increasing the list of our happy customers . Company portfolio includes more than 125 FDA approved Products and GMP certified own manufacturing plant with advance machinery . RMGM is the name for trust and result in pocket friendly prices .</p> </div>
 </div> 
  
 

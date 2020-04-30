@@ -58,6 +58,12 @@
                             </div>
                         </div>
                         <div class="media contact-info">
+                            <span class="contact-info__icon"><i class="ti-briefcase"></i></span>
+                            <div class="media-body">
+                                <h3>292 KDA Market Barra-2, Kanpur</p>
+                            </div>
+                        </div>
+                        <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                             <div class="media-body">
                                 <h3>+91 9369526020</h3>
@@ -67,7 +73,7 @@
                         <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-email"></i></span>
                             <div class="media-body">
-                                <h3>info@mybizworld.com</h3>
+                                <h3>info@mybizworld.net</h3>
                                 <p>Send us your query anytime!</p>
                             </div>
                         </div>

@@ -12,7 +12,7 @@
                                 <span></span>
                                 <h3>Welcome To
                                 RMGM
-                                Bizzworld
+                                Bizz World Pvt Ltd
                                     
                                     </h3>
                                     <p>Everything you want in life is waiting for you, outside your comfort zone and inside your effort zone.</p>
