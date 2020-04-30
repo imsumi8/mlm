@@ -3208,7 +3208,7 @@ public function get_pancard(){
 			$count_double =	get_level_nodes($third_level_sponsor,'SL3');
 			
 		
-			if($count_double==4){
+			if($count_double==3){
 				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
 				update_hrmpost_meta($third_level_sponsor,'double_star',1);
 				}else{
@@ -3220,9 +3220,9 @@ public function get_pancard(){
 
 			}elseif($count_double > 4){
 				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
-				pay_commission_to_customer($third_level_sponsor,1500,5,'0',date('Y-m-d'),1);
+				pay_commission_to_customer($third_level_sponsor,2000,5,'0',date('Y-m-d'),1);
 				}else{
-					pay_commission_to_customer($third_level_sponsor,1500,5,'0',date('Y-m-d'),0);
+					pay_commission_to_customer($third_level_sponsor,2000,5,'0',date('Y-m-d'),0);
 
 				}
 			}
