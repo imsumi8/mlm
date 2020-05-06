@@ -84,9 +84,10 @@
 		 }else{
 
             $all_node =get_all_hrm_nodes(6);
+            $level =array('0'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0);
             if(!empty($all_node)){
 
-                $level =array('0'=>0,'1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'6'=>0,'7'=>0);
+            
                 foreach($all_node as $node){
 
                     $hrm_id = $node->HRM_ID;
