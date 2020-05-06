@@ -176,8 +176,8 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-												    <span class="weight-500 uppercase-font txt-light block font-13"> SPONSOR SALES INCENTIVE</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo '0' ?></span></span>
+												    <span class="weight-500 uppercase-font txt-light block font-13"> Autopool Bonus</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $autopool=get_sum_wallet_balance_type($userid,6); ?></span></span>
 												</div>
 											
 											</div>	

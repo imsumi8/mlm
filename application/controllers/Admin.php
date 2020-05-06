@@ -489,15 +489,29 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/footer');
 	}
 
-	public function autopool_list(){
+	public function tripleStar_list(){
 	   
 		$data['title']='STAR VIEW';
-	    $data['subpage']='autoppol';
+	    $data['subpage']='triple_star';
 		
 		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
 		$data['result']=direct_member_list($this->session->userdata('userid'),3);
 	    $this->load->view('admin/header',$data);
 		$this->load->view('admin/tree/autopooltree');
+		$this->load->view('admin/footer');
+	   
+	
+	}
+
+	public function autopool_list(){
+	   
+		$data['title']='STAR VIEW';
+	    $data['subpage']='autopool';
+		
+		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
+		$data['result']=direct_member_list($this->session->userdata('userid'),3);
+	    $this->load->view('admin/header',$data);
+		$this->load->view('admin/tree/autopool');
 		$this->load->view('admin/footer');
 	   
 	

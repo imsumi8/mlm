@@ -507,7 +507,11 @@
 					
 				
 						<li>
-					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Triple Star</a>
+					<a <?php if($subpage=='triple_star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/tripleStar_list"><i class="fa fa-circle <?php if($subpage=='triple_star') { echo 'clrred'; } ?>"></i> Triple Star</a>
+				</li>	
+
+				<li>
+					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Autopool</a>
 				</li>	
 
 						</ul>

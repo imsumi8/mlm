@@ -85,10 +85,10 @@
 		$row = $query->result();
 		return $row;
     }
-    function get_mlm_stages($mlmdesc_id,$level){
+    function get_autopool_stages($mlmdesc_id,$level){
         $ci=& get_instance();
 		$ci->load->database(); 
-		$sql = "select * from mlm_stages m LEFT JOIN level_description l on l.STAGE_ID=m.STAGE_ID where m.MLM_DESC_ID='".$mlmdesc_id."' and m.LEVELS='".$level."'"; 
+		$sql = "select * from mlm_autopool_stages  where LEVEL_NO='".$level."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		return $row;
@@ -1501,6 +1501,26 @@
 		$ci->db->insert('hrm_level_tracking',$details);
 		return true;
 	}
+
+	function insert_hrm_autopool($MLM_DESC_ID,$level_id,$hrmid,$pos,$root)
+	{
+		date_default_timezone_set('Asia/Calcutta');
+		$ci =& get_instance();
+		$ci->load->database();
+		$details=array
+		       (
+				 	'MLM_DESC_ID'=>$MLM_DESC_ID,
+				 	'LEVEL_ID'=>$level_id,
+				 	'HRM_ID'=>$hrmid,
+				 	'POSITION'=>$pos,
+				 	'POSITION_ID'=>$root,
+				    'COUNT_NODE'=>0,
+				    'DATE_TIME'=>date('Y-m-d H:i:s'),
+				 	
+				);
+		$ci->db->insert('autopool',$details);
+		return true;
+	}
 	function insert_hrm_level_free_track($MLM_DESC_ID,$level_id,$hrmid,$pos,$added_by,$root,$sponsor)
 	{
 	    date_default_timezone_set('Asia/Calcutta');
@@ -1862,7 +1882,7 @@
 	{
 		$ci=& get_instance();
 		$ci->load->database(); 
-		$sql = "select * from hrm_level_tracking where POSITION_ID='".$hrm."' and LEVEL_ID='1' and MLM_DESC_ID='".$mlmdesc."'"; 
+		$sql = "select * from autopool where POSITION_ID='".$hrm."' and LEVEL_ID='1' and MLM_DESC_ID='".$mlmdesc."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		if(!empty($row)){
@@ -2124,13 +2144,13 @@
 	function  update_hrm_count_level_count_node($hrm_id,$hrm_level,$mlmdesc){
 	    $ci=& get_instance();
 		$ci->load->database(); 
-		$sql = "select COUNT_NODE from hrm_level_tracking where HRM_ID='".$hrm_id."' and LEVEL_ID='".$hrm_level."' and MLM_DESC_ID='".$mlmdesc."'"; 
+		$sql = "select COUNT_NODE from autopool hrm_level_tracking where HRM_ID='".$hrm_id."' and LEVEL_ID='".$hrm_level."' and MLM_DESC_ID='".$mlmdesc."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		if(!empty($row)){
 		    $count=$row[0]->COUNT_NODE;
 		    $count=$count+1;
-			$sql = "update `hrm_level_tracking` set COUNT_NODE='".$count."' where HRM_ID='".$hrm_id."' and LEVEL_ID='".$hrm_level."' and MLM_DESC_ID='".$mlmdesc."'"; 
+			$sql = "update `autopool` set COUNT_NODE='".$count."' where HRM_ID='".$hrm_id."' and LEVEL_ID='".$hrm_level."' and MLM_DESC_ID='".$mlmdesc."'"; 
 			$query = $ci->db->query($sql);
 		}
 	}
@@ -2335,6 +2355,21 @@
 			return 0;
 		}
 	}
+
+	function autopool_level_track($sponsor_level,$hrmid,$mlm_desc)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from autopool where LEVEL_ID='".$sponsor_level."' and HRM_ID='".$hrmid."' and MLM_DESC_ID='".$mlm_desc."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return 0;
+		}
+	}
+
 	function  check_available_position($positionid_level,$positionid){
 	    $ci=& get_instance();
 		$ci->load->database(); 
@@ -2370,6 +2405,22 @@
 		    return '';
 		}
 	}
+
+	function get_reverse_parent_autopool($positionid,$mlm_desc){
+	   
+	    $ci=& get_instance();
+		$ci->load->database(); 
+	    $sql = "select POSITION_ID from autopool where HRM_ID='".$positionid."' and MLM_DESC_ID='".$mlm_desc."'"; 
+		
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+	        return 	$row[0]->POSITION_ID;
+		}else{
+		    return '';
+		}
+	}
+
 	function get_sponsor_id_free($userid,$mlm_desc){
 	   
 	    $ci=& get_instance();
@@ -2504,6 +2555,16 @@
 		}else{
 		    return 0;
 		}
+	}
+
+	function  get_all_hrm_nodes($mlm_desc){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from hrm_count_nodes where MLM_DESC_ID='".$mlm_desc."' and COUNT > 0"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+	    return $row;
+		
 	}
 	
 	function update_hrm_reward_count($hrm,$status,$REWARD_INCOME_ID,$count)
@@ -2751,7 +2812,7 @@
 	function get_members_valid($level){
 	    $sum=0;
         for($i=0;$i<=$level;$i++){
-         $sum=$sum+pow(2,$i);
+         $sum=$sum+pow(4,$i);
         }
         return  $sum-1;
 	}
@@ -4376,12 +4437,12 @@
         $sql = "INSERT INTO `priority_table`(`HRM_ID`, `MLM_DESC_ID`, `POSITION_ID`,`CURRENT_LEVEL`) VALUES ('".$hrmid."','".$mlmdesc."','1','0')"; 
 		$query = $ci->db->query($sql);
     }
-    function get_current_pos($sponsorid,$mlm_desc){
+    function get_current_pos($mlm_desc){
         $ci=& get_instance();
 		$ci->load->database(); 
 	    $query=$ci->db->query('Select COUNT(*) as cnt from priority_table where MLM_DESC_ID="'.$mlm_desc.'"');
         $result=$query->result();
-        $position=get_option('auto_poolid'.$mlm_desc);
+        $position=get_option('auto_poolid');
         $lastblank=$position;
         if($result[0]->cnt>1){
     	    for($i=1;$position!='';$i++){
@@ -4412,7 +4473,7 @@
 	   
 	    $ci=& get_instance();
 		$ci->load->database(); 
-	    $sql = "select HRM_ID from hrm_level_tracking where POSITION_ID='".$hrm_id."' and POSITION='".$pos."' and LEVEL_ID=1 and MLM_DESC_ID='".$mlm_desc."' and HRM_ID!=5000"; 
+	    $sql = "select HRM_ID from autopool where POSITION_ID='".$hrm_id."' and POSITION='".$pos."' and LEVEL_ID=1 and MLM_DESC_ID='".$mlm_desc."' and HRM_ID!=5000"; 
 	    $query = $ci->db->query($sql);
 		$row = $query->result();
 		if(!empty($row)){
@@ -4442,9 +4503,9 @@
 	      
 	        /* for updating levels */
 	        for($x=0;$hrm_id!='5000';$x++){
-			    $hrm_id=get_reverse_parent_hrms($hrm_id,$mlm_desc);
+			    $hrm_id=get_reverse_parent_autopool($hrm_id,$mlm_desc);
 			     if($hrm_id!='5000'){
-					$array[]=$hrm_id;
+					$array[]=$hrm_id;///////////9055
 					$current_level=get_current_priority($hrm_id,$mlm_desc);
 					$valid=get_level_row_to_give($hrm_id,$current_level[0]->CURRENT_LEVEL,$mlm_desc);
 					if($valid==1){
@@ -4454,19 +4515,19 @@
 			}  
 			 
 	        /* first parent */
-    		$hrm_id=get_reverse_parent_hrms($orighrm,$mlm_desc);
+    		$hrm_id=get_reverse_parent_autopool($orighrm,$mlm_desc);
     		$parenthrm=$hrm_id;
     		$checkcount=get_two_just_down($hrm_id,$mlm_desc);
-    		if($checkcount<2){
-    		    update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',2);
+    		if($checkcount<4){
+    		    update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',$checkcount+1);
     		}
-    		else if($checkcount==2){
+    		else if($checkcount==4){
     		    update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',1);
     		    for($x=0;$hrm_id!='5000';$x++){
-    			    $hrm_id=get_reverse_parent_hrms($hrm_id,$mlm_desc);
+    			    $hrm_id=get_reverse_parent_autopool($hrm_id,$mlm_desc);
     			    if($hrm_id!='5000'){
     					$pos=get_current_priority($hrm_id,$mlm_desc)[0]->POSITION_ID;
-            		    if($pos<2){
+            		    if($pos<4){
             		        update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',$pos+1);
             		        break;
             		    }else{
@@ -4478,7 +4539,7 @@
     		/* for giving the autopool income */
     		$fresharr=array();
     		for($x=0;$orighrm!='5000';$x++){
-			    $orighrm=get_reverse_parent_hrms($orighrm,$mlm_desc);
+			    $orighrm=get_reverse_parent_autopool($orighrm,$mlm_desc);
 			    if($orighrm!='5000'){
 					$fresharr[]=$orighrm;
 				}
@@ -4487,48 +4548,29 @@
 			if(!empty($fresharr)){
 			    foreach($fresharr as $hrm_id){
 			        insert_count_nodes($hrm_id,$mlm_desc);
-        		    $stagewise_sponsor_level=get_hrm_postmeta($hrm_id,'autopool'.$mlm_desc.'level');
+        		    $stagewise_sponsor_level=get_hrm_postmeta($hrm_id,'autopoollevel');
         		    $count_nodes=get_member_nodes($hrm_id,$mlm_desc);
-        		    $full_dt=get_mlm_stages($mlm_desc,$stagewise_sponsor_level);/*main line */
+        		    $full_dt=get_autopool_stages($mlm_desc,$stagewise_sponsor_level);/*main line */
         		    $check_node=get_members_valid($stagewise_sponsor_level);
-        		    $descmaxlevel=get_max_level($mlm_desc);
-        		   
+					$descmaxlevel=8;
+					
+					if(!empty($full_dt)){
+						$amt=$full_dt[0]->LEVEL_AMOUNT;
+						if($amt>0){
+							pay_commission_to_customer($hrm_id,$amt,$mlm_desc,'0',date('Y-m-d'),1);
+						}
+					}
+        		       
         		    if($check_node<=$count_nodes){
-        		        if(!empty($full_dt)){
-            		        $amt=$full_dt[0]->AMOUNT;
-            		        if($amt>0){
-            		            pay_commission_to_customer($hrm_id,$amt,$mlm_desc,'0',date('Y-m-d'),1);
-            		        }
-        		        }
-        		        $arr=hrm_level_track($stagewise_sponsor_level,$hrm_id,$mlm_desc);
+        		       
+        		        $arr=autopool_level_track($stagewise_sponsor_level,$hrm_id,$mlm_desc);
         				$sponsor_level=$arr[0]->LEVEL_ID+1;
         				$pos=$arr[0]->POSITION;
-        				$added_by=$arr[0]->ADDED_BY;
         				$positionid=$arr[0]->POSITION_ID;
-        				$sponserids_prev=$arr[0]->SPONSOR_ID;
-        				insert_hrm_level_track($mlm_desc,$sponsor_level,$hrm_id,$pos,$added_by,$positionid,$sponserids_prev);
-        				update_hrmpost_meta($hrm_id,'autopool'.$mlm_desc.'level',$sponsor_level);
-        				//need to implemented here 
-        				if($sponsor_level>$descmaxlevel){
-        				     $newmlm_desc=$mlm_desc+1;
-        				     insert_hrm_level_free_track($newmlm_desc,1,$hrm_id,$pos,$added_by,$positionid,$sponserids_prev);
-        				     //for auto pool up coming
-        				   /* $newmlm_desc=$mlm_desc+1;
-        				    if(get_option('auto_pool'.$newmlm_desc)==0){
-			                    update_mlm_option('auto_poolid'.$newmlm_desc,$hrm_id);
-			                    update_mlm_option('auto_pool'.$newmlm_desc,1);
-			                }
-        				    update_hrmpost_meta($hrm_id,'autopool'.$newmlm_desc.'level',1);
-        				    insert_count_nodes($hrm_id,$newmlm_desc);
-        				    insert_priority($hrm_id,$newmlm_desc);
-			                $getpos=get_current_pos($sponserids_prev,$newmlm_desc);
-			               
-                    		$positionno=$getpos[0];
-                            $positionid=$getpos[1];
-                            insert_hrm_level_track($newmlm_desc,1,$hrm_id,$positionno,$added_by,$positionid,$sponserids_prev);
-                            update_priority($hrm_id,$newmlm_desc);
-                	        */
-                		}
+        			
+        				insert_hrm_autopool($mlm_desc,$sponsor_level,$hrm_id,$pos,$positionid);
+        				update_hrmpost_meta($hrm_id,'autopoollevel',$sponsor_level);
+        				
         			}
         		}
 			}
@@ -4539,7 +4581,7 @@
 	{
 		$ci=& get_instance();
 		$ci->load->database(); 
-		$sql = "select count(*) as cnt from hrm_level_tracking where POSITION_ID='".$hrm."' and LEVEL_ID='1' and MLM_DESC_ID='".$mlmdesc."'"; 
+		$sql = "select count(*) as cnt from autopool where POSITION_ID='".$hrm."' and LEVEL_ID='1' and MLM_DESC_ID='".$mlmdesc."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		$arr=array();
@@ -4627,7 +4669,7 @@
     }
     function get_members_validnew($level){
 	    $sum=0;
-        $sum=pow(2,$level);
+        $sum=pow(4,$level);
         
         return $sum;
 	}

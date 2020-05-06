@@ -3152,6 +3152,15 @@ public function get_pancard(){
 	if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
 						
 		$direct_down=get_direct_by_hrm($sponserid);
+
+		$parent = $sponserid;
+		for($x=0;$parent!=5000;$x++){
+			$parent=get_reverse_parent_hrms($parent,3);
+			if($parent!=5000){
+				
+				insert_count_nodes($parent,3);	
+			}
+		}
 		 
 		insert_count_nodes($sponserid,3);
 
@@ -3167,6 +3176,19 @@ public function get_pancard(){
         }
 
 		if($direct_down == 2){
+
+		if(get_option('auto_pool')==0){
+				update_mlm_option('auto_poolid',$sponserid);
+				update_mlm_option('auto_pool',1);
+			}
+			update_hrmpost_meta($sponserid,'autopoollevel',1);
+			insert_count_nodes($sponserid,6);
+			insert_priority($sponserid,6);
+			$getpos=get_current_pos(6);
+			$positionno=$getpos[0];
+			$positionid=$getpos[1];
+			insert_hrm_autopool(6,1,$sponserid,$positionno,$positionid);
+			update_priority($sponserid,6);
 		 
 			update_hrmpost_meta($sponserid,'star',1);
 			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
