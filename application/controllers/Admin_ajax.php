@@ -3173,22 +3173,24 @@ public function get_pancard(){
 			$income = get_level_income_by_level(1);
 			////level 1 team sales incentive
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
-        }
+        }else{
+			pay_commission_to_customer($sponserid,500,1,'0',date('Y-m-d'),1);
+		}
 
 		if($direct_down == 2){
 
-		if(get_option('auto_pool')==0){
-				update_mlm_option('auto_poolid',$sponserid);
-				update_mlm_option('auto_pool',1);
-			}
-			update_hrmpost_meta($sponserid,'autopoollevel',1);
-			insert_count_nodes($sponserid,6);
-			insert_priority($sponserid,6);
-			$getpos=get_current_pos(6);
-			$positionno=$getpos[0];
-			$positionid=$getpos[1];
-			insert_hrm_autopool(6,1,$sponserid,$positionno,$positionid);
-			update_priority($sponserid,6);
+		// if(get_option('auto_pool')==0){
+		// 		update_mlm_option('auto_poolid',$sponserid);
+		// 		update_mlm_option('auto_pool',1);
+		// 	}
+		// 	update_hrmpost_meta($sponserid,'autopoollevel',1);
+		// 	insert_count_nodes($sponserid,6);
+		// 	insert_priority($sponserid,6);
+		// 	$getpos=get_current_pos(6);
+		// 	$positionno=$getpos[0];
+		// 	$positionid=$getpos[1];
+		// 	insert_hrm_autopool(6,1,$sponserid,$positionno,$positionid);
+		// 	update_priority($sponserid,6);
 		 
 			update_hrmpost_meta($sponserid,'star',1);
 			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
@@ -3230,7 +3232,7 @@ public function get_pancard(){
 			$count_double =	get_level_nodes($third_level_sponsor,'SL3');
 			
 		
-			if($count_double==3){
+			if($count_double==4){
 				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
 				update_hrmpost_meta($third_level_sponsor,'double_star',1);
 				}else{
