@@ -105,7 +105,8 @@ class Admin_ajax extends CI_Controller {
             			$upload_nm=$full_file_name;
         				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"] , $uploadfile);	//for moving image 		
         				$packname=$_POST['pack_name'];
-        				$amts=get_epin_amt_by_id($_POST['amtid']);
+						// $amts=get_epin_amt_by_id($_POST['amtid']);
+						$amts=$_POST['amtid'];
         			     $data = array(
                             'PACKAGE_NAME'=>$packname,
                             'PACKAGE_PRICE'=>$amts,
@@ -154,13 +155,15 @@ class Admin_ajax extends CI_Controller {
                             update_pack_meta($packid,$_POST['categ_'.$i],$_POST['attr_name_'.$i],$_POST['attr_value_'.$i]);
                         }
                     }
-                    $data = array(
-                        'EPIN_AMT_ID'=>$packid,
-                        'EPIN_AMT'=>$amts,
-                        
-                    );
-                    $this->db->insert('epinamount',$data);
-            	}
+                   
+				}
+				
+				$data = array(
+					'EPIN_AMT_ID'=>$packid,
+					'EPIN_AMT'=>$amts,
+					
+				);
+				$this->db->insert('epinamount',$data);
            }
     	   if($msg=="Unsupported file type"){
     	       echo $msg;
@@ -188,10 +191,12 @@ class Admin_ajax extends CI_Controller {
             		
             			$upload_nm=$full_file_name;
         				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"] , $uploadfile);	//for moving image 		
-        				$packname=$_POST['pack_name'];
+						$packname=$_POST['pack_name'];
+						$amts=$_POST['editamt'];
         			     $data = array(
                             'PACKAGE_NAME'=>$packname,
-                            'PACKAGE_INCOME'=>1,
+							'PACKAGE_INCOME'=>1,
+							'PACKAGE_PRICE'=>$amts,
                             'CAPPING_LIMIT'=>'999999999999999999999',
                             'PACKAGE_DESC'=>$_POST['pack_desc'],
                             'PACKAGE_PV'=>'',
@@ -211,10 +216,12 @@ class Admin_ajax extends CI_Controller {
             			$msg= "Unsupported file type";
             		}
             	}else{
-            	    $packname=$_POST['pack_name'];
+					$packname=$_POST['pack_name'];
+					$amts=$_POST['editamt'];
     			     $data = array(
                         'PACKAGE_NAME'=>$packname,
-                        'PACKAGE_INCOME'=>1,
+						'PACKAGE_INCOME'=>1,
+						'PACKAGE_PRICE'=>$amts,
                         'CAPPING_LIMIT'=>'999999999999999999999',
                         'PACKAGE_DESC'=>$_POST['pack_desc'],
                         'PACKAGE_PV'=>'',
@@ -230,7 +237,16 @@ class Admin_ajax extends CI_Controller {
                             update_pack_meta($_POST['pack_id'],$_POST['categ_'.$i],$_POST['attr_name_'.$i],$_POST['attr_value_'.$i]);
                         }
                     }
-            	}
+				}
+				
+				$data = array(
+					
+					'EPIN_AMT'=>$amts,
+					
+				);
+
+				$this->db->where('EPIN_AMT_ID',$_POST['pack_id']);
+				$this->db->update('epinamount',$data);
            }
     	   if($msg=="Unsupported file type"){
     	       echo $msg;

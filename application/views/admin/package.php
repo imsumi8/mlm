@@ -62,7 +62,7 @@
 								                            <th><?php echo $pk->PACKAGE_NAME; ?></th>
 								                            <th><?php echo $pk->PACKAGE_DESC; ?></th>
 								                            <th><?php echo $pk->PACKAGE_PRICE; ?></th>
-								                            <th><button attr-id="<?php echo $pk->PACKAGE_ID; ?>" attr-desc="<?php echo $pk->PACKAGE_DESC; ?>" attr-nm="<?php echo $pk->PACKAGE_NAME; ?>" attr-img="<?php echo $pk->PACKAGE_IMG; ?>" type="button" class="btn btn-success packedit"><i class="fa fa-edit"></i></button></th>
+								                            <th><button attr-id="<?php echo $pk->PACKAGE_ID; ?>" attr-amt="<?php echo $pk->PACKAGE_PRICE; ?>" attr-desc="<?php echo $pk->PACKAGE_DESC; ?>" attr-nm="<?php echo $pk->PACKAGE_NAME; ?>" attr-img="<?php echo $pk->PACKAGE_IMG; ?>" type="button" class="btn btn-success packedit"><i class="fa fa-edit"></i></button></th>
 								                        </tr>
 								                    <?php
 								                    $srno++;
@@ -199,6 +199,12 @@
                     <input type="text" class="pack_name form-control" name="pack_name" required>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Pack Amount</label>
+                    <input type="number" class="editamt form-control" name="editamt" required>
+                </div>
+            </div>
              <div class="row pad_tp_10">
                 <div class="col-md-12">
                     <label>Pack Description</label>
@@ -308,12 +314,14 @@
 	        var ref=$('#editpackform');
 	        var id=$(this).attr('attr-id');
 	        var nm=$(this).attr('attr-nm');
+            var amt=$(this).attr('attr-amt');
 	        var desc=$(this).attr('attr-desc');
 	        var filename=$(this).attr('attr-img');
 	        $('#editpackmodel').modal('show');
 	        $('#editpackform').find('.pack_id').val(id);
 	        $('#editpackform').find('.filename').val(filename);
 	        $('#editpackform').find('.pack_name').val(nm);
+            $('#editpackform').find('.editamt').val(amt);
 	        $('#editpackform').find('.pack_desc').val(desc);
 	        ref.find('.myattrtbody').html("");   
 	        	$.ajax({    
