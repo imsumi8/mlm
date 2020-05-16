@@ -33,7 +33,7 @@ class Admin extends CI_Controller {
 				redirect('admin');
 			}
 		}
-		to_renew_perform_bonus();
+		// to_renew_perform_bonus();
 	}
 	public function index()
 	{
@@ -950,7 +950,7 @@ class Admin extends CI_Controller {
                                 1=> 'HRM_NAME',
                                 2=> 'HRM_DATE',
                                 3=> 'HRM_DATE',
-                                4=> 'HRM_STATUS',
+                                4=> 'PAY_STATUS',
                                 5=> 'HRM_ADDED_TIME',
                                 6 =>'HRM_ID', 
                                 7=> 'HRM_NAME',
@@ -1011,6 +1011,59 @@ class Admin extends CI_Controller {
                         );
                 
             echo json_encode($json_data); 
-    }
+	}
+	
+	public function team_bonus(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Manage Income | RMGM';
+    	    $data['subpage']='team_bonus';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/income/team_bonus');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
+	public function star_bonus(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Manage Income | RMGM';
+    	    $data['subpage']='star_bonus';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/income/star_bonus');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
+	public function doublestar_bonus(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Manage Income | RMGM';
+    	    $data['subpage']='doublestar_bonus';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/income/doublestar_bonus');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
+	public function triplestar_bonus(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Manage Income | RMGM';
+    	    $data['subpage']='triplestar_bonus';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/income/triplestar_bonus');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
 }
 

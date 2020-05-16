@@ -607,6 +607,35 @@
 				</li>
 
 				<li>
+					<a <?php if($title=='Manage Income') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#income_dr"><div class="pull-left"><i class="fa fa-cart-plus mr-20"></i><span class="right-nav-text">Manage Income</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">4</span></div><div class="clearfix"></div></a>
+					<ul id="income_dr" class="collapse collapse-level-1">
+						<li>
+							<a <?php if($subpage=='team_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/team_bonus">
+							<i class="fa fa-circle  <?php if($subpage=='team_bonus') { echo 'clrred'; } ?>"></i> Team Bonus</a>
+						</li>
+						<li>
+							<a  <?php if($subpage=='star_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/star_bonus">
+							<i class="fa fa-circle  <?php if($subpage=='star_bonus') { echo 'clrred'; } ?>"></i> Star Bonus</a>
+						</li>
+
+						<li>
+							<a  <?php if($subpage=='doublestar_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/doublestar_bonus">
+							<i class="fa fa-circle  <?php if($subpage=='doublestar_bonus') { echo 'clrred'; } ?>"></i> Double Star Bonus</a>
+						</li>
+
+						<li>
+							<a  <?php if($subpage=='triplestar_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/triplestar_bonus">
+							<i class="fa fa-circle  <?php if($subpage=='triplestar_bonus') { echo 'clrred'; } ?>"></i> Triple Star Bonus</a>
+						</li>
+
+					
+					
+						</li>
+					</ul>
+				</li>
+
+				<li>
 					<a <?php if($title=='Package | RMGM') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/package"><div class="pull-left"><i class="fa fa-shopping-cart mr-20"></i><span class="right-nav-text">Packages</span></div><div class="clearfix"></div></a>
 				</li>
 			    <li>

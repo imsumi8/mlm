@@ -3174,7 +3174,8 @@ public function get_pancard(){
 			////level 1 team sales incentive
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
         }else{
-			pay_commission_to_customer($sponserid,500,1,'0',date('Y-m-d'),1);
+			$income = get_level_income_by_level(11);
+			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
 		}
 
 		if($direct_down == 2){
@@ -3213,13 +3214,13 @@ public function get_pancard(){
 
 			if($sec_level_sponsor){
 				////star bonus 
-			
+				$sl2income = get_star_income_by_level(2);
 				insert_level_count_nodes($sec_level_sponsor,'SL2');
 				if(get_hrm_postmeta($sec_level_sponsor,'star')==1){
-					pay_commission_to_customer($sec_level_sponsor,500,2,'0',date('Y-m-d'),1);
+					pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),1);
 				}else{
 
-				pay_commission_to_customer($sec_level_sponsor,500,2,'0',date('Y-m-d'),0);
+				pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),0);
 				}
 			}
  
@@ -3243,10 +3244,11 @@ public function get_pancard(){
 				pay_double_star_bonus($upper_double_sponsor_id,$count_upper_double_sponsor);
 
 			}elseif($count_double > 4){
+				$sl3income = get_star_income_by_level(3);
 				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
-				pay_commission_to_customer($third_level_sponsor,2000,5,'0',date('Y-m-d'),1);
+				pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),1);
 				}else{
-					pay_commission_to_customer($third_level_sponsor,2000,5,'0',date('Y-m-d'),0);
+					pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),0);
 
 				}
 			}
@@ -3447,4 +3449,297 @@ public function get_pancard(){
 		die();
 	}
 
+
+	public function get_team_bonus(){
+		$offset = 0;$limit = 10;
+		$sort = 'ID'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`ID` like '%".$search."%' OR `LEVEL_AMOUNT` like '%".$search."%' )";
+		}
+		
+		$res=get_count_team_bonus($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_team_bonus($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			
+			$operate = "<a class='btn btn-xs btn-primary edit-income' data-id='".$row['ID']."' data-toggle='modal' data-target='#editincome' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			
+			$tempRow['ID'] = $row['ID'];
+			$tempRow['LEVEL_NO'] = $row['LEVEL_NO'];
+			$tempRow['LEVEL_AMOUNT'] = $row['LEVEL_AMOUNT'];
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	public function edit_team_bonus()
+	{
+		
+		$category=$_POST['LEVEL_AMOUNT'];
+		$category_id=$_POST['income_id'];
+
+	
+		if($category=='' || $category_id==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$id=updateteambonus($category,$category_id);
+		}
+		  
+			
+		if($id){
+		    echo 'ok';
+		}
+	
+		die();
+	}
+
+
+	public function get_star_bonus(){
+		$offset = 0;$limit = 10;
+		$sort = 'ID'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`ID` like '%".$search."%' OR `LEVEL_AMOUNT` like '%".$search."%' )";
+		}
+		
+		$res=get_count_star_bonus($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_star_bonus($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			
+			$operate = "<a class='btn btn-xs btn-primary edit-income' data-id='".$row['ID']."' data-toggle='modal' data-target='#editincome' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			
+			$tempRow['ID'] = $row['ID'];
+			$tempRow['LEVEL_NO'] = $row['LEVEL_NO'];
+			$tempRow['LEVEL_AMOUNT'] = $row['LEVEL_AMOUNT'];
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	public function edit_star_bonus()
+	{
+		
+		$category=$_POST['LEVEL_AMOUNT'];
+		$category_id=$_POST['income_id'];
+
+	
+		if($category=='' || $category_id==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$id=updatestarbonus($category,$category_id);
+		}
+		  
+			
+		if($id){
+		    echo 'ok';
+		}
+	
+		die();
+	}
+
+
+	
+	public function get_double_bonus(){
+		$offset = 0;$limit = 10;
+		$sort = 'ID'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`ID` like '%".$search."%' OR `LEVEL_AMOUNT` like '%".$search."%' )";
+		}
+		
+		$res=get_count_double_bonus($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_double_bonus($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			
+			$operate = "<a class='btn btn-xs btn-primary edit-income' data-id='".$row['ID']."' data-toggle='modal' data-target='#editincome' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			
+			$tempRow['ID'] = $row['ID'];
+			$tempRow['LEVEL_NO'] = $row['LEVEL_NO'];
+			$tempRow['LEVEL_AMOUNT'] = $row['LEVEL_AMOUNT'];
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	public function edit_double_bonus()
+	{
+		
+		$category=$_POST['LEVEL_AMOUNT'];
+		$category_id=$_POST['income_id'];
+
+	
+		if($category=='' || $category_id==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$id=updatedoublebonus($category,$category_id);
+		}
+		  
+			
+		if($id){
+		    echo 'ok';
+		}
+	
+		die();
+	}
+
+
+	
+	public function get_triple_bonus(){
+		$offset = 0;$limit = 10;
+		$sort = 'ID'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`ID` like '%".$search."%' OR `LEVEL_AMOUNT` like '%".$search."%' )";
+		}
+		
+		$res=get_count_triple_bonus($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_triple_bonus($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			
+			$operate = "<a class='btn btn-xs btn-primary edit-income' data-id='".$row['ID']."' data-toggle='modal' data-target='#editincome' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			
+			$tempRow['ID'] = $row['ID'];
+			$tempRow['LEVEL_NO'] = $row['LEVEL_NO'];
+			$tempRow['LEVEL_AMOUNT'] = $row['LEVEL_AMOUNT'];
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	public function edit_triple_bonus()
+	{
+		
+		$category=$_POST['LEVEL_AMOUNT'];
+		$category_id=$_POST['income_id'];
+
+	
+		if($category=='' || $category_id==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$id=updatetriplebonus($category,$category_id);
+		}
+		  
+			
+		if($id){
+		    echo 'ok';
+		}
+	
+		die();
+	}
 }

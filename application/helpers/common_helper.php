@@ -3514,7 +3514,7 @@
         $ci=& get_instance();
 		$ci->load->database(); 
         $users=	$ci->session->userdata('userid');
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'"  and HRM_STATUS=1 ORDER by ID ASC');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'"  and PAY_STATUS=1 ORDER by ID ASC');
         $result=$query->result();
         if(!empty($result)){ 
                 $arr=array();
@@ -3551,7 +3551,7 @@
         $ci=& get_instance();
 		$ci->load->database(); 
         $users=	$ci->session->userdata('userid');
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'"  and HRM_STATUS=1 ORDER by ID ASC');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'"  and PAY_STATUS=1 ORDER by ID ASC');
         $result=$query->result();
         if(!empty($result)){ 
                 $arr=array();
@@ -3587,7 +3587,7 @@
 		$ci->load->database(); 
 		
         $users=	$ci->session->userdata('userid');
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'"  and HRM_STATUS=1 ORDER by ID ASC');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'"  and PAY_STATUS=1 ORDER by ID ASC');
         $result=$query->result();
         if(!empty($result)){ 
                 $arr=array();
@@ -3729,6 +3729,21 @@
         $ci=& get_instance();
 		$ci->load->database(); 
 		$sql = "select * from level_income where LEVEL_NO='".$level."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->LEVEL_AMOUNT;
+		}else{
+			return 0;
+		}
+		
+	}
+
+		
+	function get_star_income_by_level($level){
+        $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from level_star_income where LEVEL_NO='".$level."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		if(!empty($row)){
@@ -4697,6 +4712,172 @@
 		    return $query[0]->cnt;
 		}else{
 		    return 0;
+		}
+	}
+
+
+	function get_count_team_bonus($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `level_income` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_team_bonus($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `level_income` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function updateteambonus($category,$id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "update `level_income` set LEVEL_AMOUNT='".$category."' where ID='".$id."'"; 
+		$query = $ci->db->query($sql);
+	    if(!empty($query)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+	
+	function get_count_star_bonus($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `level_star_income` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_star_bonus($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `level_star_income` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function updatestarbonus($category,$id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "update `level_star_income` set LEVEL_AMOUNT='".$category."' where ID='".$id."'"; 
+		$query = $ci->db->query($sql);
+	    if(!empty($query)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+
+	
+	function get_count_double_bonus($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `level_double_income` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_double_bonus($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `level_double_income` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function updatedoublebonus($category,$id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "update `level_double_income` set LEVEL_AMOUNT='".$category."' where ID='".$id."'"; 
+		$query = $ci->db->query($sql);
+	    if(!empty($query)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+
+	
+	function get_count_triple_bonus($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `level_triple_income` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_triple_bonus($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `level_triple_income` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function updatetriplebonus($category,$id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "update `level_triple_income` set LEVEL_AMOUNT='".$category."' where ID='".$id."'"; 
+		$query = $ci->db->query($sql);
+	    if(!empty($query)){
+			return 1;
+		}else{
+			return 0;
 		}
 	}
 ?>
