@@ -4880,4 +4880,44 @@
 			return 0;
 		}
 	}
+
+	function get_count_autopool_bonus($where)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT(*) as total FROM `mlm_autopool_stages` ".$where; 
+		$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function get_autopool_bonus($where,$sort,$order,$offset,$limit)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "SELECT * FROM `mlm_autopool_stages` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+				$query = $ci->db->query($sql);
+		$row = $query->result_array();
+		if(!empty($row)){
+			return $row;
+		}else{
+			return '';
+		}
+	}
+
+	function updateautopoolbonus($category,$id){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "update `mlm_autopool_stages` set LEVEL_AMOUNT='".$category."' where ID='".$id."'"; 
+		$query = $ci->db->query($sql);
+	    if(!empty($query)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 ?>

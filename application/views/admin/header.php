@@ -510,9 +510,9 @@
 					<a <?php if($subpage=='triple_star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/tripleStar_list"><i class="fa fa-circle <?php if($subpage=='triple_star') { echo 'clrred'; } ?>"></i> Triple Star</a>
 				</li>	
 
-				<!-- <li>
-					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Autopool</a>
-				</li>	 -->
+				<li>
+					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Travelpool</a>
+				</li>	
 
 						</ul>
 				</li>
@@ -629,7 +629,10 @@
 							<i class="fa fa-circle  <?php if($subpage=='triplestar_bonus') { echo 'clrred'; } ?>"></i> Triple Star Bonus</a>
 						</li>
 
-					
+						<li>
+							<a  <?php if($subpage=='autopool_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_bonus">
+							<i class="fa fa-circle  <?php if($subpage=='autopool_bonus') { echo 'clrred'; } ?>"></i> Travelpool Bonus</a>
+						</li>
 					
 						</li>
 					</ul>

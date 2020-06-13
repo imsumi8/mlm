@@ -3132,7 +3132,7 @@ public function get_pancard(){
 		if(check_pinno($epinno,$pack,$hrm_id,$sponserid)){
         	    $check=1;
         	  
-            }else{
+        }else{
         	    $check=2;
 			}
 			
@@ -3194,20 +3194,23 @@ public function get_pancard(){
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
 		}
 
+		if(get_option('auto_pool')==0){
+			update_mlm_option('auto_poolid',$sponserid);
+			update_mlm_option('auto_pool',1);
+		}
+		
+		update_hrmpost_meta($sponserid,'autopoollevel',1);
+		insert_count_nodes($sponserid,6);
+		insert_priority($sponserid,6);
+		$getpos=get_current_pos(6);
+		$positionno=$getpos[0];
+		$positionid=$getpos[1];
+		insert_hrm_autopool(6,1,$sponserid,$positionno,$positionid);
+		update_priority($sponserid,6);
+
 		if($direct_down == 2){
 
-		// if(get_option('auto_pool')==0){
-		// 		update_mlm_option('auto_poolid',$sponserid);
-		// 		update_mlm_option('auto_pool',1);
-		// 	}
-		// 	update_hrmpost_meta($sponserid,'autopoollevel',1);
-		// 	insert_count_nodes($sponserid,6);
-		// 	insert_priority($sponserid,6);
-		// 	$getpos=get_current_pos(6);
-		// 	$positionno=$getpos[0];
-		// 	$positionid=$getpos[1];
-		// 	insert_hrm_autopool(6,1,$sponserid,$positionno,$positionid);
-		// 	update_priority($sponserid,6);
+		
 		 
 			update_hrmpost_meta($sponserid,'star',1);
 			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
@@ -3749,6 +3752,79 @@ public function get_pancard(){
 		}else{
 		   
     				$id=updatetriplebonus($category,$category_id);
+		}
+		  
+			
+		if($id){
+		    echo 'ok';
+		}
+	
+		die();
+	}
+
+
+	public function get_autopool_bonus(){
+		$offset = 0;$limit = 10;
+		$sort = 'ID'; $order = 'ASC';
+		$where = '';
+		$table = $_GET['table'];
+		
+		if(isset($_POST['id']))
+			$id = $_POST['id'];
+		if(isset($_GET['offset']))
+			$offset = $_GET['offset'];
+		if(isset($_GET['limit']))
+			$limit = $_GET['limit'];
+		if(isset($_GET['order']))
+			$order = $_GET['order'];
+		if(isset($_GET['search'])){
+			$search = $_GET['search'];
+			$where = " where (`ID` like '%".$search."%' OR `LEVEL_AMOUNT` like '%".$search."%' )";
+		}
+		
+		$res=get_count_autopool_bonus($where);
+	
+		foreach($res as $row){
+			$total = $row['total'];
+		}
+		
+		$res = get_autopool_bonus($where,$sort,$order,$offset,$limit);
+		
+		$bulkData = array();
+		$bulkData['total'] = $total;
+		$rows = array();
+		$tempRow = array();
+		$i=1;
+		foreach($res as $row){
+			
+			$operate = "<a class='btn btn-xs btn-primary edit-income' data-id='".$row['ID']."' data-toggle='modal' data-target='#editincome' style='background:#fb6752;border-color:#fb6752' title='Edit'><i class='fa fa-edit'></i></a>";
+			
+			$tempRow['ID'] = $row['ID'];
+			$tempRow['LEVEL_NO'] = $row['LEVEL_NO'];
+			$tempRow['LEVEL_AMOUNT'] = $row['LEVEL_AMOUNT'];
+			$tempRow['operate'] = $operate;
+			$rows[] = $tempRow;
+			$i++;
+		}
+		
+		$bulkData['rows'] = $rows;
+		print_r(json_encode($bulkData));
+
+	}
+
+	public function edit_autopool_bonus()
+	{
+		
+		$category=$_POST['LEVEL_AMOUNT'];
+		$category_id=$_POST['income_id'];
+
+	
+		if($category=='' || $category_id==''){
+			echo $msg= 'Star fields should not be blank';
+			die();
+		}else{
+		   
+    				$id=updateautopoolbonus($category,$category_id);
 		}
 		  
 			

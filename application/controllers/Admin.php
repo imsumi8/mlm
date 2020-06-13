@@ -1065,5 +1065,18 @@ class Admin extends CI_Controller {
 	    }
 	}
 
+	public function autopool_bonus(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Manage Income | RMGM';
+    	    $data['subpage']='autopool_bonus';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/income/autopool_bonus');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
 }
 

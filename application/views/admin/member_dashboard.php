@@ -169,14 +169,14 @@
 				
 	<div class="row" >
          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
-						<div class="panel panel-default card-view pa-0" style="display:none">
+						<div class="panel panel-default card-view pa-0" >
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
 									<div class="sm-data-box actived">
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-												    <span class="weight-500 uppercase-font txt-light block font-13"> Autopool Bonus</span>
+												    <span class="weight-500 uppercase-font txt-light block font-13"> Travelpool Bonus</span>
 													<span class="txt-light block counter"><span class="counter-anim"><?php echo $autopool=get_sum_wallet_balance_type($userid,6); ?></span></span>
 												</div>
 											
@@ -191,7 +191,7 @@
 
 
 
-<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
@@ -210,6 +210,35 @@
 							</div>
 						</div>
 					</div>
+
+
+				
+	<div class="row" >
+        
+
+
+
+<div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="sm-data-box bg-red">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+													<span class="weight-500 uppercase-font txt-light block font-13">RP Wallet</span>
+													<span class="txt-light block counter"><span class="counter-anim">0</span></span>
+												</div>
+												
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				
 
 
 							
