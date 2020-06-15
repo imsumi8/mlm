@@ -48,9 +48,9 @@
 				    //$ar=json_decode($ar);
 				    $userid=$this->session->userdata('userid');
 				  ?>
-				<!-- <div class="row">
+				<div class="row">
 				    <div class="col-md-6 col-xs-12">
-				        <div class="panel panel-default card-view pa-0">
+				        <!-- <div class="panel panel-default card-view pa-0">
 				            <div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
 								    <div class="sm-data-box bg-yellow time text-center">
@@ -65,7 +65,7 @@
 				                    </div>
 				                </div>
 				            </div>
-				        </div>
+				        </div> -->
 				    </div>
 					
 					<div class="col-md-6 col-xs-12">
@@ -79,13 +79,10 @@
 				            </div>
 				        </div>
 				    </div>
-				</div> -->
+				</div>
 				<!-- Row -->
 				<!-- /Row -->
 				<div class="row">
-				<?php 
-				//print_r(allposts_count_by_user(3,$userid));
-				 ?>
 				    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
@@ -210,6 +207,7 @@
 							</div>
 						</div>
 					</div>
+					</div>
 
 
 				
@@ -236,6 +234,7 @@
 								</div>
 							</div>
 						</div>
+					</div>
 					</div>
 
 				
@@ -285,6 +284,7 @@
 							</div>
 						</div>
 					</div>
+					</div>
 					
 					
 
@@ -293,7 +293,7 @@
 
 
 
-
+	<div class="row">
 
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 

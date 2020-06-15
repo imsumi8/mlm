@@ -269,7 +269,7 @@
 							</li>
 						</ul>
 					</li>-->
-					<li class="dropdown auth-drp">
+					<!-- <li class="dropdown auth-drp">
 						<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="<?php echo base_url(); ?>assets/uploads_assets/<?php echo get_hrm_postmeta($this->session->userdata('userid'),'img');  ?>" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span></a>
 						<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
 							<li>
@@ -304,7 +304,7 @@
 								<a href="<?php echo  base_url().'admin/logout'; ?>"><i class="zmdi zmdi-power"></i><span>Log Out</span></a>
 							</li>
 						</ul>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</nav>

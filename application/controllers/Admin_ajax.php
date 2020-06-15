@@ -3163,7 +3163,27 @@ public function get_pancard(){
          
 							
           insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
-		  update_hrm_count_level_own_node($sponserid,1,3); 			
+		  update_hrm_count_level_own_node($sponserid,1,3); 	
+		  
+		  	////autopool
+	
+		if(get_option('auto_pool')==0){
+			update_mlm_option('auto_poolid',$hrm_id);
+			update_mlm_option('auto_pool',1);
+		}
+
+		update_hrmpost_meta($hrm_id,'autopoollevel',1);
+		insert_count_nodes($hrm_id,6);
+		insert_priority($hrm_id,6);
+		$getpos=get_current_pos(6);
+		$positionno=$getpos[0];
+		$positionid=$getpos[1];
+		insert_hrm_autopool(6,1,$hrm_id,$positionno,$positionid);
+		update_priority($hrm_id,6);
+
+		
+
+		/////end autopool
 
 	if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
 						
@@ -3194,19 +3214,8 @@ public function get_pancard(){
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
 		}
 
-		if(get_option('auto_pool')==0){
-			update_mlm_option('auto_poolid',$sponserid);
-			update_mlm_option('auto_pool',1);
-		}
 		
-		update_hrmpost_meta($sponserid,'autopoollevel',1);
-		insert_count_nodes($sponserid,6);
-		insert_priority($sponserid,6);
-		$getpos=get_current_pos(6);
-		$positionno=$getpos[0];
-		$positionid=$getpos[1];
-		insert_hrm_autopool(6,1,$sponserid,$positionno,$positionid);
-		update_priority($sponserid,6);
+
 
 		if($direct_down == 2){
 
@@ -3215,7 +3224,7 @@ public function get_pancard(){
 			update_hrmpost_meta($sponserid,'star',1);
 			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
 			
-			if(check_hold_payment($sponserid,'2,5,3,4') == 1){
+			if(check_hold_payment($sponserid,'2,5,3,4,6') == 1){
 
 				if(get_hrm_postmeta($sponserid,'double_star')==2){
 					update_hrmpost_meta($sponserid,'double_star',1);
@@ -3227,7 +3236,7 @@ public function get_pancard(){
 
 				
 
-				pay_hold_commission($sponserid,'2,5,3,4');
+				pay_hold_commission($sponserid,'2,5,3,4,6');
 
 			}
 

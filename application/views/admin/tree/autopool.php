@@ -59,19 +59,19 @@
 
              for($i=1; $i<=8; $i++){
 
-                if($nodes < pow(4,$i)){
+                if($nodes < pow(3,$i)){
               
                     if($i==1)
                     $level[$i-1] =$nodes; 
                     else
-                    $level[$i-1] =$nodes - pow(4,$i-1); 
+                    $level[$i-1] =$nodes - pow(3,$i-1); 
 
                  if($level[$i-1]<0)
                     $level[$i-1]=0;
 
    
                 }else{
-                    $level[$i-1] =pow(4,$i);  
+                    $level[$i-1] =pow(3,$i);  
                    
                  }
              }
@@ -97,24 +97,24 @@
            
                         for($i=1; $i<=8; $i++){
            
-                           if($nodes < pow(4,$i)){
+                           if($nodes < pow(3,$i)){
                          
                                if($i==1)
                                $level[$i-1] +=$nodes; 
                                else
-                               $level[$i-1] +=$nodes - pow(4,$i-1); 
+                               $level[$i-1] +=$nodes - pow(3,$i-1); 
            
                             if($level[$i-1]<0)
                                $level[$i-1] =0;
            
               
                            }else{
-                               $level[$i-1] +=pow(4,$i);  
+                               $level[$i-1] +=pow(3,$i);  
                               
                             }
                         }
                       
-           
+					break;           
 
                 }
             }
