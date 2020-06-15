@@ -4533,16 +4533,16 @@
     		$hrm_id=get_reverse_parent_autopool($orighrm,$mlm_desc);
     		$parenthrm=$hrm_id;
     		$checkcount=get_two_just_down($hrm_id,$mlm_desc);
-    		if($checkcount<4){
+    		if($checkcount<3){
     		    update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',$checkcount+1);
     		}
-    		else if($checkcount==4){
+    		else if($checkcount==3){
     		    update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',1);
     		    for($x=0;$hrm_id!='5000';$x++){
     			    $hrm_id=get_reverse_parent_autopool($hrm_id,$mlm_desc);
     			    if($hrm_id!='5000'){
     					$pos=get_current_priority($hrm_id,$mlm_desc)[0]->POSITION_ID;
-            		    if($pos<4){
+            		    if($pos<3){
             		        update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',$pos+1);
             		        break;
             		    }else{
@@ -4572,7 +4572,14 @@
 					if(!empty($full_dt)){
 						$amt=$full_dt[0]->LEVEL_AMOUNT;
 						if($amt>0){
-							pay_commission_to_customer($hrm_id,$amt,$mlm_desc,'0',date('Y-m-d'),1);
+							$direct_down=get_direct_by_hrm($hrm_id);	
+							if($direct_down>=2){
+								pay_commission_to_customer($hrm_id,$amt,$mlm_desc,'0',date('Y-m-d'),1);
+
+							}else{
+								pay_commission_to_customer($hrm_id,$amt,$mlm_desc,'0',date('Y-m-d'),0);
+
+							}
 						}
 					}
         		       
@@ -4684,7 +4691,7 @@
     }
     function get_members_validnew($level){
 	    $sum=0;
-        $sum=pow(4,$level);
+        $sum=pow(3,$level);
         
         return $sum;
 	}
