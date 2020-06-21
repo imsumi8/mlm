@@ -108,7 +108,7 @@
                        <div class="panel panel-default card-view panel-refresh pad_20">
 							<div class="panel-heading">
 								<div class="text-center">
-									<h1 class="panel-title txt-dark"><i class="fa fa-sitemap"></i> TREE VIEW</h1>
+									<h1 class="panel-title txt-dark"><i class="fa fa-sitemap"></i> Travelpool View</h1>
 									<hr class="reddish">
 								</div>
 								<div class="clearfix"></div>
@@ -165,7 +165,7 @@
   <script>
        
      var userid='<?php echo $this->session->userdata('userid'); ?>';   
-        var mlmdesc=3;
+        var mlmdesc=6;
        
     getGenologyTree(userid, null);
     $(document).ready(function () {        
@@ -205,7 +205,7 @@
        $('.summary').html('');
         $.ajax({
             type: "POST",
-            url: admin_loc+'tree_nth',
+            url: admin_loc+'auto_tree',
            data: {
                 user_id: user_name,mlmdesc:mlmdesc
             },

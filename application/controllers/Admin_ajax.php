@@ -2607,6 +2607,9 @@ public function get_pancard(){
 	}
 
 
+
+
+
 	public function tree_nth()
 	{
 		$hrm_id=$_POST['user_id'];
@@ -3219,7 +3222,7 @@ public function get_pancard(){
 
 		if($direct_down == 2){
 
-		
+			pay_commission_to_customer($sponserid,1000,7,'0',date('Y-m-d'),1);
 		 
 			update_hrmpost_meta($sponserid,'star',1);
 			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
@@ -3843,4 +3846,366 @@ public function get_pancard(){
 	
 		die();
 	}
+
+
+
+	public function auto_tree()
+	{
+		$hrm_id=$_POST['user_id'];
+
+		if($hrm_id=='5000'){
+			$hrm_id=get_option('auto_poolid');
+		}
+		
+		?>
+		<div class="col-md-12 text-center">
+			<ul id="tree_view" style="display:none">
+			    
+				<li>
+					<div>
+						<a href="javascript:void(0)" id="level-0" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($hrm_id!=5000 && $_POST['mlmdesc']==6) { $ar=get_member_autopool($hrm_id); 
+        				    $ar=json_decode($ar); ?>
+        				   TOTAL : <?php echo $ar[0]+$ar[1] +$ar[2]; } ?>">
+							<?php if($hrm_id!=$this->session->userdata('userid') && $hrm_id !=get_option('auto_poolid')){ ?>
+							<img class="tree_up_icon" src="<?php echo base_url(); ?>assets/img/up.png" alt="<?php echo get_autopool_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>" onclick='getGenologyTree("<?php echo get_autopool_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>",event);'/>
+							<?php } $arr=get_hrm_post($hrm_id); 
+							    if($arr[0]->HRM_STATUS==1){
+							        $stat='active.png';
+							    }else{
+							        $stat='inactive.png';
+							    }
+							    
+							?>
+							<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $stat; ?>" alt="<?php echo get_autopool_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>" id="<?php echo $hrm_id; ?>"> 
+							<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User id :<?php echo $hrm_id; ?><br>Name : <?php echo get_hrm_postmeta($hrm_id,'first_name'); ?><?php if($hrm_id==5000){ ?><br> Sponsor Id : <?php echo get_added_by($hrm_id); ?><?php } ?></div>
+						</a>
+					</div>
+			<?php
+			if($hrm_id!=5000) { ?>
+					<ul>
+					<?php
+		$nodes=get_autopool_nodes_geneology_pos($hrm_id,1,$_POST['mlmdesc']);
+					
+					if(!empty($nodes)){
+						?>
+						<li>
+							<div>
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodes[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+									<?php $arr=get_hrm_post($nodes[0]->HRM_ID); 
+    							    if($arr[0]->HRM_STATUS==1){
+    							        $stats='active.png';
+    							    }else{
+    							        $stats='inactive.png';
+    							    } ?>
+									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $stats; ?>" alt="<?php echo $nodes[0]->HRM_ID; ?>" id= "<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);' > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodes[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodes[0]->HRM_ID,'first_name'); ?></div>
+								</a>
+							</div>
+							<ul>
+								<?php
+									$nodess=get_autopool_nodes_geneology_pos($nodes[0]->HRM_ID,1,$_POST['mlmdesc']);
+									if(!empty($nodess)){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				  TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; }?>">
+														<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            							 ?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[0]->HRM_ID; ?>" id= "<?php echo $nodess[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[0]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[0]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[0]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+									
+									$nodess=get_autopool_nodes_geneology_pos($nodes[0]->HRM_ID,2,$_POST['mlmdesc']);
+									if(!empty($nodess[1])){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[1]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+													<?php $arr=get_hrm_post($nodess[1]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[1]->HRM_ID; ?>" id= "<?php echo $nodess[1]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[1]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[1]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[1]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[1]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[1]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+								
+	                          $nodess=get_autopool_nodes_geneology_pos($nodes[0]->HRM_ID,3,$_POST['mlmdesc']);
+									if(!empty($nodess[2])){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[2]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+													<?php $arr=get_hrm_post($nodess[2]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[2]->HRM_ID; ?>" id= "<?php echo $nodess[2]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[2]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[2]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[2]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[2]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[2]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+								?>
+
+
+							</ul>
+						</li>
+						<?php
+					}
+					
+						if(!empty($nodes[1])){
+						?>
+						<li>
+							<div>
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodes[1]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+									<?php $arr=get_hrm_post($nodes[1]->HRM_ID); 
+    							    if($arr[0]->HRM_STATUS==1){
+    							        $stats='active.png';
+    							    }else{
+    							        $stats='inactive.png';
+    							    } ?>
+									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $stats; ?>" alt="<?php echo $nodes[1]->HRM_ID; ?>" id= "<?php echo $nodes[1]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[1]->HRM_ID; ?>",event);' > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodes[1]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodes[1]->HRM_ID,'first_name'); ?></div>
+								</a>
+							</div>
+							<ul>
+								<?php
+									$nodess=get_autopool_nodes_geneology_pos($nodes[1]->HRM_ID,1,$_POST['mlmdesc']);
+									if(!empty($nodess)){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				  TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; }?>">
+														<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            							 ?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[0]->HRM_ID; ?>" id= "<?php echo $nodess[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[0]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[0]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[0]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+									
+									$nodess=get_autopool_nodes_geneology_pos($nodes[1]->HRM_ID,2,$_POST['mlmdesc']);
+									if(!empty($nodess[1])){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[1]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+													<?php $arr=get_hrm_post($nodess[1]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[1]->HRM_ID; ?>" id= "<?php echo $nodess[1]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[1]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[1]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[1]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[1]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[1]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+								
+	                          $nodess=get_autopool_nodes_geneology_pos($nodes[1]->HRM_ID,3,$_POST['mlmdesc']);
+									if(!empty($nodess[2])){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[2]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+													<?php $arr=get_hrm_post($nodess[2]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[2]->HRM_ID; ?>" id= "<?php echo $nodess[2]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[2]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[2]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[2]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[2]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[2]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+								?>
+
+
+							</ul>
+						</li>
+						<?php
+					}
+					
+						if(!empty($nodes[2])){
+						?>
+						<li>
+							<div>
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodes[2]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+									<?php $arr=get_hrm_post($nodes[2]->HRM_ID); 
+    							    if($arr[0]->HRM_STATUS==1){
+    							        $stats='active.png';
+    							    }else{
+    							        $stats='inactive.png';
+    							    } ?>
+									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $stats; ?>" alt="<?php echo $nodes[2]->HRM_ID; ?>" id= "<?php echo $nodes[2]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[2]->HRM_ID; ?>",event);' > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodes[2]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodes[2]->HRM_ID,'first_name'); ?></div>
+								</a>
+							</div>
+							<ul>
+								<?php
+									$nodess=get_autopool_nodes_geneology_pos($nodes[2]->HRM_ID,1,$_POST['mlmdesc']);
+									if(!empty($nodess)){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				  TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; }?>">
+														<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            							 ?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[0]->HRM_ID; ?>" id= "<?php echo $nodess[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[0]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[0]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[0]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+									
+									$nodess=get_autopool_nodes_geneology_pos($nodes[2]->HRM_ID,2,$_POST['mlmdesc']);
+									if(!empty($nodess[1])){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[1]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+													<?php $arr=get_hrm_post($nodess[1]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[1]->HRM_ID; ?>" id= "<?php echo $nodess[1]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[1]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[1]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[1]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[1]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[1]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+								
+	                          $nodess=get_autopool_nodes_geneology_pos($nodes[2]->HRM_ID,3,$_POST['mlmdesc']);
+									if(!empty($nodess[2])){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[2]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+													<?php $arr=get_hrm_post($nodess[2]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[2]->HRM_ID; ?>" id= "<?php echo $nodess[2]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[2]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[2]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[2]->HRM_ID,'first_name'); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[2]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[2]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+								?>
+
+
+							</ul>
+						</li>
+						<?php
+					}
+					
+		?>	
+				
+					</ul>
+					
+					<?php }
+					
+				 ?>
+				</li>
+			</ul>
+			<div id="tree" class="orgChart"></div>
+		</div>
+		<?php
+		die();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -1890,6 +1890,20 @@
 		}
 		
 	}
+
+	function get_autopool_member_just_down($hrm,$mlmdesc)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from autopool where POSITION_ID='".$hrm."' and LEVEL_ID='1' and MLM_DESC_ID='".$mlmdesc."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    return $row;
+		}
+		
+	}
+
 	function update_reward_gain($hrm)
 	{
 		$ci=& get_instance();
@@ -1948,7 +1962,38 @@
       }else{
 	    return 0;
 	    }
-    }
+	}
+	
+	function allposts_count_autopool($mlm_desc,$users)
+    {   
+        $ci=& get_instance();
+		$ci->load->database(); 
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 ORDER BY ID asc');
+        $result=$query->result();
+        if(!empty($result)){ 
+            $arr=array();
+            foreach($result as $results){
+    		    $hrm_id=$results->HRM_ID;
+    		   for($x=0;$hrm_id!=5000;$x++){
+    			    $hrm_id=get_autopool_reverse_parent_hrms_lev_0($hrm_id,$mlm_desc);
+    			    if($hrm_id==$users){
+    					$arr[]=$results->HRM_ID;
+    				}
+    			}
+    		}
+    		if(!empty($arr)){
+        		$user_ids = "'" . implode ( "', '", $arr ) . "'";
+        	    $query=$ci->db->query('Select * from hrm_post where HRM_ID IN ('.$user_ids.')');
+                return $query->num_rows();  
+    		}else{
+    		    return 0;
+    		}
+            //$resultnew=$query->result();
+      }else{
+	    return 0;
+	    }
+	}
+
     function get_left_right_members($mlm_desc,$users,$position)
     {   
         $ci=& get_instance();
@@ -2037,6 +2082,21 @@
                foreach($just_three_down as $downs){
                    $hrmid=$downs->HRM_ID;
                    $count_member_leg[$downs->POSITION-1]=allposts_count_reward(3,$hrmid)+1;
+               }
+           }
+        return json_encode($count_member_leg);
+	}
+	
+	function get_member_autopool($sponserid){
+        $just_three_down=get_autopool_member_just_down($sponserid,6);
+           $count_member_leg=array();
+           $count_member_leg[0]=0;
+		   $count_member_leg[1]=0;
+		   $count_member_leg[2]=0;
+           if(!empty($just_three_down)){
+               foreach($just_three_down as $downs){
+                   $hrmid=$downs->HRM_ID;
+                   $count_member_leg[$downs->POSITION-1]=allposts_count_autopool(6,$hrmid)+1;
                }
            }
         return json_encode($count_member_leg);
@@ -2476,6 +2536,22 @@
 		}
 	   
 	}
+
+	function get_autopool_reverse_parent_hrms_lev_0($positionid,$mlm_desc){
+	   
+	    $ci=& get_instance();
+		$ci->load->database(); 
+	    $sql = "select POSITION_ID from autopool where HRM_ID='".$positionid."' and LEVEL_ID=1 and MLM_DESC_ID='".$mlm_desc."'"; 
+	    $query = $ci->db->query($sql);
+		$row = $query->result();
+		if($row){
+			return 	$row[0]->POSITION_ID;
+		}else{
+			return 	'';
+		}
+	   
+	}
+
 	function get_reverse_parent_hrms_any_level($positionid,$mlm_desc,$level){
 	   
 	    $ci=& get_instance();
@@ -2857,6 +2933,24 @@
 		   return $array;
 		}
 	}
+
+
+	function get_autopool_nodes_geneology_pos($POSITION_id,$position,$mlm_desc){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$array=array();
+
+	    $sql="Select * from autopool where LEVEL_ID='1' and  POSITION_ID='".$POSITION_id."'  and MLM_DESC_ID='".$mlm_desc."'  and HRM_ID!=5000 ORDER BY POSITION ASC";
+	    $query = $ci->db->query($sql);
+	    $row = $query->result();
+	    $array=$row;
+		if(!empty($array)){
+		   return $array;
+		}else{
+		   return $array;
+		}
+	}
+
 	function get_free_nodes_geneology_pos($POSITION_id,$position,$mlm_desc){
 	    $ci=& get_instance();
 		$ci->load->database(); 

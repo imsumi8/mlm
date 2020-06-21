@@ -202,20 +202,20 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/tree/view_tree');
 		$this->load->view('admin/footer');
 	}
-	public function autopool(){
-    	$data['title']='AUTO POOL VIEW';
-	    $data['subpage']='';
-		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
+	// public function autopool(){
+    // 	$data['title']='AUTO POOL VIEW';
+	//     $data['subpage']='';
+	// 	$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
 	
-		if($this->uri->segment('3')!=''){
-		    $data['subpage']='Auto Pool '.$this->uri->segment('3');
-    	    $this->load->view('admin/header',$data);
-    		$this->load->view('admin/tree/autopooltree');
-    		$this->load->view('admin/footer');
-		}else{
-		    redirect('admin/view_tree');
-		}
-	}
+	// 	if($this->uri->segment('3')!=''){
+	// 	    $data['subpage']='Auto Pool '.$this->uri->segment('3');
+    // 	    $this->load->view('admin/header',$data);
+    // 		$this->load->view('admin/tree/autopooltree');
+    // 		$this->load->view('admin/footer');
+	// 	}else{
+	// 	    redirect('admin/view_tree');
+	// 	}
+	// }
 	public function single_tree(){
     	$data['title']='Single View';
 	    $data['subpage']='';
@@ -511,7 +511,7 @@ class Admin extends CI_Controller {
 		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
 		$data['result']=direct_member_list($this->session->userdata('userid'),3);
 	    $this->load->view('admin/header',$data);
-		$this->load->view('admin/tree/autopool');
+		$this->load->view('admin/tree/newautopool');
 		$this->load->view('admin/footer');
 	   
 	
