@@ -3212,10 +3212,12 @@ public function get_pancard(){
 			$income = get_level_income_by_level(1);
 			////level 1 team sales incentive
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
-        }else{
-			$income = get_level_income_by_level(11);
-			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
 		}
+		
+		// else{
+		// 	$income = get_level_income_by_level(11);
+		// 	pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
+		// }
 
 		$star_sp =get_upper_star_sponsor($hrm_id);
 
