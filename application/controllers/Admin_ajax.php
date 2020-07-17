@@ -3170,19 +3170,19 @@ public function get_pancard(){
 		  
 		  	////autopool
 	
-		if(get_option('auto_pool')==0){
-			update_mlm_option('auto_poolid',$hrm_id);
-			update_mlm_option('auto_pool',1);
-		}
+		// if(get_option('auto_pool')==0){
+		// 	update_mlm_option('auto_poolid',$hrm_id);
+		// 	update_mlm_option('auto_pool',1);
+		// }
 
-		update_hrmpost_meta($hrm_id,'autopoollevel',1);
-		insert_count_nodes($hrm_id,6);
-		insert_priority($hrm_id,6);
-		$getpos=get_current_pos(6);
-		$positionno=$getpos[0];
-		$positionid=$getpos[1];
-		insert_hrm_autopool(6,1,$hrm_id,$positionno,$positionid);
-		update_priority($hrm_id,6);
+		// update_hrmpost_meta($hrm_id,'autopoollevel',1);
+		// insert_count_nodes($hrm_id,6);
+		// insert_priority($hrm_id,6);
+		// $getpos=get_current_pos(6);
+		// $positionno=$getpos[0];
+		// $positionid=$getpos[1];
+		// insert_hrm_autopool(6,1,$hrm_id,$positionno,$positionid);
+		// update_priority($hrm_id,6);
 
 		
 
@@ -3217,25 +3217,36 @@ public function get_pancard(){
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
 		}
 
-		
+		$star_sp =get_upper_star_sponsor($hrm_id);
 
+		if($star_sp){
+				$sl2income = get_star_income_by_level(2);
+				insert_level_count_nodes($star_sp,'SL2');
+			pay_commission_to_customer($star_sp,$sl2income,2,'0',date('Y-m-d'),0);
+		}
+
+		if($direct_down == 11){
+			 
+			update_hrmpost_meta($sponserid,'star',1);
+
+		}
 
 		if($direct_down == 2){
 
-			pay_commission_to_customer($sponserid,1000,7,'0',date('Y-m-d'),1);
+			pay_commission_to_customer($sponserid,1700,7,'0',date('Y-m-d'),1);
 		 
-			update_hrmpost_meta($sponserid,'star',1);
-			$sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
+			// update_hrmpost_meta($sponserid,'star',1);
+			//  $sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
 			
 			if(check_hold_payment($sponserid,'2,5,3,4,6') == 1){
 
-				if(get_hrm_postmeta($sponserid,'double_star')==2){
-					update_hrmpost_meta($sponserid,'double_star',1);
-				}
+				// if(get_hrm_postmeta($sponserid,'double_star')==2){
+				// 	update_hrmpost_meta($sponserid,'double_star',1);
+				// }
 
-				if(get_hrm_postmeta($sponserid,'triple_star')==2){
-					update_hrmpost_meta($sponserid,'triple_star',1);
-				}
+				// if(get_hrm_postmeta($sponserid,'triple_star')==2){
+				// 	update_hrmpost_meta($sponserid,'triple_star',1);
+				// }
 
 				
 
@@ -3243,49 +3254,49 @@ public function get_pancard(){
 
 			}
 
-			if($sec_level_sponsor){
-				////star bonus 
-				$sl2income = get_star_income_by_level(2);
-				insert_level_count_nodes($sec_level_sponsor,'SL2');
-				if(get_hrm_postmeta($sec_level_sponsor,'star')==1){
-					pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),1);
-				}else{
+			// if($sec_level_sponsor){
+			// 	////star bonus 
+			// 	$sl2income = get_star_income_by_level(2);
+			// 	insert_level_count_nodes($sec_level_sponsor,'SL2');
+			// 	if(get_hrm_postmeta($sec_level_sponsor,'star')==1){
+			// 		pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),1);
+			// 	}else{
 
-				pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),0);
-				}
-			}
+			// 	pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),0);
+			// 	}
+			// }
  
-		 $third_level_sponsor = get_level_wise_upper_sponsor(3,$sponserid);
+	// 	 $third_level_sponsor = get_level_wise_upper_sponsor(3,$sponserid);
 
-		 if($third_level_sponsor){
-			////star bonus 
+	// if($third_level_sponsor){
+	// 		////star bonus 
 		    
-			insert_level_count_nodes($third_level_sponsor,'SL3');
-			$count_double =	get_level_nodes($third_level_sponsor,'SL3');
+	// 		insert_level_count_nodes($third_level_sponsor,'SL3');
+	// 		$count_double =	get_level_nodes($third_level_sponsor,'SL3');
 			
 		
-			if($count_double==4){
-				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
-				update_hrmpost_meta($third_level_sponsor,'double_star',1);
-				}else{
-					update_hrmpost_meta($third_level_sponsor,'double_star',2);
-				}
-				$upper_double_sponsor_id=get_top_sponsor(1,$third_level_sponsor);
-				$count_upper_double_sponsor =count($upper_double_sponsor_id);
-				pay_double_star_bonus($upper_double_sponsor_id,$count_upper_double_sponsor);
+	// 		if($count_double==4){
+	// 			if(get_hrm_postmeta($third_level_sponsor,'star')==1){
+	// 			update_hrmpost_meta($third_level_sponsor,'double_star',1);
+	// 			}else{
+	// 				update_hrmpost_meta($third_level_sponsor,'double_star',2);
+	// 			}
+	// 			$upper_double_sponsor_id=get_top_sponsor(1,$third_level_sponsor);
+	// 			$count_upper_double_sponsor =count($upper_double_sponsor_id);
+	// 			pay_double_star_bonus($upper_double_sponsor_id,$count_upper_double_sponsor);
 
-			}elseif($count_double > 4){
-				$sl3income = get_star_income_by_level(3);
-				if(get_hrm_postmeta($third_level_sponsor,'star')==1){
-				pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),1);
-				}else{
-					pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),0);
+	// 		}elseif($count_double > 4){
+	// 			$sl3income = get_star_income_by_level(3);
+	// 			if(get_hrm_postmeta($third_level_sponsor,'star')==1){
+	// 			pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),1);
+	// 			}else{
+	// 				pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),0);
 
-				}
-			}
+	// 			}
+	// 		}
 			
 			
-		}
+	// 	}
 			
 		}
 

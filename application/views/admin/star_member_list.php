@@ -53,11 +53,11 @@
 		 if($hrm_id !=5000){
 
 			 $level2 = get_level_nodes($hrm_id,'SL2');
-			 $level3 = get_level_nodes($hrm_id,'SL3');
+			//  $level3 = get_level_nodes($hrm_id,'SL3');
 
 		 }else{
             $level2 = get_all_level_nodes('SL2');
-			 $level3 = get_all_level_nodes('SL3');
+			//  $level3 = get_all_level_nodes('SL3');
 		 }
 
 ?>
@@ -85,7 +85,7 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-6 text-center pl-0 pr-0 data-wrap-left">
-												    <i class="weight-500 uppercase-font txt-light block">LEVEL 2</i>
+												    <i class="weight-500 uppercase-font txt-light block">ALL LEVEL</i>
 													<span class="txt-light block counter"><span class="counter-anim"><?php  echo $level2;  ?></span></span>
 												</div>
 												<div class="col-xs-6 text-center  pl-0 pr-0 data-wrap-right">
@@ -98,7 +98,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
@@ -118,7 +118,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
                 </div>
                 
               

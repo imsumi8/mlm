@@ -500,7 +500,7 @@
 							<a <?php if($subpage=='star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/star"><i class="fa fa-circle <?php if($subpage=='star') { echo 'clrred'; } ?>"></i> Star</a> 
 						</li>
 						
-						<li>
+						<!-- <li>
 							<a  <?php if($subpage=='double_star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/double_star"><i class="fa fa-circle <?php if($subpage=='double_star') { echo 'clrred'; } ?>"></i> Double Star</a>
 						</li>
 
@@ -512,7 +512,7 @@
 
 				<li>
 					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Travelpool</a>
-				</li>	
+				</li>	 -->
 
 						</ul>
 				</li>
@@ -606,6 +606,24 @@
 					</ul>
 				</li>
 
+<!-- 
+				<li>
+					<a <?php if($title=='Franchise') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#franchise_dr"><div class="pull-left"><i class="fa fa-users mr-20"></i><span class="right-nav-text">Franchise</span></div><div class="pull-right">
+					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">1</span></div><div class="clearfix"></div></a>
+					<ul id="franchise_dr" class="collapse collapse-level-1">
+						<li>
+							<a <?php if($subpage=='add_franchise') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/add_franchise">
+							<i class="fa fa-circle  <?php if($subpage=='add_franchise') { echo 'clrred'; } ?>"></i> Add Franchise</a>
+						</li>
+					
+					
+						</li>
+					</ul>
+				</li> -->
+
+
+
+
 				<li>
 					<a <?php if($title=='Manage Income') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#income_dr"><div class="pull-left"><i class="fa fa-cart-plus mr-20"></i><span class="right-nav-text">Manage Income</span></div><div class="pull-right">
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">4</span></div><div class="clearfix"></div></a>
@@ -619,7 +637,7 @@
 							<i class="fa fa-circle  <?php if($subpage=='star_bonus') { echo 'clrred'; } ?>"></i> Star Bonus</a>
 						</li>
 
-						<li>
+						<!-- <li>
 							<a  <?php if($subpage=='doublestar_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/doublestar_bonus">
 							<i class="fa fa-circle  <?php if($subpage=='doublestar_bonus') { echo 'clrred'; } ?>"></i> Double Star Bonus</a>
 						</li>
@@ -632,7 +650,7 @@
 						<li>
 							<a  <?php if($subpage=='autopool_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_bonus">
 							<i class="fa fa-circle  <?php if($subpage=='autopool_bonus') { echo 'clrred'; } ?>"></i> Travelpool Bonus</a>
-						</li>
+						</li> -->
 					
 						</li>
 					</ul>

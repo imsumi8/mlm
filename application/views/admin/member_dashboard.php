@@ -173,8 +173,8 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-												    <span class="weight-500 uppercase-font txt-light block font-13"> Travelpool Bonus</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $autopool=get_sum_wallet_balance_new($userid,6); ?></span></span>
+												    <span class="weight-500 uppercase-font txt-light block font-13"> Star Bonus</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $star=get_sum_wallet_balance_new($userid,2); ?></span></span>
 												</div>
 											
 											</div>	
@@ -293,7 +293,7 @@
 
 
 
-	<div class="row">
+	<!-- <div class="row">
 
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
@@ -371,7 +371,7 @@
 				    <div class="col-lg-1 text-center col-md-1 col-sm-1 col-xs-12">
 					    <i class="fa fa-align-justify plusicon"></i>
 					 </div>
-				</div>
+				</div> -->
 				<!-- /Row -->
 				<!-- Row -->
 				<div class="row">
@@ -385,7 +385,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13"> TOTAL INCOME</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales + $t_star + $d_star + $star + $autopool; ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales + $star; ?></span></span>
 												</div>
 											
 											</div>	

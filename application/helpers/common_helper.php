@@ -4132,6 +4132,30 @@
 
 }
 
+function get_upper_star_sponsor($hrm_id){
+	$ci=& get_instance();
+	// $ci->load->database(); 
+
+	$r_hrmid=0;
+		for($x=0;$hrm_id!=5000;$x++){
+			$hrm_id=get_reverse_parent_hrms($hrm_id,3);
+
+			if($hrm_id != 5000){
+			   
+				$star=get_hrm_postmeta($hrm_id,'star');
+				if($star == 1){
+
+			    $r_hrmid=$hrm_id;
+				break;
+				}
+			}
+		
+		}
+
+   return $r_hrmid;
+
+}
+
 
 
     function get_all_nodes_by_admin(){
