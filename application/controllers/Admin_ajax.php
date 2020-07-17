@@ -3208,11 +3208,13 @@ public function get_pancard(){
 		pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
 	}	
 
-		if($direct_down > 2){
+		// if($direct_down > 2){
+
 			$income = get_level_income_by_level(1);
 			////level 1 team sales incentive
 			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
-		}
+			
+		// }
 		
 		// else{
 		// 	$income = get_level_income_by_level(11);
