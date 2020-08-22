@@ -3206,6 +3206,12 @@ public function get_pancard(){
 	if($count_upper_level_sponsor>0){
 		////below level 1 team sales incentive
 		pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+
+		pay_silver_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+		pay_gold_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+
+
+
 	}	
 
 		// if($direct_down > 2){
@@ -3224,12 +3230,12 @@ public function get_pancard(){
 		$star_sp =get_upper_star_sponsor($hrm_id);
 
 		if($star_sp){
-				$sl2income = get_star_income_by_level(2);
-				insert_level_count_nodes($star_sp,'SL2');
-			pay_commission_to_customer($star_sp,$sl2income,2,'0',date('Y-m-d'),0);
+			$sl2income = get_star_income_by_level(2);
+			insert_level_count_nodes($star_sp,'SL2');
+			pay_commission_to_customer($star_sp,$sl2income,2,'0',date('Y-m-d'),1);
 		}
 
-		if($direct_down == 11){
+		if($direct_down == 8){
 			 
 			update_hrmpost_meta($sponserid,'star',1);
 
@@ -3242,21 +3248,21 @@ public function get_pancard(){
 			// update_hrmpost_meta($sponserid,'star',1);
 			//  $sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
 			
-			if(check_hold_payment($sponserid,'2,5,3,4,6') == 1){
+			// if(check_hold_payment($sponserid,'2,5,3,4,6') == 1){
 
-				// if(get_hrm_postmeta($sponserid,'double_star')==2){
-				// 	update_hrmpost_meta($sponserid,'double_star',1);
-				// }
+			// 	// if(get_hrm_postmeta($sponserid,'double_star')==2){
+			// 	// 	update_hrmpost_meta($sponserid,'double_star',1);
+			// 	// }
 
-				// if(get_hrm_postmeta($sponserid,'triple_star')==2){
-				// 	update_hrmpost_meta($sponserid,'triple_star',1);
-				// }
+			// 	// if(get_hrm_postmeta($sponserid,'triple_star')==2){
+			// 	// 	update_hrmpost_meta($sponserid,'triple_star',1);
+			// 	// }
 
 				
 
-				pay_hold_commission($sponserid,'2,5,3,4,6');
+			// 	pay_hold_commission($sponserid,'2,5,3,4,6');
 
-			}
+			// }
 
 			// if($sec_level_sponsor){
 			// 	////star bonus 

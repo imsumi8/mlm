@@ -2998,7 +2998,7 @@
 	    $ci=& get_instance();
 		$ci->load->database(); 
 		$array=array();
-	    $sql="Select * from hrm_post where HRM_ID!='5000' and HRM_STATUS=1 ORDER BY ID ASC";
+	    $sql="Select * from hrm_post where HRM_ID!='5000' and HRM_STATUS=1 and PAY_STATUS=1 ORDER BY ID ASC";
         $query = $ci->db->query($sql);
 	    $row = $query->result();
 	    if(!empty($row)){
@@ -3867,6 +3867,76 @@
 		
 	}
 
+	function pay_silver_incentive($upper_level_sponsor_id,$count_upper_level_sponsor){
+	  
+		for($i=0;$i<$count_upper_level_sponsor; $i++){
+					
+			$level = $i+1;
+
+			$income = get_level_income_by_double($level);
+			
+			 if(!$income)
+			   break;
+
+			$silver =   get_hrm_postmeta($upper_level_sponsor_id[$i],'silver');
+
+			if($silver){
+
+				$gold =   get_hrm_postmeta($upper_level_sponsor_id[$i],'gold');
+				
+				if(!$gold){
+					
+					$count_silver =	get_level_nodes($upper_level_sponsor_id[$i],'SILVER');
+
+					if($count_star >= 2){
+						pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),0);
+
+					}else{
+						pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),1);
+
+					}
+
+				}else{
+					pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),1);
+
+				}
+			}
+
+			 }
+			 
+			 return true;
+		
+	}
+
+
+	
+	function pay_gold_incentive($upper_level_sponsor_id,$count_upper_level_sponsor){
+	  
+		for($i=0;$i<$count_upper_level_sponsor; $i++){
+					
+			$level = $i+1;
+
+			$income = get_level_income_by_triple($level);
+			
+			 if(!$income)
+			   break;
+
+			$gold =   get_hrm_postmeta($upper_level_sponsor_id[$i],'gold');
+
+			if($gold){
+
+			
+					pay_commission_to_customer($upper_level_sponsor_id[$i],$income,4,'0',date('Y-m-d'),1);
+
+				
+			}
+
+			 }
+			 
+			 return true;
+		
+	}
+
 	function get_level_income_by_double($level){
         $ci=& get_instance();
 		$ci->load->database(); 
@@ -4372,7 +4442,12 @@ function get_upper_star_sponsor($hrm_id){
 		 $sum+=get_sum_wallet_balance_type($hrmid,4);
 		 $sum+=get_sum_wallet_balance_type($hrmid,5);
 		 $sum+=get_sum_wallet_balance_type($hrmid,6);
-	     $payable_income=$sum;
+		 $payable_income=$sum;
+		 $silver =   get_hrm_postmeta($hrmid,'silver');
+		 if(!$silver && $payable_income>=1000){
+
+			$payable_income=1000; 
+		 }
 		 $alreadyrequested=get_withdrawl_income_stat($hrmid,'0,1');
 		 $date=date('Y-m-d');
          $netpayable=$payable_income-$alreadyrequested-get_sum_withdrawl_amt('2018-01-01',date('Y-m-d'),$hrmid);

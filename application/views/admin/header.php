@@ -637,17 +637,17 @@
 							<i class="fa fa-circle  <?php if($subpage=='star_bonus') { echo 'clrred'; } ?>"></i> Star Bonus</a>
 						</li>
 
-						<!-- <li>
+						<li>
 							<a  <?php if($subpage=='doublestar_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/doublestar_bonus">
-							<i class="fa fa-circle  <?php if($subpage=='doublestar_bonus') { echo 'clrred'; } ?>"></i> Double Star Bonus</a>
+							<i class="fa fa-circle  <?php if($subpage=='doublestar_bonus') { echo 'clrred'; } ?>"></i> Silver Bonus</a>
 						</li>
 
 						<li>
 							<a  <?php if($subpage=='triplestar_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/triplestar_bonus">
-							<i class="fa fa-circle  <?php if($subpage=='triplestar_bonus') { echo 'clrred'; } ?>"></i> Triple Star Bonus</a>
+							<i class="fa fa-circle  <?php if($subpage=='triplestar_bonus') { echo 'clrred'; } ?>"></i> Gold Bonus</a>
 						</li>
 
-						<li>
+						<!-- <li>
 							<a  <?php if($subpage=='autopool_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_bonus">
 							<i class="fa fa-circle  <?php if($subpage=='autopool_bonus') { echo 'clrred'; } ?>"></i> Travelpool Bonus</a>
 						</li> -->

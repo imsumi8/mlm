@@ -39,6 +39,43 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/login');
 	}
+
+	public function cron()
+	{
+		$hrms =get_hrms_all();
+
+		foreach($hrms as $hrm){
+
+			$silver =   get_hrm_postmeta($hrm->HRM_ID,'silver');
+
+			if(!$silver){
+
+				$sum=0;
+		 $sum+=get_sum_wallet_balance_type($hrm->HRM_ID,1);
+
+		 if($sum >=2000){
+
+			$ledgerid=get_ledger_id($hrm->HRM_ID);
+			update_amount_ledger($ledgerid,(-1)*1000);
+			update_amount_ledger(11,(-1)*1000);
+
+			pay_commission_to_customer($hrm->HRM_ID,1000,8,'0',date('Y-m-d'),2);
+			update_hrmpost_meta($hrm->HRM_ID,'silver',1);
+
+			$sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
+
+			if($sponsorid!=5000){
+				
+				insert_level_count_nodes($sponsorid,'SILVER');	
+			}
+
+		 }
+
+			}
+		}
+
+	}
+
 	public function registration()
 	{
 		$this->load->view('site/registration');
@@ -446,6 +483,19 @@ class Admin extends CI_Controller {
     		
     	    $this->load->view('admin/header',$data);
     		$this->load->view('admin/product/product');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
+	public function add_franchise(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Franchise | RMGM';
+    	    $data['subpage']='add_franchise';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/franchise/add_franchise');
     		$this->load->view('admin/footer');
 	    }else{
 	        redirect('admin/dashboard');

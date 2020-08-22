@@ -88,8 +88,10 @@
 													     $chargeamt=0;
 													     if($commissions->WALLET_STATUS==0){
 													         $statsr='<span style="color:red;">Hold</span>';
-													     }else{
-													         $statsr='<span style="color:green;">Given</span>';
+													     }elseif($commissions->WALLET_STATUS==2){
+															$statsr='<span style="color:red;">Debit</span>';
+														 }else{
+													         $statsr='<span style="color:green;">Credit</span>';
 													     }
 													      if(!empty($accountid)){
 													          $chargestr=$accountid[0];
