@@ -2261,6 +2261,22 @@
 		return true;
 	}
 
+	function get_sum_wallet_balance_hold($hrmid,$type)
+	{
+		$ci =& get_instance();
+		$ci->load->database();
+	    $sql = "select sum(WALLET_AMOUNT) as total from wallet_balance where HRM_ID='".$hrmid."' and COMMISSION_TYPE IN (".$type.") and WALLET_STATUS=0"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->total;
+		}else{
+			return 0;
+		}
+		
+		return true;
+	}
+
 	function get_sum_wallet_balance_new($hrmid,$type)
 	{
 		$ci =& get_instance();

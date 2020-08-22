@@ -73,8 +73,42 @@ class Admin extends CI_Controller {
 		 }
 
 			}
+
+
+///gold pagy
+
+if(check_hold_payment($hrm->HRM_ID,'3') == 1){
+
+	if(get_sum_wallet_balance_hold($hrm->HRM_ID,'3') >= 1200){
+
+		$ledgerid=get_ledger_id($hrm->HRM_ID);
+			update_amount_ledger($ledgerid,(-1)*1200);
+			update_amount_ledger(11,(-1)*1200);
+
+			pay_commission_to_customer($hrm->HRM_ID,1200,9,'0',date('Y-m-d'),2);
+			update_hrmpost_meta($hrm->HRM_ID,'gold',1);
+
+			$sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
+
+			if($sponsorid!=5000){
+				
+				insert_level_count_nodes($sponsorid,'GOLD');	
+			}
+			pay_hold_commission($hrm->HRM_ID,'3');
+
+	}
+
+	
+}
+////close gold
+
+
+
 		}
 	}
+
+
+
 
 	}
 
