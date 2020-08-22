@@ -44,6 +44,7 @@ class Admin extends CI_Controller {
 	{
 		$hrms =get_hrms_all();
 
+		if($hrms){
 		foreach($hrms as $hrm){
 
 			$silver =   get_hrm_postmeta($hrm->HRM_ID,'silver');
@@ -73,6 +74,7 @@ class Admin extends CI_Controller {
 
 			}
 		}
+	}
 
 	}
 
