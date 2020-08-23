@@ -3317,7 +3317,7 @@ public function get_pancard(){
 				
 
 		}    	
-							
+			cron();				
 
             			 
             				$result=1; 
