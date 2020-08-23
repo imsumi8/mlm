@@ -3243,7 +3243,9 @@ public function get_pancard(){
 
 		if($direct_down == 2){
 
-			pay_commission_to_customer($sponserid,1700,7,'0',date('Y-m-d'),1);
+			update_hrmpost_meta($sponserid,'dp_wallet',1150);
+
+			// pay_commission_to_customer($sponserid,1150,7,'0',date('Y-m-d'),1);
 		 
 			// update_hrmpost_meta($sponserid,'star',1);
 			//  $sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);

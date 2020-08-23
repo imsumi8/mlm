@@ -224,8 +224,8 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-													<span class="weight-500 uppercase-font txt-light block font-13">RP Wallet</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $rp=get_sum_wallet_balance_type($userid,7); ?></span></span>
+													<span class="weight-500 uppercase-font txt-light block font-13">DP Wallet</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php if(get_hrm_postmeta($userid,'dp_wallet')) { echo get_hrm_postmeta($userid,'dp_wallet'); } else { echo '0'; } ?></span></span>
 												</div>
 												
 											</div>	
@@ -238,6 +238,56 @@
 					</div>
 
 				
+
+				
+
+
+							
+					<div class="row">
+         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="sm-data-box actived">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+												    <span class="weight-500 uppercase-font txt-light block font-13"> Silver Bonus</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $silver=get_sum_wallet_balance_type($userid,3); ?></span></span>
+												</div>
+											
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="sm-data-box bg-red">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+													<span class="weight-500 uppercase-font txt-light block font-13">Gold Bonus</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php $gold=get_sum_wallet_balance_type($userid,4); ?></span></span>
+												</div>
+												
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					
 
 
 							
@@ -385,7 +435,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13"> TOTAL INCOME</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales + $star; ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales + $star +$silver +$gold; ?></span></span>
 												</div>
 											
 											</div>	
