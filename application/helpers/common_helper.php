@@ -1289,6 +1289,8 @@
 		$ledger_dt=$ledger_dt->result();
 		return $ledger_dt;
 	}
+
+
 	function update_amount_ledger($ledgerid,$amt)
 	{
 		$ci =& get_instance();
@@ -1301,6 +1303,7 @@
 		$ledger_get_amount=$ci->db->query('update accounting_ledgers set AMOUNT="'.$amt.'" where ID="'.$ledgerid.'"');
 		return true;
 	}
+
 	function insert_self_level_pair($hrmid,$levelid,$lefthrmid,$righthrmid)
 	{
 		$ci =& get_instance();
@@ -5145,28 +5148,34 @@ function get_upper_star_sponsor($hrm_id){
 		if($hrms){
 		foreach($hrms as $hrm){
 
-			$silver =   get_hrm_postmeta($hrm->HRM_ID,'silver');
+			$hrmid=$hrm->HRM_ID;
+
+			$silver =   get_hrm_postmeta($hrmid,'silver');
 
 			if(!$silver){
 
 				$sum=0;
-		 $sum+=get_sum_wallet_balance_type($hrm->HRM_ID,1);
+		 $sum+=get_sum_wallet_balance_type($hrmid,1);
 
 		 if($sum >=2000){
 
-			$ledgerid=get_ledger_id($hrm->HRM_ID);
-			update_amount_ledger($ledgerid,(-1)*1000);
-			update_amount_ledger(11,(-1)*1000);
+			$amt=1000;
+			$crid=5;
+			$ledgerid = get_ledger_id($hrmid);
+			
+			$upd=update_amount_ledger($ledgerid,(-1)*$amt);
 
-			pay_commission_to_customer($hrm->HRM_ID,1000,8,'0',date('Y-m-d'),2);
-			update_hrmpost_meta($hrm->HRM_ID,'silver',1);
+			update_amount_ledger($crid,(-1)*$amt);
 
-			$sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
+			pay_commission_to_customer($hrmid,1000,8,'0',date('Y-m-d'),2);
+			update_hrmpost_meta($hrmid,'silver',1);
 
-			if($sponsorid!=5000){
+			// $sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
+
+			// if($sponsorid!=5000){
 				
-				insert_level_count_nodes($sponsorid,'SILVER');	
-			}
+				insert_level_count_nodes($hrmid,'SILVER');	
+			
 
 		 }
 
@@ -5180,18 +5189,19 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 	if(get_sum_wallet_balance_hold($hrm->HRM_ID,'3') >= 1200){
 
 		$ledgerid=get_ledger_id($hrm->HRM_ID);
-			update_amount_ledger($ledgerid,(-1)*1200);
-			update_amount_ledger(11,(-1)*1200);
+		$amt=1200.00;
+			update_amount_ledger($ledgerid,(-1)*$amt);
+			update_amount_ledger(5,1200);
 
 			pay_commission_to_customer($hrm->HRM_ID,1200,9,'0',date('Y-m-d'),2);
 			update_hrmpost_meta($hrm->HRM_ID,'gold',1);
 
-			$sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
+			// $sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
 
-			if($sponsorid!=5000){
+			// if($sponsorid!=5000){
 				
-				insert_level_count_nodes($sponsorid,'GOLD');	
-			}
+				insert_level_count_nodes($hrm->HRM_ID,'GOLD');	
+			// }
 			pay_hold_commission($hrm->HRM_ID,'3');
 
 	}

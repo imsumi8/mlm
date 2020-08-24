@@ -55,20 +55,20 @@ class Admin extends CI_Controller {
 		 $sum+=get_sum_wallet_balance_type($hrm->HRM_ID,1);
 
 		 if($sum >=2000){
-
+            $amt=1000;
 			$ledgerid=get_ledger_id($hrm->HRM_ID);
-			update_amount_ledger($ledgerid,(-1)*1000);
-			update_amount_ledger(11,(-1)*1000);
+			update_amount_ledger($ledgerid,(-1)*$amt);
+			update_amount_ledger(5,1000);
 
 			pay_commission_to_customer($hrm->HRM_ID,1000,8,'0',date('Y-m-d'),2);
 			update_hrmpost_meta($hrm->HRM_ID,'silver',1);
 
-			$sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
+			// $sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
 
-			if($sponsorid!=5000){
+			// if($sponsorid!=5000){
 				
-				insert_level_count_nodes($sponsorid,'SILVER');	
-			}
+				insert_level_count_nodes($hrm->HRM_ID,'SILVER');	
+			
 
 		 }
 
@@ -83,17 +83,17 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 
 		$ledgerid=get_ledger_id($hrm->HRM_ID);
 			update_amount_ledger($ledgerid,(-1)*1200);
-			update_amount_ledger(11,(-1)*1200);
+			update_amount_ledger(11,1200);
 
 			pay_commission_to_customer($hrm->HRM_ID,1200,9,'0',date('Y-m-d'),2);
 			update_hrmpost_meta($hrm->HRM_ID,'gold',1);
 
-			$sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
+			// $sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
 
-			if($sponsorid!=5000){
+			// if($sponsorid!=5000){
 				
-				insert_level_count_nodes($sponsorid,'GOLD');	
-			}
+				insert_level_count_nodes($hrm->HRM_ID,'GOLD');	
+			// }
 			pay_hold_commission($hrm->HRM_ID,'3');
 
 	}

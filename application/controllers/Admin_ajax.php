@@ -3416,7 +3416,8 @@ public function get_pancard(){
 		    if(check_sponsor($sponserid)==1){
 		        if(check_sponsor($positionid)==1){
 		           if($desiredid=='' || check_sponsor($desiredid)!=1){
-		               $hrm_id="RM".create_hrm_id();
+					//    $hrm_id="RM".create_hrm_id();
+					   $hrm_id="RM8383879";
 					   $orghrm=$hrm_id;
 					   $bckdate=date('Y-m-d');
     		            $id=insert_hrm($hrm_id,$firstname." ".$lastname,$date,$status,$pass,$bckdate,$desiredid);
