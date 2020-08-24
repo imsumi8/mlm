@@ -3904,7 +3904,7 @@
 					
 					$count_silver =	get_level_nodes($upper_level_sponsor_id[$i],'SILVER');
 
-					if($count_star >= 2){
+					if($count_silver >= 2){
 						pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),0);
 
 					}else{
