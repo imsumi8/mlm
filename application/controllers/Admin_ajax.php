@@ -3207,8 +3207,6 @@ public function get_pancard(){
 		////below level 1 team sales incentive
 		pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
 
-		pay_silver_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
-		pay_gold_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
 
 
 
@@ -3416,8 +3414,8 @@ public function get_pancard(){
 		    if(check_sponsor($sponserid)==1){
 		        if(check_sponsor($positionid)==1){
 		           if($desiredid=='' || check_sponsor($desiredid)!=1){
-					//    $hrm_id="RM".create_hrm_id();
-					   $hrm_id="RM8383879";
+					    $hrm_id="RM".create_hrm_id();
+					//    $hrm_id="RM4213378";
 					   $orghrm=$hrm_id;
 					   $bckdate=date('Y-m-d');
     		            $id=insert_hrm($hrm_id,$firstname." ".$lastname,$date,$status,$pass,$bckdate,$desiredid);
