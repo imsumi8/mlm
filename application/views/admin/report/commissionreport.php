@@ -191,7 +191,7 @@
 													      $chargestr='';
 													      $chargeamt=0;
 													      if($commissions->WALLET_STATUS==0){
-													         $statsr='<span style="color:red;">Over Pairs</span>';
+													         $statsr='<span style="color:red;">Hold</span>';
 													          $overpairs+=$commissions->WALLET_AMOUNT;
 													      }else{
 													         $statsr='<span style="color:green;">Given</span>';
@@ -335,7 +335,7 @@
     													     $chargestr='';
     													     $chargeamt=0;
     													     if($commissions->WALLET_STATUS==0){
-    													         $statsr='<span style="color:red;">Over Pairs</span>';
+    													         $statsr='<span style="color:red;">Hold</span>';
     													         $overpairs+=$commissions->WALLET_AMOUNT;
     													     }else{
     													         $statsr='<span style="color:green;">Given</span>';
