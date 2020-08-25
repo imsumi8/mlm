@@ -2333,6 +2333,30 @@
 		return true;
 	}
 
+	function pay_silver_hold_commission($hrmid,$type)
+	{
+		$ci =& get_instance();
+		$ci->load->database();
+	    $sql = "select * from wallet_balance where HRM_ID='".$hrmid."' and COMMISSION_TYPE IN (".$type.") and WALLET_STATUS=0"; 
+		$query = $ci->db->query($sql);
+		$result = $query->result();
+		if(!empty($result)){
+         $sum=0;
+			foreach($result as $results){
+				$sum +=$results->WALLET_AMOUNT;
+				if($sum<=1000){  
+				$sql = "update `wallet_balance` set WALLET_STATUS=1  where WALLET_ID='".$results->WALLET_ID."' "; 
+				$query = $ci->db->query($sql);
+				}
+			}
+
+		}else{
+			return 0;
+		}
+		
+		return true;
+	}
+
 
 
 	function get_count_wallet_balance_type($hrmid,$type)
@@ -3905,12 +3929,15 @@
 				
 				if(!$gold){
 					
-					$count_silver =	get_level_nodes($upper_level_sponsor_id[$i],'SILVER');
+					// $count_silver =	get_level_nodes($upper_level_sponsor_id[$i],'SILVER');
+					$get_amt= get_sum_wallet_balance_type($upper_level_sponsor_id[$i],'3');
 
-					if($count_silver >= 2){
+					if($get_amt >= 1000){
+
 						pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),0);
 
 					}else{
+						
 						pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),1);
 
 					}
@@ -3925,6 +3952,8 @@
 			}
 
 			 }
+
+			 
 			 
 			 return true;
 		
@@ -5151,6 +5180,7 @@ function get_upper_star_sponsor($hrm_id){
 		$hrms =get_hrms_all();
 
 		if($hrms){
+
 		foreach($hrms as $hrm){
 
 			$hrmid=$hrm->HRM_ID;
@@ -5176,7 +5206,7 @@ function get_upper_star_sponsor($hrm_id){
 			$upper_level_sponsor_id=get_top_sponsor(1,$hrmid);
 			$count_upper_level_sponsor =count($upper_level_sponsor_id);
 			pay_silver_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
-			pay_hold_commission($hrmid,'3');
+			pay_silver_hold_commission($hrmid,'3');
 
 			
 
@@ -5186,7 +5216,7 @@ function get_upper_star_sponsor($hrm_id){
 
 
 ///gold pagy
-
+if($silver){
 if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 
 	if(get_sum_wallet_balance_hold($hrm->HRM_ID,'3') >= 1200){
@@ -5207,6 +5237,7 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 	}
 
 	
+}
 }
 ////close gold
 
