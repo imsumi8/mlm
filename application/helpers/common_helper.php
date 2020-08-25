@@ -3916,9 +3916,12 @@
 					}
 
 				}else{
+		
 					pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),1);
 
 				}
+			}else{
+				pay_commission_to_customer($upper_level_sponsor_id[$i],$income,3,'0',date('Y-m-d'),0);
 			}
 
 			 }
@@ -5173,6 +5176,7 @@ function get_upper_star_sponsor($hrm_id){
 			$upper_level_sponsor_id=get_top_sponsor(1,$hrmid);
 			$count_upper_level_sponsor =count($upper_level_sponsor_id);
 			pay_silver_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+			pay_hold_commission($hrmid,'3');
 
 			
 
@@ -5187,8 +5191,8 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 
 	if(get_sum_wallet_balance_hold($hrm->HRM_ID,'3') >= 1200){
 
-		$ledgerid=get_ledger_id($hrm->HRM_ID);
-		$amt=1200;
+			$ledgerid=get_ledger_id($hrm->HRM_ID);
+			$amt=1200;
 			update_amount_ledger($ledgerid,(-1)*$amt);
 			update_amount_ledger(5,1200);
 
@@ -5197,14 +5201,7 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 			$upper_level_sponsor_id=get_top_sponsor(1,$hrmid);
 			$count_upper_level_sponsor =count($upper_level_sponsor_id);
 			pay_gold_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
-
-
-			// $sponsorid=get_reverse_parent_hrms($hrm->HRM_ID,3);
-
-			// if($sponsorid!=5000){
-				
-				insert_level_count_nodes($hrm->HRM_ID,'GOLD');	
-			// }
+	        insert_level_count_nodes($hrm->HRM_ID,'GOLD');	
 			pay_hold_commission($hrm->HRM_ID,'3');
 
 	}
