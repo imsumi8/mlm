@@ -1490,7 +1490,7 @@ var strTime = hours + ':' + minutes + ':' + x + ' ' + ampm;
 
 x1=monthNames[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear() + " " + strTime;
 
-document.getElementById('ct').innerHTML = x1;
+// document.getElementById('ct').innerHTML = x1;
 display_c();
  }
 function copyToClipboard(element) {
