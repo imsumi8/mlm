@@ -5200,6 +5200,13 @@ function get_upper_star_sponsor($hrm_id){
 			update_amount_ledger($crid,$amt);
 			update_amount_ledger($ledgerid,(-1)*$amt);
 			update_amount_ledger($ledgerid,(-1)*$amt);
+			$firstname=get_hrm_postmeta($hrmid,"first_name");
+			$lastname=get_hrm_postmeta($hrmid,"last_name");
+			$drid=5;
+			$crid=$ledgerid;
+			$dt=date('Y-m-d');
+			$particular='being amount charge for silver upgrade of '.$firstname. ' '.$lastname.' of '.$amt;
+			insert_record_transaction($drid,$crid,$hrmid,$particular,$amt,$dt);
             pay_commission_to_customer($hrmid,$amt,8,'0',date('Y-m-d'),2);
 			update_hrmpost_meta($hrmid,'silver',1);
 			insert_level_count_nodes($hrmid,'SILVER');	
@@ -5225,7 +5232,13 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 			$amt=1200;
 			update_amount_ledger($ledgerid,(-1)*$amt);
 			update_amount_ledger(5,1200);
-
+			$firstname=get_hrm_postmeta($hrmid,"first_name");
+			$lastname=get_hrm_postmeta($hrmid,"last_name");
+			$drid=5;
+			$crid=$ledgerid;
+			$dt=date('Y-m-d');
+			$particular='being amount charge for gold upgrade of '.$firstname. ' '.$lastname.' of '.$amt;
+			insert_record_transaction($drid,$crid,$hrmid,$particular,$amt,$dt);
 			pay_commission_to_customer($hrm->HRM_ID,1200,9,'0',date('Y-m-d'),2);
 			update_hrmpost_meta($hrm->HRM_ID,'gold',1);
 			$upper_level_sponsor_id=get_top_sponsor(1,$hrmid);
