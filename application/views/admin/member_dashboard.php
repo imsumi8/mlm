@@ -253,7 +253,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 												    <span class="weight-500 uppercase-font txt-light block font-13"> Silver Bonus</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $silver=get_sum_wallet_balance_type($userid,3); ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $silver=get_sum_wallet_balance_new($userid,3); ?></span></span>
 												</div>
 											
 											</div>	
