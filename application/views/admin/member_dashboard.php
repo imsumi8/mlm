@@ -445,7 +445,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
@@ -463,7 +463,26 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="sm-data-box actived">
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
+													<span class="weight-500 uppercase-font txt-light block font-13"> Net Wallet (INCOME RS)</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo liable_amount_to_pay($this->session->userdata('userid'));  ?></span></span>
+												</div>
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
