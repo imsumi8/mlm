@@ -3876,6 +3876,20 @@
 		
 	}
 
+	function get_direct_income_by_level($level){
+        $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from level_income where LEVEL_NO='".$level."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->LEVEL_DIRECT;
+		}else{
+			return 0;
+		}
+		
+	}
+
 		
 	function get_star_income_by_level($level){
         $ci=& get_instance();
@@ -5174,6 +5188,54 @@ function get_upper_star_sponsor($hrm_id){
 		}
 	}
 
+	function pay_team_incentive2($upper_level_sponsor_id,$count_upper_level_sponsor){
+	  
+		for($i=0;$i<$count_upper_level_sponsor; $i++){
+					
+			$level = $i+1;
+
+			$income = get_level_income_by_level($level);
+
+			$countDirect = get_direct_by_hrm($upper_level_sponsor_id[$i]);
+
+			$requiredDirect =get_direct_income_by_level($level);
+			
+			 if(!$income)
+			   break;
+			   
+			 if($requiredDirect > $countDirect)
+			 continue;  
+
+     pay_commission_to_customer($upper_level_sponsor_id[$i],$income,1,'0',date('Y-m-d'),1);	
+					   	
+			 }
+			 
+			 return true;
+		
+	}
+
+
+	function cron2(){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$hrms =get_hrms_all();
+		if($hrms){
+
+			foreach($hrms as $hrm){
+
+				$hrmid=$hrm->HRM_ID;
+				$sponsors = get_top_sponsor(1,$hrmid);
+			   
+		if(count($sponsors)>0){
+			pay_team_incentive2($sponsors,count($sponsors));
+			}
+			
+			// echo "<pre>".count($sponsors)."</pre>";
+
+				 
+			}
+		}
+	}
 
 	 function cron(){
 		 

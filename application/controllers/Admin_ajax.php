@@ -3203,20 +3203,20 @@ public function get_pancard(){
 		 
 		insert_count_nodes($sponserid,3);
 
-	if($count_upper_level_sponsor>0){
-		////below level 1 team sales incentive
-		pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+	// if($count_upper_level_sponsor>0){
+	// 	////below level 1 team sales incentive
+	// 	pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
 
 
 
 
-	}	
+	// }	
 
 		// if($direct_down > 2){
 
-			$income = get_level_income_by_level(1);
+			// $income = get_level_income_by_level(1);
 			////level 1 team sales incentive
-			pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
+			// pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
 			
 		// }
 		
@@ -3225,19 +3225,19 @@ public function get_pancard(){
 		// 	pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
 		// }
 
-		$star_sp =get_upper_star_sponsor($hrm_id);
+		// $star_sp =get_upper_star_sponsor($hrm_id);
 
-		if($star_sp){
-			$sl2income = get_star_income_by_level(2);
-			insert_level_count_nodes($star_sp,'SL2');
-			pay_commission_to_customer($star_sp,$sl2income,2,'0',date('Y-m-d'),1);
-		}
+		// if($star_sp){
+		// 	$sl2income = get_star_income_by_level(2);
+		// 	insert_level_count_nodes($star_sp,'SL2');
+		// 	pay_commission_to_customer($star_sp,$sl2income,2,'0',date('Y-m-d'),1);
+		// }
 
-		if($direct_down == 8){
+		// if($direct_down == 8){
 			 
-			update_hrmpost_meta($sponserid,'star',1);
+		// 	update_hrmpost_meta($sponserid,'star',1);
 
-		}
+		// }
 
 		if($direct_down == 2){
 
@@ -3315,7 +3315,7 @@ public function get_pancard(){
 				
 
 		}    	
-			cron();				
+			// cron();				
 
             			 
             				$result=1; 
@@ -3348,7 +3348,9 @@ public function get_pancard(){
 		die();
 	}
 	
-	
+	public function distribution(){
+		cron2();
+	}
 	
 		public function memberregister()
 	{
@@ -3360,16 +3362,16 @@ public function get_pancard(){
 		$desiredid=strtoupper($_POST['desiredid']);
 		$email=$_POST['email'];
 		$phone=$_POST['phone'];
-		$aadhar=$_POST['aadhar'];
-		$gender=$_POST['gender'];
-		$dob=$_POST['dob'];
-		$pancard=$_POST['pancard'];
-		$address=$_POST['address'];
-		$acno=$_POST['acno'];
-		$holdername=$_POST['holdername'];
-		$bank=$_POST['bank'];
-		$ifsc=$_POST['ifsc'];
-		$branch=$_POST['branch'];
+		// $aadhar=$_POST['aadhar'];
+		// $gender=$_POST['gender'];
+		// $dob=$_POST['dob'];
+		// $pancard=$_POST['pancard'];
+		// $address=$_POST['address'];
+		// $acno=$_POST['acno'];
+		// $holdername=$_POST['holdername'];
+		// $bank=$_POST['bank'];
+		// $ifsc=$_POST['ifsc'];
+		// $branch=$_POST['branch'];
 		$sponserid=strtoupper($_POST['sponserid']);
 		$positionid=strtoupper($_POST['positionid']);
 		
@@ -3426,24 +3428,24 @@ public function get_pancard(){
             				update_hrmpost_meta($hrm_id,'father_name','');
             				update_hrmpost_meta($hrm_id,'mother_name','');
             				update_hrmpost_meta($hrm_id,'email',$email);
-            				update_hrmpost_meta($hrm_id,'gender',$gender);
+            				// update_hrmpost_meta($hrm_id,'gender',$gender);
             				update_hrmpost_meta($hrm_id,'contact',$phone);
             				update_hrmpost_meta($hrm_id,'whatsap_contact','');
             				update_hrmpost_meta($hrm_id,'state','');
             				update_hrmpost_meta($hrm_id,'city','');
             				update_hrmpost_meta($hrm_id,'pin_code','');
-            				update_hrmpost_meta($hrm_id,'dob',$dob);
-            				update_hrmpost_meta($hrm_id,'pancard',$pancard);
-            				update_hrmpost_meta($hrm_id,'aadhar',$aadhar);
-            				update_hrmpost_meta($hrm_id,'address',$address);
+            				// update_hrmpost_meta($hrm_id,'dob',$dob);
+            				// update_hrmpost_meta($hrm_id,'pancard',$pancard);
+            				// update_hrmpost_meta($hrm_id,'aadhar',$aadhar);
+            				// update_hrmpost_meta($hrm_id,'address',$address);
             				update_hrmpost_meta($hrm_id,'img',get_option('default_img'));
             				update_hrmpost_meta($hrm_id,'password',$_POST['pass']);
             				
-            				update_hrmpost_meta($hrm_id,'ac_no',$acno);
-            				update_hrmpost_meta($hrm_id,'ac_holder_name',$holdername);
-            				update_hrmpost_meta($hrm_id,'bank_id',$bank);
-            				update_hrmpost_meta($hrm_id,'ifsc',$ifsc);
-            				update_hrmpost_meta($hrm_id,'branch_name',$branch);
+            				// update_hrmpost_meta($hrm_id,'ac_no',$acno);
+            				// update_hrmpost_meta($hrm_id,'ac_holder_name',$holdername);
+            				// update_hrmpost_meta($hrm_id,'bank_id',$bank);
+            				// update_hrmpost_meta($hrm_id,'ifsc',$ifsc);
+            				// update_hrmpost_meta($hrm_id,'branch_name',$branch);
             				update_hrmpost_meta($hrm_id,'brnch_address','');
             				update_hrmpost_meta($hrm_id,'payment_type','');
             				update_hrmpost_meta($hrm_id,'pin_no','');

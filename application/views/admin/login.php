@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title><?php echo get_option('footer_name'); ?></title>
+	<title></title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -139,7 +139,7 @@ margin-left: 4px;
 					<a href="<?php echo base_url(); ?>" class="btn btn-sm btn-primary" >HOME</a>
 				</div> -->
 			
-				<h3 style="padding-top: 27px;text-align: center;">Sign In With RMGM</h3>
+				<h3 style="padding-top: 27px;text-align: center;">Sign In </h3>
 				<div class="d-flex justify-content-end social_icon">
 					<!-- <span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>

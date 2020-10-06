@@ -103,13 +103,7 @@ jQuery(document).ready(function (){
 			},
 			"pos":{
 			    required: true,
-			},
-			"aadhar":{
-			    required: true,
-			},
-			"pancard":{
-			    required: true,
-			},
+			}
 			
 		},
         
@@ -490,6 +484,23 @@ jQuery(document).ready(function (){
 			}
 		});
 	});
+
+
+	$('.copy_text').click(function (e) {
+		e.preventDefault();
+		var copyText = $(this).attr('href');
+	 
+		document.addEventListener('copy', function(e) {
+		   e.clipboardData.setData('text/plain', copyText);
+		   e.preventDefault();
+		}, true);
+	 
+		document.execCommand('copy');  
+		$('#copied').show();
+		// console.log('copied text : ', copyText);
+		// alert('copied text: ' + copyText); 
+	  });
+
 	$("#memberregister").on('submit', function(e){
 		var checked=$('#checkedform').val();
 		var pass=$('#password').val();

@@ -18,7 +18,7 @@
 					<div class="form-group">
 						<div class="form-row form-row-1">
 						<input type="hidden" id="checkedform" value='0'>
-							<input type="text" name="sponserid" id="sponserid" style="" class="input-text get_name_member get_postitionid" placeholder="Sponsor Id*" autocomplete="off" required>
+							<input type="text" name="sponserid" id="sponserid" style="" class="input-text get_name_member get_postitionid" value="<?php echo $sponsorid?$sponsorid:"" ?>" placeholder="Sponsor Id*" autocomplete="off" required>
 						</div>
 						<div class="form-row form-row-2">
 							<input type="text" name="sponsor_name" id="sponsor_name" class="input-text sponsor_name" placeholder="Sponsor Name" readonly>
@@ -33,20 +33,20 @@
 
 					<div class="form-group">
 						<div class="form-row form-row-1">
-						<input type="number" name="phone" class="phone input_num" id="phone" placeholder="Phone No*" required>
+						<input type="number" name="phone" class="phone input_num" id="phone" placeholder="Mobile No*" required>
 						</div>
 						<div class="form-row form-row-2">
 						<input type="text" name="email" class="email" id="email" placeholder="Email*" required>
 						</div>
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div class="form-row form-row-1">
 						<input type="text" name="pancard" class="pancard" id="pancard" placeholder="Pan Card*" required>
 						</div>
 						<div class="form-row form-row-2">
 						<input type="number" name="aadhar" class="aadhar" id="aadhar" placeholder="Aadhar No*" required>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="form-group" style="display:none">
 						<div class="form-row form-row-1">
@@ -67,45 +67,43 @@
 						<input type="hidden" name="lastname" class="form-control">
 					</div> -->
 
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div class="form-row form-row-1">
 						<select name="gender" required>
 						    <option value="">Gender*</option>
 						    <option value="Male">Male</option>
 						    <option value="Male">Female</option>
-						    <!-- <option value="employee">Employee</option> -->
+						   
 						</select>
 						<span class="select-btn">
 						  	<i class="zmdi zmdi-chevron-down"></i>
 						</span>
-					</div>
+					</div> -->
 					
-						<div class="form-row form-row-2">
+						<!-- <div class="form-row form-row-2">
 						<input type="text" name="dob" class="dob datepicker" id="dob" placeholder="DOB*" readonly>
 						</div>
 					</div>
 
 					<div class="form-row">
 						<input type="text" name="address" class="address" id="editor" placeholder="Address" required>
-					</div>
-					<!-- <div class="form-group">
-						<div class="form-row form-row-3">
-							<input type="text" name="business" class="business" id="business" placeholder="Business Arena" required>
-						</div>
-						<div class="form-row form-row-4">
-							<select name="employees">
-							    <option value="employees">Employees</option>
-							    <option value="trainee">Trainee</option>
-							    <option value="colleague">Colleague</option>
-							    <option value="associate">Associate</option>
-							</select>
-							<span class="select-btn">
-							  	<i class="zmdi zmdi-chevron-down"></i>
-							</span>
-						</div>
 					</div> -->
+					<!-- <div class="form-checkbox">
+						<label class="container"><p>I agree with the <a href="javsacript:void(0);"  data-toggle="modal" data-target="#myModal" class="text">Terms and Conditions</a> </p>
+						  	<input  type="checkbox" name="terms" value="yes" class="terms" required style="position: relative;top: 2px;">
+						  	<span class="checkmark"></span>
+						</label>
+					</div> -->
+					<div class="form-row-last">
+						<input type="submit" style="background-color:#5d40ff; color:#ffffff" name="register" class="btn btn-primary" value="Register">
+					</div>
+
+					<div class="form-row-last" style=" margin-left: auto;margin-right: auto;padding: 40px 0;">
+					<a href="<?php echo base_url('admin') ?>"><button type="button" class="btn btn-primary">Back to Login</button></a>
+					</div>
 				</div>
-				<div class="form-right">
+			
+				<!-- <div class="form-right">
 					<h2>Bank Details</h2>
 					<div class="form-row">
 						<input type="text" name="acno" class="input_num" id="acno" placeholder="Bank A/c">
@@ -128,25 +126,7 @@
 							</span>
 					
 					</div>
-					<!-- <div class="form-row">
-						<select name="country">
-						    <option value="country">Country</option>
-						    <option value="Vietnam">Vietnam</option>
-						    <option value="Malaysia">Malaysia</option>
-						    <option value="India">India</option>
-						</select>
-						<span class="select-btn">
-						  	<i class="zmdi zmdi-chevron-down"></i>
-						</span>
-					</div> -->
-					<!-- <div class="form-group">
-						<div class="form-row form-row-1">
-							<input type="text" name="code" class="code" id="code" placeholder="Code +" required>
-						</div>
-						<div class="form-row form-row-2">
-							<input type="text" name="phone" class="phone" id="phone" placeholder="Phone Number" required>
-						</div>
-					</div> -->
+				
 					<div class="form-row">
 						<input type="text" name="branch" id="branch" class="input-text"  placeholder="Branch">
 					</div>
@@ -155,16 +135,8 @@
 						<input type="text" name="ifsc" id="ifsc" class="input-text"  placeholder="IFSC Code">
 					</div>
 
-					<div class="form-checkbox">
-						<label class="container"><p>I agree with the <a href="javsacript:void(0);"  data-toggle="modal" data-target="#myModal" class="text">Terms and Conditions</a> </p>
-						  	<input  type="checkbox" name="terms" value="yes" class="terms" required style="position: relative;top: 2px;">
-						  	<span class="checkmark"></span>
-						</label>
-					</div>
-					<div class="form-row-last">
-						<input type="submit" name="register" class="register submitregister" value="SUBMIT">
-					</div>
-				</div>
+				
+				</div> -->
 			</form>
 		</div>
     </div>
@@ -200,7 +172,12 @@
 			</div>
     <script>
 			    $('document').ready(function(){
-			      
+				  
+					var sponsorid=$('.get_name_member').val();
+			        //var position=$('.pos').val();
+			        if(sponsorid!=''){
+						change_position();
+					}	
 			       $('.get_postitionid').on('Keyup',function(){
 			           change_position();
 			       }); 
@@ -268,7 +245,7 @@
 							
 								var obj = jQuery.parseJSON(msg);
 							
-							console.log(obj);
+							// console.log(obj);
 
             				    if(obj.msg=="Invalid Sponsor id"){
 									sweetalert('Invalid','warning',obj.msg,'#f99b4a');

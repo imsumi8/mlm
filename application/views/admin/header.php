@@ -490,7 +490,7 @@
 
 
 			
-				<li>
+				<!-- <li>
 					
 				    <a <?php if($title=='STAR VIEW') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#star_dr"><div class="pull-left"><i class="fa fa-tree mr-20"></i><span class="right-nav-text">Star Geneology</span></div><div class="pull-right">
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">3</span></div><div class="clearfix"></div></a>
@@ -498,7 +498,7 @@
 					
 						<li>
 							<a <?php if($subpage=='star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/star"><i class="fa fa-circle <?php if($subpage=='star') { echo 'clrred'; } ?>"></i> Star</a> 
-						</li>
+						</li> -->
 						
 						<!-- <li>
 							<a  <?php if($subpage=='double_star') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/double_star"><i class="fa fa-circle <?php if($subpage=='double_star') { echo 'clrred'; } ?>"></i> Double Star</a>
@@ -514,8 +514,8 @@
 					<a <?php if($subpage=='autopool') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_list"><i class="fa fa-circle <?php if($subpage=='autopool') { echo 'clrred'; } ?>"></i> Travelpool</a>
 				</li>	 -->
 
-						</ul>
-				</li>
+						<!-- </ul>
+				</li> -->
 
 			
 				

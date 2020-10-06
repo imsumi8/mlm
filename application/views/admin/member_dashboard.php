@@ -173,8 +173,8 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-												    <span class="weight-500 uppercase-font txt-light block font-13"> Star Bonus</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $star=get_sum_wallet_balance_new($userid,2); ?></span></span>
+												    <span class="weight-500 uppercase-font txt-light block font-13"> DP Wallet</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php if(get_hrm_postmeta($userid,'dp_wallet')) { echo get_hrm_postmeta($userid,'dp_wallet'); } else { echo '0'; } ?></span></span>
 												</div>
 											
 											</div>	
@@ -211,7 +211,7 @@
 
 
 				
-	<div class="row" >
+	<!-- <div class="row" >
         
 
 
@@ -235,14 +235,14 @@
 							</div>
 						</div>
 					</div>
-					</div>
+					</div> -->
 
 				
 
 				
 
 
-							
+<!-- 							
 					<div class="row">
          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
@@ -286,7 +286,7 @@
 							</div>
 						</div>
 					</div>
-					</div>
+					</div> -->
 					
 
 
@@ -547,6 +547,15 @@
 											    <tr>
 											        <td>DATE OF JOINING</td>
 											       <td><?php echo $today = date("F j, Y, g:i a",strtotime( $hrm_post[0]->HRM_DATE)); ?></td>
+											    </tr>
+
+												<tr>
+											        <td>Share Link</td>
+			    <td> 
+				<a class="copy_text"  data-toggle="tooltip" title="Copy to Clipboard" href="<?php echo "http://mybizworld.net/registration?sponsor=".base64_encode($this->session->userdata('userid')) ?>">Copy Link
+				<span id="copied" style="color:green;float:right;display:none">copied</span>
+				</a>
+</td>
 											    </tr>
 											    
 											</table>

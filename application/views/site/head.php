@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>RMGM</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url();  ?>assets/hus/img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -68,33 +68,27 @@
             <div id="sticky-header" class="main-header-area">
                 <div class="container-fluid p-0">
                     <div class="row align-items-center no-gutters">
-                        <div class="col-xl-2 col-lg-2">
+                        <!-- <div class="col-xl-2 col-lg-2">
                             <div class="logo">
                                 <a href="<?php echo site_url('welcome'); ?>">
                                     <img class="logo_img" src="<?php echo base_url();  ?>assets/hus/img/logo.jpeg" alt="" style="">
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6">
+                        </div> -->
+                        <!-- <div class="col-xl-6 col-lg-6">
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
                                         <li><a class="active" href="<?php echo site_url('welcome'); ?>">home</a></li>
                                         <li><a href="<?php echo site_url('welcome/about'); ?>">About</a></li>
-                                        <!-- <li><a href="#">pages</a>
-                                            <ul class="submenu">
-                                                    <li><a href="facilites.html">Facilities</a></li>
-                                                    <li><a href="property.html">Properties</a></li>
-                                                    <li><a href="elements.html">elements</a></li>
-                                            </ul>
-                                        </li> -->
+                                     
                                       
                                         <li><a href="<?php echo site_url('welcome/contact'); ?>">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 d-block d-lg-block">
+                        </div> -->
+                        <!-- <div class="col-xl-4 col-lg-4 d-block d-lg-block">
                             <div class="social_wrap d-flex align-items-center justify-content-end">
                                 <div class="login_text">
                                 <a  href="<?php echo site_url('registration'); ?>">Register</a>
@@ -103,10 +97,10 @@
                                 <a  href="<?php echo site_url('admin'); ?>">Login</a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12">
+                        </div> -->
+                        <!-- <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>

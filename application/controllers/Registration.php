@@ -34,7 +34,7 @@ class Registration extends CI_Controller {
 		$data['states']=get_all_states();
 		$data['banks']=get_all_banks();
 		$data['packs']=get_all_packs();
-		
+		$data['sponsorid']=base64_decode($this->input->get('sponsor'));
 		$this->load->view('site/head');
 		$this->load->view('site/register',$data);
 		
