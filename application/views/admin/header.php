@@ -50,7 +50,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/export/bootstrap-table-export.min.js"></script>
 		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/mobile/bootstrap-table-mobile.min.js"></script>
-		
+		<script data-ad-client="ca-pub-9621985279299351" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
 		var admin_loc='<?php echo base_url().'Admin_ajax/'; ?>';
 		var base_loc='<?php echo base_url().'Admin/'; ?>';
