@@ -17,7 +17,7 @@
 	<script src="<?php echo base_url(); ?>assets/js/front.js"></script>
 	 <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
-
+	<script data-ad-client="ca-pub-9621985279299351" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
 		var admin_loc='<?php echo base_url().'admin_ajax/'; ?>';
 		var base_loc='<?php echo base_url().'admin/'; ?>';
