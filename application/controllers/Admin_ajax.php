@@ -3241,7 +3241,7 @@ public function get_pancard(){
 
 		if($direct_down == 2){
 
-			update_hrmpost_meta($sponserid,'dp_wallet',1150);
+			update_hrmpost_meta($sponserid,'dp_wallet',1000);
 
 			// pay_commission_to_customer($sponserid,1150,7,'0',date('Y-m-d'),1);
 		 

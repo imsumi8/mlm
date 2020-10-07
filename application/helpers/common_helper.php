@@ -5224,6 +5224,7 @@ function get_upper_star_sponsor($hrm_id){
 			foreach($hrms as $hrm){
 
 				$hrmid=$hrm->HRM_ID;
+				pay_commission_to_customer($hrmid,20,10,'0',date('Y-m-d'),1);		
 				$sponsors = get_top_sponsor(1,$hrmid);
 			   
 		if(count($sponsors)>0){

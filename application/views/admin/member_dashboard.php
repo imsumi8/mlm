@@ -173,8 +173,8 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-												    <span class="weight-500 uppercase-font txt-light block font-13"> DP Wallet</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php if(get_hrm_postmeta($userid,'dp_wallet')) { echo get_hrm_postmeta($userid,'dp_wallet'); } else { echo '0'; } ?></span></span>
+												    <span class="weight-500 uppercase-font txt-light block font-13"> By Self Bonus</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $by_self=get_sum_wallet_balance_type($userid,10); ?></span></span>
 												</div>
 											
 											</div>	
@@ -211,7 +211,7 @@
 
 
 				
-	<!-- <div class="row" >
+	<div class="row" >
         
 
 
@@ -224,7 +224,7 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-													<span class="weight-500 uppercase-font txt-light block font-13">DP Wallet</span>
+													<span class="weight-500 uppercase-font txt-light block font-13">Product Discount Wallet</span>
 													<span class="txt-light block counter"><span class="counter-anim"><?php if(get_hrm_postmeta($userid,'dp_wallet')) { echo get_hrm_postmeta($userid,'dp_wallet'); } else { echo '0'; } ?></span></span>
 												</div>
 												
@@ -235,7 +235,7 @@
 							</div>
 						</div>
 					</div>
-					</div> -->
+					</div>
 
 				
 
@@ -435,7 +435,7 @@
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
 													<span class="weight-500 uppercase-font txt-light block font-13"> TOTAL INCOME</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales + $star +$silver +$gold; ?></span></span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales + $by_self; ?></span></span>
 												</div>
 											
 											</div>	
@@ -552,7 +552,7 @@
 												<tr>
 											        <td>Share Link</td>
 			    <td> 
-				<a class="copy_text"  data-toggle="tooltip" title="Copy to Clipboard" href="<?php echo "http://mybizworld.net/registration?sponsor=".base64_encode($this->session->userdata('userid')) ?>">Copy Link
+				<a class="copy_text"  data-toggle="tooltip" title="Copy to Clipboard" href="<?php echo "http://rbwbusiness.com/registration?sponsor=".base64_encode($this->session->userdata('userid')) ?>">Copy Link
 				<span id="copied" style="color:green;float:right;display:none">copied</span>
 				</a>
 </td>
