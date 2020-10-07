@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title><?php echo $title; ?></title>
+	<title><?php echo "RBW Business"; ?></title>
 
 	
 	<!-- Favicon -->
@@ -101,8 +101,8 @@
 				<div class="nav-header pull-left">
 					<div class="logo-wrap pad_tp_0">
 						<a href="javascript:void(0);">
-							
-							 <img style="top:-4px;" class="brand-img wdth top-img" src="<?php echo base_url() ?>assets/uploads_assets/<?php echo get_option('logo'); ?>" alt="brand">
+							<h3 style="color:#ffffff">RBW Business</h3>
+							 <!-- <img style="top:-4px;" class="brand-img wdth top-img" src="<?php echo base_url() ?>assets/uploads_assets/<?php echo get_option('logo'); ?>" alt="brand"> -->
 						</a>
 					</div>
 				</div>	
