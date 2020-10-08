@@ -3100,7 +3100,7 @@
 		$ci->load->database(); 
 		$array=array();
 		if($income=='all'){
-		    $income='1,2,3,4,5,6';
+		    $income='1,2,3,4,5,6,10';
 		}
 		$sql="Select * from wallet_balance where HRM_ID='".$userid."' and COMMISSION_TYPE IN (".$income.") and DATE(DATE_TIME)>='".$from."' and DATE(DATE_TIME)<='".$to."' order by WALLET_ID ASC";
         $query = $ci->db->query($sql);
@@ -3117,7 +3117,7 @@
 		$ci->load->database(); 
 		$array=array();
 		if($income=='all'){
-		    $income='1,2,3,4,5,6';
+		    $income='1,2,3,4,5,6,10';
 		}
 		$users=	$ci->session->userdata('userid');
         $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and HRM_STATUS=1 ORDER by ID ASC');
@@ -3142,7 +3142,7 @@
 		$ci->load->database(); 
 		$array=array();
 		if($income=='all'){
-		    $income='1,2,3,4,5,6';
+		    $income='1,2,3,4,5,6,10';
 		}
 		$sql="Select SUM(WALLET_AMOUNT) as AMOUNT from wallet_balance where HRM_ID='".$userid."' and COMMISSION_TYPE IN (".$income.") and DATE(DATE_TIME)>='".$from."' and DATE(DATE_TIME)<='".$to."'";
         $query = $ci->db->query($sql);
@@ -4507,6 +4507,7 @@ function get_upper_star_sponsor($hrm_id){
 		 $sum+=get_sum_wallet_balance_type($hrmid,6);
 		 $sum-=get_sum_wallet_balance_new($hrmid,8);
 		 $sum-=get_sum_wallet_balance_new($hrmid,9);
+		 $sum-=get_sum_wallet_balance_new($hrmid,10);
 		 $payable_income=$sum;
 		 $silver =   get_hrm_postmeta($hrmid,'silver');
 		 if(!$silver && $payable_income>=1000){
