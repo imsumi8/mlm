@@ -3267,47 +3267,45 @@
 		}
 	
 	}
-	function send_sms($mobileno,$msg,$touserid){
+	
+	 function send_sms($mobileno,$msg,$touserid){
 	    $ci =& get_instance();
 		$ci->load->database();
-		// $ci->load->library('setupfile');
-		//	$ci->setupfile->send("9696006233", "hello");
 	    if(get_option('send_msg')==1){
-    	    $username="rohit123456";
-    		$password="dcntv.16";
-    		$sender=get_option('sender');
-    	    $mobile=$mobileno;
+    	    $username="Trans";
+    		$password=0;
+			$sender="RMGMBZ";
+			$apikey=urlencode("bBfOidTjVE6HE6F7Ve9GHw");
+    	    $mobile="91".$mobileno;
     	    $message=$msg;
     	   
-    		$username=urlencode($username);
-    		$password=urlencode($password);
-    		$sender=urlencode($sender);
+    		$username=$username;
+    		$password=$password;
     		$message=urlencode($message);
-    		if ($mobile > 1111111111 && $mobile < 9999999999) {
-    			$parameters="username=".$username."&password=".$password."&mobile=".$mobile."&sendername=".$sender."&message=".$message;
+    		if ($mobile != "") {
+    	        $parameters="Apikey=".$apikey."&channel=".$username."&DCS=".$password."&number=".$mobile."&flashsms=0&route=27&senderid=".$sender."&text=".$message;
+    			$url="http://mysms.msg24.in/api/mt/SendSMS?";
     
-    			$url="http://priority.muzztech.in/sms_api/sendsms.php";
-    
-    			$ch = curl_init($url);
-    
-    			if(isset($_POST))
-    			{
-    				curl_setopt($ch, CURLOPT_POST,1);
-    				curl_setopt($ch, CURLOPT_POSTFIELDS,$parameters);
-    			}
-    			else
-    			{
-    				$get_url=$url."?".$parameters;
-    
-    				curl_setopt($ch, CURLOPT_POST,0);
-    				curl_setopt($ch, CURLOPT_URL, $get_url);
-    			}
-    
-    			curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1); 
-    			curl_setopt($ch, CURLOPT_HEADER,0);  // DO NOT RETURN HTTP HEADERS 
-    			curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);  // RETURN THE CONTENTS OF THE CALL
+			$body =$url.$parameters;
+			
+				$method = 'GET';
+				$headers = array(
+					"content-type: application/json"
+				);
+			 
+				$curl = curl_init();
+			
+				curl_setopt_array($curl, array(
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_URL => $body,
+					CURLOPT_CUSTOMREQUEST => $method,
+					CURLOPT_HTTPHEADER => $headers
+				));
+	
     			
-    			$return_val = curl_exec($ch);
+				$return_val = curl_exec($curl);
+
+			
     			if($return_val==""){
     				$jbid="Failed";
     				$stat=0;

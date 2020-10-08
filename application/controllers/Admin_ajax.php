@@ -2810,6 +2810,8 @@ public function get_pancard(){
 		<?php
 		die();
 	}
+
+
 	public function memberregister2()
 	{
 		date_default_timezone_set('Asia/Calcutta'); 
@@ -3466,7 +3468,7 @@ public function get_pancard(){
 							update_hrmpost_meta($hrm_id,'triple_star',0);
             			    update_hrmpost_meta($hrm_id,'sponsorid',$sponserid);
             			    
-                            $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RMGM.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
+                            $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RBW.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
 							send_sms($phone,$msg,$hrm_id);
 							$ledger_id=insert_ledger('ledger_'.$hrm_id);
             		 
