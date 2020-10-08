@@ -27,12 +27,12 @@ class Admin extends CI_Controller {
 		$this->load->library('email');
         $this->load->helper('common_helper'); 
       
-        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-		if($this->session->userdata('userid')==''){
-			if(base_url().'admin'!= $actual_link){
-				redirect('admin');
-			}
-		}
+        // $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// 		if($this->session->userdata('userid')==''){
+// 			if(base_url().'admin'!= $actual_link){
+// 				redirect('admin');
+// 			}
+// 		}
 		// to_renew_perform_bonus();
 	}
 	public function index()
