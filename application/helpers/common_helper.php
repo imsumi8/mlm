@@ -4507,7 +4507,7 @@ function get_upper_star_sponsor($hrm_id){
 		 $sum+=get_sum_wallet_balance_type($hrmid,6);
 		 $sum-=get_sum_wallet_balance_new($hrmid,8);
 		 $sum-=get_sum_wallet_balance_new($hrmid,9);
-		 $sum-=get_sum_wallet_balance_new($hrmid,10);
+		 $sum-=get_sum_wallet_balance_type($hrmid,10);
 		 $payable_income=$sum;
 		 $silver =   get_hrm_postmeta($hrmid,'silver');
 		 if(!$silver && $payable_income>=1000){
