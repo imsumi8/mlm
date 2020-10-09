@@ -552,7 +552,7 @@
 												<tr>
 											        <td>Share Link</td>
 			    <td> 
-				<a class="copy_text"  data-toggle="tooltip" title="Copy to Clipboard" href="<?php echo "http://rbwbusiness.com/registration?sponsor=".base64_encode($this->session->userdata('userid')) ?>">Copy Link
+				<a class="copy_text"  data-toggle="tooltip" title="Copy to Clipboard" href="<?php echo "https://rbwbusiness.com/registration?sponsor=".base64_encode($this->session->userdata('userid')) ?>">Copy Link
 				<span id="copied" style="color:green;float:right;display:none">copied</span>
 				</a>
 </td>
