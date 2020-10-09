@@ -48,8 +48,8 @@
 				    //$ar=json_decode($ar);
 				    $userid=$this->session->userdata('userid');
 				  ?>
-				<div class="row">
-				    <div class="col-md-6 col-xs-12">
+				<!-- <div class="row">
+				    <div class="col-md-6 col-xs-12"> -->
 				        <!-- <div class="panel panel-default card-view pa-0">
 				            <div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
@@ -66,9 +66,9 @@
 				                </div>
 				            </div>
 				        </div> -->
-				    </div>
+				    <!-- </div>
 					
-					<div class="col-md-6 col-xs-12">
+					<div class="col-md-6 col-xs-12"> -->
 				        <!-- <div class="panel panel-default card-view pa-0">
 				            <div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
@@ -78,8 +78,8 @@
 				                </div>
 				            </div>
 				        </div> -->
-				    </div>
-				</div>
+				    <!-- </div>
+				</div> -->
 				<!-- Row -->
 				<!-- /Row -->
 				<div class="row">
