@@ -2874,6 +2874,14 @@
 		$sql = "delete from `hrm_post` where HRM_ID='".$userid."'"; 
 		$query = $ci->db->query($sql);
 	}
+
+	function delete_wallet_balance($hrmid){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "delete from `wallet_balance` where HRM_ID='".$hrmid."'"; 
+		$query = $ci->db->query($sql);
+	}
+
 	function  update_hrm_free_level_pos($pos,$hrm){
 	    $ci=& get_instance();
 		$ci->load->database(); 
@@ -3050,6 +3058,22 @@
 		   return '';
 		}
 	}
+
+	function get_hrms_all_by_status(){
+	    
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$array=array();
+	    $sql="Select * from hrm_post where HRM_ID!='5000' and HRM_STATUS=1 ORDER BY ID ASC";
+        $query = $ci->db->query($sql);
+	    $row = $query->result();
+	    if(!empty($row)){
+		   return $row;
+		}else{
+		   return '';
+		}
+	}
+
 	function get_hrm_by_date($from,$to){
 	    
 	    $ci=& get_instance();
@@ -5215,17 +5239,40 @@ function get_upper_star_sponsor($hrm_id){
 	}
 
 
+
+
 	function cron2(){
 		$ci=& get_instance();
 		$ci->load->database(); 
-		$hrms =get_hrms_all();
+		$hrms =get_hrms_all_by_status();
 		if($hrms){
 
 			foreach($hrms as $hrm){
 
 				$hrmid=$hrm->HRM_ID;
-				pay_commission_to_customer($hrmid,20,10,'0',date('Y-m-d'),1);		
-				$sponsors = get_top_sponsor(1,$hrmid);
+			
+ 
+		if($hrm->PAY_STATUS==0){
+			$create_Date= $hrm->HRM_DATE;
+			$beforedate = date("Y-m-d", strtotime( "-5 days"));
+			if($create_Date>$beforedate){
+				pay_commission_to_customer($hrmid,20,10,'0',date('Y-m-d'),1);	
+				continue;
+			}else{
+				$ledgername ="ledger_".$hrmid;
+				$currentamt = get_ledger_amt($ledgername);
+				$ledgerid = get_ledger_id($hrmid);
+				if($currentamt>0){
+				update_amount_ledger($ledgerid,(-1)*$currentamt);
+				}
+				delete_wallet_balance($hrmid);
+				continue;
+			}
+		
+		}	
+		
+		pay_commission_to_customer($hrmid,20,10,'0',date('Y-m-d'),1);	
+		$sponsors = get_top_sponsor(1,$hrmid);
 			   
 		if(count($sponsors)>0){
 			pay_team_incentive2($sponsors,count($sponsors));
