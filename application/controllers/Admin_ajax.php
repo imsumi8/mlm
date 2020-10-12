@@ -278,7 +278,14 @@ class Admin_ajax extends CI_Controller {
 				$this->session->set_userdata('userid',strtoupper($userid));
 				insert_activity($userid,'User logged in');
 			}else{
+				$query=$this->db->query("Select * from hrm_post where HRM_ID='".$userid."' and HRM_PASSWORD='".$userpass."' and HRM_STATUS=0");
+			$result=$query->num_rows();
+			if($result>0){
+				echo 'Your account is Inactive.Contact to admin to activate.';
+			}else{
 				echo 'Invalid login credentials';
+			}
+
 			}
 		}	
 		die();
@@ -3161,7 +3168,8 @@ public function get_pancard(){
             	 update_hrmpost_meta($hrm_id,'pin_no',$epinno);
 				 update_hrmpost_meta($hrm_id,'package',$pack);
 				 update_epin_done_by_epinno($hrm_id,$epinno,$hrm_id);
-                 update_paystatus($hrm_id, 1);
+				 update_paystatus($hrm_id, 1);
+				 update_pass_hrms($hrm_id,"HRM_STATUS",1);
             	 insert_count_nodes($hrm_id,3);
 				 insert_count_nodes(5000,3);
 				
@@ -3362,12 +3370,12 @@ public function get_pancard(){
 		$firstname=ucwords($_POST['firstname']);
 		$lastname=ucwords($_POST['lastname']);
 		$desiredid=strtoupper($_POST['desiredid']);
-		$email=$_POST['email'];
+		// $email=$_POST['email'];
 		$phone=$_POST['phone'];
-		// $aadhar=$_POST['aadhar'];
+		 $aadhar=$_POST['aadhar'];
 		// $gender=$_POST['gender'];
 		// $dob=$_POST['dob'];
-		// $pancard=$_POST['pancard'];
+		 $pancard=$_POST['pancard'];
 		// $address=$_POST['address'];
 		// $acno=$_POST['acno'];
 		// $holdername=$_POST['holdername'];
@@ -3429,7 +3437,7 @@ public function get_pancard(){
             				update_hrmpost_meta($hrm_id,'last_name',$lastname);
             				update_hrmpost_meta($hrm_id,'father_name','');
             				update_hrmpost_meta($hrm_id,'mother_name','');
-            				update_hrmpost_meta($hrm_id,'email',$email);
+            				// update_hrmpost_meta($hrm_id,'email',$email);
             				// update_hrmpost_meta($hrm_id,'gender',$gender);
             				update_hrmpost_meta($hrm_id,'contact',$phone);
             				update_hrmpost_meta($hrm_id,'whatsap_contact','');
@@ -3437,8 +3445,8 @@ public function get_pancard(){
             				update_hrmpost_meta($hrm_id,'city','');
             				update_hrmpost_meta($hrm_id,'pin_code','');
             				// update_hrmpost_meta($hrm_id,'dob',$dob);
-            				// update_hrmpost_meta($hrm_id,'pancard',$pancard);
-            				// update_hrmpost_meta($hrm_id,'aadhar',$aadhar);
+            				 update_hrmpost_meta($hrm_id,'pancard',$pancard);
+            				 update_hrmpost_meta($hrm_id,'aadhar',$aadhar);
             				// update_hrmpost_meta($hrm_id,'address',$address);
             				update_hrmpost_meta($hrm_id,'img',get_option('default_img'));
             				update_hrmpost_meta($hrm_id,'password',$_POST['pass']);

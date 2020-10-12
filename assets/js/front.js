@@ -87,8 +87,11 @@ jQuery(document).ready(function (){
                 required: true,
                
             }, 
-			"email": {
-               email: true
+			"pancard": {
+				required: true
+			},
+			"aadhar": {
+				required: true
             },
 			"pass" : {
 			        required: true,

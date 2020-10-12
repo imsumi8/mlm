@@ -5259,13 +5259,14 @@ function get_upper_star_sponsor($hrm_id){
 				pay_commission_to_customer($hrmid,20,10,'0',date('Y-m-d'),1);	
 				continue;
 			}else{
-				$ledgername ="ledger_".$hrmid;
-				$currentamt = get_ledger_amt($ledgername);
-				$ledgerid = get_ledger_id($hrmid);
-				if($currentamt>0){
-				update_amount_ledger($ledgerid,(-1)*$currentamt);
-				}
-				delete_wallet_balance($hrmid);
+				// $ledgername ="ledger_".$hrmid;
+				// $currentamt = get_ledger_amt($ledgername);
+				// $ledgerid = get_ledger_id($hrmid);
+				// if($currentamt>0){
+				// // update_amount_ledger($ledgerid,(-1)*$currentamt);
+				// }
+				update_pass_hrms($hrmid,"HRM_STATUS",0);
+				// delete_wallet_balance($hrmid);
 				continue;
 			}
 		
