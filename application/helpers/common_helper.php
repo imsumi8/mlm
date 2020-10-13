@@ -4374,6 +4374,27 @@ function get_upper_star_sponsor($hrm_id){
 		}
    }
 
+   function get_free_count($hrm_id){
+	$ci=& get_instance();
+	$ci->load->database(); 
+	$sql="select * from hrm_post_meta where HRM_VALUE='".$hrm_id."'";
+	$query = $ci->db->query($sql);
+	$response = $query->result();
+$i=0;
+	foreach($response as $resp){
+
+		$downline = $resp->HRM_ID;
+		$sql="select * from hrm_post where HRM_ID='".$downline."'";
+		$query = $ci->db->query($sql);
+		$downdata = $query->row();	
+		if($downdata->PAY_STATUS ==0){
+			$i++;
+		}
+
+	}
+	return $i;
+   }
+
 	function get_today_products($packge_id){
 	     $ci=& get_instance();
 		 $ci->load->database(); 

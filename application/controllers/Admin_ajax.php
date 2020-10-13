@@ -2637,9 +2637,7 @@ public function get_pancard(){
 						  ?>
 							TOTAL : <?php echo get_member_nodes($hrm_id,$_POST['mlmdesc']); ?>
 							<br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); ?>
-							<br>Star: <?php echo (get_level_nodes($hrm_id,'SL2') +get_level_nodes($hrm_id,'SL3')); ?>
-							<br>Double Star: <?php echo get_level_nodes($hrm_id,'DL');  ?>
-						    <br>Triple Star: <?php echo get_level_nodes($hrm_id,'TL'); } ?>"
+							<br>REGISTERED : <?php echo get_free_count($hrm_id); } ?>"
 							class="blue-tooltip">
 							
 							<?php if($hrm_id!=$this->session->userdata('userid')){ ?>
@@ -2686,9 +2684,7 @@ public function get_pancard(){
         				    //$ar=json_decode($ar); ?>
                             TOTAL : <?php echo get_member_nodes($nodes->HRM_ID,$_POST['mlmdesc']); ?>
 							<br>DIRECT : <?php echo get_own_count_nodes($nodes->HRM_ID,1,$_POST['mlmdesc']); ?>
-							<br>Star: <?php echo (get_level_nodes($nodes->HRM_ID,'SL2') +get_level_nodes($nodes->HRM_ID,'SL3')); ?>
-							<br>Double Star: <?php echo get_level_nodes($nodes->HRM_ID,'DL');  ?>
-						    <br>Triple Star: <?php echo get_level_nodes($nodes->HRM_ID,'TL'); } ?>"
+							<br>REGISTERED : <?php echo get_free_count($nodes->HRM_ID); } ?>"
 							class="blue-tooltip">
 
 							<?php
@@ -2763,9 +2759,7 @@ public function get_pancard(){
 		                   
 						   TOTAL : <?php echo get_member_nodes($nodess->HRM_ID,$_POST['mlmdesc']); ?>
 							<br>DIRECT : <?php echo get_own_count_nodes($nodess->HRM_ID,1,$_POST['mlmdesc']); ?>
-							<br>Star: <?php echo (get_level_nodes($nodess->HRM_ID,'SL2') +get_level_nodes($nodess->HRM_ID,'SL3')); ?>
-							<br>Double Star: <?php echo get_level_nodes($nodess->HRM_ID,'DL');  ?>
-						    <br>Triple Star: <?php echo get_level_nodes($nodess->HRM_ID,'TL'); } ?>"
+							<br>REGISTERED : <?php echo get_free_count($nodess->HRM_ID); } ?>"
 							class="blue-tooltip">
 
 							
