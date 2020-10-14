@@ -3788,7 +3788,7 @@
 		$ci->load->database(); 
         $ledgerid=get_ledger_id($userid);	
         $query=$ci->db->query("SELECT *,SUM(`AMOUNT`) AS account_total
-		FROM accounts where DR_ID='".$ledgerid."' OR CR_ID='".$ledgerid."'
+		FROM accounts where DR_ID='".$ledgerid."' AND CR_ID !=8
 		GROUP BY `DATE`");
         $result=$query->result();
         return $result;
