@@ -31,38 +31,40 @@
 													    <th>SR NO.</th>
 														<th>Date</th>
 														<!--<th>Description</th>-->
-														<th>Debit</th>
-													    <th>Credit</th>
-														<th>Balance</th>
+														<!-- <th>Debit</th> -->
+													    <th>Income</th>
+														<th>Net Income</th>
 													</tr>
 												</thead>
 											    <tbody>
-													<?php if(!empty($result)){ $i=1;$balanceamt=0;
+													<?php if(!empty($result)){ 
+                                                        $i=1;$balanceamt=0;
 													 foreach($result as $results){  
-													    $amt1=0;$amt2=0; 
+                                                        $amt1=0;$amt2=0; 
+                                                        
 													    if($results->DR_ID==$ledgerid){
-													        $amt2=$results->AMOUNT;
+													        $amt2=$results->account_total;
 													        $balanceamt+=$amt2;
 													    }
-													    if($results->CR_ID==$ledgerid){
-													        $amt1=$results->AMOUNT;
-													        $balanceamt-=$amt1;
-													    }
+													    // if($results->CR_ID==$ledgerid){
+													    //     $amt1=$results->AMOUNT;
+													    //     $balanceamt-=$amt1;
+													    // }
 													    
 													 ?>
                                                          <tr>
                                                              <td><?php echo $i; ?></td>
                                                              <td><?php echo $results->DATE; ?></td>
                                                              <!--<td><?php echo $results->PARTICULAR; ?></td>-->
-                                                             <?php if($amt1!=0){ ?>
+                                                             <!-- <?php if($amt1!=0){ ?>
                                                              <td style="color:red;"><?php echo $amt1; ?></td>
                                                              <?php } else { ?>
                                                               <td><?php echo $amt1; ?></td>
-                                                             <?php } ?>
+                                                             <?php } ?> -->
                                                               <?php if($amt2!=0){ ?>
-                                                              <td style="color:green;"><?php echo $amt2; ?></td>
+                                                              <td style="color:green;"><?php echo $balanceamt; ?></td>
                                                              <?php } else { ?>
-                                                              <td><?php echo $amt2; ?></td>
+                                                              <td><?php echo $balanceamt; ?></td>
                                                              <?php } ?>
                                                             
                                                             <td><?php echo $balanceamt; ?></td>

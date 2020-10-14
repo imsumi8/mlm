@@ -3778,8 +3778,18 @@
     function get_transactions($userid){
         $ci=& get_instance();
 		$ci->load->database(); 
-        $ledgerid=get_ledger_id($userid);
+        $ledgerid=get_ledger_id($userid);	
         $query=$ci->db->query("Select * from accounts where DR_ID='".$ledgerid."' OR CR_ID='".$ledgerid."'  ORDER BY ID ASC");
+        $result=$query->result();
+        return $result;
+	}
+	function get_transactions_by_date($userid){
+        $ci=& get_instance();
+		$ci->load->database(); 
+        $ledgerid=get_ledger_id($userid);	
+        $query=$ci->db->query("SELECT *,SUM(`AMOUNT`) AS account_total
+		FROM accounts where DR_ID='".$ledgerid."' OR CR_ID='".$ledgerid."'
+		GROUP BY `DATE`");
         $result=$query->result();
         return $result;
     }

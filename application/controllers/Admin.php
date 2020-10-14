@@ -731,7 +731,7 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 			$this->load->view('admin/memberwallet/ewalletsummary');
 		}else if($this->uri->segment(3)=="transaction"){
 		    $data['subpage']='transaction';
-		    $data['result']=get_transactions($this->session->userdata('userid'));
+		    $data['result']=get_transactions_by_date($this->session->userdata('userid'));
 		    $data['ledgerid']=get_ledger_id($this->session->userdata('userid'));
 			$this->load->view('admin/header',$data);
 			$this->load->view('admin/memberwallet/transaction');
