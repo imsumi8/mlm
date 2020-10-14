@@ -411,8 +411,8 @@
 					</ul>
 				</li>
 
-<!-- 
-				<li>
+
+				<!-- <li>
 					<a <?php if($title=='Franchise') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#franchise_dr"><div class="pull-left"><i class="fa fa-users mr-20"></i><span class="right-nav-text">Franchise</span></div><div class="pull-right">
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">1</span></div><div class="clearfix"></div></a>
 					<ul id="franchise_dr" class="collapse collapse-level-1">
@@ -544,11 +544,15 @@
 						<li>
 							<a <?php if($subpage=='rincome') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/report/released_income"><i class="fa fa-circle <?php if($subpage=='rincome') { echo 'clrred'; } ?>"></i> Released Income</a>
 						</li>
-						<!--
+
+						<li>
+							<a <?php if($subpage=='transaction') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/memberwallet/transaction"><i class="fa fa-circle <?php if($subpage=='transaction') { echo 'clrred'; } ?>"></i> Transaction</a>
+						</li>
+<!-- 						
 						<li>
 							<a <?php if($subpage=='ewalletsummary') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/memberwallet/ewalletsummary"><i class="fa fa-circle <?php if($subpage=='ewalletsummary') { echo 'clrred'; } ?>"></i> E-Wallet Summary</a>
-						</li>
-						-->
+						</li> -->
+						
 						<li>
 							<a <?php if($subpage=='withdrawfund') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/memberwallet/withdrawfund"><i class="fa fa-circle <?php if($subpage=='withdrawfund') { echo 'clrred'; } ?>"></i> My Wallet</a>
 						</li>
