@@ -5248,7 +5248,11 @@ $i=0;
 		for($i=0;$i<$count_upper_level_sponsor; $i++){
 					
 			$level = $i+1;
+			$chek_status = get_hrm_post($upper_level_sponsor_id[$i]);
 
+			if($chek_status[0]->HRM_STATUS==0)
+			continue;
+			
 			$income = get_level_income_by_level($level);
 
 			$countDirect = get_direct_by_hrm($upper_level_sponsor_id[$i]);
