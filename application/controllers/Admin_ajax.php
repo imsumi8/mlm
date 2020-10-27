@@ -364,23 +364,37 @@ class Admin_ajax extends CI_Controller {
 		
 		die();
 	}
+
 	public function sendwithdrawreq()
 	{
+
 		$userid=$_POST['userid'];
 		$amt=$_POST['amt'];
+		
 		if($amt>0){
-            $noteswithdraw=$_POST['noteswithdraw'];
-            if(liable_amount_to_pay($this->session->userdata('userid'))>=$amt){
-                insert_withdrawreq($userid,$amt,0,$noteswithdraw);
-                echo 'ok';
+			
+			$noteswithdraw   = $_POST['noteswithdraw'];
+			$admin_charge    = $_POST['admin_charge'];
+			$tds_charge      = $_POST['tds_charge'];
+			$withdraw_charge = ($amt * ($admin_charge + $tds_charge))/100;
+
+        if(liable_amount_to_pay($this->session->userdata('userid'))>=$amt){
+				
+                insert_withdrawreq($userid,$amt,0,$noteswithdraw,'',$withdraw_charge);
+				echo 'ok';
+				
             }else{
                 echo 'Invalid Amount Entered!';
-            }
+			}
+			
 		}else{
 		    echo 'Invalid Amount Entered!';
 		}
-        die();
+
+		die();
+		
 	}
+
 	public function wlcmfrm(){
 	     $wlcmtext=$_POST['wlcmtext'];
 	     update_hrmpost_meta(5000,'wlcm_letter',$wlcmtext);

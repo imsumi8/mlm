@@ -546,7 +546,7 @@
 						</li>
 
 						<li>
-							<a <?php if($subpage=='transaction') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/memberwallet/transaction"><i class="fa fa-circle <?php if($subpage=='transaction') { echo 'clrred'; } ?>"></i> Transaction</a>
+							<a <?php if($subpage=='transaction') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/memberwallet/transaction"><i class="fa fa-circle <?php if($subpage=='transaction') { echo 'clrred'; } ?>"></i> Daily Payout Detail</a>
 						</li>
 <!-- 						
 						<li>

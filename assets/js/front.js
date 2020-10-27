@@ -46,14 +46,25 @@ jQuery(document).ready(function (){
 			check=1;
         }
     });
-    $('body').on('keyup','.withdrawamtvalid',function(){
+    $('body').on('focusout','.withdrawamtvalid',function(){
         var currentval=parseInt($(this).val());
-        var targetval=parseInt($(this).attr('attr-amt'));
-        if(currentval>targetval){
-            $(this).val('');
-            sweetalert('Warning','warning','Invalid amount entered!','#f99b4a');
-        }
-    });
+		var targetval=parseInt($(this).attr('attr-amt'));
+		var minval=parseInt($(this).attr('attr-min'));
+        if(currentval>targetval || currentval < minval){
+			$(this).val('');
+			$(".netamountpayable").val('0');	
+			sweetalert('Warning','warning','Invalid amount entered!','#f99b4a');
+			
+        }else{
+			
+			if(currentval){
+				var total_charge =parseInt($("#admin_charge").val()) + parseInt($("#tds_charge").val());
+			   var net_amt = currentval-(currentval*total_charge)/100;
+			   $(".netamountpayable").val(net_amt);	
+			}
+		}
+	});
+	
     $('body').on('keydown','.input_num',function (e) {
        
         // Allow: backspace, delete, tab, escape, enter and .

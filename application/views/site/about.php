@@ -21,9 +21,9 @@
     <div class="section_title mb-55" style="padding-top:10px; ">
         
     
-<h3 align="center"> <span> Why </span> RMGM Wellness </h3></div>
+<h3 align="center"> <span> Why </span> RBW Wellness </h3></div>
 <div class="info_inne " >
-<p style="padding-left: 10px; padding-right:10px;" >  RMGM Bizz World known to offer best result oriented Ayurvedic products since last 2 years . All unique formulations are based on 5 years Experience which enhances the efficiency of products and keep increasing the list of our happy customers . Company portfolio includes more than 125 FDA approved Products and GMP certified own manufacturing plant with advance machinery . RMGM is the name for trust and result in pocket friendly prices .</p> </div>
+<p style="padding-left: 10px; padding-right:10px;" >  RBW known to offer best result oriented Ayurvedic products since last 2 years . All unique formulations are based on 5 years Experience which enhances the efficiency of products and keep increasing the list of our happy customers . Company portfolio includes more than 125 FDA approved Products and GMP certified own manufacturing plant with advance machinery . RBW is the name for trust and result in pocket friendly prices .</p> </div>
 </div> 
  
 
@@ -44,7 +44,7 @@
 <h3 align="center"> Company Mission </h3> </div>
 
 <div class="info_inner" >
-<p style="padding-left: 15px; padding-right:15px;">Ayurveda is the science of life and RMGM has mission to explore it and spread this miracle herbs all around the world by using scientific technology. Through Swasth Bharat Abhiyaan ,Amrutveda is now reaching everywhere to give instant relief from various health issues . Company offers Online Doctor advice free of cost to prevent all patients from misleading advertisements . RMGM believes that every person suffering from any health problem should get proper information about it and has full rights to choose correct ayurvedic or herbal products.
+<p style="padding-left: 15px; padding-right:15px;">Ayurveda is the science of life and RBW has mission to explore it and spread this miracle herbs all around the world by using scientific technology. Through Swasth Bharat Abhiyaan ,Amrutveda is now reaching everywhere to give instant relief from various health issues . Company offers Online Doctor advice free of cost to prevent all patients from misleading advertisements . RBW believes that every person suffering from any health problem should get proper information about it and has full rights to choose correct ayurvedic or herbal products.
 </p> </div>
 
 </div> 

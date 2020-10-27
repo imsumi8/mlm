@@ -63,6 +63,13 @@
 								<div class="text-center">
 									<h1 class="panel-title txt-dark">Create Withdrawl Request</h1>
 									<hr class="reddish">
+									<?php
+									 $admin_charge =get_charges_mlm_type(1); 
+									 $tds_charge =get_charges_mlm_type(2); 
+									
+									?>
+									<div style="color:red;margin-top:3px;">Note :Charges will be applied for every withdrawal. (Admin charge-<?php echo $admin_charge[0]->CHARGES_AMOUNT ?>%, TDS-<?php echo $tds_charge[0]->CHARGES_AMOUNT ?>%)</div>
+
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -73,9 +80,20 @@
 								            <input type="hidden" name="userid" value="<?php echo $this->session->userdata('userid'); ?>">
 								            <div class="col-md-12">
 								                <label>Amount To Be Withdraw : <span class="star"></span></label>
-										        <input type="text" class="form-control input_num withdrawamtvalid" attr-amt="<?php echo liable_amount_to_pay($this->session->userdata('userid')); ?>" name="amt" placeholder='Enter Amount' required>
-										        <div style="color:red;margin-top:3px;">Max amount to be requested : <?php echo liable_amount_to_pay($this->session->userdata('userid')); ?></div>
-									        </div>
+										        <input type="number" class="form-control input_num withdrawamtvalid" attr-amt="<?php echo liable_amount_to_pay($this->session->userdata('userid')); ?>" attr-min="400" name="amt" placeholder='Enter Amount' autocomplete="off" required>
+										        <!-- <div style="color:red;margin-top:3px;">Max amount to be requested : <?php echo liable_amount_to_pay($this->session->userdata('userid')); ?></div> -->
+												<div style="color:red;margin-top:3px;">Min amount to be requested : <?php echo "400"; ?></div>
+
+										    </div>
+
+											<div class="col-md-12 mrg_tp_15">
+								                <label>Net Payable Amount :</label>
+										        <input type="text" class="form-control input_num netamountpayable"  name="net_amt" value="0" placeholder='Net Amount' required readonly>
+									           <input type="hidden" name="admin_charge" id="admin_charge" value="<?php echo $admin_charge[0]->CHARGES_AMOUNT ?>">
+											   <input type="hidden" name="tds_charge" id="tds_charge" value="<?php echo $tds_charge[0]->CHARGES_AMOUNT ?>">
+
+										    </div>
+
     								         <div class="col-md-12 mrg_tp_15">
 								                 <label>Notes : <span class="star"></span></label>
 										        <textarea class="form-control" name="noteswithdraw" placeholder='Enter Notes Here...' required></textarea>

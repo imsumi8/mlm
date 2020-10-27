@@ -43,12 +43,16 @@
 											            <th>
 											               AMOUNT
 											            </th>
+
+														<th>
+														WITHDRAWL CHARGE
+											            </th>
 											            <!--<th>
 											               PREFFERED METHOD
-											            </th>
-											            <th>
-											               WITHDRAWL CHARGE
 											            </th>-->
+											            <th>
+											              Net Payable
+											            </th>
 											            <th>
 											               DESCRIPTION
 											            </th>
@@ -68,8 +72,9 @@
 											            <td><?php echo trim($arr[0]->HRM_NAME," "); ?></td>
 											            <td><?php echo $activereqs->DATE; ?></td>
 											            <td><?php echo $activereqs->AMOUNT; ?></td>
-											            <!--<td><?php echo $activereqs->PREFFERED_METHOD; ?></td>
-											            <td><?php echo $activereqs->WITHDRAWL_CHARGE; ?></td>-->
+											            <!--<td><?php echo $activereqs->PREFFERED_METHOD; ?></td>-->
+											            <td><?php echo $activereqs->WITHDRAWL_CHARGE; ?></td>
+														<td><?php echo  $activereqs->AMOUNT - $activereqs->WITHDRAWL_CHARGE; ?></td>
 											            <td><?php echo $activereqs->DESCRIPTION; ?></td>
 											            <th><button type="button" class="btn btn-success approve" attr-id="<?php echo $activereqs->WITHDRAW_ID; ?>">Approve (Pending)</button>&nbsp;&nbsp;<button type="button"  attr-id="<?php echo $activereqs->WITHDRAW_ID; ?>" class="btn btn-danger cancel">Reject</button></th>
 											        </tr>

@@ -16,7 +16,7 @@
     							</div>
 								<div class="panel-body">
 									<div  class="pills-struct mrg_tp_25">
-										<ul role="tablist" class="nav nav-pills" id="myTabs_6">
+										<ul role="tablist" class="nav nav-pills" id="myTabs_6" >
 										    <li class="active" role="presentation"><a aria-expanded="true"  data-toggle="tab" role="tab" id="summary" href="#actreq">Active Withdrawl Requests</a></li>
 											<li role="presentation" class=""><a  data-toggle="tab"  role="tab" href="#actpend" aria-expanded="false">Approved - Pending Payment</a></li>
 										    <li role="presentation" class=""><a  data-toggle="tab" role="tab" href="#actpaid" aria-expanded="false">Approved - Paid</a></li>
@@ -36,6 +36,13 @@
 											            <th>
 											               AMOUNT
 											            </th>
+
+														<th>
+											               Withdrawl Charges
+											            </th>
+														<th>
+											               NET PAYABLE AMOUNT
+											            </th>
 											            
 											            <th>
 											               DESCRIPTION
@@ -46,6 +53,8 @@
 											            <td><?php echo $i; ?></td>
 											            <td><?php echo $activereqs->DATE; ?></td>
 											            <td><?php echo $activereqs->AMOUNT; ?></td>
+														<td><?php echo $activereqs->WITHDRAWL_CHARGE; ?></td>
+														<td><?php echo $activereqs->AMOUNT - $activereqs->WITHDRAWL_CHARGE; ?></td>
 											            
 											            <td><?php echo $activereqs->DESCRIPTION; ?></td>
 											        </tr>
@@ -77,8 +86,7 @@
 											            <td><?php echo $i; ?></td>
 											            <td><?php echo $activereqs->DATE; ?></td>
 											            <td><?php echo $activereqs->APPROVED_DATE; ?></td>
-											            <td><?php echo $activereqs->AMOUNT; ?></td>
-											            
+														<td><?php echo $activereqs->AMOUNT - $activereqs->WITHDRAWL_CHARGE; ?></td>
 											            <td><?php echo $activereqs->DESCRIPTION; ?></td>
 											        </tr>
 											        <?php $i++; } } ?>
@@ -109,7 +117,7 @@
 											            <td><?php echo $i; ?></td>
 											            <td><?php echo $activereqs->DATE; ?></td>
 											            <td><?php echo $activereqs->RELEASED_DATE; ?></td>
-											            <td><?php echo $activereqs->AMOUNT; ?></td>
+														<td><?php echo $activereqs->AMOUNT - $activereqs->WITHDRAWL_CHARGE; ?></td>
 											           
 											            <td><?php echo $activereqs->DESCRIPTION; ?></td>
 											        </tr>
@@ -141,7 +149,7 @@
 											            <td><?php echo $i; ?></td>
 											            <td><?php echo $activereqs->DATE; ?></td>
 											            <td><?php echo $activereqs->CANCELLED_DATE; ?></td>
-											            <td><?php echo $activereqs->AMOUNT; ?></td>
+														<td><?php echo $activereqs->AMOUNT - $activereqs->WITHDRAWL_CHARGE; ?></td>
 											            
 											            <td><?php echo $activereqs->DESCRIPTION; ?></td>
 											        </tr>

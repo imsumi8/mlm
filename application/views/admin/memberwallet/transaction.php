@@ -15,7 +15,7 @@
                        <div class="panel panel-default card-view panel-refresh pad_20">
 							<div class="panel-heading">
 								<div class="text-center">
-									<h1 class="panel-title txt-dark">Transactions List</h1>
+									<h1 class="panel-title txt-dark">Daily Payout Details</h1>
 									<hr class="reddish">
 								</div>
 								<div class="clearfix"></div>
@@ -29,11 +29,11 @@
 												<thead>
 													<tr>
 													    <th>SR NO.</th>
-														<th>Date</th>
+														<th>Payout Date</th>
 														<!--<th>Description</th>-->
 														<!-- <th>Debit</th> -->
-													    <th>Income</th>
-														<th>Net Income</th>
+													    <th>Level Benefits</th>
+														<th>Gross Benefits</th>
 													</tr>
 												</thead>
 											    <tbody>
@@ -54,7 +54,7 @@
 													 ?>
                                                          <tr>
                                                              <td><?php echo $i; ?></td>
-                                                             <td><?php echo $results->DATE; ?></td>
+                                                             <td><?php echo date("d M Y",strtotime($results->DATE)); ?></td>
                                                              <!--<td><?php echo $results->PARTICULAR; ?></td>-->
                                                              <!-- <?php if($amt1!=0){ ?>
                                                              <td style="color:red;"><?php echo $amt1; ?></td>

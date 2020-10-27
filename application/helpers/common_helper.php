@@ -4565,11 +4565,11 @@ $i=0;
 		 $sum-=get_sum_wallet_balance_new($hrmid,9);
 		
 		 $payable_income=$sum;
-		 $silver =   get_hrm_postmeta($hrmid,'silver');
-		 if(!$silver && $payable_income>=1000){
+		//  $silver =   get_hrm_postmeta($hrmid,'silver');
+		//  if(!$silver && $payable_income>=1000){
 
-			$payable_income=1000; 
-		 }
+		// 	$payable_income=1000; 
+		//  }
 		 $alreadyrequested=get_withdrawl_income_stat($hrmid,'0,1');
 		 $date=date('Y-m-d');
          $netpayable=$payable_income-$alreadyrequested-get_sum_withdrawl_amt('2018-01-01',date('Y-m-d'),$hrmid);
@@ -5252,7 +5252,7 @@ $i=0;
 
 			if($chek_status[0]->HRM_STATUS==0)
 			continue;
-			
+
 			$income = get_level_income_by_level($level);
 
 			$countDirect = get_direct_by_hrm($upper_level_sponsor_id[$i]);

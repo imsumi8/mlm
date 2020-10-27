@@ -11,8 +11,7 @@
                             <div class="slider_text">
                                 <span></span>
                                 <h3>Welcome To
-                                RMGM
-                                Bizz World Pvt Ltd
+                               RBW Business
                                     
                                     </h3>
                                     <p>Everything you want in life is waiting for you, outside your comfort zone and inside your effort zone.</p>
@@ -46,7 +45,7 @@
                                 <span></span>
                                 <h3>Welcome To The World Of Innovation
                                     </h3>
-                                    <p>RMGM is a direct selling business that offers a comprehensive range
+                                    <p>RBW is a direct selling business that offers a comprehensive range
                                      of research-based Ayurvedic pharmaceutical directly to the consumers.
                                       </p>
                             <a href="#" class="boxed-btn3">View Package</a>
@@ -76,7 +75,7 @@
                 <div class="col-lg-6">
                     <div class="about_info pl-70">
                         <div class="section_title mb-55">
-                            <h3>We are RMGM <br>
+                            <h3>We are RBW <br>
                                 <span> Company</span></h3>
                             <div class="devider">
                                 <span></span>
@@ -130,7 +129,7 @@
                             <i class="flaticon-sketch"></i>
                         </div>
                         <h3>Planning Stage</h3>
-                        <p>You can become a partner without spending money in RMGM, because there is no subscription fees to become an affiliate.</p>
+                        <p>You can become a partner without spending money in RBW, because there is no subscription fees to become an affiliate.</p>
                         <a href="#">Learn more</a>
                     </div>
                 </div>
@@ -140,7 +139,7 @@
                             <i class="flaticon-hotel"></i>
                         </div>
                         <h3>Much Profit</h3>
-                        <p>To get the benefit of the RMGM business, you need to purchase the product at maximum retail price (M.R.P.) in open choice</p>
+                        <p>To get the benefit of the RBW business, you need to purchase the product at maximum retail price (M.R.P.) in open choice</p>
                         <a href="#">Learn more</a>
                     </div>
                 </div>
