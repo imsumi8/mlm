@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
+    <title>RBW Business</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -55,6 +55,16 @@
 		var admin_loc='<?php echo base_url().'admin_ajax/'; ?>';
 		var base_loc='<?php echo base_url().'admin/'; ?>';
     </script>
+
+    <style>
+    .header-area .social_wrap .login_textt a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    margin-right: 10px;
+}
+    </style>
 </head>
 
 <body>
@@ -71,7 +81,7 @@
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
                                 <a href="<?php echo site_url('welcome'); ?>">
-                                <h2 style="color:#ffffff">RBW Business</h2>
+                                <h3 style="color:#ffffff">RBW Business</h3>
                                     <!-- <img class="logo_img" src="<?php echo base_url();  ?>assets/hus/img/logo.jpeg" alt="" style=""> -->
                                 </a>
                             </div>
@@ -91,7 +101,7 @@
                         </div>
                         <div class="col-xl-4 col-lg-4 d-block d-lg-block">
                             <div class="social_wrap d-flex align-items-center justify-content-end">
-                                <div class="login_text">
+                                <div class="login_textt" >
                                 <a  href="<?php echo site_url('registration'); ?>">Register</a>
                                 </div>
                                 <div class="login_text">

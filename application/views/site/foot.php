@@ -9,7 +9,7 @@
                             <h3 class="footer_title">
                                 About Us
                             </h3>
-                            <p>We stand at the threshold of a new world, a world where dreams are realized and lives are positively impacted . In this world, roads will lead us to our collective destinies , We are <B>RBW Business Pvt Ltd</B> and we are making this new world happen. We invite you to join us o this magnificent journey of innovation and growth. </p>
+                            <p>We stand at the threshold of a new world, a world where dreams are realized and lives are positively impacted . In this world, roads will lead us to our collective destinies , We are <B>RBW Business</B> and we are making this new world happen. We invite you to join us o this magnificent journey of innovation and growth. </p>
                             <div class="footer_logo">
                                 <a href="#">
                                     <!-- <img style="height:50px;" src="<?php echo base_url();  ?>assets/hus/img/loo.png" alt=""> -->
@@ -69,7 +69,7 @@
                     <div class="col-lg-8">
                         <p class="copy_right">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> RBW Business Pvt Ltd, All rights reserved
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> RMGM Pvt Ltd, All rights reserved
                         </p>
                     </div>
                     <div class="col-lg-4">
