@@ -62,7 +62,7 @@
 								                            <th><?php echo $pk->PACKAGE_NAME; ?></th>
 								                            <th><?php echo $pk->PACKAGE_DESC; ?></th>
 								                            <th><?php echo $pk->PACKAGE_PRICE; ?></th>
-								                            <th><button attr-id="<?php echo $pk->PACKAGE_ID; ?>" attr-amt="<?php echo $pk->PACKAGE_PRICE; ?>" attr-desc="<?php echo $pk->PACKAGE_DESC; ?>" attr-nm="<?php echo $pk->PACKAGE_NAME; ?>" attr-img="<?php echo $pk->PACKAGE_IMG; ?>" type="button" class="btn btn-success packedit"><i class="fa fa-edit"></i></button></th>
+								                            <th><button attr-id="<?php echo $pk->PACKAGE_ID; ?>" attr-amt="<?php echo $pk->PACKAGE_PRICE; ?>" attr-point="<?php echo $pk->PACKAGE_INCOME; ?>" attr-desc="<?php echo $pk->PACKAGE_DESC; ?>" attr-nm="<?php echo $pk->PACKAGE_NAME; ?>" attr-img="<?php echo $pk->PACKAGE_IMG; ?>" type="button" class="btn btn-success packedit"><i class="fa fa-edit"></i></button></th>
 								                        </tr>
 								                    <?php
 								                    $srno++;
@@ -110,11 +110,11 @@
          <form  id="addpackform" enctype="multipart/form-data">
              <input type="hidden" class="totalrow" name="totalrow" value="0">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>Package Name <span class="star">*</span></label>
                     <input type="text" class="pack_name form-control" name="pack_name" required>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>Pack Amount <span class="star">*</span></label>
                     <input type="number" class="form-control" name="amtid" required>
                     	<!-- <select name="amtid" class="form-control"> -->
@@ -129,6 +129,10 @@
                         //  } } 
                          ?>
 						<!-- </select> -->
+                </div>
+                <div class="col-md-4">
+                    <label>Package Point <span class="star">*</span></label>
+                    <input type="number" class="pack_point form-control" name="pack_point" required>
                 </div>
             </div>
             <div class="row pad_tp_10">
@@ -203,6 +207,13 @@
                 <div class="col-md-12">
                     <label>Pack Amount</label>
                     <input type="number" class="editamt form-control" name="editamt" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Pack Point</label>
+                    <input type="number" class="editpoint form-control" name="editpoint" required>
                 </div>
             </div>
              <div class="row pad_tp_10">
@@ -316,6 +327,7 @@
 	        var nm=$(this).attr('attr-nm');
             var amt=$(this).attr('attr-amt');
 	        var desc=$(this).attr('attr-desc');
+            var point=$(this).attr('attr-point');
 	        var filename=$(this).attr('attr-img');
 	        $('#editpackmodel').modal('show');
 	        $('#editpackform').find('.pack_id').val(id);
@@ -323,6 +335,7 @@
 	        $('#editpackform').find('.pack_name').val(nm);
             $('#editpackform').find('.editamt').val(amt);
 	        $('#editpackform').find('.pack_desc').val(desc);
+            $('#editpackform').find('.editpoint').val(point);
 	        ref.find('.myattrtbody').html("");   
 	        	$.ajax({    
     			type: 'POST',

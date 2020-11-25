@@ -1985,7 +1985,7 @@
     {   
         $ci=& get_instance();
 		$ci->load->database(); 
-        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" ORDER BY ID asc');
+        $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and PAY_STATUS=1 ORDER BY ID asc');
         $result=$query->result();
         if(!empty($result)){ 
             $arr=array();

@@ -107,10 +107,11 @@ class Admin_ajax extends CI_Controller {
         				$packname=$_POST['pack_name'];
 						// $amts=get_epin_amt_by_id($_POST['amtid']);
 						$amts=$_POST['amtid'];
+						$pack_point=$_POST['pack_point'];
         			     $data = array(
                             'PACKAGE_NAME'=>$packname,
                             'PACKAGE_PRICE'=>$amts,
-                            'PACKAGE_INCOME'=>1,
+                            'PACKAGE_INCOME'=>$pack_point,
                             'CAPPING_LIMIT'=>'999999999999999999999',
                             'PACKAGE_DESC'=>$_POST['pack_desc'],
                             'PACKAGE_PV'=>'',
@@ -136,10 +137,11 @@ class Admin_ajax extends CI_Controller {
             	    $packname=$_POST['pack_name'];
 					// $amts=get_epin_amt_by_id($_POST['amtid']);
 					$amts=$_POST['amtid'];
+					$pack_point=$_POST['pack_point'];
     			     $data = array(
                         'PACKAGE_NAME'=>$packname,
                         'PACKAGE_PRICE'=>$amts,
-                        'PACKAGE_INCOME'=>1,
+                        'PACKAGE_INCOME'=>$pack_point,
                         'CAPPING_LIMIT'=>'999999999999999999999',
                         'PACKAGE_DESC'=>$_POST['pack_desc'],
                         'PACKAGE_PV'=>'',
@@ -193,9 +195,10 @@ class Admin_ajax extends CI_Controller {
         				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"] , $uploadfile);	//for moving image 		
 						$packname=$_POST['pack_name'];
 						$amts=$_POST['editamt'];
+						$pack_point=$_POST['pack_point'];
         			     $data = array(
                             'PACKAGE_NAME'=>$packname,
-							'PACKAGE_INCOME'=>1,
+							'PACKAGE_INCOME'=>$pack_point,
 							'PACKAGE_PRICE'=>$amts,
                             'CAPPING_LIMIT'=>'999999999999999999999',
                             'PACKAGE_DESC'=>$_POST['pack_desc'],
@@ -218,9 +221,10 @@ class Admin_ajax extends CI_Controller {
             	}else{
 					$packname=$_POST['pack_name'];
 					$amts=$_POST['editamt'];
+					$pack_point=$_POST['pack_point'];
     			     $data = array(
                         'PACKAGE_NAME'=>$packname,
-						'PACKAGE_INCOME'=>1,
+						'PACKAGE_INCOME'=>$pack_point,
 						'PACKAGE_PRICE'=>$amts,
                         'CAPPING_LIMIT'=>'999999999999999999999',
                         'PACKAGE_DESC'=>$_POST['pack_desc'],
