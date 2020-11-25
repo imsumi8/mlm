@@ -498,6 +498,32 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 	    }
 	}
 
+	public function direct_income(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Direct Income | RMGM';
+    	    $data['subpage']='direct_income';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/income/direct_income');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
+	public function referal_income(){
+	    if($this->session->userdata('hrmtype') == 'admin') { 
+        	$data['title']='Referal Income | RMGM';
+    	    $data['subpage']='referal_income';
+    		
+    	    $this->load->view('admin/header',$data);
+    		$this->load->view('admin/income/referal_income');
+    		$this->load->view('admin/footer');
+	    }else{
+	        redirect('admin/dashboard');
+	    }
+	}
+
 	public function add_subcategory(){
 	    if($this->session->userdata('hrmtype') == 'admin') { 
         	$data['title']='Sub-Category | RMGM';

@@ -4900,7 +4900,10 @@ $i=0;
 		    return '';
 		}
 	}
+
+
 	function update_priority($hrm_id,$mlm_desc){
+		
         $ci=& get_instance();
 		$ci->load->database();
 		$array=array();
@@ -4924,16 +4927,16 @@ $i=0;
     		$hrm_id=get_reverse_parent_autopool($orighrm,$mlm_desc);
     		$parenthrm=$hrm_id;
     		$checkcount=get_two_just_down($hrm_id,$mlm_desc);
-    		if($checkcount<3){
+    		if($checkcount<4){
     		    update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',$checkcount+1);
     		}
-    		else if($checkcount==3){
+    		else if($checkcount==4){
     		    update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',1);
     		    for($x=0;$hrm_id!='5000';$x++){
     			    $hrm_id=get_reverse_parent_autopool($hrm_id,$mlm_desc);
     			    if($hrm_id!='5000'){
     					$pos=get_current_priority($hrm_id,$mlm_desc)[0]->POSITION_ID;
-            		    if($pos<3){
+            		    if($pos<4){
             		        update_priority_key($hrm_id,$mlm_desc,'POSITION_ID',$pos+1);
             		        break;
             		    }else{

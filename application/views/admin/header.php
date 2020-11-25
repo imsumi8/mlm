@@ -433,11 +433,21 @@
 					<a <?php if($title=='Manage Income') { ?> class="actived" <?php } ?> href="javascript:void(0);" data-toggle="collapse" data-target="#income_dr"><div class="pull-left"><i class="fa fa-cart-plus mr-20"></i><span class="right-nav-text">Manage Income</span></div><div class="pull-right">
 					<span class="badge badge-success bounceIn animation-delay5" style="background-color: #fc8675">4</span></div><div class="clearfix"></div></a>
 					<ul id="income_dr" class="collapse collapse-level-1">
-						<li>
-							<a <?php if($subpage=='team_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/team_bonus">
-							<i class="fa fa-circle  <?php if($subpage=='team_bonus') { echo 'clrred'; } ?>"></i> Team Bonus</a>
+
+				     	<li>
+							<a <?php if($subpage=='direct_income') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/direct_income">
+							<i class="fa fa-circle  <?php if($subpage=='direct_income') { echo 'clrred'; } ?>"></i>Direct Income</a>
 						</li>
+
 						<li>
+							<a <?php if($subpage=='referal_income') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/referal_income">
+							<i class="fa fa-circle  <?php if($subpage=='referal_income') { echo 'clrred'; } ?>"></i>Referal Income</a>
+						</li>
+						<!-- <li>
+							<a <?php if($subpage=='team_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/team_bonus">
+							<i class="fa fa-circle  <?php if($subpage=='team_bonus') { echo 'clrred'; } ?>"></i> Income</a>
+						</li> -->
+						<!-- <li>
 							<a  <?php if($subpage=='star_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/star_bonus">
 							<i class="fa fa-circle  <?php if($subpage=='star_bonus') { echo 'clrred'; } ?>"></i> Star Bonus</a>
 						</li>
@@ -450,7 +460,7 @@
 						<li>
 							<a  <?php if($subpage=='triplestar_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/triplestar_bonus">
 							<i class="fa fa-circle  <?php if($subpage=='triplestar_bonus') { echo 'clrred'; } ?>"></i> Gold Bonus</a>
-						</li>
+						</li> -->
 
 						<!-- <li>
 							<a  <?php if($subpage=='autopool_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_bonus">

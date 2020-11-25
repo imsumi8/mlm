@@ -941,6 +941,54 @@ public function get_pancard(){
 	}
 
 
+	public function add_direct_income()
+	{
+
+		$this->db->trans_start();
+		$result=0;
+		$category=$_POST['direct_income'];
+
+	
+		if($category==''){
+
+			echo $msg= 'Star fields should not be blank';
+			die();
+
+		}else{
+		   
+			update_mlm_option('direct_income',$category);
+		}
+		  
+		echo 'ok';
+		
+		$this->db->trans_complete();
+		die();
+	}
+
+	public function add_referal_income()
+	{
+		
+		$this->db->trans_start();
+		$result=0;
+		$category=$_POST['pair_income'];
+
+	
+		if($category==''){
+
+			echo $msg= 'Star fields should not be blank';
+			die();
+
+		}else{
+		   
+			update_mlm_option('pair_income',$category);
+		}
+		  
+		echo 'ok';
+		
+		$this->db->trans_complete();
+		die();
+	}
+
 
 	public function edit_category()
 	{
@@ -4359,7 +4407,40 @@ public function get_pancard(){
 							</ul>
 						</li>
 						<?php
+					
+
+					$nodess=get_autopool_nodes_geneology_pos($nodes[0]->HRM_ID,4,$_POST['mlmdesc']);
+					if(!empty($nodess[3])){
+						?>
+						<li>
+							<div>
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==6) { $ar=get_member_autopool($nodess[3]->HRM_ID); 
+			$ar=json_decode($ar); ?>
+			TOTAL : <?php echo $ar[0]+$ar[1]+$ar[2]; } ?>">
+									<?php $arr=get_hrm_post($nodess[3]->HRM_ID); 
+											if($arr[0]->HRM_STATUS==1){
+												$statss='active.png';
+											}else{
+												$statss='inactive.png';
+											} 
+									?>
+									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodess[3]->HRM_ID; ?>" id= "<?php echo $nodess[3]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[3]->HRM_ID; ?>",event);' > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[3]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[3]->HRM_ID,'first_name'); ?></div>
+									<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess[3]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess[3]->HRM_ID; ?>",event);'/></a></div>
+								</a>
+							</div>
+						</li>
+						<?php
 					}
+				?>
+
+
+			</ul>
+		</li>
+		<?php
+	}
+
+					
 					
 						if(!empty($nodes[1])){
 						?>
