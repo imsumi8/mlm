@@ -825,6 +825,21 @@
 			return '';
 		}
 	}
+
+	function get_all_packs_income_by_id($id)
+	{
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from matc_packages where PACKAGE_ID='".$id."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+			return $row[0]->PACKAGE_INCOME;
+		}else{
+			return '';
+		}
+	}
+
 	function get_all_packs_by_id_full($id)
 	{
 		$ci=& get_instance();
@@ -989,17 +1004,23 @@
 		$sql = "select * from hrm_post_meta where HRM_KEY='".$key."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
+		
 		if(!empty($row)){
+			$i=0;
 		foreach($row as $res){
 			   
 			if($res->HRM_VALUE==$value)
 			{
-                  return 0;
+                  $i++;
 			}
-              
+
 		}
-		
-			return 1;
+
+		if($i>3)
+		return 0;
+		else
+		return 1;
+
 		}else{
 			return 1;
 		}
@@ -1343,29 +1364,31 @@
 		   return $row;
 		}
 	}
-	function get_last_left_right($hrmid){
+	
+	function get_last_left_right($hrmid,$position){
 	    
 	    if($hrmid!=5000){
     	    $ci =& get_instance();
     		$ci->load->database();
     		$orghrmid=$hrmid;
-    		// for($i=1;$hrmid!='';$i++){
-            // 	$sql = "Select * from hrm_level_tracking where POSITION_ID='".$hrmid."' and LEVEL_ID='1' and MLM_DESC_ID=3"; 
-        	// 	$query = $ci->db->query($sql);
-        	// 	$row = $query->result();
-        	// 	if(!empty($row)){
-        	// 	   $hrmid=$row[0]->HRM_ID;
-        	// 	   $orghrmid=$hrmid;
-        	// 	}else{
-        	// 	    $hrmid='';
-        	// 	}
-    		// }
+    		for($i=1;$hrmid!='';$i++){
+            	$sql = "Select * from hrm_level_tracking where POSITION_ID='".$hrmid."' and LEVEL_ID='1' and POSITION='".$position."' and MLM_DESC_ID=3"; 
+        		$query = $ci->db->query($sql);
+        		$row = $query->result();
+        		if(!empty($row)){
+        		   $hrmid=$row[0]->HRM_ID;
+        		   $orghrmid=$hrmid;
+        		}else{
+        		    $hrmid='';
+        		}
+    		}
     		return $orghrmid;
 	    }else{
 	        return 5000;
 	    }
 		
 	}
+
 	function get_admin_id(){
 	    
 	  
@@ -1417,6 +1440,27 @@
 		$row = $query->result();
 		if(!empty($row)){
 		   return $row[0]->cnt;
+		}else{
+		    return 0;
+		}
+	}
+
+
+
+	function get_direct_by_point($hrmid,$pos){
+	    $ci =& get_instance();
+		$ci->load->database();
+	
+    	$sql = "Select * from hrm_level_tracking where POSITION_ID='".$hrmid."' and MLM_DESC_ID=3 and LEVEL_ID='1' and POSITION='".$pos."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		
+		if(!empty($row)){
+		   $id= $row[0]->HRM_ID;
+
+		   $point =get_point_nodes($id,3);
+		   $self_point =get_hrm_postmeta($id,'package_point');
+		   return ($point+$self_point);
 		}else{
 		    return 0;
 		}
@@ -1885,7 +1929,7 @@
 	{
 		$ci=& get_instance();
 		$ci->load->database(); 
-		$sql = "select * from autopool where POSITION_ID='".$hrm."' and LEVEL_ID='1' and MLM_DESC_ID='".$mlmdesc."'"; 
+		$sql = "select * from hrm_level_tracking where POSITION_ID='".$hrm."' and LEVEL_ID='1' and MLM_DESC_ID='".$mlmdesc."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		if(!empty($row)){
@@ -2648,10 +2692,41 @@
 		}
 	}
 
+	function  insert_point_count_nodes($hrm_id,$mlm_desc_id,$point){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select * from point_count_nodes where HRM_ID='".$hrm_id."' and MLM_DESC='".$mlm_desc_id."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    $count=$row[0]->COUNT;
+		    $count=$count+$point;
+			$sql = "update `point_count_nodes` set COUNT='".$count."' where HRM_ID='".$hrm_id."' and MLM_DESC='".$mlm_desc_id."'"; 
+			$query = $ci->db->query($sql);
+		}else{
+			$sql = "INSERT INTO `point_count_nodes`(`HRM_ID`, `COUNT`, `MLM_DESC`) VALUES ('".$hrm_id."','".$point."','".$mlm_desc_id."')"; 
+			$query = $ci->db->query($sql);
+		}
+	}
+
 	function  get_level_nodes($hrm_id,$mlm_desc){
 	    $ci=& get_instance();
 		$ci->load->database(); 
 		$sql = "select COUNT from level_count_nodes where HRM_ID='".$hrm_id."' and MLM_DESC='".$mlm_desc."'"; 
+		$query = $ci->db->query($sql);
+		$row = $query->result();
+		if(!empty($row)){
+		    $count=$row[0]->COUNT;
+		    return $count;
+		}else{
+		    return 0;
+		}
+	}
+
+	function  get_point_nodes($hrm_id,$mlm_desc){
+	    $ci=& get_instance();
+		$ci->load->database(); 
+		$sql = "select COUNT from point_count_nodes where HRM_ID='".$hrm_id."' and MLM_DESC='".$mlm_desc."'"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		if(!empty($row)){
@@ -2973,8 +3048,9 @@
 	    $ci=& get_instance();
 		$ci->load->database(); 
 		$array=array();
+	    // $sql="Select * from hrm_level_tracking where LEVEL_ID='1' and  POSITION_ID='".$POSITION_id."'  and MLM_DESC_ID='".$mlm_desc."'  and HRM_ID!=5000 ORDER BY POSITION ASC";
 
-	    $sql="Select * from hrm_level_tracking where LEVEL_ID='1' and  POSITION_ID='".$POSITION_id."'  and MLM_DESC_ID='".$mlm_desc."'  and HRM_ID!=5000 ORDER BY POSITION ASC";
+	    $sql="Select * from hrm_level_tracking where LEVEL_ID='1' and POSITION IN (1,2) and POSITION_ID='".$POSITION_id."'  and MLM_DESC_ID='".$mlm_desc."' and POSITION='".$position."' and HRM_ID!=5000 ORDER BY POSITION ASC";
 	    $query = $ci->db->query($sql);
 	    $row = $query->result();
 	    $array=$row;
@@ -5006,7 +5082,7 @@ $i=0;
     }
     function get_members_validnew($level){
 	    $sum=0;
-        $sum=pow(3,$level);
+        $sum=pow(4,$level);
         
         return $sum;
 	}

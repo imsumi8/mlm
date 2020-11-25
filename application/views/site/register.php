@@ -26,6 +26,23 @@
 
 					</div>
 
+
+					<div class="form-group">
+					<div class="form-row form-row-1">
+					<div><label>Position <span class="star">*</span></label></div>
+						<select name="pos" class="pos get_postitionid" required>
+							<!-- <option value=''>Select Position</option> -->
+							<option value="1" >LEFT</option>
+							<option value="2">RIGHT</option>
+						</select>
+						</div>
+
+						<div class="form-row form-row-2">
+						<input type="number" name="phone" class="phone input_num" id="phone" placeholder="Mobile No*" required>
+						</div>
+
+					</div>
+
 					<!-- <div class="form-row">
 						<input type="text" name="firstname" class="name_free" id="firstname" placeholder="Applicant's Name*" required>
 						<input type="hidden" name="lastname" class="form-control">
@@ -39,18 +56,18 @@
 						</div>
 
 						<div class="form-row form-row-2">
-						<input type="number" name="phone" class="phone input_num" id="phone" placeholder="Mobile No*" required>
+						<input type="text" name="pancard" class="pancard" id="pancard" placeholder="Pan Card*" required>
 						</div>
 					
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div class="form-row form-row-1">
 						<input type="text" name="pancard" class="pancard" id="pancard" placeholder="Pan Card*" required>
 						</div>
 						<div class="form-row form-row-2">
 						<input type="number" name="aadhar" class="aadhar" id="aadhar" placeholder="Aadhar No*" required>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="form-group" style="display:none">
 						<div class="form-row form-row-1">

@@ -628,6 +628,17 @@ class Admin_ajax extends CI_Controller {
 	      die();
 	}
 
+	public function get_positionid2($sponsorid,$position){
+		// $sponsorid=strtoupper($_POST['sponsorid']);
+		// $position=$_POST['position'];
+		if(check_sponsor($sponsorid)==1){
+			 return get_last_left_right($sponsorid,$position);
+		}else{
+			return '';
+		}
+		die();
+  }
+
 	public function get_sponsor(){
 		$userid=strtoupper($_POST['id']);
 	   // $position=$_POST['position'];
@@ -646,7 +657,7 @@ class Admin_ajax extends CI_Controller {
 	public function get_phone(){
 		$phone=strtoupper($_POST['phone']);
 	   // $position=$_POST['position'];
-	  $cphone= check_duplicate_detail('contact',$phone);
+	  $cphone= check_duplicate_detail('contact',$phofne);
 		if($cphone != 0){
 			$data = array('msg'=>'ok');
 			 echo json_encode($data);
@@ -2629,8 +2640,6 @@ public function get_pancard(){
 
 
 
-
-
 	public function tree_nth()
 	{
 		$hrm_id=$_POST['user_id'];
@@ -2645,164 +2654,227 @@ public function get_pancard(){
 			    
 				<li>
 					<div>
-						<a href="javascript:void(0)" id="level-0" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($hrm_id!=5000 && $_POST['mlmdesc']==3) {
-							 //$ar=get_member_three($hrm_id); 
-						  //  $ar=json_decode($ar); 
-						  ?>
-							TOTAL : <?php echo get_member_nodes($hrm_id,$_POST['mlmdesc']); ?>
-							<br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); ?>
-							<br>REGISTERED : <?php echo get_free_count($hrm_id); } ?>"
-							class="blue-tooltip">
-							
+						<a href="javascript:void(0)" id="level-0" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($hrm_id!=5000 && $_POST['mlmdesc']==3) { $ar=get_member_three($hrm_id); 
+        				    $ar=json_decode($ar); ?>
+        				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($hrm_id,1,$_POST['mlmdesc']); } ?>">
 							<?php if($hrm_id!=$this->session->userdata('userid')){ ?>
 							<img class="tree_up_icon" src="<?php echo base_url(); ?>assets/img/up.png" alt="<?php echo get_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>" onclick='getGenologyTree("<?php echo get_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>",event);'/>
-							<?php } 
-							
-							$arr=get_hrm_post($hrm_id); 
-
+							<?php } $arr=get_hrm_post($hrm_id); 
 							    if($arr[0]->HRM_STATUS==1){
 							        $stat='active.png';
 							    }else{
 							        $stat='inactive.png';
-								}
-								
-								if(get_hrm_postmeta($hrm_id,'star')==1){
-									$stat='star.png';
-								}
-
-								if(get_hrm_postmeta($hrm_id,'double_star')==1){
-									$stat='double.png';
-								}
-
-								if(get_hrm_postmeta($hrm_id,'triple_star')==1){
-									$stat='triple.png';
-								}
+							    }
 							    
 							?>
 							<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $stat; ?>" alt="<?php echo get_reverse_parent_hrms_lev_0($hrm_id,$_POST['mlmdesc']); ?>" id="<?php echo $hrm_id; ?>"> 
-							<div class="username" title=" "  data-placement="bottom" > <?php echo get_hrm_postmeta($hrm_id,'first_name'); ?><br>(<?php echo $hrm_id; ?>)</div>
-
+							<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User id :<?php echo $hrm_id; ?><br>Name : <?php echo get_hrm_postmeta($hrm_id,'first_name'); ?><?php if($hrm_id!=5000){ ?><br> Sponsor Id : <?php echo get_added_by($hrm_id); ?><?php } ?></div>
 						</a>
 					</div>
 					<?php if($hrm_id!=5000) { ?>
 					<ul>
 					<?php
-					$nodess=get_nodes_geneology_pos($hrm_id,1,$_POST['mlmdesc']);
+					$nodes=get_nodes_geneology_pos($hrm_id,1,$_POST['mlmdesc']);
 					
-					if(!empty($nodess)){
-						foreach($nodess as $nodes){
+					if(!empty($nodes)){
 						?>
 						<li>
 							<div>
-								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { //$ar=get_member_three($nodes->HRM_ID); 
-        				    //$ar=json_decode($ar); ?>
-                            TOTAL : <?php echo get_member_nodes($nodes->HRM_ID,$_POST['mlmdesc']); ?>
-							<br>DIRECT : <?php echo get_own_count_nodes($nodes->HRM_ID,1,$_POST['mlmdesc']); ?>
-							<br>REGISTERED : <?php echo get_free_count($nodes->HRM_ID); } ?>"
-							class="blue-tooltip">
-
-							<?php
-							
-							$arr=get_hrm_post($nodes->HRM_ID); 
-
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodes[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodes[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
+									<?php $arr=get_hrm_post($nodes[0]->HRM_ID); 
     							    if($arr[0]->HRM_STATUS==1){
-
-										$stats='active.png';
-										
+    							        $stats='active.png';
     							    }else{
-
-										$stats='inactive.png';
-										
-									} 
-									
-									if(get_hrm_postmeta($nodes->HRM_ID,'star')==1){
-										$stats='star.png';
-									}
-									if(get_hrm_postmeta($nodes->HRM_ID,'double_star')==1){
-										$stats='double.png';
-									}
-
-									if(get_hrm_postmeta($nodes->HRM_ID,'triple_star')==1){
-										$stats='triple.png';
-									}
-									
-									?>
+    							        $stats='inactive.png';
+    							    } ?>
 									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $stats; ?>" alt="<?php echo $hrm_id; ?>" id= "<?php echo $hrm_id; ?>" onclick='getGenologyTree("<?php echo $hrm_id; ?>",event);' > 
-									<div class="username" title=" "  data-placement="bottom" > <?php echo get_hrm_postmeta($nodes->HRM_ID,'first_name'); ?><br>(<?php echo $nodes->HRM_ID; ?>)</div>
-
-									<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodes->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes->HRM_ID; ?>",event);'/></a></div>
-
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodes[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodes[0]->HRM_ID,'first_name'); ?><br> Sponsor Id : <?php echo get_added_by($nodes[0]->HRM_ID); ?></div>
 								</a>
 							</div>
-					
+							<ul>
+								<?php
+									$nodess=get_nodes_geneology_pos($nodes[0]->HRM_ID,1,$_POST['mlmdesc']);
+									if(!empty($nodess)){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodess[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodess[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
+														<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            							 ?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodes[0]->HRM_ID; ?>" id= "<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[0]->HRM_ID,'first_name'); ?><br> Sponsor Id : <?php echo get_added_by($nodess[0]->HRM_ID); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}else{
+										?>
+										<li>
+											<div>
+												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '1'; ?>" target="_blank">
+												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+									$nodess=get_nodes_geneology_pos($nodes[0]->HRM_ID,2,$_POST['mlmdesc']);
+									if(!empty($nodess)){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodess[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodess[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
+													<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodes[0]->HRM_ID; ?>" id= "<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[0]->HRM_ID,'first_name'); ?><br> Sponsor Id : <?php echo get_added_by($nodess[0]->HRM_ID); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}else{
+										?>
+										<li>
+											<div>
+												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '2'; ?>" target="_blank">
+												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+								?>
+							</ul>
 						</li>
 						<?php
-					}
-					
-				}else{
-					?>
-					<li>
-						<div>
-							<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $hrm_id; ?>/<?php echo '1'; ?>" target="_blank">
-							<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
-								<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
-							</a>
-						</div>
-					</li>
-					<?php
-				}
-		
-					?>
-
-			
-					</ul>
-					<?php } else { ?>
-					<ul>
-					    <?php 
-					    $allnodes=get_all_nodes_by_admin(); 
-					        if(!empty($allnodes)){ 
-					            foreach($allnodes as $nodess){
-					    ?>
-					    <li>
-					
+					}else{
+						?>
+						<li>
 							<div>
-								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { //$ar=get_member_three($nodess->HRM_ID); 
-										//$ar=json_decode($ar); 
-										
-										?>
-		                   
-						   TOTAL : <?php echo get_member_nodes($nodess->HRM_ID,$_POST['mlmdesc']); ?>
-							<br>DIRECT : <?php echo get_own_count_nodes($nodess->HRM_ID,1,$_POST['mlmdesc']); ?>
-							<br>REGISTERED : <?php echo get_free_count($nodess->HRM_ID); } ?>"
-							class="blue-tooltip">
-
-							
-									<?php $arr=get_hrm_post($nodess->HRM_ID); 
-            							    if($arr[0]->HRM_STATUS==1){
-            							        $statss='active.png';
-            							    }else{
-            							        $statss='inactive.png';
-											} 
-											
-											if(get_hrm_postmeta($nodess->HRM_ID,'star')==1){
-												$statss='star.png';
-											}
-											if(get_hrm_postmeta($nodess->HRM_ID,'double_star')==1){
-												$statss='double.png';
-											}
-											if(get_hrm_postmeta($nodess->HRM_ID,'triple_star')==1){
-												$statss='triple.png';
-											}
-            						?>
-									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $hrm_id; ?>" id= "<?php echo $hrm_id; ?>" onclick='getGenologyTree("<?php echo $hrm_id; ?>",event);' > 
-									</a>
-									<div class="username" title=" "  data-placement="bottom" > <?php echo get_hrm_postmeta($nodess->HRM_ID,'first_name'); ?><br>(<?php echo $nodess->HRM_ID; ?>)</div>
-									<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess->HRM_ID; ?>",event);'/></a></div>
-								
+								<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $hrm_id; ?>/<?php echo '1'; ?>" target="_blank">
+								<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
+									
+								</a>
 							</div>
-						
 						</li>
-						<?php } }else{
+						<?php						
+					}
+					if($hrm_id!=5000){
+					$nodes=get_nodes_geneology_pos($hrm_id,2,$_POST['mlmdesc']);
+					if(!empty($nodes)){
+						?>
+						<li>
+							<div>
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodes[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodes[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
+									<?php $arr=get_hrm_post($nodes[0]->HRM_ID); 
+    							    if($arr[0]->HRM_STATUS==1){
+    							        $stats='active.png';
+    							    }else{
+    							        $stats='inactive.png';
+    							    } ?>
+									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $stats; ?>" alt="<?php echo $hrm_id; ?>" id= "<?php echo $hrm_id; ?>" onclick='getGenologyTree("<?php echo $hrm_id; ?>",event);' > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodes[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodes[0]->HRM_ID,'first_name'); ?><br> Sponsor Id : <?php echo get_added_by($nodes[0]->HRM_ID); ?></div>
+								</a>
+							</div>
+							<ul>
+								<?php
+									$nodess=get_nodes_geneology_pos($nodes[0]->HRM_ID,1,$_POST['mlmdesc']);
+									if(!empty($nodess)){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php $ar=get_member_three($nodess[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodess[0]->HRM_ID,1,$_POST['mlmdesc']); ?>">
+													<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodes[0]->HRM_ID; ?>" id= "<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[0]->HRM_ID,'first_name'); ?><br> Sponsor Id : <?php echo get_added_by($nodess[0]->HRM_ID); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}else{
+										?>
+										<li>
+											<div>
+												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '1'; ?>" target="_blank">
+												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+									$nodess=get_nodes_geneology_pos($nodes[0]->HRM_ID,2,$_POST['mlmdesc']);
+									if(!empty($nodess)){
+										?>
+										<li>
+											<div>
+												<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodess[0]->HRM_ID); 
+        				    $ar=json_decode($ar); ?>
+        				    LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodess[0]->HRM_ID,1,$_POST['mlmdesc']); } ?>">
+													<?php $arr=get_hrm_post($nodess[0]->HRM_ID); 
+                            							    if($arr[0]->HRM_STATUS==1){
+                            							        $statss='active.png';
+                            							    }else{
+                            							        $statss='inactive.png';
+                            							    } 
+                            						?>
+													<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $nodes[0]->HRM_ID; ?>" id= "<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);' > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess[0]->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess[0]->HRM_ID,'first_name'); ?><br> Sponsor Id : <?php echo get_added_by($nodess[0]->HRM_ID); ?></div>
+													<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodes[0]->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodes[0]->HRM_ID; ?>",event);'/></a></div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}else{
+										?>
+										<li>
+											<div>
+												<a href="<?php echo base_url(); ?>admin/register/no/<?php echo $nodes[0]->HRM_ID; ?>/<?php echo '2'; ?>" target="_blank">
+												<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/add.png" alt="" id= ""  > 
+													<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">Add Member</div>
+												</a>
+											</div>
+										</li>
+										<?php
+									}
+									
+								?>
+							</ul>
+						</li>
+						<?php
+					}else{
 						?>
 						<li>
 							<div>
@@ -2814,8 +2886,37 @@ public function get_pancard(){
 						</li>
 						<?php	
 					}
+				
+					}
+					?>
+					</ul>
+					<?php } else { ?>
+					<ul>
+					    <?php $allnodes=get_all_nodes_by_admin(); 
+					        if(!empty($allnodes)){ 
+					            foreach($allnodes as $nodess){
+					    ?>
+					    <li>
 						
-						?>
+							<div>
+								<a href="javascript:void(0)" id="level-1" data-toggle="tooltip" data-placement="left"  data-html="true" data-title="<?php if($_POST['mlmdesc']==3) { $ar=get_member_three($nodess->HRM_ID); 
+		                                $ar=json_decode($ar); ?>
+		                        LEFT : <?php echo $ar[0]; ?><br>RIGHT : <?php echo $ar[1]; ?><br>TOTAL : <?php echo $ar[0]+$ar[1]; ?><br>DIRECT : <?php echo get_own_count_nodes($nodess->HRM_ID,1,$_POST['mlmdesc']); } ?>">
+									<?php $arr=get_hrm_post($nodess->HRM_ID); 
+            							    if($arr[0]->HRM_STATUS==1){
+            							        $statss='active.png';
+            							    }else{
+            							        $statss='inactive.png';
+            							    } 
+            						?>
+									<img class="tree_icon" src="<?php echo base_url(); ?>assets/img/<?php echo $statss; ?>" alt="<?php echo $hrm_id; ?>" id= "<?php echo $hrm_id; ?>" onclick='getGenologyTree("<?php echo $hrm_id; ?>",event);' > 
+									<div class="username" title=" "  data-placement="bottom" style="background: #454552 !important;">User Id : <?php echo $nodess->HRM_ID; ?><br>Name : <?php echo get_hrm_postmeta($nodess->HRM_ID,'first_name'); ?><br> Sponsor Id : <?php echo get_added_by($nodess->HRM_ID); ?></div>
+									<div class="tree_downline_arrow" style="  width: 100px;" ><a href="javascript:void(0)"><img class="" src="<?php echo  base_url(); ?>assets/img/down.png" alt="<?php echo $nodess->HRM_ID; ?>" onclick='getGenologyTree("<?php echo $nodess->HRM_ID; ?>",event);'/></a></div>
+								</a>
+							</div>
+						
+						</li>
+						<?php } } ?>
 					</ul>
 					<?php } ?>
 				</li>
@@ -2825,6 +2926,8 @@ public function get_pancard(){
 		<?php
 		die();
 	}
+
+	
 
 
 	public function memberregister2()
@@ -3119,6 +3222,255 @@ public function get_pancard(){
 
 
 
+	// public function joinedpackage()
+	// {
+	// 	date_default_timezone_set('Asia/Calcutta'); 
+	// 	$this->db->trans_start();
+	// 	$result=0;
+		
+	// 	$sponserid=strtoupper($_POST['sponserid']);
+	// 	$pack=$_POST['pack'];
+	// 	$packprice=get_all_packs_by_id($pack);
+	// 	$positionid=strtoupper($sponserid);
+	// 	$epinno=$_POST['epinno'];
+	// 	$hrm_id=$_POST['userid'];
+	// 	$date=date('Y-m-d h:i:s');
+	// 	$status=1;
+	// 	$orghrm='';
+	//     $dt=date('Y-m-d');
+	// 	$check=0;
+		
+
+	// 	if(strtoupper($_POST['sponserid'])==5000){
+	// 	    $positionid=5000;
+	// 		$pos=0;
+	// 		$count_upper_level_sponsor =0;
+	// 	}else{
+	// 		$upper_level_sponsor_id=get_top_sponsor(1,$_POST['sponserid']);
+	// 		$pos = count($upper_level_sponsor_id) +1;
+	// 		$count_upper_level_sponsor =count($upper_level_sponsor_id);
+	// 	}
+
+	// 	$hrm_info =get_hrm_post($hrm_id);
+	// 	if(check_pinno($epinno,$pack,$hrm_id,$sponserid)){
+    //     	    $check=1;
+        	  
+    //     }else{
+    //     	    $check=2;
+	// 		}
+			
+      
+	// 		if($hrm_info[0]->PAY_STATUS == 1){
+
+    //     	    $check=6;
+        	  
+    //         }
+	  
+	
+
+		
+
+    // 	if($check==1){
+		   
+	// 	    if(check_sponsor($sponserid)==1){
+		    
+	// 				   $orghrm=$hrm_id;
+				
+    //         	 update_hrmpost_meta($hrm_id,'pin_no',$epinno);
+	// 			 update_hrmpost_meta($hrm_id,'package',$pack);
+	// 			 update_epin_done_by_epinno($hrm_id,$epinno,$hrm_id);
+	// 			 update_paystatus($hrm_id, 1);
+	// 			 update_pass_hrms($hrm_id,"HRM_STATUS",1);
+    //         	 insert_count_nodes($hrm_id,3);
+	// 			 insert_count_nodes(5000,3);
+				
+         
+							
+    //       insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
+	// 	  update_hrm_count_level_own_node($sponserid,1,3); 	
+		  
+	// 	  	////autopool
+	
+	// 	// if(get_option('auto_pool')==0){
+	// 	// 	update_mlm_option('auto_poolid',$hrm_id);
+	// 	// 	update_mlm_option('auto_pool',1);
+	// 	// }
+
+	// 	// update_hrmpost_meta($hrm_id,'autopoollevel',1);
+	// 	// insert_count_nodes($hrm_id,6);
+	// 	// insert_priority($hrm_id,6);
+	// 	// $getpos=get_current_pos(6);
+	// 	// $positionno=$getpos[0];
+	// 	// $positionid=$getpos[1];
+	// 	// insert_hrm_autopool(6,1,$hrm_id,$positionno,$positionid);
+	// 	// update_priority($hrm_id,6);
+
+		
+
+	// 	/////end autopool
+
+	// if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
+						
+	// 	$direct_down=get_direct_by_hrm($sponserid);
+
+	// 	$parent = $sponserid;
+	// 	for($x=0;$parent!=5000;$x++){
+	// 		$parent=get_reverse_parent_hrms($parent,3);
+	// 		if($parent!=5000){
+				
+	// 			insert_count_nodes($parent,3);	
+	// 		}
+	// 	}
+		 
+	// 	insert_count_nodes($sponserid,3);
+
+	// // if($count_upper_level_sponsor>0){
+	// // 	////below level 1 team sales incentive
+	// // 	pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+
+
+
+
+	// // }	
+
+	// 	// if($direct_down > 2){
+
+	// 		// $income = get_level_income_by_level(1);
+	// 		////level 1 team sales incentive
+	// 		// pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
+			
+	// 	// }
+		
+	// 	// else{
+	// 	// 	$income = get_level_income_by_level(11);
+	// 	// 	pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
+	// 	// }
+
+	// 	// $star_sp =get_upper_star_sponsor($hrm_id);
+
+	// 	// if($star_sp){
+	// 	// 	$sl2income = get_star_income_by_level(2);
+	// 	// 	insert_level_count_nodes($star_sp,'SL2');
+	// 	// 	pay_commission_to_customer($star_sp,$sl2income,2,'0',date('Y-m-d'),1);
+	// 	// }
+
+	// 	// if($direct_down == 8){
+			 
+	// 	// 	update_hrmpost_meta($sponserid,'star',1);
+
+	// 	// }
+
+	// 	if($direct_down == 2){
+
+	// 		update_hrmpost_meta($sponserid,'dp_wallet',1000);
+
+	// 		// pay_commission_to_customer($sponserid,1150,7,'0',date('Y-m-d'),1);
+		 
+	// 		// update_hrmpost_meta($sponserid,'star',1);
+	// 		//  $sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
+			
+	// 		// if(check_hold_payment($sponserid,'2,5,3,4,6') == 1){
+
+	// 		// 	// if(get_hrm_postmeta($sponserid,'double_star')==2){
+	// 		// 	// 	update_hrmpost_meta($sponserid,'double_star',1);
+	// 		// 	// }
+
+	// 		// 	// if(get_hrm_postmeta($sponserid,'triple_star')==2){
+	// 		// 	// 	update_hrmpost_meta($sponserid,'triple_star',1);
+	// 		// 	// }
+
+				
+
+	// 		// 	pay_hold_commission($sponserid,'2,5,3,4,6');
+
+	// 		// }
+
+	// 		// if($sec_level_sponsor){
+	// 		// 	////star bonus 
+	// 		// 	$sl2income = get_star_income_by_level(2);
+	// 		// 	insert_level_count_nodes($sec_level_sponsor,'SL2');
+	// 		// 	if(get_hrm_postmeta($sec_level_sponsor,'star')==1){
+	// 		// 		pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),1);
+	// 		// 	}else{
+
+	// 		// 	pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),0);
+	// 		// 	}
+	// 		// }
+ 
+	// // 	 $third_level_sponsor = get_level_wise_upper_sponsor(3,$sponserid);
+
+	// // if($third_level_sponsor){
+	// // 		////star bonus 
+		    
+	// // 		insert_level_count_nodes($third_level_sponsor,'SL3');
+	// // 		$count_double =	get_level_nodes($third_level_sponsor,'SL3');
+			
+		
+	// // 		if($count_double==4){
+	// // 			if(get_hrm_postmeta($third_level_sponsor,'star')==1){
+	// // 			update_hrmpost_meta($third_level_sponsor,'double_star',1);
+	// // 			}else{
+	// // 				update_hrmpost_meta($third_level_sponsor,'double_star',2);
+	// // 			}
+	// // 			$upper_double_sponsor_id=get_top_sponsor(1,$third_level_sponsor);
+	// // 			$count_upper_double_sponsor =count($upper_double_sponsor_id);
+	// // 			pay_double_star_bonus($upper_double_sponsor_id,$count_upper_double_sponsor);
+
+	// // 		}elseif($count_double > 4){
+	// // 			$sl3income = get_star_income_by_level(3);
+	// // 			if(get_hrm_postmeta($third_level_sponsor,'star')==1){
+	// // 			pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),1);
+	// // 			}else{
+	// // 				pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),0);
+
+	// // 			}
+	// // 		}
+			
+			
+	// // 	}
+			
+	// 	}
+
+
+
+				
+
+	// 	}    	
+	// 		// cron();				
+
+            			 
+    //         				$result=1; 
+            			
+    //         			if($result>0){
+    //         				echo $result;
+    //         				$this->db->trans_complete();
+    //         			}else{
+    //         			    echo 'Member not registered';
+    //         			}
+		           
+		        
+    // 		}else{
+	// 	    	echo 'No such sponsor id is present';
+	// 	    }
+	// 	}else{
+	// 	    if($check==2){
+	// 	    	echo 'Incorrect E-Pin entered';
+	// 	    }else if($check==4){
+	// 	        echo 'You cannot add the member under the selected position id';
+	// 	    }else if($check==5){
+	// 	        echo 'You cannot add this member in this position';
+	// 	    }else if($check==6){
+	// 	        echo 'Userid Already Topup';
+	// 	    }
+	// 	    else{
+	// 	        echo 'Cannot use admin id for add member'.$check;
+	// 	    }
+	// 	}
+	// 	die();
+	// }
+
+
+
 	public function joinedpackage()
 	{
 		date_default_timezone_set('Asia/Calcutta'); 
@@ -3128,7 +3480,8 @@ public function get_pancard(){
 		$sponserid=strtoupper($_POST['sponserid']);
 		$pack=$_POST['pack'];
 		$packprice=get_all_packs_by_id($pack);
-		$positionid=strtoupper($sponserid);
+		$packpoint =get_all_packs_income_by_id($pack);
+		
 		$epinno=$_POST['epinno'];
 		$hrm_id=$_POST['userid'];
 		$date=date('Y-m-d h:i:s');
@@ -3136,17 +3489,17 @@ public function get_pancard(){
 		$orghrm='';
 	    $dt=date('Y-m-d');
 		$check=0;
+		$pos=get_hrm_postmeta($hrm_id,'pos');
+		$positionid=get_hrm_postmeta($hrm_id,'position_id');
 		
 
-		if(strtoupper($_POST['sponserid'])==5000){
-		    $positionid=5000;
-			$pos=0;
-			$count_upper_level_sponsor =0;
-		}else{
-			$upper_level_sponsor_id=get_top_sponsor(1,$_POST['sponserid']);
-			$pos = count($upper_level_sponsor_id) +1;
-			$count_upper_level_sponsor =count($upper_level_sponsor_id);
+		if($sponserid==5000){
+			$positionid=5000;
+		    $pos=get_positionmax();
 		}
+		$orgpostoinid=$positionid;
+	    $prev_upper_sponsor=$sponserid;
+		$prev_upper_positionid=$positionid;
 
 		$hrm_info =get_hrm_post($hrm_id);
 		if(check_pinno($epinno,$pack,$hrm_id,$sponserid)){
@@ -3175,6 +3528,7 @@ public function get_pancard(){
 				
             	 update_hrmpost_meta($hrm_id,'pin_no',$epinno);
 				 update_hrmpost_meta($hrm_id,'package',$pack);
+				 update_hrmpost_meta($hrm_id,'package_point',$packpoint);
 				 update_epin_done_by_epinno($hrm_id,$epinno,$hrm_id);
 				 update_paystatus($hrm_id, 1);
 				 update_pass_hrms($hrm_id,"HRM_STATUS",1);
@@ -3184,156 +3538,125 @@ public function get_pancard(){
          
 							
           insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
-		  update_hrm_count_level_own_node($sponserid,1,3); 	
+		 
 		  
 		  	////autopool
 	
-		// if(get_option('auto_pool')==0){
-		// 	update_mlm_option('auto_poolid',$hrm_id);
-		// 	update_mlm_option('auto_pool',1);
-		// }
+		if(get_option('auto_pool')==0){
+			update_mlm_option('auto_poolid',$hrm_id);
+			update_mlm_option('auto_pool',1);
+		}
 
-		// update_hrmpost_meta($hrm_id,'autopoollevel',1);
-		// insert_count_nodes($hrm_id,6);
-		// insert_priority($hrm_id,6);
-		// $getpos=get_current_pos(6);
-		// $positionno=$getpos[0];
-		// $positionid=$getpos[1];
-		// insert_hrm_autopool(6,1,$hrm_id,$positionno,$positionid);
-		// update_priority($hrm_id,6);
+		update_hrmpost_meta($hrm_id,'autopoollevel',1);
+		insert_count_nodes($hrm_id,6);
+		insert_priority($hrm_id,6);
+		$getpos=get_current_pos(6);
+		$positionno=$getpos[0];
+		$positionid=$getpos[1];
+		insert_hrm_autopool(6,1,$hrm_id,$positionno,$positionid);
+		update_priority($hrm_id,6);
 
 		
 
 		/////end autopool
 
 	if(get_hrm_type(get_hrm_postmeta($sponserid,'hrm_type')) != 'admin') {
-						
-		$direct_down=get_direct_by_hrm($sponserid);
 
-		$parent = $sponserid;
-		for($x=0;$parent!=5000;$x++){
-			$parent=get_reverse_parent_hrms($parent,3);
-			if($parent!=5000){
+		    update_hrm_count_level_own_node($sponserid,1,3); 
+
+		///for direct income
+			$direct_income=get_option('direct_income');
+			$netdirectincome = $direct_income*$packpoint;
+		    pay_commission_to_customer($sponserid,$netdirectincome,1,'0',date('Y-m-d'),1);
+
+        ///end for direct income
+
+		///for pair income
+
+		$array=array();
+		for($x=0;$hrm_id!=5000;$x++){
+			$hrm_id=get_reverse_parent_hrms($hrm_id,3);
+			if($hrm_id!=5000){
+				$array[]=$hrm_id;
 				
-				insert_count_nodes($parent,3);	
 			}
 		}
-		 
-		insert_count_nodes($sponserid,3);
+		$array=array_unique($array);
 
-	// if($count_upper_level_sponsor>0){
-	// 	////below level 1 team sales incentive
-	// 	pay_team_incentive($upper_level_sponsor_id,$count_upper_level_sponsor);
+		foreach($array as $spid){
+
+			insert_point_count_nodes($spid,3,$packpoint);
+			$get_givenpair=get_hrm_postmeta($spid,'given_pair');
+			$current_point= get_point_nodes($spid,3);
+			$totalleft=get_direct_by_point($spid,1);
+			$totalright=get_direct_by_point($spid,2);
 
 
+			if($get_givenpair>0){
+                
+				$leftcut= $totalleft - get_hrm_postmeta($spid,'left_point');
+				$rightcut=$totalrigh - get_hrm_postmeta($spid,'left_point');
+				
 
+				if($leftcut>$rightcut){
+					$netpair=$rightcut;
+				}else if($rightcut>$leftcut){
+					$netpair=$leftcut;
+				}else{
+					$netpair=$leftcut;
+				}
 
-	// }	
-
-		// if($direct_down > 2){
-
-			// $income = get_level_income_by_level(1);
-			////level 1 team sales incentive
-			// pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);	
-			
-		// }
-		
-		// else{
-		// 	$income = get_level_income_by_level(11);
-		// 	pay_commission_to_customer($sponserid,$income,1,'0',date('Y-m-d'),1);
-		// }
-
-		// $star_sp =get_upper_star_sponsor($hrm_id);
-
-		// if($star_sp){
-		// 	$sl2income = get_star_income_by_level(2);
-		// 	insert_level_count_nodes($star_sp,'SL2');
-		// 	pay_commission_to_customer($star_sp,$sl2income,2,'0',date('Y-m-d'),1);
-		// }
-
-		// if($direct_down == 8){
-			 
-		// 	update_hrmpost_meta($sponserid,'star',1);
-
-		// }
-
-		if($direct_down == 2){
-
-			update_hrmpost_meta($sponserid,'dp_wallet',1000);
-
-			// pay_commission_to_customer($sponserid,1150,7,'0',date('Y-m-d'),1);
-		 
-			// update_hrmpost_meta($sponserid,'star',1);
-			//  $sec_level_sponsor = get_level_wise_upper_sponsor(2,$sponserid);
-			
-			// if(check_hold_payment($sponserid,'2,5,3,4,6') == 1){
-
-			// 	// if(get_hrm_postmeta($sponserid,'double_star')==2){
-			// 	// 	update_hrmpost_meta($sponserid,'double_star',1);
-			// 	// }
-
-			// 	// if(get_hrm_postmeta($sponserid,'triple_star')==2){
-			// 	// 	update_hrmpost_meta($sponserid,'triple_star',1);
-			// 	// }
+				if($netpair > ($get_givenpair-1)){
+					$goingpair=$netpair-$get_givenpair;
+					$pair_income=get_option('pair_income');
+					$netdirectincome = $pair_income*$goingpair;
+					pay_commission_to_customer($spid,$netdirectincome,2,'0',date('Y-m-d'),1);
+				}
+				
+			}else{
 
 				
 
-			// 	pay_hold_commission($sponserid,'2,5,3,4,6');
+				if(($totalleft >= 2 && $totalright>=1) || ($totalright >= 2 && $totalleft>=1)){
 
-			// }
+					if($totalleft >= 2){
+						update_hrmpost_meta($spid,'left_point',2);
+						update_hrmpost_meta($spid,'left_point',1);
+                     
 
-			// if($sec_level_sponsor){
-			// 	////star bonus 
-			// 	$sl2income = get_star_income_by_level(2);
-			// 	insert_level_count_nodes($sec_level_sponsor,'SL2');
-			// 	if(get_hrm_postmeta($sec_level_sponsor,'star')==1){
-			// 		pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),1);
-			// 	}else{
+					}else{
+						update_hrmpost_meta($spid,'left_point',1);
+						update_hrmpost_meta($spid,'right_point',2);
 
-			// 	pay_commission_to_customer($sec_level_sponsor,$sl2income,2,'0',date('Y-m-d'),0);
-			// 	}
-			// }
- 
-	// 	 $third_level_sponsor = get_level_wise_upper_sponsor(3,$sponserid);
 
-	// if($third_level_sponsor){
-	// 		////star bonus 
-		    
-	// 		insert_level_count_nodes($third_level_sponsor,'SL3');
-	// 		$count_double =	get_level_nodes($third_level_sponsor,'SL3');
-			
-		
-	// 		if($count_double==4){
-	// 			if(get_hrm_postmeta($third_level_sponsor,'star')==1){
-	// 			update_hrmpost_meta($third_level_sponsor,'double_star',1);
-	// 			}else{
-	// 				update_hrmpost_meta($third_level_sponsor,'double_star',2);
-	// 			}
-	// 			$upper_double_sponsor_id=get_top_sponsor(1,$third_level_sponsor);
-	// 			$count_upper_double_sponsor =count($upper_double_sponsor_id);
-	// 			pay_double_star_bonus($upper_double_sponsor_id,$count_upper_double_sponsor);
+					}   
 
-	// 		}elseif($count_double > 4){
-	// 			$sl3income = get_star_income_by_level(3);
-	// 			if(get_hrm_postmeta($third_level_sponsor,'star')==1){
-	// 			pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),1);
-	// 			}else{
-	// 				pay_commission_to_customer($third_level_sponsor,$sl3income,5,'0',date('Y-m-d'),0);
+			$pair_income=get_option('pair_income');
+			$netdirectincome = $pair_income;
+		    pay_commission_to_customer($spid,$netdirectincome,2,'0',date('Y-m-d'),1);
+					
+				}
 
-	// 			}
-	// 		}
+			}
 			
 			
-	// 	}
 			
 		}
+
+
+		///end for pair income
+
+
+
+			
+		
 
 
 
 				
 
 		}    	
-			// cron();				
+							
 
             			 
             				$result=1; 
@@ -3366,6 +3689,8 @@ public function get_pancard(){
 		die();
 	}
 	
+
+	
 	public function distribution(){
 		cron2();
 	}
@@ -3380,7 +3705,7 @@ public function get_pancard(){
 		$desiredid=strtoupper($_POST['desiredid']);
 		// $email=$_POST['email'];
 		$phone=$_POST['phone'];
-		 $aadhar=$_POST['aadhar'];
+		//  $aadhar=$_POST['aadhar'];
 		// $gender=$_POST['gender'];
 		// $dob=$_POST['dob'];
 		 $pancard=$_POST['pancard'];
@@ -3392,8 +3717,10 @@ public function get_pancard(){
 		// $branch=$_POST['branch'];
 		$sponserid=strtoupper($_POST['sponserid']);
 		$positionid=strtoupper($_POST['positionid']);
-		
-	
+		$pos = $_POST['pos'];
+		$position_id= $this->get_positionid2($sponserid,$pos);
+		if($position_id=="")
+		$check=2;
 		
 	    $orgpostoinid=$positionid;
 	    $prev_upper_sponsor=$sponserid;
@@ -3454,7 +3781,7 @@ public function get_pancard(){
             				update_hrmpost_meta($hrm_id,'pin_code','');
             				// update_hrmpost_meta($hrm_id,'dob',$dob);
             				 update_hrmpost_meta($hrm_id,'pancard',$pancard);
-            				 update_hrmpost_meta($hrm_id,'aadhar',$aadhar);
+            				//  update_hrmpost_meta($hrm_id,'aadhar',$aadhar);
             				// update_hrmpost_meta($hrm_id,'address',$address);
             				update_hrmpost_meta($hrm_id,'img',get_option('default_img'));
             				update_hrmpost_meta($hrm_id,'password',$_POST['pass']);
@@ -3482,6 +3809,8 @@ public function get_pancard(){
 							update_hrmpost_meta($hrm_id,'star',0);
 							update_hrmpost_meta($hrm_id,'double_star',0);
 							update_hrmpost_meta($hrm_id,'triple_star',0);
+							update_hrmpost_meta($hrm_id,'pos',$pos);
+							update_hrmpost_meta($hrm_id,'position_id',$position_id);
             			    update_hrmpost_meta($hrm_id,'sponsorid',$sponserid);
             			    
                             $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RBW.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
@@ -3514,6 +3843,8 @@ public function get_pancard(){
 		        echo 'Pancard already registered';
 		    }else if($check==5){
 				echo 'Aadhar already registered';
+			}elseif($check==6){
+				echo 'Invalid Sponsorid';
 			}
 		    else{
 		        echo 'Cannot use admin id for add member';
@@ -3898,7 +4229,7 @@ public function get_pancard(){
 		if($hrm_id=='5000'){
 			$hrm_id=get_option('auto_poolid');
 		}
-		
+		if($hrm_id){
 		?>
 		<div class="col-md-12 text-center">
 			<ul id="tree_view" style="display:none">
@@ -4234,6 +4565,7 @@ public function get_pancard(){
 			<div id="tree" class="orgChart"></div>
 		</div>
 		<?php
+		}
 		die();
 	}
 

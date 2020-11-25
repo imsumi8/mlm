@@ -173,8 +173,8 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-												    <span class="weight-500 uppercase-font txt-light block font-13"> By Self Bonus</span>
-													<span class="txt-light block counter"><span class="counter-anim"><?php echo $by_self=get_sum_wallet_balance_type($userid,10); ?></span></span>
+												    <span class="weight-500 uppercase-font txt-light block font-13"> Pair Income</span>
+													<span class="txt-light block counter"><span class="counter-anim"><?php echo $by_self=get_sum_wallet_balance_type($userid,2); ?></span></span>
 												</div>
 											
 											</div>	
@@ -196,7 +196,7 @@
 										<div class="container-fluid">
 											<div class="row">
 												<div class="col-xs-12 text-center pl-0 pr-0 data-wrap-left">
-													<span class="weight-500 uppercase-font txt-light block font-13">TEAM SALES INCENTIVE</span>
+													<span class="weight-500 uppercase-font txt-light block font-13">Referal Income</span>
 													<span class="txt-light block counter"><span class="counter-anim"><?php echo $team_sales=get_sum_wallet_balance_type($userid,1); ?></span></span>
 												</div>
 												
