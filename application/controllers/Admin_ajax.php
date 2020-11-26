@@ -195,7 +195,7 @@ class Admin_ajax extends CI_Controller {
         				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"] , $uploadfile);	//for moving image 		
 						$packname=$_POST['pack_name'];
 						$amts=$_POST['editamt'];
-						$pack_point=$_POST['pack_point'];
+						$pack_point=$_POST['editpoint'];
         			     $data = array(
                             'PACKAGE_NAME'=>$packname,
 							'PACKAGE_INCOME'=>$pack_point,
@@ -221,7 +221,7 @@ class Admin_ajax extends CI_Controller {
             	}else{
 					$packname=$_POST['pack_name'];
 					$amts=$_POST['editamt'];
-					$pack_point=$_POST['pack_point'];
+					$pack_point=$_POST['editpoint'];
     			     $data = array(
                         'PACKAGE_NAME'=>$packname,
 						'PACKAGE_INCOME'=>$pack_point,
