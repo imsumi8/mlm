@@ -4728,7 +4728,7 @@ public function get_pancard(){
 										<?php
 									}
 									
-									$nodess=get_autopool_nodes_geneology_pos($nodes[2]->HRM_ID,2,$_POST['mlmdesc']);
+									$nodess=get_autopool_nodes_geneology_pos($nodes[3]->HRM_ID,2,$_POST['mlmdesc']);
 									if(!empty($nodess[1])){
 										?>
 										<li>
@@ -4752,7 +4752,7 @@ public function get_pancard(){
 										<?php
 									}
 								
-	                          $nodess=get_autopool_nodes_geneology_pos($nodes[2]->HRM_ID,3,$_POST['mlmdesc']);
+	                          $nodess=get_autopool_nodes_geneology_pos($nodes[3]->HRM_ID,3,$_POST['mlmdesc']);
 									if(!empty($nodess[2])){
 										?>
 										<li>
@@ -4776,7 +4776,7 @@ public function get_pancard(){
 										<?php
 									}
 
-									$nodess=get_autopool_nodes_geneology_pos($nodes[2]->HRM_ID,4,$_POST['mlmdesc']);
+									$nodess=get_autopool_nodes_geneology_pos($nodes[3]->HRM_ID,4,$_POST['mlmdesc']);
 									if(!empty($nodess[3])){
 										?>
 										<li>
