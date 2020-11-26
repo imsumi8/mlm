@@ -3647,7 +3647,7 @@ public function get_pancard(){
 			if($get_givenpair>0){
                 
 				$leftcut= $totalleft - get_hrm_postmeta($spid,'left_point');
-				$rightcut=$totalrigh - get_hrm_postmeta($spid,'left_point');
+				$rightcut=$totalright - get_hrm_postmeta($spid,'right_point');
 				
 
 				if($leftcut>$rightcut){
@@ -3673,7 +3673,7 @@ public function get_pancard(){
 
 					if($totalleft >= 2){
 						update_hrmpost_meta($spid,'left_point',2);
-						update_hrmpost_meta($spid,'left_point',1);
+						update_hrmpost_meta($spid,'right_point',1);
                      
 
 					}else{
