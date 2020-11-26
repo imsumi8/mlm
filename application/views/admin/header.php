@@ -441,7 +441,7 @@
 
 						<li>
 							<a <?php if($subpage=='referal_income') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/referal_income">
-							<i class="fa fa-circle  <?php if($subpage=='referal_income') { echo 'clrred'; } ?>"></i>Referal Income</a>
+							<i class="fa fa-circle  <?php if($subpage=='referal_income') { echo 'clrred'; } ?>"></i>Pair Income</a>
 						</li>
 						<!-- <li>
 							<a <?php if($subpage=='team_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/team_bonus">
@@ -462,10 +462,10 @@
 							<i class="fa fa-circle  <?php if($subpage=='triplestar_bonus') { echo 'clrred'; } ?>"></i> Gold Bonus</a>
 						</li> -->
 
-						<!-- <li>
+						<li>
 							<a  <?php if($subpage=='autopool_bonus') { ?> class="active active-page" <?php } ?> href="<?php echo base_url(); ?>admin/autopool_bonus">
 							<i class="fa fa-circle  <?php if($subpage=='autopool_bonus') { echo 'clrred'; } ?>"></i> Travelpool Bonus</a>
-						</li> -->
+						</li>
 					
 						</li>
 					</ul>
