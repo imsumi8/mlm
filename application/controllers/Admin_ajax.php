@@ -3659,6 +3659,7 @@ public function get_pancard(){
 				}
 
 				if($netpair > ($get_givenpair-1)){
+					update_hrmpost_meta($spid,'given_pair',($get_givenpair+1));
 					$goingpair=$netpair-$get_givenpair;
 					$pair_income=get_option('pair_income');
 					$netdirectincome = $pair_income*$goingpair;
