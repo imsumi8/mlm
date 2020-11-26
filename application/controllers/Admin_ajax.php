@@ -3663,6 +3663,8 @@ public function get_pancard(){
 					$pair_income=get_option('pair_income');
 					$netdirectincome = $pair_income*$goingpair;
 					pay_commission_to_customer($spid,$netdirectincome,2,'0',date('Y-m-d'),1);
+					update_hrmpost_meta($spid,'given_pair',($get_givenpair+1));
+
 				}
 				
 			}else{
