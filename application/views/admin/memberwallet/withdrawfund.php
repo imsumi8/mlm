@@ -80,9 +80,9 @@
 								            <input type="hidden" name="userid" value="<?php echo $this->session->userdata('userid'); ?>">
 								            <div class="col-md-12">
 								                <label>Amount To Be Withdraw : <span class="star"></span></label>
-										        <input type="number" class="form-control input_num withdrawamtvalid" attr-amt="<?php echo liable_amount_to_pay($this->session->userdata('userid')); ?>" attr-min="400" name="amt" placeholder='Enter Amount' autocomplete="off" required>
+										        <input type="number" class="form-control input_num withdrawamtvalid" attr-amt="<?php echo liable_amount_to_pay($this->session->userdata('userid')); ?>" attr-min="250" name="amt" placeholder='Enter Amount' autocomplete="off" required>
 										        <!-- <div style="color:red;margin-top:3px;">Max amount to be requested : <?php echo liable_amount_to_pay($this->session->userdata('userid')); ?></div> -->
-												<div style="color:red;margin-top:3px;">Min amount to be requested : <?php echo "400"; ?></div>
+												<div style="color:red;margin-top:3px;">Min amount to be requested : <?php echo "250"; ?></div>
 
 										    </div>
 

@@ -295,7 +295,7 @@
 								var obj = jQuery.parseJSON(msg);
 							
 							
-            				    if(obj.msg=="Mobile No. already taken"){
+            				    if(obj.msg=="Mobile No already taken"){
 									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
 									$('.phone').val('');
             				    }else{
@@ -308,56 +308,56 @@
 				}
 				
 
-				function check_duplicate_email(){
-			        var email=$('.email').val();
-			        //var position=$('.pos').val();
-			        if(email != ''){
-			            $.ajax({
-            				type: 'POST',
-            				url: admin_loc+'get_email',
-            				data: 'email='+email,
-            				async:false,
-            				success: function(msg){
+				// function check_duplicate_email(){
+			    //     var email=$('.email').val();
+			    //     //var position=$('.pos').val();
+			    //     if(email != ''){
+			    //         $.ajax({
+            	// 			type: 'POST',
+            	// 			url: admin_loc+'get_email',
+            	// 			data: 'email='+email,
+            	// 			async:false,
+            	// 			success: function(msg){
 							
-								var obj = jQuery.parseJSON(msg);
+				// 				var obj = jQuery.parseJSON(msg);
 							
-            				    if(obj.msg=="Email already taken"){
-									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
-									$('.email').val('');
-            				    }else{
-									// $('.sponsor_name').val(obj.hrm_name);
-            				        // $('.position_check').val(obj.hrm_id);
-            				    }
-            				}
-            			});
-			        }
-				}
+            	// 			    if(obj.msg=="Email already taken"){
+				// 					sweetalert('Invalid','warning',obj.msg,'#f99b4a');
+				// 					$('.email').val('');
+            	// 			    }else{
+				// 					// $('.sponsor_name').val(obj.hrm_name);
+            	// 			        // $('.position_check').val(obj.hrm_id);
+            	// 			    }
+            	// 			}
+            	// 		});
+			    //     }
+				// }
 				
 
-				function check_duplicate_aadhar(){
-			        var aadhar=$('.aadhar').val();
-			        //var position=$('.pos').val();
-			        if(aadhar != ''){
-			            $.ajax({
-            				type: 'POST',
-            				url: admin_loc+'get_aadhar',
-            				data: 'aadhar='+aadhar,
-            				async:false,
-            				success: function(msg){
+				// function check_duplicate_aadhar(){
+			    //     var aadhar=$('.aadhar').val();
+			    //     //var position=$('.pos').val();
+			    //     if(aadhar != ''){
+			    //         $.ajax({
+            	// 			type: 'POST',
+            	// 			url: admin_loc+'get_aadhar',
+            	// 			data: 'aadhar='+aadhar,
+            	// 			async:false,
+            	// 			success: function(msg){
 							
-								var obj = jQuery.parseJSON(msg);
+				// 				var obj = jQuery.parseJSON(msg);
 							
-            				    if(obj.msg=="Aadhar No already taken"){
-									sweetalert('Invalid','warning',obj.msg,'#f99b4a');
-									$('.aadhar').val('');
-            				    }else{
-									// $('.sponsor_name').val(obj.hrm_name);
-            				        // $('.position_check').val(obj.hrm_id);
-            				    }
-            				}
-            			});
-			        }
-				}
+            	// 			    if(obj.msg=="Aadhar No already taken"){
+				// 					sweetalert('Invalid','warning',obj.msg,'#f99b4a');
+				// 					$('.aadhar').val('');
+            	// 			    }else{
+				// 					// $('.sponsor_name').val(obj.hrm_name);
+            	// 			        // $('.position_check').val(obj.hrm_id);
+            	// 			    }
+            	// 			}
+            	// 		});
+			    //     }
+				// }
 				
 
 				function check_duplicate_pancard(){

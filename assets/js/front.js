@@ -534,7 +534,7 @@ jQuery(document).ready(function (){
 				},
 				success: function(msg){
 					msg=$.trim(msg);
-					console.log(msg);
+					// console.log(msg);
 					var s = msg.substr(0, 2);
 					if(s == 'RM'){
 						$('#memberregister').trigger('reset');
@@ -862,7 +862,7 @@ jQuery(document).ready(function (){
 						$('.epins_register').append(str);
 						$('.noepincase').html("");
 					}else{
-						$('.noepincase').html("Sponsor does not have any epin");
+						$('.noepincase').html("No Pin Found");
 					}
 					
 				}
@@ -871,72 +871,73 @@ jQuery(document).ready(function (){
 	 });
 	 
 
-    $('.get_name_member').focusout(function(){
+    // $('.get_name_member').focusout(function(){
         
-            var d=$(this);
-            var id=d.closest('form').find('.get_name_member').val();
-            if(id==5000){
-                // $('.forleader').hide();
-                $('.pos').val('2');
-                $('.position_check').val('5000');
-            }else{
-				$('.pos').val('2');
-                $('.forleader').show();
-            }
-            $('.epins_register option').remove();
-			$.ajax({
-				type: 'POST',
-				url: admin_loc+'get_epin_sponsor',
-				data: 'id='+id+'&pack='+$('.packmain').val()+'&price='+$('option:selected', '.packmain').attr('attr-price'),
-				async:false,
-				dataType: "json",
-				success: function(msg){
-					var str = '';
+    //         var d=$(this);
+    //         var id=d.closest('form').find('.get_name_member').val();
+    //         if(id==5000){
+    //             // $('.forleader').hide();
+    //             $('.pos').val('2');
+    //             $('.position_check').val('5000');
+    //         }else{
+	// 			$('.pos').val('2');
+    //             $('.forleader').show();
+    //         }
+    //         $('.epins_register option').remove();
+	// 		$.ajax({
+	// 			type: 'POST',
+	// 			url: admin_loc+'get_epin_sponsor',
+	// 			data: 'id='+id+'&pack='+$('.packmain').val()+'&price='+$('option:selected', '.packmain').attr('attr-price'),
+	// 			async:false,
+	// 			dataType: "json",
+	// 			success: function(msg){
+	// 				var str = '';
 					
-					if(msg!=''){
-						$.each(msg, function (index, element) {
-							str += "<option value='" + element.EPIN_NO + "'>" + element.EPIN_NO + "</option>";
-						});
-						$('.epins_register').append(str);
-						$('.noepincase').html("");
-					}else{
-						$('.noepincase').html("Sponsor does not have any epin");
-					}
+	// 				if(msg!=''){
+	// 					$.each(msg, function (index, element) {
+	// 						str += "<option value='" + element.EPIN_NO + "'>" + element.EPIN_NO + "</option>";
+	// 					});
+	// 					$('.epins_register').append(str);
+	// 					$('.noepincase').html("");
+	// 				}else{
+	// 					$('.noepincase').html("Sponsor does not have any epin");
+	// 				}
 					
-				}
-			});
-            $.ajax({
-				type: 'POST',
-				url: admin_loc+'get_name',
-				data: 'id='+id,
-				async:false,
-				success: function(msg){
-					msg=$.trim(msg);
-					d.closest('form').find('.usrnm').val(msg);
-				}
-			});
-		   var currentname=$.trim(d.closest('form').find('.name_free').val());
-           var sponsortype=d.closest('form').find('.sponsor_type:checked').val();
-           var matchname=d.closest('form').find('.usrnm').val();
-           if(id!='' && currentname!=''){
-               if(sponsortype=="other"){
-                   if(currentname==matchname){
-                       msg="You cannot use your name in other type";
-                       $(this).closest('form').find('.name_free').val('');
-                       sweetalert('Invalid','warning',msg,'#f99b4a');
-                   }
-               }else{
-                   if(currentname!=matchname){
-                       msg="You must have to use your name in self type";
-                       $(this).closest('form').find('.name_free').val('');
-                       sweetalert('Invalid','warning',msg,'#f99b4a');
-                   }
-               }
-           }else{
-                $(this).closest('form').find('.name_free').val('');
-           }
+	// 			}
+	// 		});
+    //         $.ajax({
+	// 			type: 'POST',
+	// 			url: admin_loc+'get_name',
+	// 			data: 'id='+id,
+	// 			async:false,
+	// 			success: function(msg){
+	// 				msg=$.trim(msg);
+	// 				d.closest('form').find('.usrnm').val(msg);
+	// 			}
+	// 		});
+	// 	   var currentname=$.trim(d.closest('form').find('.name_free').val());
+    //        var sponsortype=d.closest('form').find('.sponsor_type:checked').val();
+    //        var matchname=d.closest('form').find('.usrnm').val();
+    //        if(id!='' && currentname!=''){
+    //            if(sponsortype=="other"){
+    //                if(currentname==matchname){
+    //                    msg="You cannot use your name in other type";
+    //                    $(this).closest('form').find('.name_free').val('');
+    //                    sweetalert('Invalid','warning',msg,'#f99b4a');
+    //                }
+    //            }else{
+    //                if(currentname!=matchname){
+    //                    msg="You must have to use your name in self type";
+    //                    $(this).closest('form').find('.name_free').val('');
+    //                    sweetalert('Invalid','warning',msg,'#f99b4a');
+    //                }
+    //            }
+    //        }else{
+    //             $(this).closest('form').find('.name_free').val('');
+    //        }
            
-    });
+	// });
+	
     $('.name_free').focusout(function(){
            var id=$(this).closest('form').find('.get_name_member').val();
            var currentname=$.trim($(this).closest('form').find('.name_free').val());
