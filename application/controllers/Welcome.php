@@ -42,6 +42,15 @@ class Welcome extends CI_Controller {
 		$this->load->view('site/foot');
 		
 	}
+
+	public function leagle()
+	{
+		//$data['packs']=get_all_packs();
+		$this->load->view('site/head');
+		$this->load->view('site/leagle');
+		$this->load->view('site/foot');
+		
+	}
 	public function contact()
 	{
 		//$data['packs']=get_all_packs();
