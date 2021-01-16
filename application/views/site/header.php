@@ -35,6 +35,7 @@
   <link href="<?php echo base_url();  ?>assets/assetstheme/css/responsive.css" rel="stylesheet">
     <link href="<?php echo base_url();  ?>assets/slick/slick.css" rel="stylesheet">
     <script src="<?php echo base_url();  ?>assets/slick/slick.js"></script>
+    <script data-ad-client="ca-pub-9621985279299351" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
  
 </head>
 

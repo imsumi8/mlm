@@ -1,0 +1,11 @@
+[17-Nov-2020 11:41:04 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/database/DB_result.php on line 119
+[17-Nov-2020 11:43:49 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/core/Controller.php on line 93
+[17-Nov-2020 11:50:00 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 305
+[17-Nov-2020 11:52:29 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/database/DB_driver.php on line 651
+[17-Nov-2020 11:52:30 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 305
+[25-Nov-2020 21:09:58 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 305
+[25-Nov-2020 21:21:02 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 305
+[25-Nov-2020 21:26:57 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/core/Controller.php on line 93
+[25-Nov-2020 23:35:22 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/core/CodeIgniter.php on line 369
+[25-Nov-2020 23:37:57 Asia/Calcutta] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/mybizfad/public_html/system/database/drivers/mysqli/mysqli_driver.php on line 305
+[05-Jan-2021 06:47:20 UTC] PHP Warning:  "continue" targeting switch is equivalent to "break". Did you mean to use "continue 2"? in /home/mybizfad/public_html/adminer.php on line 1176

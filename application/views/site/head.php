@@ -51,6 +51,8 @@
 	<!--<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>-->
 	<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script src="https://unpkg.com/sweetalert2@7.17.0/dist/sweetalert2.all.js"></script>
+    
+    	<script data-ad-client="ca-pub-9621985279299351" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
 		var admin_loc='<?php echo base_url().'admin_ajax/'; ?>';
 		var base_loc='<?php echo base_url().'admin/'; ?>';
