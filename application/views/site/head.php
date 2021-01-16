@@ -97,6 +97,9 @@
                                      
                                       
                                         <li><a href="<?php echo site_url('welcome/contact'); ?>">Contact</a></li>
+                                        <li><a href="<?php echo site_url('welcome/leagle'); ?>">Leagle</a></li>
+                                        <li><a href="<?php echo site_url('/franchise'); ?>">Franchise Login</a></li>
+                                    
                                     </ul>
                                 </nav>
                             </div>
@@ -109,6 +112,8 @@
                                 <div class="login_text">
                                 <a  href="<?php echo site_url('admin'); ?>">Login</a>
                                 </div>
+
+                               
                             </div>
                         </div>
                         <div class="col-12">

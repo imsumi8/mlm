@@ -499,7 +499,7 @@
 	{
 		$ci=& get_instance();
 		$ci->load->database(); 
-		$sql = "SELECT * FROM `products` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
+		$sql = "SELECT * FROM `rbw_products` ".$where." ORDER BY ".$sort." ".$order." LIMIT ".$offset.", ".$limit;
 				$query = $ci->db->query($sql);
 		$row = $query->result_array();
 		if(!empty($row)){
@@ -803,7 +803,7 @@
 	{
 		$ci=& get_instance();
 		$ci->load->database(); 
-		$sql = "select * from products order by id desc"; 
+		$sql = "select * from rbw_products order by id desc"; 
 		$query = $ci->db->query($sql);
 		$row = $query->result();
 		if(!empty($row)){

@@ -4970,7 +4970,7 @@ public function get_pancard(){
 						   
 					
 									   
-					 insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$positionid,$sponserid);
+					 insert_hrm_level_track(3,1,$hrm_id,$pos,$this->session->userdata('userid'),$position_id,$sponserid);
 					
 					 
 						 ////autopool

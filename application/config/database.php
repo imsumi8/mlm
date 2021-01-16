@@ -76,9 +76,10 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-'username' => 'mybizfad_rmgm',
+    'username' => 'mybizfad_rmgm',
 	'password' => 'bpyp$3542D',
 	'database' => 'mybizfad_rmgm',
+
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
