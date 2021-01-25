@@ -35,18 +35,19 @@
                                 <h3>292 KDA Market Barra-2, Kanpur</p>
                             </div>
                         </div> -->
-                        <div class="media contact-info">
+                        <!-- <div class="media contact-info">
                             <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                             <div class="media-body">
                                 <h3>AGDKVMD324DZ</h3>
                                 <p>GST Detail</p>
                             </div>
-                        </div>
-                        <div class="media contact-info">
+                        </div> -->
+                        <div class="single_appertment">
                             <span class="contact-info__icon"><i class="ti-email"></i></span>
-                            <div class="media-body">
-                                <h3>AAJCR0349F</h3>
-                                <p>Pancard Detail</p>
+                            <div class="thumb">
+                                <h3>Pancard Detail</h3>
+                                <img src="../assets/hus/img/banner/pancard.jpeg" alt="pancard">
+                                <!-- <p>Pancard Detail</p> -->
                             </div>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 
 use App\Models\Requisition;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\DB;
 
 function active_if_full_match($path)
 {
@@ -184,6 +184,26 @@ function get_perc_value(int $oval, int $perc){
 
     return $value;
 
+}
+
+function get_hrm_postmeta($user_id,$key)
+{
+    
+    $sql = DB::select("select * from hrm_post_meta where HRM_ID='".$user_id."' and HRM_KEY='".$key."'");
+ 
+    if(!empty($sql)){
+        return $sql[0]->HRM_VALUE;
+    }else{
+        return '';
+    }
+}	
+
+function get_hrm_post($user_id)
+{
+ 
+    $sql = DB::select("select * from hrm_post where HRM_ID='".$user_id."'");
+
+    return $sql;
 }
 
 

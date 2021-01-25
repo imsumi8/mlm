@@ -62,8 +62,8 @@
                                                 <span>{{__('pages.hsn_code')}}: {{$product->hsn_code}}</span>
                                             </h2>
                                             <p>
-                                                <span class="text-primary"> {{__('pages.purchase')}} : {{get_option('app_currency')}}{{$product->purchase_price}},</span>
-                                                <span class="text-warning"> {{__('pages.sell')}}: {{get_option('app_currency')}}{{$product->sell_price}}</span>
+                                                {{-- <span class="text-primary"> {{__('pages.purchase')}} : {{get_option('app_currency')}}{{$product->purchase_price}},</span>
+                                                <span class="text-warning"> {{__('pages.sell')}}: {{get_option('app_currency')}}{{$product->sell_price}}</span> --}}
                                                 <br>
                                                 <span class="text-primary"> {{__('pages.dp')}} : @php $dpval= $product->sell_price - get_perc_value($product->sell_price,$product->dp); echo $dpval; @endphp,</span>
                                                 <span class="text-info"> {{__('pages.bv')}}: {{get_perc_value($dpval,$product->bv)}},</span>

@@ -9,36 +9,43 @@
                     <div class="logo p-2 text-center bg-secondary">
                         <img src="{{asset($customer->photo ? $customer->photo : 'backend/img/user-placeholder.png')}}" class="img-fluid">
                     </div>
-                    <h5 class="text-center mt-4 company-name">{{$customer->name}}</h5>
-                    <span class="since">Member Since in {{$customer->created_at->diffForHumans()}}</span>
+                    <h5 class="text-center mt-4 company-name">{{$customer->HRM_NAME}}</h5>
+                    <span class="since">Member Since in {{$customer->HRM_DATE->diffForHumans()}}</span>
 
                     <table class="table table-bordered text-left mt-3">
                         <tr>
-                            <td>{{__('pages.name')}}:</td>
-                            <td>{{$customer->name}}</td>
+                            <td>{{__('User Id')}}:</td>
+                            <td>{{$customer->HRM_ID}}</td>
                         </tr>
 
-                        <tr>
+                        {{-- <tr>
                             <td>{{__('pages.email')}}:</td>
                             <td>{{$customer->email}}</td>
+                        </tr> --}}
+                       
+                        <tr>
+                            <td>{{__('Sponsor')}}:</td>
+                            <td>
+                            {{get_hrm_post(get_hrm_postmeta($customer->HRM_ID,'sponsorid'))[0]->HRM_NAME}}
+                            ({{get_hrm_postmeta($customer->HRM_ID,'sponsorid')}})
+                            </td>
                         </tr>
-
-
+                        
                         <tr>
                             <td>{{__('pages.phone_number')}}:</td>
-                            <td>{{$customer->phone}}</td>
+                            <td>{{get_hrm_postmeta($customer->HRM_ID,'contact')}}</td>
                         </tr>
 
 
 
                         <tr>
                             <td>{{__('pages.address')}}:</td>
-                            <td>{{$customer->address}}</td>
+                            <td>{{get_hrm_postmeta($customer->HRM_ID,'address')}}</td>
                         </tr>
 
                         <tr>
                             <td>{{__('pages.created_at')}}:</td>
-                            <td>{{$customer->created_at->format(get_option('app_date_format'))}}</td>
+                            <td>{{$customer->HRM_DATE->format(get_option('app_date_format'))}}</td>
                         </tr>
                     </table>
                 </div>

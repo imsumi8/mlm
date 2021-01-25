@@ -28,7 +28,7 @@ class CustomerController extends Controller
         } // end permission checking
 
         return view('backend.customer.index',[
-            'customers' => Customer::orderBy('id', 'DESC')->get()
+            'customers' => Customer::where('HRM_ID','!=','5000')->orderBy('ID', 'DESC')->paginate(24)
         ]);
     }
 
@@ -96,6 +96,7 @@ class CustomerController extends Controller
             $sell_by_branches[$key]['sells'] = Sell::where('customer_id', $customer->id)->where('branch_id', $branch->id)->get();
         }
 
+        
         return view('backend.customer.show',[
             'customer' => $customer,
             'sells' => $sells,

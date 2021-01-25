@@ -27,7 +27,7 @@ class Sell extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class)->withTrashed();
+        return $this->belongsTo(Customer::class,'customer_id','ID');
     }
 
     public function user()

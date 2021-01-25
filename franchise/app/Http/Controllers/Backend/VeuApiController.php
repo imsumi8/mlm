@@ -47,6 +47,19 @@ class VeuApiController extends Controller
     public function products()
     {
         $products = Product::where('status', 1)->with('tax')->get();
+
+        foreach($products as $product){
+            $dp_value= $product->sell_price - get_perc_value($product->sell_price,$product->dp); 
+            $gst = round($dp_value-($dp_value*100)/($product->tax->value +100),2);
+            $product->dp =$dp_value;
+            $product->original_price =$dp_value-$gst;
+            $product->gst =$gst;
+            $product->gst_withamount =$gst.' ('.$product->tax->value.'%)';
+
+
+
+
+        }
         return response($products);
     }
 
@@ -137,7 +150,11 @@ class VeuApiController extends Controller
     }
 
     public function customers(){
-        $customers = Customer::where('status', 1)->get();
+        $customers = Customer::where('HRM_STATUS', 1)->where('HRM_ID','!=', '5000')->get();
+
+        foreach ($customers as $key => $customer) {
+           $customer->phone=get_hrm_postmeta($customer->HRM_ID,'contact');
+        }
         return response($customers);
     }
 

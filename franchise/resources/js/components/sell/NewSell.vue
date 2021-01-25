@@ -6,14 +6,21 @@
                 <div class="card mb-2 rounded-0">
                     <div class="card-header bg-secondary rounded-0">
                         <div class="row text-right">
-                            <div class="col-10 pr-0 select-customer">
-                                <v-select  :options="customers" v-model="customer" label="name" placeholder="Select Customer"></v-select>
+                            <div class="col-12 pr-0 select-customer">
+                                <v-select  :options="customers" v-model="customer" label="HRM_NAME" value="ID" placeholder="Select Customer">
+
+                                      <template slot="option" slot-scope="option">
+                                                     
+                                                    {{ option.HRM_NAME }}
+                                                    ({{ option.HRM_ID }})
+                                                </template>
+                                </v-select>
                             </div>
-                            <div class="col-2 pl-0 mml-5">
+                            <!-- <div class="col-2 pl-0 mml-5">
                                 <div class="form-group">
                                     <button class="btn btn-warning text-white btn-block" @click="newCustomer()"> <i class="fa fa-plus"></i> </button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- Card Body -->
@@ -26,7 +33,7 @@
                                 </div>
                                 <div class="col-md-7">
                                     <div class="float-left text-center w-90px">
-                                        <span>{{lang.sell_price}}</span>
+                                        <span>{{lang.dp}}</span>
                                     </div>
                                     <div class="float-left text-center w-90px">
                                         <span>{{lang.tax}}</span>
@@ -49,12 +56,12 @@
 
                                 <div class="col-md-7">
                                     <div class="float-left w-90px">
-                                        <input type="number" v-model.number="cart.sell_price" step=".1" min=".1" value="10" class="form-control font-12 text-center" v-if="cart.price_type == 1" readonly>
-                                        <input type="number" v-model.number="cart.sell_price" step=".1" min=".1" value="10" class="form-control font-12 text-center" v-if="cart.price_type == 2">
+                                        <input type="number" v-model.number="cart.original_price" step=".1" min=".1" value="10" class="form-control font-12 text-center" v-if="cart.price_type == 1" readonly>
+                                        <input type="number" v-model.number="cart.original_price" step=".1" min=".1" value="10" class="form-control font-12 text-center" v-if="cart.price_type == 2">
                                     </div>
                                     <div class="float-left w-90px">
                                         <input type="hidden" v-model="cart.tax_percentage = cart.tax.value">
-                                        <input type="number" v-model.number="cart.tax_amount = cart.sell_price * cart.tax.value/ 100" step=".1" min=".1" value="10" class="form-control font-12 text-center" readonly>
+                                        <input type="text" v-model.number="cart.gst_withamount"  class="form-control font-12 text-center" readonly>
                                     </div>
 
                                     <div class="float-left w-80px">
@@ -63,7 +70,7 @@
 
                                     <div class="float-right">
                                         <input type="hidden" v-model.number="cart.total_price">
-                                        <span class="price font-12"> <b>{{appConfig('app_currency')}}{{cart.total_price = cart.quantity * (parseInt(cart.sell_price) + parseInt(cart.tax_amount))}}</b></span>
+                                        <span class="price font-12"> <b>{{appConfig('app_currency')}}{{cart.total_price = cart.quantity * (parseFloat(cart.original_price) + parseFloat(cart.gst))}}</b></span>
                                         <a href="javascript:void(0)" class="mr-2 text-danger remove" @click="deleteProductFormCart(key)">
                                             <i class="fa fa-trash"></i>
                                         </a>
@@ -161,7 +168,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="price">{{appConfig('app_currency')}}{{product.sell_price}}</div>
+                                    <div class="price">{{appConfig('app_currency')}}{{product.dp}}</div>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +309,7 @@
                                         <div class="col-6" v-if="">
                                             <div>
                                                 <span>{{lang.customer_name}}:
-                                                    {{customer.name}}
+                                                    {{customer.HRM_NAME}}
                                                 </span>
                                             </div>
                                             <div class="mtm8">
@@ -328,6 +335,7 @@
                                                     <tr class="bg-secondary text-white">
                                                         <th>{{lang.sl}}</th>
                                                         <th>{{lang.product_title}}</th>
+                                                        <th>{{lang.hsn_code}}</th>
                                                         <th>{{lang.price}}</th>
                                                         <th>{{lang.tax}}</th>
                                                         <th>{{lang.qty}}</th>
@@ -339,13 +347,14 @@
                                                     <tr v-for="(cart, index) in carts">
                                                         <td>{{index + 1}}</td>
                                                         <td>{{cart.title}}</td>
-                                                        <td>{{appConfig('app_currency')}}{{cart.sell_price}}</td>
-                                                        <td>{{appConfig('app_currency')}}{{cart.tax_amount}} <sub>( {{cart.tax_percentage}}% )</sub></td>
+                                                        <td>{{cart.hsn_code}}</td>
+                                                        <td>{{appConfig('app_currency')}}{{cart.original_price}}</td>
+                                                        <td>{{appConfig('app_currency')}}{{cart.gst}} <sub>( {{cart.tax_percentage}}% )</sub></td>
                                                         <td>{{cart.quantity}}</td>
-                                                        <td>{{appConfig('app_currency')}}{{(cart.sell_price + cart.tax_amount) * cart.quantity}}</td>
+                                                        <td>{{appConfig('app_currency')}}{{(cart.original_price + cart.gst) * cart.quantity}}</td>
                                                     </tr>
                                                 <tr>
-                                                    <td colspan="5" class="text-right pr-5">
+                                                    <td colspan="6" class="text-right pr-5">
                                                         {{lang.sub_total_price}}:
                                                     </td>
                                                     <td>
@@ -354,7 +363,7 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td colspan="5" class="text-right pr-5">
+                                                    <td colspan="6" class="text-right pr-5">
                                                        (-) {{lang.discount}}:
                                                     </td>
                                                     <td>
@@ -363,7 +372,7 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td colspan="5" class="text-right pr-5">
+                                                    <td colspan="6" class="text-right pr-5">
                                                          {{lang.net_payable}}
                                                     </td>
                                                     <td>
@@ -372,7 +381,7 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td colspan="5" class="text-right pr-5">
+                                                    <td colspan="6" class="text-right pr-5">
                                                         <strong v-if="summary.payment_type == 1">{{lang.cash_paid}}: </strong>
                                                         <strong v-if="summary.payment_type == 2">{{lang.card_paid}}: </strong>
                                                     </td>
@@ -385,7 +394,7 @@
 
 
                                                 <tr v-if="summary.due_amount > 0">
-                                                    <td colspan="5" class="text-right pr-5">
+                                                    <td colspan="6" class="text-right pr-5">
                                                         {{lang.due_amount}}:
                                                     </td>
                                                     <td>
@@ -394,7 +403,7 @@
                                                 </tr>
 
                                                 <tr v-if="summary.change_amount > 0">
-                                                    <td colspan="5" class="text-right pr-5">
+                                                    <td colspan="6" class="text-right pr-5">
                                                         {{lang.change_amount}}:
                                                     </td>
                                                     <td>
@@ -792,7 +801,7 @@
                 this.configs.forEach((element) => {
                     if (element.option_key == 'default_customer'){
                         this.customers.forEach((customer) => {
-                            if (customer.id == element.option_value){
+                            if (customer.ID == element.option_value){
                                 this.customer = customer;
                             }
                         });
@@ -881,18 +890,18 @@
                     this.summary.discount = 0;
                 }
 
-                let grand_total =  parseInt(this.subTotalotalCartsValue) - parseInt(this.summary.discount);
+                let grand_total =  parseFloat(this.subTotalotalCartsValue) - parseFloat(this.summary.discount);
                 this.summary.paid_amount = grand_total;
                 return grand_total;
             },
 
             currentDue(){
                 if(this.summary.paid_amount > this.grandTotalotalCartsValue){
-                    this.summary.change_amount = parseInt(this.summary.paid_amount) - parseInt(this.grandTotalotalCartsValue);
+                    this.summary.change_amount = parseFloat(this.summary.paid_amount) - parseFloat(this.grandTotalotalCartsValue);
                     return  0;
                 }else{
                     this.summary.change_amount = 0;
-                    return  parseInt(this.grandTotalotalCartsValue) - parseInt(this.summary.paid_amount);
+                    return  parseFloat(this.grandTotalotalCartsValue) - parseFloat(this.summary.paid_amount);
                 }
             },
 
@@ -943,9 +952,10 @@
             axios.get('../vue/api/customers').then((response) => {
                 this.customers = response.data;
                 this.configs.forEach((element) => {
+
                     if (element.option_key == 'default_customer'){
                         this.customers.forEach((customer) => {
-                            if (customer.id == element.option_value){
+                            if (customer.ID == element.option_value){
                                 this.customer = customer;
                             }
                         });
