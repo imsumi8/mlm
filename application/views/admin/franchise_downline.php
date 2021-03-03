@@ -76,13 +76,64 @@
 												  $total_gbv = cummulative_gbv($this->session->userdata('userid'));
 
 														?>
-														<td class="text-center" style="font-weight:bold"><?php echo $pbv; ?></td>
+                                                </tr>
+                                                <tr>
+														<td  class="text-center" style="font-weight:bold"><?php echo $pbv; ?></td>
 														<td class="text-center" style="font-weight:bold"><?php echo $gbv; ?></td>
-														<td class="text-center" style="font-weight:bold"><?php echo $pbv+$gbv; ?></td>
+														<td  class="text-center" style="font-weight:bold"><?php echo $pbv+$gbv; ?></td>
 														<td class="text-center" style="font-weight:bold"><?php echo $total_pbv; ?></td>
 														<td class="text-center" style="font-weight:bold"><?php echo $total_gbv; ?></td>
 														<td class="text-center" style="font-weight:bold"><?php echo $total_pbv+$total_gbv; ?></td>
 												</tr>
+
+                                                
+                                              <?php
+                                               if(!empty($result)){ 
+                                                //    print_r($result);
+                                                $i++;
+                                                foreach($result as $results){ ?>
+                                              <tr>
+											
+												<td rowspan="2" class="text-center"><?php echo $i; 
+												$self =get_hrm_post($results->HRM_ID);
+                                                $direct =direct_member_list($results->HRM_ID,3);
+												?></td>
+														<td rowspan="2" class="text-center" style="color:blue;font-weight:bold" ><?php echo $results->HRM_ID ?></td>
+														<td rowspan="2" class="text-center" style="font-weight:bold"><?php echo $self[0]->HRM_NAME ?></td>
+														<td rowspan="2" class="text-center" style="font-weight:bold">
+														<i class="fa fa-eye view_dt" attr-name='<?php echo $self[0]->HRM_NAME; ?>' attr-id='<?php echo $results->HRM_ID; ?>' attr-dob='<?php echo get_hrm_postmeta($self[0]->HRM_ID,'dob'); ?>' attr-address='<?php echo get_hrm_postmeta($self[0]->HRM_ID,'address'); ?>' attr-pincode='<?php echo get_hrm_postmeta($self[0]->HRM_ID,'pin_code'); ?>' attr-pan='<?php echo get_hrm_postmeta($self[0]->HRM_ID,'pancard'); ?>' attr-email='<?php echo get_hrm_postmeta($self[0]->HRM_ID,'email'); ?>' attr-mob='<?php echo get_hrm_postmeta($self[0]->HRM_ID,'contact'); ?>' attr-bank='<?php  echo get_hrm_postmeta($self[0]->HRM_ID,'ac_no'); ?>' attr-bnk_nm='<?php echo get_banks_by_id(get_hrm_postmeta($self[0]->HRM_ID,'bank_id')); ?>' attr-branchname='<?php echo get_hrm_postmeta($self[0]->HRM_ID,'branch_name'); ?>'></i></td>
+
+														<td rowspan="2" class="text-center" style="font-weight:bold">
+                                                        <?php if(!empty($direct) && count($direct)){ ?>
+
+                                                        <i class="fa fa-level-down" style="color:red"></i>
+                                                        <?php } ?>
+                                                        </td>
+
+														<td rowspan="2" class="text-center" style="font-weight:bold"><?php echo (!empty($direct))?count($direct):0; ?></td>
+													
+														<td rowspan="2" class="text-center" style="font-weight:bold">0</td>
+														<?php 
+														$pbv = current_month_pbv($results->HRM_ID);
+														$gbv = current_month_gbv($results->HRM_ID);
+                                                        $total_pbv = cummulative_pbv($results->HRM_ID);
+                                                        $total_gbv = cummulative_gbv($results->HRM_ID);
+
+														?>
+                                                         </tr>
+                                                <tr>    
+													    <td class="text-center" style="font-weight:bold"><?php echo $pbv; ?></td>
+														<td class="text-center" style="font-weight:bold"><?php echo $gbv; ?></td>
+														<td class="text-center" style="font-weight:bold"><?php echo $pbv+$gbv; ?></td>
+														<td  class="text-center" style="font-weight:bold"><?php echo $total_pbv; ?></td>
+														<td class="text-center" style="font-weight:bold"><?php echo $total_gbv; ?></td>
+														<td class="text-center" style="font-weight:bold"><?php echo $total_pbv+$total_gbv; ?></td>
+											</tr>
+                                              <?php 
+                                              $i++;
+                                               }
+                                            }
+                                                ?>
 												</tbody>
 											</table>
 										</div>

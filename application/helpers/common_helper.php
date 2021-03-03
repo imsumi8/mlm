@@ -5516,9 +5516,12 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 
 		$direct=direct_member_list($userid,3);
        $total_bv=0;
+	   if(!empty($direct)){
+
 		foreach($direct as $item){
-			$total_bv+= current_month_pbv($userid);
+			$total_bv+= current_month_pbv($item->HRM_ID);
 		}
+	}
 		return $total_bv;
 	}
 
@@ -5542,11 +5545,14 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 
 	function cummulative_gbv($userid){
 
-		$direct=direct_member_list($userid,3);
+		$result=direct_member_list($userid,3);
+		
        $total_bv=0;
-		foreach($direct as $item){
-			$total_bv+= cummulative_pbv($userid);
+	   if(!empty($result)){
+		foreach($result as $results){ 
+			$total_bv+= cummulative_pbv($results->HRM_ID);
 		}
+	}
 		return $total_bv;
 	}
 
