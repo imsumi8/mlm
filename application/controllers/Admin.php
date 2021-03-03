@@ -347,6 +347,16 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 		$this->load->view('admin/footer');
 	}
 
+	public function franchisedownline(){
+    	$data['title']='Franchise Downline';
+	    $data['subpage']='';
+		$data['hrm_data']=get_hrm_post($this->session->userdata('userid'));
+		$data['result']=direct_member_list($this->session->userdata('userid'),3);
+	    $this->load->view('admin/header',$data);
+		$this->load->view('admin/franchise_downline');
+		$this->load->view('admin/footer');
+	}
+
 	public function star(){
     	$data['title']='STAR VIEW';
 	    $data['subpage']='star';

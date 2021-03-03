@@ -373,6 +373,10 @@
     				<li>
     					<a <?php if($title=='Direct Member List') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/directmemberlist"><div class="pull-left"><i class="fa fa-level-down mr-20"></i><span class="right-nav-text">Direct Downline</span></div><div class="clearfix"></div></a>
     				</li>
+
+					<li>
+    					<a <?php if($title=='Franchise Downline') { ?> class="actived" <?php } ?> href="<?php echo base_url(); ?>admin/franchisedownline"><div class="pull-left"><i class="fa fa-level-down mr-20"></i><span class="right-nav-text">Franchise Downline</span></div><div class="clearfix"></div></a>
+    				</li>
     				
 				<?php } ?>
 				<!--

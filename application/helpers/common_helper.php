@@ -5489,6 +5489,65 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 
 
 
+
+
+	}
+
+
+	function current_month_pbv($userid){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$self =get_hrm_post($userid);
+
+		$array=array();
+	    $sql="Select Sum(bv) as total from sells where customer_id='".$self[0]->ID."' and MONTH(sell_date)='".date('m')."' ";
+        $query = $ci->db->query($sql);
+	    $row = $query->result();
+	    if($row[0]->total){
+		
+		   return $row[0]->total;
+		}else{
+		   return 0;
+		}
+
+	}
+
+	function current_month_gbv($userid){
+
+		$direct=direct_member_list($userid,3);
+       $total_bv=0;
+		foreach($direct as $item){
+			$total_bv+= current_month_pbv($userid);
+		}
+		return $total_bv;
+	}
+
+	function cummulative_pbv($userid){
+		$ci=& get_instance();
+		$ci->load->database(); 
+		$self =get_hrm_post($userid);
+
+		$array=array();
+	    $sql="Select Sum(bv) as total from sells where customer_id='".$self[0]->ID."' ";
+        $query = $ci->db->query($sql);
+	    $row = $query->result();
+	    if($row[0]->total){
+		
+		   return $row[0]->total;
+		}else{
+		   return 0;
+		}
+
+	}
+
+	function cummulative_gbv($userid){
+
+		$direct=direct_member_list($userid,3);
+       $total_bv=0;
+		foreach($direct as $item){
+			$total_bv+= cummulative_pbv($userid);
+		}
+		return $total_bv;
 	}
 
 ?>

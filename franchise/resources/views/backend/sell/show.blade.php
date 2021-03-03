@@ -28,7 +28,7 @@
                                     <tbody>
                                     <tr>
                                         <td>{{__('pages.full_name')}}</td>
-                                        <td>{{$sell->customer->name}}</td>
+                                        <td>{{$sell->customer->HRM_NAME}}</td>
                                     </tr>
 
                                     <tr>

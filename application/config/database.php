@@ -76,9 +76,9 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-    'username' => 'mybizfad_rmgm',
-	'password' => 'bpyp$3542D',
-	'database' => 'mybizfad_rmgm',
+    'username' => 'root',
+	'password' => '',
+	'database' => 'mlm',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

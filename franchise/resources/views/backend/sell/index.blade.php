@@ -96,7 +96,7 @@
                                         @can('access_to_all_branch')
                                         <td>{{$sell->branch->title}}</td>
                                         @endcan
-                                        <td>{{$sell->customer->name}}</td>
+                                        <td>{{$sell->customer->HRM_NAME}}</td>
                                         <td>{{$sell->sell_date->format(get_option('app_date_format'))}}</td>
                                         <td> {{get_option('app_currency')}}{{number_format($sell->sub_total, 2)}} </td>
                                         <td> {{get_option('app_currency')}}{{number_format($sell->discount, 2)}} </td>

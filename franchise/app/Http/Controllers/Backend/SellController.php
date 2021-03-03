@@ -77,7 +77,7 @@ class SellController extends Controller
         }
 
         $sell = new Sell();
-        $sell->customer_id = $request->customer['id'];
+        $sell->customer_id = $request->customer['ID'];
         $sell->fill($request->summary);
         $sell->paid_amount = $paid_amount;
         $sell->save();
@@ -160,7 +160,7 @@ class SellController extends Controller
         }
 
         $sell = Sell::findOrFail($id);
-        $sell->customer_id = $request->customer['id'];
+        $sell->customer_id = $request->customer['ID'];
         $sell->sub_total = $request->summary['sub_total'];
         $sell->discount = $request->summary['discount'];
         $sell->grand_total_price = $request->summary['grand_total'];
@@ -257,6 +257,7 @@ class SellController extends Controller
 
     private function storeSellProducts($request, $sell)
     {
+        $totalBv = 0;
         foreach ($request->carts as $cart_product) {
             $sell_product = new SellProduct();
             $sell_product->sell_id = $sell->id;
@@ -265,6 +266,13 @@ class SellController extends Controller
             $sell_product->branch_id = $sell->branch_id;
             $sell_product->fill($cart_product);
             $sell_product->save();
+            $totalBv += Product::find($cart_product['id'])->bv;
+
+
         }
+
+        $sell =Sell::find($sell->id);
+        $sell->bv= $totalBv;
+        $sell->save();
     }
 }
