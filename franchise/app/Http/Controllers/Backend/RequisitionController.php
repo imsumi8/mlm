@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Auth;
 
 class RequisitionController extends Controller
@@ -377,6 +378,7 @@ class RequisitionController extends Controller
 
     private function saveRequisitionProducts($request, $requisition){
         foreach ($request->carts as $cart_product) {
+            $product  = Product::find($cart_product['id']);
             $requisition_product = new RequisitionProduct();
             $requisition_product->requisition_id = $requisition->id;
             $requisition_product->product_id = $cart_product['id'];
