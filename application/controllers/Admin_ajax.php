@@ -971,9 +971,11 @@ public function get_pancard(){
 		$this->db->trans_start();
 		$result=0;
 		$category=$_POST['pair_income'];
+		$spill=$_POST['spill_income'];
+
 
 	
-		if($category==''){
+		if($category=='' && $spill==''){
 
 			echo $msg= 'Star fields should not be blank';
 			die();
@@ -981,6 +983,8 @@ public function get_pancard(){
 		}else{
 		   
 			update_mlm_option('pair_income',$category);
+			update_mlm_option('spill_income',$spill);
+
 		}
 		  
 		echo 'ok';
@@ -3701,16 +3705,24 @@ public function get_pancard(){
 
 		///end for pair income
 
+		/// for spill income
+	
+		$tspot =  get_level_sponsor($positionid,2);       ///get 3rd level sponsor of positionid
 
+		if($tspot != ""){
+			$hasLeftRight = has_sponsor_left_right($tspot); ///check has left right child 
 
-			
-		
+			if($hasLeftRight){
+				$spillIncome =get_option('spill_income');
+			pay_commission_to_customer($tspot,$spillIncome,11,'0',date('Y-m-d'),1);
 
+			}
+		}
 
+		///end spill income
 
-				
-
-		}    	
+	
+	}    	
 							
 
             			 
@@ -3869,7 +3881,7 @@ public function get_pancard(){
             			    update_hrmpost_meta($hrm_id,'sponsorid',$sponserid);
             			    
                             $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RBW.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
-							send_sms($phone,$msg,$hrm_id);
+							// send_sms($phone,$msg,$hrm_id);
 							$ledger_id=insert_ledger('ledger_'.$hrm_id);
             		 
             				$result=1; 

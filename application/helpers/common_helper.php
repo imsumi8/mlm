@@ -4355,6 +4355,39 @@
 	
    }
 
+    function get_level_sponsor($hrm_id,$count)         ///get nth level top sponsor of positionid
+   {
+	     $ci=& get_instance();
+		 $id='';
+		 for($x=0;$hrm_id!=5000;$x++){
+			 $hrm_id=get_reverse_parent_hrms($hrm_id,3);
+			 if($count-1 == $x){
+				 $id=$hrm_id;
+				 
+			 }
+		 }
+
+	return $id;
+
+   }
+
+    function has_sponsor_left_right($hrm_id)         ///has sponsor left and right node
+   {
+	$ci=& get_instance();
+  $lid=	get_last_left_right_limited_loop($hrm_id,1,1);
+  $rid=	get_last_left_right_limited_loop($hrm_id,2,1);
+
+  if($lid && $rid){
+	  return true;
+  }else{
+	  return false;
+  }
+
+
+   }
+
+
+
    function get_level_wise_upper_sponsor($level,$hrm_id){
 	$ci=& get_instance();
 	// $ci->load->database(); 

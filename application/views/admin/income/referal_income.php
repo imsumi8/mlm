@@ -47,6 +47,17 @@
                                 										</div>
                                 										
                                 									</div>
+
+																	<div class="row">
+                                										<div class="col-md-6">
+                                											<div class="form-group">
+												
+                                												<div><label>Spill Income<span class="star">*</span></label></div>
+                                												<input type="text" name="spill_income"  class="form-control" autocomplete="off" value="<?php echo get_option('spill_income'); ?>"> 
+                                											</div>
+                                										</div>
+                                										
+                                									</div>
                                 									<div class="row">
                                 										<div class="col-md-12">
                                 											<input type="submit" class="btn btn-success submitcategory" style="background: #65cea7; border: solid 1px #65cea7;" value="SUBMIT >>">
