@@ -5120,6 +5120,43 @@ public function get_pancard(){
 		   
 					   
 				   
+		/// for spill income
+	
+		// $tspot =  get_level_sponsor($prev_upper_positionid,2);       ///get 3rd level sponsor of positionid
+		// $tarr = hrm_level_track(1,$prev_upper_positionid,3);
+		// $tspot = $tarr[0]->SPONSOR_ID;
+		// $tpos = $tarr[0]->POSITION;
+		
+		// if($tspot != 5000){
+		// 	$sideCount =get_direct_by_pos($tspot,$tpos);
+		// 	$hasLeftRight = has_sponsor_left_right($tspot); ///check has left right child 
+
+		// 	if($sideCount>=3 && $hasLeftRight){
+
+		// 		$spillIncome =get_option('spill_income');
+		// 	pay_commission_to_customer($tspot,$spillIncome,11,'0',date('Y-m-d'),1);
+
+		// 	}
+		// }
+
+		$usponserid =$sponserid;
+        $upos =$pos;
+         for($i =0; $usponserid != 5000; $i++ ){
+			$hasLeftRight = has_sponsor_left_right($usponserid);
+			$sideCount =get_direct_by_pos($usponserid,$upos);
+			if($sideCount>=2 && $hasLeftRight==true){
+             $spillIncome =get_option('spill_income');
+			pay_commission_to_customer($usponserid,$spillIncome,11,'0',date('Y-m-d'),1);
+			break;
+            }
+			// $usponserid = get_reverse_sponsor_hrms($usponserid,3);
+			$tarr = hrm_level_track(1,$usponserid,3);
+			$usponserid = $tarr[0]->SPONSOR_ID;
+			$upos = $tarr[0]->POSITION;
+		 }
+
+
+		///end spill income
 		   
 		   
 		   
