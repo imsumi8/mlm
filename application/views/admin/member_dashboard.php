@@ -445,7 +445,7 @@
 				<!-- /Row -->
 				<!-- Row -->
 
-				<div class="row">
+				<!-- <div class="row">
 					
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 						<div class="panel panel-default card-view pa-0">
@@ -506,7 +506,7 @@
 						</div>
 					</div>
 					
-				</div>
+				</div> -->
 				<div class="row">
 					
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">

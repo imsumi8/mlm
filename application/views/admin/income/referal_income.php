@@ -13,7 +13,7 @@
                        <div class="panel panel-default card-view panel-refresh pad_20">
 							<div class="panel-heading">
 								<div class="text-center">
-									<h1 class="panel-title txt-dark">Referal Income</h1>
+									<h1 class="panel-title txt-dark">Pair Income & Spill Income</h1>
 									<hr class="reddish">
 								</div>
 								<div class="clearfix"></div>
@@ -41,7 +41,7 @@
                                 										<div class="col-md-6">
                                 											<div class="form-group">
 												
-                                												<div><label>Referal Income<span class="star">*</span></label></div>
+                                												<div><label>Pair Income<span class="star">*</span></label></div>
                                 												<input type="text" name="pair_income"  class="form-control" autocomplete="off" value="<?php echo get_option('pair_income'); ?>"> 
                                 											</div>
                                 										</div>

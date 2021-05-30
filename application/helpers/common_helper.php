@@ -3200,7 +3200,7 @@
 		$ci->load->database(); 
 		$array=array();
 		if($income=='all'){
-		    $income='1,2,3,4,5,6,10';
+		    $income='1,2,3,4,5,6,10,11';
 		}
 		$sql="Select * from wallet_balance where HRM_ID='".$userid."' and COMMISSION_TYPE IN (".$income.") and DATE(DATE_TIME)>='".$from."' and DATE(DATE_TIME)<='".$to."' order by WALLET_ID ASC";
         $query = $ci->db->query($sql);
@@ -3217,7 +3217,7 @@
 		$ci->load->database(); 
 		$array=array();
 		if($income=='all'){
-		    $income='1,2,3,4,5,6,10';
+		    $income='1,2,3,4,5,6,10,11';
 		}
 		$users=	$ci->session->userdata('userid');
         $query=$ci->db->query('Select * from hrm_post where HRM_ID!="'.$users.'" and HRM_STATUS=1 ORDER by ID ASC');
@@ -3242,7 +3242,7 @@
 		$ci->load->database(); 
 		$array=array();
 		if($income=='all'){
-		    $income='1,2,3,4,5,6,10';
+		    $income='1,2,3,4,5,6,10,11';
 		}
 		$sql="Select SUM(WALLET_AMOUNT) as AMOUNT from wallet_balance where HRM_ID='".$userid."' and COMMISSION_TYPE IN (".$income.") and DATE(DATE_TIME)>='".$from."' and DATE(DATE_TIME)<='".$to."'";
         $query = $ci->db->query($sql);
@@ -4355,21 +4355,37 @@
 	
    }
 
-    function get_level_sponsor($hrm_id,$count)         ///get nth level top sponsor of positionid
-   {
-	     $ci=& get_instance();
-		 $id='';
-		 for($x=0;$hrm_id!=5000;$x++){
-			 $hrm_id=get_reverse_parent_hrms($hrm_id,3);
-			 if($count-1 == $x){
-				 $id=$hrm_id;
-				 
-			 }
-		 }
+//     function get_level_sponsor($hrm_id,$count)         ///get nth level top sponsor of positionid
+//    {
+// 	     $ci=& get_instance();
+// 		 $id='';
+// 		 for($x=0;$hrm_id!=5000;$x++){
+// 			 $hrm_id=get_reverse_sponsor_hrms($hrm_id,3);
+// 			 if($count-1 == $x){
+// 				 $id=$hrm_id;
+// 				 break;
+// 			 }
+// 		 }
+// 		 get_direct_by_pos($hrmid,$pos)
 
-	return $id;
+// 	return $id;
 
-   }
+//    }
+
+   function get_reverse_sponsor_hrms($positionid,$mlm_desc){
+	   
+	$ci=& get_instance();
+	$ci->load->database(); 
+	$sql = "select SPONSOR_ID from hrm_level_tracking where HRM_ID='".$positionid."' and MLM_DESC_ID='".$mlm_desc."'"; 
+	
+	$query = $ci->db->query($sql);
+	$row = $query->result();
+	if(!empty($row)){
+		return 	$row[0]->SPONSOR_ID;
+	}else{
+		return '';
+	}
+}
 
     function has_sponsor_left_right($hrm_id)         ///has sponsor left and right node
    {
@@ -4377,7 +4393,7 @@
   $lid=	get_last_left_right_limited_loop($hrm_id,1,1);
   $rid=	get_last_left_right_limited_loop($hrm_id,2,1);
 
-  if($lid && $rid){
+  if($lid !='' && $rid != ''){
 	  return true;
   }else{
 	  return false;
