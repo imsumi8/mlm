@@ -5147,7 +5147,7 @@ public function get_pancard(){
          for($i =0; $usponserid != 5000; $i++ ){
 			$hasLeftRight = has_sponsor_left_right($usponserid);
 			$sideCount =get_direct_by_pos($usponserid,$upos);
-			if($sideCount>=2 && $hasLeftRight==true){
+			if($sideCount>2 && $hasLeftRight==true){
              $spillIncome =get_option('spill_income');
 			pay_commission_to_customer($usponserid,$spillIncome,11,'0',date('Y-m-d'),1);
 			break;
@@ -5157,6 +5157,7 @@ public function get_pancard(){
 			$usponserid = $tarr[0]->SPONSOR_ID;
 			$upos = $tarr[0]->POSITION;
 		 }
+
 
 
 		///end spill income
