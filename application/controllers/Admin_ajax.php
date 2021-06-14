@@ -3726,16 +3726,32 @@ public function get_pancard(){
 
 		$usponserid =$sponserid;
         $upos =$pos;
+		$spillfound =0;
+
 		
      for($i =0; $usponserid != 5000; $i++ ){
 			
 		$hasLeftRight = has_sponsor_left_right($usponserid);
 		$sideCount =get_direct_by_pos($usponserid,$upos);
 
-		if($sideCount>2 && $hasLeftRight){
-            $spillIncome =get_option('spill_income');
-			pay_commission_to_customer($usponserid,$spillIncome,11,'0',date('Y-m-d'),1);
+		if($sideCount>=2 && $hasLeftRight){
+
+			for($x=0;$orghrm!=5000;$x++){
+				$orghrm=get_reverse_parent_hrms($orghrm,3);
+				if($x==1 && $orghrm!=$usponserid){
+					// $array[]=$orghrm;
+					$spillIncome =get_option('spill_income');
+					pay_commission_to_customer($usponserid,$spillIncome,11,'0',date('Y-m-d'),1);
+					$spillfound=1;
+					break;
+					
+				}
+				if($x>2)
+				break;
+			}
+			if($spillfound)
 			break;
+          
          }
 			// $usponserid = get_reverse_sponsor_hrms($usponserid,3);
 			$tarr = hrm_level_track(1,$usponserid,3);
@@ -5144,12 +5160,40 @@ public function get_pancard(){
 
 		$usponserid =$sponserid;
         $upos =$pos;
+		$spillfound=0;
          for($i =0; $usponserid != 5000; $i++ ){
 			$hasLeftRight = has_sponsor_left_right($usponserid);
 			$sideCount =get_direct_by_pos($usponserid,$upos);
-			if($sideCount>2 && $hasLeftRight==true){
-             $spillIncome =get_option('spill_income');
-			pay_commission_to_customer($usponserid,$spillIncome,11,'0',date('Y-m-d'),1);
+			// 	$details=array
+		    //    (
+			// 	 	'HRM_ID'=>$usponserid,
+			// 	 	'BONANZA_INCOME_ID'=>$upos,
+			// 	 	'FROM'=>$hasLeftRight,
+			// 	 	'TO'=>$sideCount,
+			// 	 	'COUNTER'=>'0',
+			// 	 	'TARGET_COUNTER'=>'0',
+			// 	 	'DATETIME'=>'0',
+			// 	 	'STATUS'=>'0',
+			// 		 'BONANZA_GAIN_OR_NOT'=>''
+
+			// 	);
+			// insert_test($details);
+			if($sideCount>=2 && $hasLeftRight){
+         
+				for($x=0;$orghrm!=5000;$x++){
+				$orghrm=get_reverse_parent_hrms($orghrm,3);
+				if($x==1 && $orghrm!=$usponserid){
+					// $array[]=$orghrm;
+					$spillIncome =get_option('spill_income');
+					pay_commission_to_customer($usponserid,$spillIncome,11,'0',date('Y-m-d'),1);
+					$spillfound=1;
+					break;
+					
+				}
+				if($x>2)
+				break;
+			}
+			if($spillfound)
 			break;
             }
 			// $usponserid = get_reverse_sponsor_hrms($usponserid,3);
@@ -5157,6 +5201,8 @@ public function get_pancard(){
 			$usponserid = $tarr[0]->SPONSOR_ID;
 			$upos = $tarr[0]->POSITION;
 		 }
+
+	
 
 
 

@@ -1481,6 +1481,21 @@
 		}
 	}
 
+
+	function insert_test($details)
+	{
+		$ci =& get_instance();
+		$ci->load->database();
+		// $details=array
+		//        (
+		// 		 	'NAME'=>$name,
+		// 		 	'UNDER'=>'29',
+		// 		 	'AMOUNT'=>'0',
+		// 		);
+		$ci->db->insert('bonanza_track',$details);
+		return $ci->db->insert_id();
+	}
+
 	function insert_ledger($name)
 	{
 		$ci =& get_instance();
