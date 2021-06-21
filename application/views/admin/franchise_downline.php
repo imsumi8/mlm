@@ -17,7 +17,7 @@
                        <div class="panel panel-default card-view panel-refresh pad_20">
 							<div class="panel-heading">
 								<div class="text-center">
-									<h1 class="panel-title txt-dark">Franchise Downline Member List</h1>
+									<h1 class="panel-title txt-dark">Generation Plan Member List</h1>
 									<hr class="reddish">
 								</div>
 								<div class="clearfix"></div>
