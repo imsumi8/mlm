@@ -742,7 +742,7 @@ if(check_hold_payment($hrm->HRM_ID,'3') == 1){
 		}else{
 		    if($this->uri->segment(3)=="earned_income"){
 				$data['subpage']='eincmome';
-				$data['commission']=get_comission_by_date('2017-01-01',date('Y-m-d'),'1,2,3,4,5,6,10.11',$this->session->userdata('userid'));
+				$data['commission']=get_comission_by_date('2017-01-01',date('Y-m-d'),'1,2,3,4,5,6,10,11',$this->session->userdata('userid'));
 				$this->load->view('admin/header',$data);
 				$this->load->view('admin/income/earned_income');
 			}elseif($this->uri->segment(3)=="released_income"){
