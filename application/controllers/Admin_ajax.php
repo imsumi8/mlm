@@ -486,7 +486,7 @@ class Admin_ajax extends CI_Controller {
     				update_hrmpost_meta($hrm_id,'father_name',$fathername);
     				update_hrmpost_meta($hrm_id,'mother_name',ucwords($_POST['mothername']));
     				update_hrmpost_meta($hrm_id,'email',$_POST['email']);
-    				update_hrmpost_meta($hrm_id,'gender',$_POST['gender']);
+    				// update_hrmpost_meta($hrm_id,'gender',$_POST['gender']);
     				update_hrmpost_meta($hrm_id,'contact',$_POST['phone']);
     				update_hrmpost_meta($hrm_id,'whatsap_contact',$_POST['wphone']);
     				update_hrmpost_meta($hrm_id,'state',$_POST['state']);
@@ -522,7 +522,7 @@ class Admin_ajax extends CI_Controller {
     				update_hrmpost_meta($hrm_id,'father_name',$fathername);
     				update_hrmpost_meta($hrm_id,'mother_name',ucwords($_POST['mothername']));
     				update_hrmpost_meta($hrm_id,'email',$_POST['email']);
-    				update_hrmpost_meta($hrm_id,'gender',$_POST['gender']);
+    				// update_hrmpost_meta($hrm_id,'gender',$_POST['gender']);
     				update_hrmpost_meta($hrm_id,'contact',$_POST['phone']);
     				update_hrmpost_meta($hrm_id,'whatsap_contact',$_POST['wphone']);
     				update_hrmpost_meta($hrm_id,'state',$_POST['state']);
@@ -3922,7 +3922,7 @@ public function get_pancard(){
             			    update_hrmpost_meta($hrm_id,'sponsorid',$sponserid);
             			    
                             $msg='Dear '.$firstname. ' '.$lastname.'\nYou are successfully registered with RBW.\nYour User ID : '.$hrm_id.'\nPassword : '.$_POST['pass'].'\nFollow this link to login\n'.base_url();
-							// send_sms($phone,$msg,$hrm_id);
+							send_sms($phone,$msg,$hrm_id);
 							$ledger_id=insert_ledger('ledger_'.$hrm_id);
             		 
             				$result=1; 
