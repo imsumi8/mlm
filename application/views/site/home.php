@@ -163,43 +163,59 @@
 
 
     <!-- appertment_area_start  -->
-    <div class="appertment_area">
+    <!-- <div class="appertment_area">
         <div class="section_title text-center mb-80">
                         <h3>OUR PRODUCTS</h3>
         </div>
-        <div class="appertment_active owl-carousel">
+        <div class="appertment_active owl-carousel"> -->
 
         <?php 
-       if(!empty($products)){ 
-        foreach($products as $pro){
-            $dp_value = $pro->mrp - get_perc_value($pro->mrp,$pro->dp);
-            $bv_val = get_perc_value($dp_value,$pro->bv);  
+    //    if(!empty($products)){ 
+    //     foreach($products as $pro){
+    //         $dp_value = $pro->mrp - get_perc_value($pro->mrp,$pro->dp);
+    //         $bv_val = get_perc_value($dp_value,$pro->bv);  
             ?>
 
-<div class="single_appertment">
+<!-- <div class="single_appertment">
 <div class="thumb">
 
     <img src="<?php echo base_url();  ?>assets/uploads_assets/products/<?php echo $pro->image ?>" alt="products">
     
-</div>
+</div> -->
 
-
+<!-- 
 <div class="appertment_info">
-<span>₹<?php echo $pro->mrp; ?></span>
+<span>₹ -->
+    <?php
+    //  echo $pro->mrp;
+      ?>
+      <!-- </span>
                     <a href="#">
-                        <h5><?php echo $pro->name; ?></h5>
+                        <h5> -->
+                            <?php 
+                            // echo $pro->name; 
+                            ?>
+                            <!-- </h5>
                     </a>
                     <ul>
-                        <li><?php echo $dp_value ?> DP</li>
-                        <li><?php echo $bv_val ?> BV</li>
+                        <li> -->
+                            <?php
+                            //  echo $dp_value 
+                             ?>
+                              <!-- DP</li> -->
+                        <!-- <li> -->
+                            <?php
+                            //  echo $bv_val 
+                             ?>
+                              <!-- BV</li> -->
                     
-                    </ul>  
+                    <!-- </ul>  
 </div>
-</div>
+</div> -->
 
 <?php 
-  } 
-}
+//   } 
+// }
   ?>
            
             <!-- <div class="single_appertment">
@@ -242,8 +258,8 @@
                     
                 </div>
             </div> -->
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
 
 
     <!-- our_latest_news_area_Start  -->

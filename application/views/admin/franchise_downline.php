@@ -66,7 +66,7 @@
 
 														<td rowspan="2" class="text-center" style="font-weight:bold">(Own Status)</td>
 
-														<td rowspan="2" class="text-center" style="font-weight:bold"><?php echo count($result); ?></td>
+														<td rowspan="2" class="text-center" style="font-weight:bold"><?php echo $result?count($result):0; ?></td>
 													
 														<td rowspan="2" class="text-center" style="font-weight:bold">0</td>
 														<?php 
