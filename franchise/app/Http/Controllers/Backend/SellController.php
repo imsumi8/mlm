@@ -244,8 +244,8 @@ class SellController extends Controller
         if ($action_type == 1){
             return $pdf->download($sell->invoice_id . '.pdf');
         }else{
-            $pdf->save('pdf/sell/' . $sell->invoice_id . '.pdf');
-            return redirect('pdf/sell/' . $sell->invoice_id .'.pdf');
+            $pdf->save('public/pdf/sell/' . $sell->invoice_id . '.pdf');
+            return redirect('public/pdf/sell/' . $sell->invoice_id .'.pdf');
         }
     }
 
