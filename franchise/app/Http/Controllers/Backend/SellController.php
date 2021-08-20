@@ -252,8 +252,8 @@ class SellController extends Controller
     public function printInvoice($sell_id){
         $sell = Sell::findOrFail($sell_id);
         $pdf = PDF::loadView('backend.pdf.sell.invoice', compact('sell'))->setPaper('a4');
-        $pdf->save('pdf/sell/' . $sell->invoice_id . '.pdf');
-        return redirect('pdf/sell/' . $sell->invoice_id .'.pdf');
+        $pdf->save('public/pdf/sell/' . $sell->invoice_id . '.pdf');
+        return redirect('public/pdf/sell/' . $sell->invoice_id .'.pdf');
     }
 
     private function storeSellProducts($request, $sell)
