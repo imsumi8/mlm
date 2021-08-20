@@ -65,6 +65,7 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         if (!Auth::user()->can('create_sell_invoice')) {
             return redirect('home')->with(denied());
         } // end permission checking
@@ -264,9 +265,16 @@ class SellController extends Controller
             $sell_product->product_id = $cart_product['id'];
             $sell_product->sell_date = $sell->sell_date;
             $sell_product->branch_id = $sell->branch_id;
+            $cart_product['sell_price']=$cart_product['original_price'];
+            $cart_product['tax_amount']=$cart_product['gst'];
+
             $sell_product->fill($cart_product);
             $sell_product->save();
-            $totalBv += Product::find($cart_product['id'])->bv;
+
+            $product = Product::find($cart_product['id']);
+
+            $dpval= $product->sell_price - get_perc_value($product->sell_price,$product->dp);
+            $totalBv += get_perc_value($dpval,$product->bv);
 
 
         }
