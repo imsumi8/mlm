@@ -1,5 +1,5 @@
 @extends('backend.layouts.app')
-@section('title') Requisition  @endsection
+@section('title') {{__('pages.requisition')}}  @endsection
 @section('content')
     <div id="app">
         <new-requisition></new-requisition>

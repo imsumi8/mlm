@@ -87,6 +87,7 @@ class RequisitionController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         if (!Auth::user()->can('manage_requisition')) {
             return redirect('home')->with(denied());
         } // end permission checking
@@ -238,10 +239,11 @@ class RequisitionController extends Controller
         $notification->save();
 
         RequisitionProduct::where('requisition_id', $requisition->id)->delete();
-        $this->saveRequisitionProducts($request, $requisition);
+        $this->updateRequisitionProducts($request, $requisition);
 
         $data = Requisition::where('id', $requisition->id)->with('requisitionProducts')->with('requisitionFrom')->with('requisitionTo')->first();
         return response($data);
+        // return redirect('requisition')->with('success', 'Successfully Submitted');
 
     }
 
@@ -382,9 +384,29 @@ class RequisitionController extends Controller
             $requisition_product = new RequisitionProduct();
             $requisition_product->requisition_id = $requisition->id;
             $requisition_product->product_id = $cart_product['id'];
+            $requisition_product->quantity = $cart_product['quantity'];
+            $requisition_product->price = $cart_product['original_price'];
+            $requisition_product->gst = $cart_product['gst'];
+            $requisition_product->total_amount = $cart_product['dp'];
             $requisition_product->requisition_date = $requisition->requisition_date;
-            $requisition_product->fill($cart_product);
+            // $requisition_product->fill($cart_product);
             $requisition_product->save();
+        }
+    }
+
+    private function updateRequisitionProducts($request, $requisition){
+        foreach ($request->carts as $cart_product) {
+            $product  = Product::find($cart_product['id']);
+            $requisition_product = new RequisitionProduct();
+            $requisition_product->requisition_id = $requisition->id;
+            $requisition_product->product_id = $cart_product['id'];
+            $requisition_product->quantity = $cart_product['quantity'];
+            $requisition_product->price = $cart_product['original_price'];
+            $requisition_product->gst = $cart_product['gst'];
+            $requisition_product->total_amount = $cart_product['dp'];
+            $requisition_product->requisition_date = $requisition->requisition_date;
+            // $requisition_product->fill($cart_product);
+            $requisition_product->updateOrCreate();
         }
     }
 }
