@@ -124,7 +124,10 @@
                                     <tr class="bg-secondary text-white">
                                         <th>{{__('pages.sl')}}</th>
                                         <th>{{__('pages.product')}}</th>
+                                        <th>{{__('pages.unit_price')}}</th>
+                                        <th>{{__('pages.tax')}}</th>
                                         <th>{{__('pages.quantity')}}</th>
+                                        <th>{{__('pages.total_price')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -132,16 +135,19 @@
                                         <tr>
                                             <td width="3%">{{$key+1}}</td>
                                             <td>{{$requisition_product->product->title}}</td>
+                                            <td>{{get_option('app_currency')}}{{number_format($requisition_product->price,2)}}</td>
+                                            <td>{{get_option('app_currency')}}{{number_format($requisition_product->gst,2)}}</td>
                                             <td> {{$requisition_product->quantity}} </td>
+                                            <td>{{get_option('app_currency')}}{{number_format($requisition_product->total_amount,2)}}</td>
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="2" class="text-right pr-5">
+                                        <td colspan="5" class="text-right pr-5">
                                             <strong>{{__('pages.total')}}:</strong>
                                         </td>
 
                                         <td>
-                                            <strong>{{$requisition->requisitionProducts->sum('quantity')}}</strong>
+                                            <strong>{{number_format($requisition->requisitionProducts->sum('total_amount'),2)}}</strong>
                                         </td>
                                     </tr>
                                     </tbody>
